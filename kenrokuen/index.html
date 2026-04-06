@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兼六園・金沢城公園入園者数</title>
+    <!-- 必要なフォントとアイコンの読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Chart.jsの読み込み -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 追加: CSVパース用ライブラリ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+    <style>
+        /* ご指定のトンマナ CSS */
+        :root {
+            --tifo-bg: #F7FAFC;
+            --tifo-text: #2D3748;
+            --tifo-primary: #4FD1C5;
+            --tifo-primary-dark: #38B2AC;
+            --tifo-card-border: #E2E8F0;
+            --tifo-card-bg: #FFFFFF;
+            /* 追加のカラー変数 */
+            --tifo-secondary: #ED8936;
+            --tifo-muted: #718096;
+            --tifo-bg-darker: #E2E8F0;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--tifo-bg);
+            color: var(--tifo-text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Webアプリ全体のレイアウト */
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* ヘッダー */
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            font-size: 1.8rem;
+            color: var(--tifo-primary-dark);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* タブナビゲーション */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--tifo-card-border);
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--tifo-muted);
+            padding: 0.75rem 2rem;
+            cursor: pointer;
+            border-bottom: 4px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s ease;
+        }
+        .tab-btn:hover {
+            color: var(--tifo-text);
+        }
+        .tab-btn.active {
+            color: var(--tifo-primary);
+            border-bottom-color: var(--tifo-primary);
+        }
+
+        /* 提供されたカードスタイル */
+        .tifo-card {
+            background-color: var(--tifo-card-bg);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--tifo-card-border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--tifo-muted);
+            margin-top: 0;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* --- 追加UI用スタイル --- */
+        .card-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .card-header-flex .card-title {
+            margin-bottom: 0;
+        }
+        .period-controls {
+            display: flex;
+            background-color: var(--tifo-bg);
+            border-radius: 8px;
+            padding: 2px;
+        }
+        .period-btn {
+            background: transparent;
+            border: none;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--tifo-muted);
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .period-btn.active {
+            background-color: white;
+            color: var(--tifo-primary-dark);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .ranking-controls select {
+            padding: 4px 8px;
+            border: 1px solid var(--tifo-card-border);
+            border-radius: 4px;
+            font-family: inherit;
+            color: var(--tifo-text);
+            background-color: white;
+            font-size: 0.9rem;
+        }
+        .ranking-controls select:focus {
+            outline: none;
+            border-color: var(--tifo-primary);
+        }
+
+        /* KPI グリッド */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--tifo-primary-dark);
+            line-height: 1.2;
+        }
+        .kpi-unit {
+            font-size: 1rem;
+            color: var(--tifo-muted);
+            font-weight: normal;
+        }
+        .kpi-subtext {
+            font-size: 0.9rem;
+            color: var(--tifo-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* グラフ・表のコンテナ */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        
+        /* 2カラムレイアウト */
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* テーブルスタイル */
+        .table-responsive {
+            overflow-y: auto;
+            max-height: 450px; /* 10行分程度の高さ制限を追加 */
+        }
+        /* スクロールバーのスタイル調整 */
+        .table-responsive::-webkit-scrollbar {
+            width: 8px;
+        }
+        .table-responsive::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 4px;
+        }
+        .table-responsive::-webkit-scrollbar-thumb {
+            background: #d1d5db; 
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: right;
+            border-bottom: 1px solid var(--tifo-card-border);
+        }
+        th:first-child, td:first-child {
+            text-align: left;
+        }
+        th {
+            background-color: var(--tifo-bg);
+            color: var(--tifo-muted);
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+            z-index: 10; /* スクロール時に他の行より手前にする */
+        }
+        tr:hover {
+            background-color: var(--tifo-bg);
+        }
+
+        /* ランキングとプログレスバー (提供CSS) */
+        .rank-badge {
+            width: 2rem; height: 2rem; border-radius: 50%; display: inline-flex;
+            align-items: center; justify-content: center; font-weight: bold; color: white;
+            flex-shrink: 0; font-size: 0.9rem;
+        }
+        .rank-1 { background-color: #FFD700; }
+        .rank-2 { background-color: #C0C0C0; }
+        .rank-3 { background-color: #CD7F32; }
+        .rank-4, .rank-5, .rank-default { background-color: #A9A9A9; }
+
+        .ranking-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 280px; /* カード内でスクロールさせるための高さ制限 */
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        /* ランキングリスト用スクロールバー */
+        .ranking-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        .ranking-list::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 4px;
+        }
+        .ranking-list::-webkit-scrollbar-thumb {
+            background: #d1d5db; 
+            border-radius: 4px;
+        }
+        
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 0.5rem;
+            border-bottom: 1px dashed var(--tifo-card-border);
+            transition: background-color 0.2s ease, border-radius 0.2s ease;
+        }
+        .ranking-item:last-child {
+            border-bottom: none;
+        }
+        .ranking-name {
+            flex-grow: 1;
+            margin-left: 1rem;
+            font-weight: 500;
+        }
+        .ranking-value {
+            font-weight: 700;
+            color: var(--tifo-primary-dark);
+        }
+        
+        /* モーダル表示用にクリック可能にする */
+        .ranking-item.clickable {
+            cursor: pointer;
+        }
+        .ranking-item.clickable:hover {
+            background-color: var(--tifo-bg);
+            border-radius: 8px;
+            border-bottom-color: transparent; /* ホバー時は線を消す */
+        }
+
+        /* プログレスバー（インバウンド指数用） */
+        .progress-bar-bg { background-color: #EDF2F7; border-radius: 9999px; overflow: hidden; height: 1.5rem; margin-top: 1rem;}
+        .progress-bar {
+            background-color: var(--tifo-primary);
+            height: 100%;
+            border-radius: 9999px;
+            transition: width 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        /* --- モーダル用スタイル --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(45, 55, 72, 0.75);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.hidden .modal-content {
+            transform: translateY(-20px);
+        }
+        .modal-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;
+        }
+        .modal-close-btn {
+            background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--tifo-muted);
+            transition: color 0.2s;
+        }
+        .modal-close-btn:hover {
+            color: var(--tifo-text);
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .two-col-grid {
+                grid-template-columns: 1fr;
+            }
+            .kpi-value {
+                font-size: 2rem;
+            }
+            .tab-btn {
+                padding: 0.75rem 1rem;
+                font-size: 1rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .modal-content {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* 兼六園固有セクションの切り替え用 */
+        .kenrokuen-only {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        body.tab-kenrokuen .kenrokuen-only {
+            display: flex;
+        }
+
+    </style>
+</head>
+<body class="tab-kenrokuen">
+
+<!-- データ取得中のローディング画面 -->
+<div id="loading-overlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--tifo-bg); z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 3rem; color: var(--tifo-primary); margin-bottom: 1rem;"></i>
+    <div style="font-weight: bold; color: var(--tifo-muted);">スプレッドシートからデータを取得中...</div>
+</div>
+
+<div class="app-container">
+    <header>
+        <h1>兼六園・金沢城公園入園者数</h1>
+    </header>
+
+    <!-- タブ -->
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="switchTab('kenrokuen')" id="tab-kenrokuen">兼六園</button>
+        <button class="tab-btn" onclick="switchTab('kanazawa')" id="tab-kanazawa">金沢城公園</button>
+    </div>
+
+    <main>
+        <!-- 1. KPIセクション (直近月 / 年度累計) -->
+        <div class="kpi-grid">
+            <div class="tifo-card">
+                <h2 class="card-title"><i class="fa-regular fa-calendar-check"></i> 直近月 入園者数 (<span id="latest-month-label"></span>)</h2>
+                <div>
+                    <span class="kpi-value" id="kpi-latest-month">0</span>
+                    <span class="kpi-unit">人</span>
+                </div>
+                <div class="kpi-subtext" id="kpi-latest-compare">前年同月比: --</div>
+            </div>
+            
+            <div class="tifo-card">
+                <h2 class="card-title"><i class="fa-solid fa-chart-line"></i> 今年度 累計入園者数 (<span id="fiscal-year-label"></span>)</h2>
+                <div>
+                    <span class="kpi-value" id="kpi-ytd">0</span>
+                    <span class="kpi-unit">人</span>
+                </div>
+                <div class="kpi-subtext">4月〜現在までの累計</div>
+            </div>
+        </div>
+
+        <!-- 2. 月次チャート -->
+        <div class="tifo-card">
+            <div class="card-header-flex">
+                <h2 class="card-title"><i class="fa-solid fa-chart-area"></i> 月次入園者数推移</h2>
+                <div class="period-controls">
+                    <button class="period-btn active" id="btn-period-3years" onclick="changeChartPeriod('3years')">過去3年</button>
+                    <button class="period-btn" id="btn-period-all" onclick="changeChartPeriod('all')">全期間</button>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="monthlyChart"></canvas>
+            </div>
+        </div>
+
+        <!-- 3. 年度別データ (チャート・全幅) -->
+        <div class="tifo-card">
+            <h2 class="card-title"><i class="fa-solid fa-chart-bar"></i> 年度別 入園者数推移</h2>
+            <div class="chart-container">
+                <canvas id="yearlyChart"></canvas>
+            </div>
+        </div>
+
+        <!-- 4. 兼六園専用セクション -->
+        <div class="kenrokuen-only">
+            <!-- フィルターコントロール (全幅) -->
+            <div style="display: flex; justify-content: space-between; align-items: center; background: var(--tifo-card-bg); padding: 1rem 1.5rem; border-radius: 1.5rem; border: 1px solid var(--tifo-card-border); box-shadow: 0 4px 6px -2px rgba(0,0,0,0.05);">
+                <div style="font-weight: bold; font-size: 1.1rem; color: var(--tifo-text);"><i class="fa-regular fa-calendar-check" style="color:var(--tifo-primary);"></i> 月別・年度別 インバウンド詳細</div>
+                <div class="ranking-controls">
+                    <select id="select-year" onchange="updateRankingSection()"></select> 年
+                    <select id="select-month" onchange="updateRankingSection()"></select>
+                </div>
+            </div>
+
+            <!-- 2カラムグリッド -->
+            <div class="two-col-grid">
+                <!-- 国別ランキング -->
+                <div class="tifo-card" style="margin-bottom: 0;">
+                    <div class="card-header-flex">
+                        <h2 class="card-title"><i class="fa-solid fa-earth-asia"></i> 国別ランキング</h2>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--tifo-muted); margin-bottom: 10px; text-align: right;">※国名をクリックで推移を表示</div>
+                    <ul class="ranking-list" id="country-ranking">
+                        <!-- JSで動的に生成 -->
+                    </ul>
+                </div>
+
+                <!-- インバウンド指数 -->
+                <div class="tifo-card" style="margin-bottom: 0;">
+                    <h2 class="card-title"><i class="fa-solid fa-plane"></i> インバウンド観光客指数</h2>
+                    <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 900; color: var(--tifo-primary); line-height: 1;" id="inbound-index-value">0%</div>
+                        <div style="color: var(--tifo-muted); margin-bottom: 1rem;">インバウンド割合</div>
+                        
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar" id="inbound-progress" style="width: 0%;">0%</div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--tifo-muted); margin-top: 0.5rem;">
+                            <span>国内: <span id="domestic-count">0</span>人</span>
+                            <span>海外: <span id="inbound-count">0</span>人</span>
+                        </div>
+                    </div>
+                    <div class="kpi-subtext" style="margin-top: 1rem; border-top: 1px solid var(--tifo-card-border); padding-top: 0.5rem;">
+                        ※ インバウンド指数 = 外国人入園者数 / (総入園者数)
+                    </div>
+                </div>
+            </div>
+
+            <!-- インバウンド指数推移チャート (全幅) -->
+            <div class="tifo-card" style="margin-bottom: 0;">
+                <div class="card-header-flex">
+                    <h2 class="card-title"><i class="fa-solid fa-chart-line"></i> インバウンド観光客指数 推移</h2>
+                    <div class="period-controls">
+                        <button class="period-btn active" id="btn-inbound-3years" onclick="changeInboundPeriod('3years')">過去3年</button>
+                        <button class="period-btn" id="btn-inbound-all" onclick="changeInboundPeriod('all')">全期間</button>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="inboundChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. 年度別データ表 (全幅、一番下) -->
+        <div class="tifo-card">
+            <h2 class="card-title"><i class="fa-solid fa-table"></i> 年度別 データ表</h2>
+            <!-- .table-responsive に高さを設けてスクロール可能にしています -->
+            <div class="table-responsive">
+                <table id="yearlyTable">
+                    <thead>
+                        <tr id="yearlyTableHeaderRow">
+                            <!-- JSで動的に生成 -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- JSで動的に生成 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 元データリンク (一番下) -->
+        <div style="text-align: right; margin-top: 2rem;">
+            <a href="https://docs.google.com/spreadsheets/u/1/d/1HdaqmIPXDChGrc2XynYPtzkDRIIBQObh41GS9T4ohlo/edit?usp=sharing" target="_blank" style="color: var(--tifo-muted); text-decoration: underline; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> 元データはこちら (Google Spreadsheet)
+            </a>
+        </div>
+
+    </main>
+</div>
+
+<!-- モーダル（国別グラフ） -->
+<div class="modal-overlay hidden" id="country-modal" onclick="if(event.target === this) closeCountryModal()">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="card-title" id="modal-country-title" style="margin: 0; font-size: 1.4rem;"></h2>
+            <button class="modal-close-btn" onclick="closeCountryModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
+            <div class="period-controls">
+                <button class="period-btn active" id="btn-modal-monthly" onclick="changeModalPeriod('monthly')">月別推移</button>
+                <button class="period-btn" id="btn-modal-yearly" onclick="changeModalPeriod('yearly')">年度別推移</button>
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="modalChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- 1. 定数とグローバル状態 ---
+    // 提供されたGoogle SpreadsheetのIDとCSVエクスポート用URL
+    const SHEET_ID = '1HdaqmIPXDChGrc2XynYPtzkDRIIBQObh41GS9T4ohlo';
+    const URL_VISITORS = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=兼六園金沢城公園`;
+    const URL_FOREIGN = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=兼六園外国人国別`;
+
+    let monthlyData = []; // 整形後のデータ格納用
+    let currentTab = 'kenrokuen'; 
+    let chartPeriod = '3years'; 
+    let inboundChartPeriod = '3years'; 
+    
+    let monthlyChartInstance = null;
+    let yearlyChartInstance = null;
+    let inboundChartInstance = null;
+    
+    // モーダル用状態
+    let modalCountry = '';
+    let modalPeriod = 'monthly';
+    let modalChartInstance = null;
+    
+    // カラー設定
+    const colors = {
+        primary: '#4FD1C5',
+        primaryDark: '#38B2AC',
+        secondary: '#ED8936',
+        bg: '#F7FAFC'
+    };
+
+    // --- 2. データ取得・パース ---
+    async function fetchCSV(url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Network response error');
+            const csvText = await response.text();
+            return new Promise((resolve, reject) => {
+                Papa.parse(csvText, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: results => resolve(results.data),
+                    error: err => reject(err)
+                });
+            });
+        } catch (error) {
+            console.error('CSV Fetch Error:', error);
+            return [];
+        }
+    }
+
+    // 初期化とデータフェッチ
+    async function initData() {
+        const [rawVisitors, rawForeign] = await Promise.all([
+            fetchCSV(URL_VISITORS),
+            fetchCSV(URL_FOREIGN)
+        ]);
+
+        if (rawVisitors.length === 0) {
+            alert('データの取得に失敗しました。スプレッドシートの公開設定等をご確認ください。');
+            document.getElementById('loading-overlay').style.display = 'none';
+            return;
+        }
+
+        // 外国人データの集計 (月ごとにまとめる)
+        const foreignAgg = {};
+        rawForeign.forEach(row => {
+            const m = row['年月'];
+            const count = parseInt((row['人数'] || '0').replace(/,/g, ''), 10);
+            if (!m) return;
+            
+            if (!foreignAgg[m]) {
+                foreignAgg[m] = { total: 0, countries: [] };
+            }
+            foreignAgg[m].total += count;
+            if (count > 0) {
+                foreignAgg[m].countries.push({
+                    country: row['国と地域'],
+                    count: count
+                });
+            }
+        });
+
+        // メインデータの構築
+        monthlyData = rawVisitors.map(row => {
+            const m = row['年月'];
+            // カンマ等を取り除いて数値化
+            const kenrokuen = parseInt((row['兼六園入園者数'] || '0').replace(/,/g, ''), 10) || 0;
+            const kanazawa = parseInt((row['金沢城公園入園者数'] || '0').replace(/,/g, ''), 10) || 0;
+            
+            let inboundCount = 0;
+            let foreignDetails = [];
+            if (foreignAgg[m]) {
+                inboundCount = foreignAgg[m].total;
+                // 人数が多い順にソートしておく
+                foreignDetails = foreignAgg[m].countries.sort((a, b) => b.count - a.count);
+            }
+            
+            const inboundIndex = kenrokuen > 0 ? (inboundCount / kenrokuen) * 100 : 0;
+
+            return {
+                month: m,
+                kenrokuen: kenrokuen,
+                kanazawa: kanazawa,
+                inboundCount: inboundCount,
+                inboundIndex: inboundIndex,
+                foreignDetails: foreignDetails
+            };
+        });
+
+        // 古い順にソート（スプレッドシートの並び順崩れ対策）
+        monthlyData.sort((a, b) => new Date(a.month) - new Date(b.month));
+
+        // ローディング非表示とUIの初期化
+        document.getElementById('loading-overlay').style.display = 'none';
+        initRankingSelects();
+        updateDashboard();
+    }
+
+    // --- 3. ユーティリティ関数 ---
+    function getFiscalYear(dateStr) {
+        const d = new Date(dateStr);
+        const year = d.getFullYear();
+        const month = d.getMonth() + 1;
+        return month >= 4 ? year : year - 1;
+    }
+
+    function formatNum(num) {
+        return num.toLocaleString();
+    }
+
+    // --- 4. データ計算ロジック ---
+    function processData() {
+        const latestData = monthlyData[monthlyData.length - 1];
+        const latestDate = new Date(latestData.month);
+        const currentFY = getFiscalYear(latestData.month);
+
+        const yearlyAgg = {};
+        monthlyData.forEach(row => {
+            const fy = getFiscalYear(row.month);
+            if (!yearlyAgg[fy]) {
+                yearlyAgg[fy] = { kenrokuen: 0, kanazawa: 0, inbound: 0 };
+            }
+            yearlyAgg[fy].kenrokuen += row.kenrokuen;
+            yearlyAgg[fy].kanazawa += row.kanazawa;
+            yearlyAgg[fy].inbound += row.inboundCount; // インバウンド総数を追加集計
+        });
+
+        let ytdKenrokuen = 0;
+        let ytdKanazawa = 0;
+        monthlyData.forEach(row => {
+            if (getFiscalYear(row.month) === currentFY) {
+                ytdKenrokuen += row.kenrokuen;
+                ytdKanazawa += row.kanazawa;
+            }
+        });
+
+        const lastYearSameMonth = new Date(latestDate.getFullYear() - 1, latestDate.getMonth(), latestDate.getDate());
+        const lastYearSameMonthStr = `${lastYearSameMonth.getFullYear()}/${lastYearSameMonth.getMonth()+1}/${lastYearSameMonth.getDate()}`;
+        const lastYearData = monthlyData.find(d => {
+            const dDate = new Date(d.month);
+            return dDate.getFullYear() === lastYearSameMonth.getFullYear() && dDate.getMonth() === lastYearSameMonth.getMonth();
+        });
+
+        return {
+            latest: latestData,
+            latestDateStr: `${latestDate.getFullYear()}年${latestDate.getMonth() + 1}月`,
+            currentFY: currentFY,
+            yearlyAgg: yearlyAgg,
+            ytd: { kenrokuen: ytdKenrokuen, kanazawa: ytdKanazawa },
+            lastYearData: lastYearData
+        };
+    }
+
+    // --- 5. モーダル（国別グラフ）の制御 ---
+    function openCountryModal(country) {
+        modalCountry = country;
+        document.getElementById('modal-country-title').innerHTML = `<i class="fa-solid fa-earth-asia" style="margin-right:8px; color:var(--tifo-muted);"></i> ${country} の入園者数推移`;
+        document.getElementById('country-modal').classList.remove('hidden');
+        
+        // デフォルトは月別に
+        changeModalPeriod('monthly');
+    }
+
+    function closeCountryModal() {
+        document.getElementById('country-modal').classList.add('hidden');
+    }
+
+    function changeModalPeriod(period) {
+        modalPeriod = period;
+        document.getElementById('btn-modal-monthly').classList.remove('active');
+        document.getElementById('btn-modal-yearly').classList.remove('active');
+        document.getElementById(`btn-modal-${period}`).classList.add('active');
+        
+        updateModalChart();
+    }
+
+    function updateModalChart() {
+        let labels = [];
+        let dataCounts = [];
+
+        // 2019年1月以降のデータのみにフィルタリング
+        const filteredData = monthlyData.filter(d => new Date(d.month) >= new Date('2019/1/1'));
+
+        // データ抽出
+        if (modalPeriod === 'monthly') {
+            filteredData.forEach(d => {
+                const date = new Date(d.month);
+                labels.push(`${date.getFullYear()}/${date.getMonth() + 1}`);
+                const detail = d.foreignDetails.find(fd => fd.country === modalCountry);
+                dataCounts.push(detail ? detail.count : 0);
+            });
+        } else {
+            // 年度別
+            const yearlyAgg = {};
+            filteredData.forEach(d => {
+                const fy = getFiscalYear(d.month);
+                if (!yearlyAgg[fy]) yearlyAgg[fy] = 0;
+                const detail = d.foreignDetails.find(fd => fd.country === modalCountry);
+                if (detail) {
+                    yearlyAgg[fy] += detail.count;
+                }
+            });
+            const fyLabels = Object.keys(yearlyAgg).sort();
+            fyLabels.forEach(fy => {
+                labels.push(`${fy}年度`);
+                dataCounts.push(yearlyAgg[fy]);
+            });
+        }
+
+        if (modalChartInstance) modalChartInstance.destroy();
+        const ctx = document.getElementById('modalChart').getContext('2d');
+        modalChartInstance = new Chart(ctx, {
+            type: modalPeriod === 'monthly' ? 'line' : 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: `${modalCountry} (人)`,
+                    data: dataCounts,
+                    borderColor: '#9F7AEA',
+                    backgroundColor: modalPeriod === 'monthly' ? '#9F7AEA33' : '#9F7AEA',
+                    borderWidth: modalPeriod === 'monthly' ? 2 : 0,
+                    fill: modalPeriod === 'monthly',
+                    tension: 0.4,
+                    pointRadius: modalPeriod === 'monthly' ? 2 : 0,
+                    borderRadius: modalPeriod === 'yearly' ? 4 : 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, ticks: { callback: function(value) { return value.toLocaleString(); } } }
+                }
+            }
+        });
+    }
+
+    // --- 6. UI更新ロジック ---
+    function switchTab(tab) {
+        currentTab = tab;
+        document.getElementById('tab-kenrokuen').classList.remove('active');
+        document.getElementById('tab-kanazawa').classList.remove('active');
+        document.getElementById(`tab-${tab}`).classList.add('active');
+        document.body.className = `tab-${tab}`;
+        updateDashboard();
+    }
+
+    function changeChartPeriod(period) {
+        chartPeriod = period;
+        document.getElementById('btn-period-3years').classList.remove('active');
+        document.getElementById('btn-period-all').classList.remove('active');
+        document.getElementById(`btn-period-${period}`).classList.add('active');
+        updateDashboard(); 
+    }
+
+    function changeInboundPeriod(period) {
+        inboundChartPeriod = period;
+        document.getElementById('btn-inbound-3years').classList.remove('active');
+        document.getElementById('btn-inbound-all').classList.remove('active');
+        document.getElementById(`btn-inbound-${period}`).classList.add('active');
+        updateInboundChart();
+    }
+
+    function initRankingSelects() {
+        const yearSelect = document.getElementById('select-year');
+        const monthSelect = document.getElementById('select-month');
+        
+        const years = [...new Set(monthlyData.map(d => new Date(d.month).getFullYear()))];
+        years.forEach(y => {
+            const option = document.createElement('option');
+            option.value = y;
+            option.textContent = y;
+            yearSelect.appendChild(option);
+        });
+
+        for(let m = 1; m <= 12; m++) {
+            const option = document.createElement('option');
+            option.value = m;
+            option.textContent = `${m}月`;
+            monthSelect.appendChild(option);
+        }
+        
+        // 年度オプション追加
+        const yearlyOption = document.createElement('option');
+        yearlyOption.value = 'yearly';
+        yearlyOption.textContent = '年度';
+        monthSelect.appendChild(yearlyOption);
+
+        const latestDate = new Date(monthlyData[monthlyData.length - 1].month);
+        yearSelect.value = latestDate.getFullYear();
+        monthSelect.value = latestDate.getMonth() + 1;
+    }
+
+    function updateRankingSection() {
+        if (currentTab !== 'kenrokuen') return;
+
+        const year = parseInt(document.getElementById('select-year').value);
+        const monthVal = document.getElementById('select-month').value;
+
+        let targetData = null;
+
+        if (monthVal === 'yearly') {
+            // 年度別（year年の4月 〜 翌年3月）の合計値を計算
+            let totalKenrokuen = 0;
+            let totalInbound = 0;
+            const foreignMap = {};
+
+            monthlyData.forEach(d => {
+                if (getFiscalYear(d.month) === year) {
+                    totalKenrokuen += d.kenrokuen;
+                    totalInbound += d.inboundCount;
+                    d.foreignDetails.forEach(fd => {
+                        if (!foreignMap[fd.country]) foreignMap[fd.country] = 0;
+                        foreignMap[fd.country] += fd.count;
+                    });
+                }
+            });
+
+            if (totalKenrokuen > 0) {
+                const foreignDetails = Object.keys(foreignMap).map(country => ({
+                    country: country,
+                    count: foreignMap[country]
+                })).sort((a, b) => b.count - a.count);
+
+                targetData = {
+                    kenrokuen: totalKenrokuen,
+                    inboundCount: totalInbound,
+                    inboundIndex: (totalInbound / totalKenrokuen) * 100,
+                    foreignDetails: foreignDetails
+                };
+            }
+        } else {
+            // 月別データを取得
+            const month = parseInt(monthVal);
+            targetData = monthlyData.find(d => {
+                const dt = new Date(d.month);
+                return dt.getFullYear() === year && (dt.getMonth() + 1) === month;
+            });
+        }
+
+        const rankingList = document.getElementById('country-ranking');
+        rankingList.innerHTML = '';
+        
+        if (!targetData || targetData.kenrokuen === 0) {
+            rankingList.innerHTML = '<li class="ranking-item"><div class="ranking-name" style="color:var(--tifo-muted);">データがありません</div></li>';
+            document.getElementById('inbound-index-value').textContent = `0%`;
+            document.getElementById('inbound-count').textContent = '0';
+            document.getElementById('domestic-count').textContent = '0';
+            document.getElementById('inbound-progress').style.width = `0%`;
+            document.getElementById('inbound-progress').textContent = `0%`;
+            return;
+        }
+
+        // 全件表示（CSSでスクロール制御）
+        const topForeign = targetData.foreignDetails;
+        if (topForeign.length === 0) {
+            rankingList.innerHTML = '<li class="ranking-item"><div class="ranking-name" style="color:var(--tifo-muted);">外国人入園者データなし</div></li>';
+        } else {
+            topForeign.forEach((item, index) => {
+                const rankClass = index < 3 ? `rank-${index + 1}` : 'rank-default';
+                const li = document.createElement('li');
+                // モーダルを開くイベントを追加
+                li.className = 'ranking-item clickable';
+                li.onclick = () => openCountryModal(item.country);
+                
+                li.innerHTML = `
+                    <div class="rank-badge ${rankClass}">${index + 1}</div>
+                    <div class="ranking-name">${item.country}</div>
+                    <div class="ranking-value">${formatNum(item.count)} <span style="font-size:0.8rem; font-weight:normal; color:#718096;">人</span></div>
+                `;
+                rankingList.appendChild(li);
+            });
+        }
+
+        const totalInbound = targetData.inboundCount;
+        const totalVisitors = targetData.kenrokuen;
+        const domestic = Math.max(0, totalVisitors - totalInbound); 
+        const indexPercentage = targetData.inboundIndex.toFixed(1);
+        
+        document.getElementById('inbound-index-value').textContent = `${indexPercentage}%`;
+        document.getElementById('inbound-count').textContent = formatNum(totalInbound);
+        document.getElementById('domestic-count').textContent = formatNum(domestic);
+        
+        const progressBar = document.getElementById('inbound-progress');
+        progressBar.style.width = `${indexPercentage}%`;
+        progressBar.textContent = `${indexPercentage}%`;
+    }
+
+    function updateInboundChart() {
+        const validData = monthlyData.filter(d => d.foreignDetails && d.foreignDetails.length > 0);
+        
+        let chartSourceData = validData;
+        if (inboundChartPeriod === '3years') {
+            chartSourceData = validData.slice(-36);
+        }
+
+        const labels = chartSourceData.map(d => {
+            const date = new Date(d.month);
+            return `${date.getFullYear()}/${date.getMonth()+1}`;
+        });
+        const chartData = chartSourceData.map(d => d.inboundIndex);
+
+        if (inboundChartInstance) inboundChartInstance.destroy();
+        const ctx = document.getElementById('inboundChart').getContext('2d');
+        inboundChartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'インバウンド割合 (%)',
+                    data: chartData,
+                    borderColor: '#4FD1C5', // トンマナに合わせて青緑系に変更
+                    backgroundColor: '#4FD1C533',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { 
+                        beginAtZero: true, 
+                        max: 100,
+                        ticks: { callback: function(value) { return value + '%'; } } 
+                    }
+                }
+            }
+        });
+    }
+
+    function updateDashboard() {
+        if (monthlyData.length === 0) return;
+
+        const data = processData();
+        const targetKey = currentTab;
+        
+        document.getElementById('latest-month-label').textContent = data.latestDateStr;
+        document.getElementById('fiscal-year-label').textContent = `${data.currentFY}年度`;
+        
+        const latestCount = data.latest[targetKey];
+        document.getElementById('kpi-latest-month').textContent = formatNum(latestCount);
+        document.getElementById('kpi-ytd').textContent = formatNum(data.ytd[targetKey]);
+
+        const compareEl = document.getElementById('kpi-latest-compare');
+        if (data.lastYearData && data.lastYearData[targetKey] > 0) {
+            const lastYearCount = data.lastYearData[targetKey];
+            const ratio = ((latestCount - lastYearCount) / lastYearCount * 100).toFixed(1);
+            if (ratio > 0) {
+                compareEl.innerHTML = `前年同月比: <span style="color: #48BB78;">+${ratio}% <i class="fa-solid fa-arrow-trend-up"></i></span>`;
+            } else {
+                compareEl.innerHTML = `前年同月比: <span style="color: #F56565;">${ratio}% <i class="fa-solid fa-arrow-trend-down"></i></span>`;
+            }
+        } else {
+            compareEl.textContent = '前年同月比: データなし';
+        }
+
+        let chartSourceData = monthlyData;
+        if (chartPeriod === '3years') {
+            chartSourceData = monthlyData.slice(-36);
+        }
+
+        const labels = chartSourceData.map(d => {
+            const date = new Date(d.month);
+            return `${date.getFullYear()}/${date.getMonth()+1}`;
+        });
+        const chartData = chartSourceData.map(d => d[targetKey]);
+        const themeColor = currentTab === 'kenrokuen' ? colors.primary : colors.secondary;
+
+        if (monthlyChartInstance) monthlyChartInstance.destroy();
+        const ctxMonthly = document.getElementById('monthlyChart').getContext('2d');
+        monthlyChartInstance = new Chart(ctxMonthly, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '入園者数',
+                    data: chartData,
+                    borderColor: themeColor,
+                    backgroundColor: themeColor + '33', 
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, ticks: { callback: function(value) { return value.toLocaleString(); } } }
+                }
+            }
+        });
+
+        const fyLabels = Object.keys(data.yearlyAgg).sort();
+        const fyData = fyLabels.map(fy => data.yearlyAgg[fy][targetKey]);
+
+        if (yearlyChartInstance) yearlyChartInstance.destroy();
+        const ctxYearly = document.getElementById('yearlyChart').getContext('2d');
+        yearlyChartInstance = new Chart(ctxYearly, {
+            type: 'bar',
+            data: {
+                labels: fyLabels.map(fy => `${fy}年度`),
+                datasets: [{
+                    label: '入園者数',
+                    data: fyData,
+                    backgroundColor: themeColor,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, ticks: { callback: function(value) { return value.toLocaleString(); } } }
+                }
+            }
+        });
+
+        // テーブルヘッダーの切り替え
+        const theadTr = document.getElementById('yearlyTableHeaderRow');
+        if (currentTab === 'kenrokuen') {
+            theadTr.innerHTML = '<th>年度</th><th>入園者数(人)</th><th>前年度比</th><th>インバウンド(人)</th>';
+        } else {
+            theadTr.innerHTML = '<th>年度</th><th>入園者数(人)</th><th>前年度比</th>';
+        }
+
+        const tbody = document.querySelector('#yearlyTable tbody');
+        tbody.innerHTML = '';
+        for (let i = fyLabels.length - 1; i >= 0; i--) { 
+            const fy = fyLabels[i];
+            const count = data.yearlyAgg[fy][targetKey];
+            let compareText = '-';
+            
+            if (i > 0) {
+                const prevCount = data.yearlyAgg[fyLabels[i-1]][targetKey];
+                if (prevCount > 0) {
+                    const diff = ((count - prevCount) / prevCount * 100).toFixed(1);
+                    const color = diff > 0 ? '#48BB78' : '#F56565';
+                    const icon = diff > 0 ? 'fa-caret-up' : 'fa-caret-down';
+                    compareText = `<span style="color: ${color}; font-weight:bold;"><i class="fa-solid ${icon}"></i> ${Math.abs(diff)}%</span>`;
+                }
+            }
+
+            const tr = document.createElement('tr');
+            if (currentTab === 'kenrokuen') {
+                const inboundCount = data.yearlyAgg[fy].inbound;
+                tr.innerHTML = `
+                    <td>${fy}年度</td>
+                    <td>${formatNum(count)}</td>
+                    <td>${compareText}</td>
+                    <td>${formatNum(inboundCount)}</td>
+                `;
+            } else {
+                tr.innerHTML = `
+                    <td>${fy}年度</td>
+                    <td>${formatNum(count)}</td>
+                    <td>${compareText}</td>
+                `;
+            }
+            tbody.appendChild(tr);
+        }
+
+        if (currentTab === 'kenrokuen') {
+            updateRankingSection();
+            updateInboundChart();
+        }
+    }
+
+    // --- 7. 起動（データ取得） ---
+    window.onload = initData;
+
+</script>
+</body>
+</html>
