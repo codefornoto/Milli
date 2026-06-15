@@ -1,0 +1,1577 @@
+{
+"schema_version": "1.1.0",
+"dataset_type": "jnto_monthly_visitor_arrivals_country_status",
+"report": {
+"source_name_ja": "日本政府観光局（JNTO）",
+"source_name_en": "Japan National Tourism Organization",
+"report_title_ja": "訪日外客数（2024年5月推計値）",
+"published_date": "2024-06-19",
+"data_month": "2024-05",
+"data_year": 2024,
+"data_month_number": 5,
+"as_of_date": "2024-06-14",
+"primary_comparison": {
+"type": "year_over_year",
+"base_year": 2023,
+"target_year": 2024,
+"label_ja": "前年同月比"
+},
+"notes_ja": [
+"2024年の数値は推計値である。",
+"2023年の数値は暫定値である。",
+"2019年の数値は参考表では確定値である。",
+"訪日外客数には乗員は含まれない。",
+"北欧地域はスウェーデン、デンマーク、ノルウェー、フィンランドを指す。",
+"中東地域はイスラエル、トルコ、GCC6か国を指す。"
+],
+"definition_ja": "訪日外客数とは、法務省集計による出入国管理統計に基づき算出したものである。訪日外客は、外国人正規入国者から日本を主たる居住国とする永住者等の外国人を除き、これに外国人一時上陸客等を加えた入国外国人旅行者を指す。駐在員やその家族、留学生等の入国者・再入国者は含まれ、乗員は含まれない。"
+},
+"overall": {
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 3040100,
+"comparison_year": 2023,
+"comparison_value": 1899176,
+"change_pct_vs_comparison_year": 60.1,
+"comparison_type": "year_over_year",
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 14641500,
+"comparison_year": 2023,
+"comparison_value": 8638955,
+"change_pct_vs_comparison_year": 69.5,
+"comparison_type": "year_over_year",
+"data_status": "preliminary_estimate"
+}
+},
+"headline_summary_ja": "2024年5月の訪日外客数は3,040,100人で、前年同月比60.1%増、2019年同月比9.6%増となった。同月過去最高であった2019年5月の2,773,091人を20万人以上上回り、3か月連続で300万人を突破した。",
+"overall_context_ja": [
+"一部市場において学校休暇を含む連休にあわせた訪日需要の高まりが見られた。",
+"東アジアでは韓国、東南アジアではシンガポール、欧米豪・中東地域では米国などで訪日外客数が増加したことが押し上げ要因となった。",
+"23市場のうち19市場で5月として過去最高を記録した。",
+"インドでは単月過去最高を更新した。"
+],
+"common_market_conditions_ja": [
+"COVID-19の拡大以降、航空・旅行会社を取り巻く人手不足等の課題が多くの市場で見られている。",
+"欧州地域では、ウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が訪日旅行の懸念材料となっている。",
+"多くの市場において円安傾向が継続している。"
+]
+},
+"markets": [
+{
+"market_key": "KR",
+"name_ja": "韓国",
+"name_en": "South Korea",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 738800,
+"comparison_year": 2023,
+"comparison_value": 515717,
+"change_pct_vs_comparison_year": 43.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 24.3,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 3738700,
+"comparison_year": 2023,
+"comparison_value": 2583387,
+"change_pct_vs_comparison_year": 44.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 25.53,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "日本各地へのチャーター便を含む地方路線の増便等の影響もあり、訪日外客数は738,800人、前年同月比43.3%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"地方路線の増便",
+"チャーター便の運航",
+"日本への直行便数が前年同月を上回った",
+"クルーズ船の寄港",
+"定期航路の再開"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"仁川～関西間の増便",
+"仁川～那覇間の増便",
+"清州～花巻間、仁川～南紀白浜間、仁川～富山間などでチャーター便の運航",
+"那覇港、新潟港などにクルーズ船の寄港",
+"釜山～厳原間の定期航路が再開"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase",
+"route_resumption"
+]
+},
+{
+"market_key": "CN",
+"name_ja": "中国",
+"name_en": "China",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 545400,
+"comparison_year": 2023,
+"comparison_value": 134510,
+"change_pct_vs_comparison_year": 305.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 17.94,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 2407100,
+"comparison_year": 2023,
+"comparison_value": 386195,
+"change_pct_vs_comparison_year": 523.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 16.44,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "中国の水際規制緩和、地方路線を含む増便、労働節等の影響もあり、訪日外客数は545,400人、前年同月比305.5%増となり、前年同月を上回った。",
+"positive_drivers_ja": [
+"中国の水際規制緩和",
+"地方路線を含む増便",
+"日本への直行便数が前年同月を上回った",
+"クルーズ船の寄港"
+],
+"constraints_ja": [
+"2023年8月9日まで中国文化旅游部より日本行き団体旅行・パッケージツアー商品の販売禁止措置が継続していた"
+],
+"aviation_updates_ja": [
+"岡山～上海間の増便",
+"北京～羽田間の増便",
+"上海～羽田間の増便",
+"那覇港、博多港、長崎港などにクルーズ船の寄港"
+],
+"demand_events_ja": [
+"労働節"
+],
+"policy_or_regulation_notes_ja": [
+"中国の水際規制緩和",
+"2023年8月9日まで日本行き団体旅行・パッケージツアー商品の販売禁止措置が継続していた"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"aviation_increase",
+"holiday_effect",
+"regulatory_constraint"
+]
+},
+{
+"market_key": "TW",
+"name_ja": "台湾",
+"name_en": "Taiwan",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 466000,
+"comparison_year": 2023,
+"comparison_value": 303343,
+"change_pct_vs_comparison_year": 53.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 15.33,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 2404700,
+"comparison_year": 2023,
+"comparison_value": 1381642,
+"change_pct_vs_comparison_year": 74.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 16.42,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "旅行代金の高騰や日本のゴールデンウィーク期間の訪日を避ける動き等があったものの、日本各地へのチャーター便を含む地方路線の増便等の影響もあり、訪日外客数は466,000人、前年同月比53.6%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"地方路線の増便",
+"チャーター便の運航",
+"日本への直行便数が前年同月を上回った"
+],
+"constraints_ja": [
+"旅行代金の高騰",
+"日本のゴールデンウィーク期間の訪日を避ける動き"
+],
+"aviation_updates_ja": [
+"台北桃園～鹿児島間の復便",
+"台北桃園～中部間の増便",
+"台北桃園～福岡間の増便",
+"台北桃園～高知間などでチャーター便の運航"
+],
+"demand_events_ja": [
+"日本のゴールデンウィーク期間の訪日を避ける動き"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase",
+"route_resumption"
+]
+},
+{
+"market_key": "HK",
+"name_ja": "香港",
+"name_en": "Hong Kong",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 217500,
+"comparison_year": 2023,
+"comparison_value": 154393,
+"change_pct_vs_comparison_year": 40.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 7.15,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 1025600,
+"comparison_year": 2023,
+"comparison_value": 723437,
+"change_pct_vs_comparison_year": 41.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 7.0,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "旅行代金の高騰や日本のゴールデンウィーク期間の訪日を避ける動き等があったものの、地方路線の増便等の影響もあり、訪日外客数は217,500人、前年同月比40.9%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"地方路線の増便",
+"日本への直行便数が前年同月を上回った",
+"クルーズ船の寄港"
+],
+"constraints_ja": [
+"旅行代金の高騰",
+"日本のゴールデンウィーク期間の訪日を避ける動き"
+],
+"aviation_updates_ja": [
+"香港～成田間の増便",
+"香港～高松間の増便",
+"那覇港にクルーズ船の寄港"
+],
+"demand_events_ja": [
+"日本のゴールデンウィーク期間の訪日を避ける動き"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase"
+]
+},
+{
+"market_key": "TH",
+"name_ja": "タイ",
+"name_en": "Thailand",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 97400,
+"comparison_year": 2023,
+"comparison_value": 80728,
+"change_pct_vs_comparison_year": 20.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 3.2,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 563700,
+"comparison_year": 2023,
+"comparison_value": 446448,
+"change_pct_vs_comparison_year": 26.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 3.85,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "消費者購買力の低下等の影響があるものの、直行便数の増加、祝日等の影響もあり、訪日外客数は97,400人、前年同月比20.7%増となり、前年同月を上回った。",
+"positive_drivers_ja": [
+"直行便数の増加",
+"日本への直行便数が前年同月を上回った"
+],
+"constraints_ja": [
+"消費者購買力の低下"
+],
+"aviation_updates_ja": [
+"バンコク～成田間の増便"
+],
+"demand_events_ja": [
+"祝日"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "SG",
+"name_ja": "シンガポール",
+"name_en": "Singapore",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 62700,
+"comparison_year": 2023,
+"comparison_value": 49746,
+"change_pct_vs_comparison_year": 26.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.06,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 241100,
+"comparison_year": 2023,
+"comparison_value": 198135,
+"change_pct_vs_comparison_year": 21.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.65,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "直行便数の増加、スクールホリデーや祝日等の影響もあり、訪日外客数は62,700人、前年同月比26.0%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"直行便数の増加",
+"スクールホリデー",
+"祝日",
+"日本への直行便数が前年同月を上回った"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"シンガポール～成田間の増便"
+],
+"demand_events_ja": [
+"スクールホリデー",
+"祝日"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "MY",
+"name_ja": "マレーシア",
+"name_en": "Malaysia",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 39600,
+"comparison_year": 2023,
+"comparison_value": 34004,
+"change_pct_vs_comparison_year": 16.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.3,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 219800,
+"comparison_year": 2023,
+"comparison_value": 172243,
+"change_pct_vs_comparison_year": 27.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.5,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "査証免除措置による訪中旅行への人気の高まり等の影響があるものの、直行便数の増加、スクールホリデー等の影響もあり、訪日外客数は39,600人、前年同月比16.5%増となり、前年同月を上回った。",
+"positive_drivers_ja": [
+"直行便数の増加",
+"スクールホリデー",
+"日本への直行便数が前年同月を上回った"
+],
+"constraints_ja": [
+"査証免除措置による訪中旅行への人気の高まり"
+],
+"aviation_updates_ja": [
+"クアラルンプール～関西間の増便"
+],
+"demand_events_ja": [
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [
+"査証免除措置による訪中旅行への人気の高まり"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "ID",
+"name_ja": "インドネシア",
+"name_en": "Indonesia",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 41300,
+"comparison_year": 2023,
+"comparison_value": 31120,
+"change_pct_vs_comparison_year": 32.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.36,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 220800,
+"comparison_year": 2023,
+"comparison_value": 162380,
+"change_pct_vs_comparison_year": 36.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.51,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "直行便数の増加、祝日等の影響もあり、訪日外客数は41,300人、前年同月比32.7%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"直行便数の増加",
+"祝日",
+"日本への直行便数が前年同月を上回った"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"ジャカルタ～羽田間の増便"
+],
+"demand_events_ja": [
+"祝日"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "PH",
+"name_ja": "フィリピン",
+"name_en": "Philippines",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 67400,
+"comparison_year": 2023,
+"comparison_value": 49939,
+"change_pct_vs_comparison_year": 35.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.22,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 336700,
+"comparison_year": 2023,
+"comparison_value": 222915,
+"change_pct_vs_comparison_year": 51.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.3,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "直行便数の増加等の影響もあり、訪日外客数は67,400人、前年同月比35.0%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"直行便数の増加",
+"日本への直行便数が前年同月を上回った"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"マニラ～関西間の増便"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase"
+]
+},
+{
+"market_key": "VN",
+"name_ja": "ベトナム",
+"name_en": "Vietnam",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 50600,
+"comparison_year": 2023,
+"comparison_value": 45768,
+"change_pct_vs_comparison_year": 10.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.66,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 284500,
+"comparison_year": 2023,
+"comparison_value": 262025,
+"change_pct_vs_comparison_year": 8.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.94,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "割安かつ査証免除・取得が容易な東南アジアや中国等への旅行需要の高まりがあるものの、直行便数が2019年水準を上回っていること、インセンティブツアーの催行等の影響もあり、訪日外客数は50,600人、前年同月比10.6%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"直行便数が2019年水準を上回っていること",
+"インセンティブツアーの催行",
+"日本への直行便数が前年同月を上回った",
+"チャーター便の運航"
+],
+"constraints_ja": [
+"割安かつ査証免除・取得が容易な東南アジアや中国等への旅行需要の高まり"
+],
+"aviation_updates_ja": [
+"ハノイ～広島間の新規就航",
+"ハノイ～出雲間などでチャーター便の運航"
+],
+"demand_events_ja": [
+"インセンティブツアーの催行"
+],
+"policy_or_regulation_notes_ja": [
+"東南アジアや中国等への旅行で査証免除・取得が容易な点が影響"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"record_high",
+"aviation_increase",
+"new_route"
+]
+},
+{
+"market_key": "IN",
+"name_ja": "インド",
+"name_en": "India",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 29100,
+"comparison_year": 2023,
+"comparison_value": 17992,
+"change_pct_vs_comparison_year": 61.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.96,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 102100,
+"comparison_year": 2023,
+"comparison_value": 65236,
+"change_pct_vs_comparison_year": 56.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.7,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": true,
+"record_note_ja": "単月として過去最高（5月としても過去最高）"
+},
+"market_context": {
+"status_summary_ja": "海外旅行需要の高まり、経由便就航の利便性の向上、スクールホリデー、大型インセンティブツアーの催行等の影響もあり、訪日外客数は29,100人、前年同月比61.7%増となり、単月として過去最高を記録した。",
+"positive_drivers_ja": [
+"海外旅行需要の高まり",
+"経由便就航の利便性の向上",
+"大型インセンティブツアーの催行"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"2023年1月のデリー～羽田間の増便後、現時点で新たな復便・増便の情報は出ていない"
+],
+"demand_events_ja": [
+"スクールホリデー",
+"大型インセンティブツアーの催行"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"all_time_record_high",
+"holiday_effect"
+]
+},
+{
+"market_key": "AU",
+"name_ja": "豪州",
+"name_en": "Australia",
+"region_ja": "豪州",
+"region_en": "Australia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 66500,
+"comparison_year": 2023,
+"comparison_value": 40816,
+"change_pct_vs_comparison_year": 62.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.19,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 400200,
+"comparison_year": 2023,
+"comparison_value": 232361,
+"change_pct_vs_comparison_year": 72.2,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.73,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "国際航空運賃が高騰しているものの、直行便数が2019年水準を上回っていること等の影響もあり、訪日外客数は66,500人、前年同月比62.9%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"直行便数が2019年水準を上回っていること",
+"日本への直行便数が前年同月を上回った"
+],
+"constraints_ja": [
+"国際航空運賃の高騰"
+],
+"aviation_updates_ja": [
+"2024年4月のシドニー～関西間の復便"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"route_resumption"
+]
+},
+{
+"market_key": "US",
+"name_ja": "米国",
+"name_en": "U.S.A.",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 247000,
+"comparison_year": 2023,
+"comparison_value": 183408,
+"change_pct_vs_comparison_year": 34.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 8.12,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 1046500,
+"comparison_year": 2023,
+"comparison_value": 745402,
+"change_pct_vs_comparison_year": 40.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 7.15,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "直行便数の増加に加え、スクールホリデーや祝日等の影響もあり、訪日外客数は247,000人、前年同月比34.7%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"直行便数の増加",
+"スクールホリデー",
+"祝日",
+"日本への直行便数が前年同月を上回った",
+"クルーズ船の寄港"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"グアム～羽田間の新規就航",
+"サンフランシスコ～成田間の増便",
+"ホノルル～成田間の増便",
+"函館港などにクルーズ船の寄港"
+],
+"demand_events_ja": [
+"スクールホリデー",
+"祝日"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase",
+"new_route",
+"holiday_effect"
+]
+},
+{
+"market_key": "CA",
+"name_ja": "カナダ",
+"name_en": "Canada",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 55800,
+"comparison_year": 2023,
+"comparison_value": 42285,
+"change_pct_vs_comparison_year": 32.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.84,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 231200,
+"comparison_year": 2023,
+"comparison_value": 153250,
+"change_pct_vs_comparison_year": 50.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.58,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "直行便数が2019年水準を上回っていることに加え、航空機材の大型化等の影響もあり、訪日外客数は55,800人、前年同月比32.0%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"直行便数が2019年水準を上回っていること",
+"航空機材の大型化",
+"日本への直行便数が前年同月を上回った"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"バンクーバー～関西間の増便"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase"
+]
+},
+{
+"market_key": "MX",
+"name_ja": "メキシコ",
+"name_en": "Mexico",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 11500,
+"comparison_year": 2023,
+"comparison_value": 8465,
+"change_pct_vs_comparison_year": 35.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.38,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 53300,
+"comparison_year": 2023,
+"comparison_value": 28153,
+"change_pct_vs_comparison_year": 89.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.36,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "燃油サーチャージの上昇等があるものの、直行便数が2019年水準まで回復したこと等の影響もあり、訪日外客数は11,500人、前年同月比35.9%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"直行便数が2019年水準まで回復"
+],
+"constraints_ja": [
+"燃油サーチャージの上昇"
+],
+"aviation_updates_ja": [
+"2023年3月のメキシコシティ～成田間の復便後、現時点で新たな増便等の情報は出ていない"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"route_resumption"
+]
+},
+{
+"market_key": "GB",
+"name_ja": "英国",
+"name_en": "United Kingdom",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 39100,
+"comparison_year": 2023,
+"comparison_value": 27739,
+"change_pct_vs_comparison_year": 41.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.29,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 189600,
+"comparison_year": 2023,
+"comparison_value": 129744,
+"change_pct_vs_comparison_year": 46.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.29,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "経由便航空商品の多様化等の影響もあり、訪日外客数は39,100人、前年同月比41.0%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"経由便航空商品の多様化",
+"日本への直行便数が前年同月を上回った"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"ヒースロー～羽田間の増便"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase"
+]
+},
+{
+"market_key": "FR",
+"name_ja": "フランス",
+"name_en": "France",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 38200,
+"comparison_year": 2023,
+"comparison_value": 26754,
+"change_pct_vs_comparison_year": 42.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.26,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 161200,
+"comparison_year": 2023,
+"comparison_value": 104420,
+"change_pct_vs_comparison_year": 54.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.1,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "航空券代金の高騰等があるものの、直行便数の増加や祝日等の影響もあり、訪日外客数は38,200人、前年同月比42.8%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"直行便数の増加",
+"祝日",
+"日本への直行便数が前年同月を上回った"
+],
+"constraints_ja": [
+"航空券代金の高騰"
+],
+"aviation_updates_ja": [
+"パリ～関西間の増便"
+],
+"demand_events_ja": [
+"祝日"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "DE",
+"name_ja": "ドイツ",
+"name_en": "Germany",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 32200,
+"comparison_year": 2023,
+"comparison_value": 23118,
+"change_pct_vs_comparison_year": 39.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.06,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 141000,
+"comparison_year": 2023,
+"comparison_value": 93060,
+"change_pct_vs_comparison_year": 51.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.96,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "航空券代金の高騰等があるものの、経由便航空商品の多様化や祝日等の影響もあり、訪日外客数は32,200人、前年同月比39.3%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"経由便航空商品の多様化",
+"祝日",
+"日本への直行便数が前年同月を上回った"
+],
+"constraints_ja": [
+"航空券代金の高騰"
+],
+"aviation_updates_ja": [
+"ミュンヘン～関西間の増便"
+],
+"demand_events_ja": [
+"祝日"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "IT",
+"name_ja": "イタリア",
+"name_en": "Italy",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 17400,
+"comparison_year": 2023,
+"comparison_value": 11828,
+"change_pct_vs_comparison_year": 47.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.57,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 81100,
+"comparison_year": 2023,
+"comparison_value": 49116,
+"change_pct_vs_comparison_year": 65.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.55,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "経由便の航空商品の多様化等の影響もあり、訪日外客数は17,400人、前年同月比47.1%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"経由便の航空商品の多様化",
+"日本への直行便数が前年同月を上回った"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"ローマ～羽田間の増便"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase"
+]
+},
+{
+"market_key": "ES",
+"name_ja": "スペイン",
+"name_en": "Spain",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 13400,
+"comparison_year": 2023,
+"comparison_value": 8581,
+"change_pct_vs_comparison_year": 56.2,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.44,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 53000,
+"comparison_year": 2023,
+"comparison_value": 30837,
+"change_pct_vs_comparison_year": 71.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.36,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "経由便航空商品の多様化等の影響もあり、訪日外客数は13,400人、前年同月比56.2%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"経由便航空商品の多様化"
+],
+"constraints_ja": [
+"COVID-19の拡大以降、日本への直行便は運休が続いている"
+],
+"aviation_updates_ja": [
+"COVID-19の拡大以降、日本への直行便は運休が継続",
+"イベリア航空が2024年10月末より復便予定"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"seat_capacity_decline"
+]
+},
+{
+"market_key": "RU",
+"name_ja": "ロシア",
+"name_en": "Russia",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 8000,
+"comparison_year": 2023,
+"comparison_value": 2960,
+"change_pct_vs_comparison_year": 170.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.26,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 35400,
+"comparison_year": 2023,
+"comparison_value": 13801,
+"change_pct_vs_comparison_year": 156.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.24,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "ウクライナ侵攻による各国からの制裁等による影響が続いている中、訪日外客数は8,000人、前年同月比170.3%増となった。",
+"positive_drivers_ja": [],
+"constraints_ja": [
+"ウクライナ侵攻による各国からの制裁等による影響",
+"COVID-19の拡大以降、日本への直行便は運休が続いている"
+],
+"aviation_updates_ja": [
+"COVID-19の拡大以降、日本への直行便は運休が継続"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"geopolitical_risk",
+"seat_capacity_decline"
+]
+},
+{
+"market_key": "NORDIC",
+"name_ja": "北欧地域",
+"name_en": "Nordic Countries",
+"region_ja": "北欧地域",
+"region_en": "Nordic Countries",
+"is_region_aggregate": true,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 11900,
+"comparison_year": 2023,
+"comparison_value": 8607,
+"change_pct_vs_comparison_year": 38.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.39,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 59300,
+"comparison_year": 2023,
+"comparison_value": 41677,
+"change_pct_vs_comparison_year": 42.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.41,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "直行便数の増加や祝日等の影響もあり、訪日外客数は11,900人、前年同月比38.3%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"直行便数の増加",
+"祝日",
+"日本への直行便数が前年同月を上回った"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"ヘルシンキ～成田間の増便",
+"コペンハーゲン～羽田間の増便"
+],
+"demand_events_ja": [
+"祝日"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"北欧地域はスウェーデン、デンマーク、ノルウェー、フィンランドを指す。"
+]
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "ME",
+"name_ja": "中東地域",
+"name_en": "Middle East",
+"region_ja": "中東地域",
+"region_en": "Middle East",
+"is_region_aggregate": true,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 14000,
+"comparison_year": 2023,
+"comparison_value": 8746,
+"change_pct_vs_comparison_year": 60.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.46,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 61200,
+"comparison_year": 2023,
+"comparison_value": 42822,
+"change_pct_vs_comparison_year": 42.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.42,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "5月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "イスラエル、パレスチナの情勢悪化等があるものの、直行便数が2019年水準を上回っていることに加え、アラブ首長国連邦においてスポーツイベントが日本で開催されたこと、サウジアラビアにおいて政府・企業関係者らが参加する国際会議が日本で開催されたこと等の影響もあり、訪日外客数は14,000人、前年同月比60.1%増となり、5月として過去最高を記録した。",
+"positive_drivers_ja": [
+"直行便数が2019年水準を上回っていること",
+"日本への直行便数が前年同月を上回った",
+"スポーツイベントが日本で開催されたこと",
+"国際会議が日本で開催されたこと"
+],
+"constraints_ja": [
+"イスラエル、パレスチナの情勢悪化"
+],
+"aviation_updates_ja": [
+"イスタンブール～関西間の増便"
+],
+"demand_events_ja": [
+"アラブ首長国連邦におけるスポーツイベントの日本開催",
+"サウジアラビアにおける政府・企業関係者らが参加する国際会議の日本開催"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"中東地域はイスラエル、トルコ、GCC6か国を指す。"
+]
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase",
+"geopolitical_risk"
+]
+},
+{
+"market_key": "OTHERS",
+"name_ja": "その他",
+"name_en": "Others",
+"region_ja": "その他",
+"region_en": "Others",
+"is_region_aggregate": true,
+"visitor_arrivals": {
+"month": {
+"period": "2024-05",
+"current_year": 2024,
+"current_value": 129300,
+"comparison_year": 2023,
+"comparison_value": 88609,
+"change_pct_vs_comparison_year": 45.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 4.25,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2024-01_2024-05",
+"current_year": 2024,
+"current_value": 583700,
+"comparison_year": 2023,
+"comparison_value": 370269,
+"change_pct_vs_comparison_year": 57.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 3.99,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": null,
+"positive_drivers_ja": [],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth"
+]
+}
+],
+"dashboard_hints": {
+"primary_metric": "visitor_arrivals.month.current_value",
+"comparison_metric": "visitor_arrivals.month.change_pct_vs_comparison_year",
+"context_metric": "market_context.status_summary_ja",
+"group_by": [
+"region_ja",
+"market_key"
+],
+"suggested_charts": [
+"国・地域別の月次訪日外客数ランキング",
+"国・地域別の前年同月比または2019年同月比",
+"地域別の回復・増減状況",
+"航空便・休暇・規制要因の一覧",
+"過去最高を記録した市場のハイライト"
+]
+},
+"quality_checks": {
+"has_country_table": true,
+"has_market_context": true,
+"missing_context_markets": [
+"OTHERS"
+],
+"warnings": [
+"本文では2019年比が参考指標として掲載されているが、本JSONのvisitor_arrivals比較値は主基準である2023年比を格納した。",
+"recordスキーマに5月過去最高専用フィールドがないため、5月として過去最高を記録した市場はrecord.month_record=trueおよびrecord_note_jaに格納した。",
+"record.april_recordは5月レポートのため全市場falseとした。"
+]
+}
+}

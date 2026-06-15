@@ -1,0 +1,1651 @@
+{
+"schema_version": "1.1.0",
+"dataset_type": "jnto_monthly_visitor_arrivals_country_status",
+"report": {
+"source_name_ja": "日本政府観光局（JNTO）",
+"source_name_en": "Japan National Tourism Organization",
+"report_title_ja": "訪日外客数（2025年4月推計値）",
+"published_date": "2025-05-21",
+"data_month": "2025年4月",
+"data_year": 2025,
+"data_month_number": 4,
+"as_of_date": "2025-05-14",
+"primary_comparison": {
+"type": "year_over_year",
+"base_year": 2024,
+"target_year": 2025,
+"label_ja": "前年同月比"
+},
+"notes_ja": [
+"本資料を引用する際は、出典名を「日本政府観光局（JNTO）」と明示する必要がある。",
+"2024年の数値は暫定値、2025年の数値はJNTOによる推計値である。",
+"単月過去最高の10市場はインド、カナダ、メキシコ、英国、フランス、ドイツ、イタリア、ロシア、北欧地域、中東地域である。",
+"4月過去最高の11市場は韓国、中国、台湾、香港、シンガポール、マレーシア、フィリピン、ベトナム、豪州、米国、スペインである。",
+"北欧地域はスウェーデン、デンマーク、ノルウェー、フィンランドを指す。",
+"中東地域はイスラエル、トルコ、GCC6か国（サウジアラビア、アラブ首長国連邦（UAE）、バーレーン、オマーン、カタール、クウェート）を指す。"
+],
+"definition_ja": "訪日外客数とは、法務省集計による出入国管理統計に基づき算出したものである。訪日外客は、外国人正規入国者から日本を主たる居住国とする永住者等の外国人を除き、これに外国人一時上陸客等を加えた入国外国人旅行者のことである。駐在員やその家族、留学生等の入国者・再入国者は訪日外客に含まれる。乗員は含まれない。"
+},
+"overall": {
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 3908900,
+"comparison_year": 2024,
+"comparison_value": 3043003,
+"change_pct_vs_comparison_year": 28.5,
+"comparison_type": "year_over_year",
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 14446600,
+"comparison_year": 2024,
+"comparison_value": 11601486,
+"change_pct_vs_comparison_year": 24.5,
+"comparison_type": "year_over_year",
+"data_status": "preliminary_estimate"
+}
+},
+"headline_summary_ja": "2025年4月の訪日外客数は3,908,900人で、前年同月比28.5%増となり、過去最高であった2025年1月の3,781,629人を上回って単月過去最高を記録した。単月として初めて390万人を突破した。",
+"overall_context_ja": [
+"春の桜シーズンで前月に続き多くの市場で訪日需要が高まった。",
+"アジアの一部市場や欧米豪市場では、イースター休暇に合わせて海外旅行需要が増加した。",
+"東アジアでは中国、香港、欧米豪では米国、豪州を中心に訪日外客数が増加したことが今月の押し上げ要因となった。",
+"カナダや英国など10市場で単月過去最高を更新したほか、韓国や中国、シンガポールなど11市場で4月として過去最高を記録した。",
+"2023年3月に策定された第4次観光立国推進基本計画では、「持続可能な観光」「消費額拡大」「地方誘客促進」の3つの柱と、旅行消費額・地方部宿泊数等に関する政府目標が掲げられている。"
+],
+"common_market_conditions_ja": [
+"COVID-19の拡大以降、航空・旅行会社を取り巻く人手不足や旅行費用の高騰等の課題が多くの市場で見られている。",
+"欧州地域では、ウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が訪日旅行の懸念材料となっている。",
+"多くの市場において円安傾向が継続している。",
+"4月は例年、桜シーズンによる訪日需要の高まりにより、多くの市場で訪日旅行者が多くなる傾向にある。"
+]
+},
+"markets": [
+{
+"market_key": "KR",
+"name_ja": "韓国",
+"name_en": "South Korea",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 721600,
+"comparison_year": 2024,
+"comparison_value": 661259,
+"change_pct_vs_comparison_year": 9.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 18.46,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 3227800,
+"comparison_year": 2024,
+"comparison_value": 2999962,
+"change_pct_vs_comparison_year": 7.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 22.34,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": true,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "4月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "先月に続き為替レートがウォン安傾向となったものの、仁川～石垣間の新規就航、金浦～関西間、金浦～中部間、仁川～米子間の増便や仁川～神戸間のチャーター便運航等の影響もあり、訪日外客数は721,600人、前年同月比9.1%増となり、4月として過去最高を記録した。",
+"positive_drivers_ja": [
+"仁川～石垣間の新規就航",
+"金浦～関西間、金浦～中部間、仁川～米子間の増便",
+"仁川～神戸間のチャーター便運航"
+],
+"constraints_ja": [
+"為替レートがウォン安傾向"
+],
+"aviation_updates_ja": [
+"仁川～石垣間の新規就航",
+"金浦～関西間、金浦～中部間、仁川～米子間の増便",
+"仁川～神戸間のチャーター便の運航"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"aviation_increase",
+"new_route",
+"record_high",
+"april_record_high"
+]
+},
+{
+"market_key": "CN",
+"name_ja": "中国",
+"name_en": "China",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 765100,
+"comparison_year": 2024,
+"comparison_value": 533611,
+"change_pct_vs_comparison_year": 43.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 19.57,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 3130200,
+"comparison_year": 2024,
+"comparison_value": 1861687,
+"change_pct_vs_comparison_year": 68.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 21.67,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": true,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "4月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "福州～中部間の新規就航、北京～羽田間、北京～関西間、上海～福岡間の中国各地からの航空便の増便、清明節休暇の影響もあり、訪日外客数は765,100人、前年同月比43.4%増となり、4月として過去最高を記録した。",
+"positive_drivers_ja": [
+"中国各地からの航空便の増便",
+"清明節休暇による需要"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"福州～中部間の新規就航",
+"北京～羽田間、北京～関西間、上海～福岡間の航空便の増便"
+],
+"demand_events_ja": [
+"清明節休暇"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"aviation_increase",
+"new_route",
+"holiday_effect",
+"record_high",
+"april_record_high"
+]
+},
+{
+"market_key": "TW",
+"name_ja": "台湾",
+"name_en": "Taiwan",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 537600,
+"comparison_year": 2024,
+"comparison_value": 459723,
+"change_pct_vs_comparison_year": 16.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 13.75,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 2161300,
+"comparison_year": 2024,
+"comparison_value": 1938702,
+"change_pct_vs_comparison_year": 11.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 14.96,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": true,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "4月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "高雄～関西間の増便、台北桃園～神戸間、台北桃園～大分間のチャーター便運航をはじめとした航空便の座席数増加やクルーズ船寄港に加え、4連休の影響もあり、訪日外客数は537,600人、前年同月比16.9%増となり、4月として過去最高を記録した。",
+"positive_drivers_ja": [
+"航空便の座席数増加",
+"クルーズ船寄港",
+"4連休による需要"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"高雄～関西間の増便",
+"台北桃園～神戸間、台北桃園～大分間のチャーター便の運航",
+"航空便の座席数増加"
+],
+"demand_events_ja": [
+"4連休"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"クルーズ船寄港の影響"
+]
+},
+"dashboard_tags": [
+"moderate_growth",
+"aviation_increase",
+"holiday_effect",
+"record_high",
+"april_record_high"
+]
+},
+{
+"market_key": "HK",
+"name_ja": "香港",
+"name_en": "Hong Kong",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 263600,
+"comparison_year": 2024,
+"comparison_value": 184460,
+"change_pct_vs_comparison_year": 42.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 6.74,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 911200,
+"comparison_year": 2024,
+"comparison_value": 808017,
+"change_pct_vs_comparison_year": 12.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 6.31,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": true,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "4月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "香港～小松間の新規就航、香港～石垣間の復便、香港～関西間の増便等に加え、清明節休暇や前年は3月下旬からであったイースター休暇が今年は4月中旬からとなった影響もあり、訪日外客数は263,600人、前年同月比42.9%増となり、4月として過去最高を記録した。",
+"positive_drivers_ja": [
+"航空路線の新規就航・復便・増便",
+"清明節休暇による需要",
+"イースター休暇の時期が4月中旬となった影響"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"香港～小松間の新規就航",
+"香港～石垣間の復便",
+"香港～関西間の増便"
+],
+"demand_events_ja": [
+"清明節休暇",
+"イースター休暇の期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"aviation_increase",
+"route_resumption",
+"new_route",
+"holiday_effect",
+"easter_shift",
+"record_high",
+"april_record_high"
+]
+},
+{
+"market_key": "TH",
+"name_ja": "タイ",
+"name_en": "Thailand",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 158500,
+"comparison_year": 2024,
+"comparison_value": 142521,
+"change_pct_vs_comparison_year": 11.2,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 4.05,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 520300,
+"comparison_year": 2024,
+"comparison_value": 466298,
+"change_pct_vs_comparison_year": 11.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 3.6,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "査証免除措置による訪中旅行への人気の高まりや地震の影響による旅行需要の減退の影響等があるものの、継続する日本人気やバンコク～成田間の増便、ソンクラン等の影響もあり、訪日外客数は158,500人、前年同月比11.2%増となった。",
+"positive_drivers_ja": [
+"継続する日本人気",
+"バンコク～成田間の増便",
+"ソンクランによる需要"
+],
+"constraints_ja": [
+"査証免除措置による訪中旅行への人気の高まり",
+"地震の影響による旅行需要の減退"
+],
+"aviation_updates_ja": [
+"バンコク～成田間の増便"
+],
+"demand_events_ja": [
+"ソンクラン"
+],
+"policy_or_regulation_notes_ja": [
+"査証免除措置による訪中旅行への人気の高まり"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"continued_japan_popularity",
+"aviation_increase",
+"holiday_effect",
+"regulatory_constraint"
+]
+},
+{
+"market_key": "SG",
+"name_ja": "シンガポール",
+"name_en": "Singapore",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 60000,
+"comparison_year": 2024,
+"comparison_value": 46324,
+"change_pct_vs_comparison_year": 29.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.53,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 213300,
+"comparison_year": 2024,
+"comparison_value": 178426,
+"change_pct_vs_comparison_year": 19.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.48,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": true,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "4月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する日本人気や、シンガポール～沖縄便などによる直行便数の増加、祝日の影響等もあり、訪日外客数は60,000人、前年同月比29.5%増となり、4月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する日本人気",
+"直行便数の増加",
+"祝日による需要"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"シンガポール～沖縄便などによる直行便数の増加"
+],
+"demand_events_ja": [
+"祝日"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"continued_japan_popularity",
+"aviation_increase",
+"holiday_effect",
+"record_high",
+"april_record_high"
+]
+},
+{
+"market_key": "MY",
+"name_ja": "マレーシア",
+"name_en": "Malaysia",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 51200,
+"comparison_year": 2024,
+"comparison_value": 45983,
+"change_pct_vs_comparison_year": 11.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.31,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 244200,
+"comparison_year": 2024,
+"comparison_value": 180193,
+"change_pct_vs_comparison_year": 35.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.69,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": true,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "4月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "査証免除措置による訪中旅行への人気の高まりや、前年は4月中旬からであった断食明け休暇が今年は3月末からとなった影響等があるものの、マレーシアリンギット高や公務員の給与引き上げなどの影響もあり、訪日外客数は51,200人、前年同月比11.3%増となり、4月として過去最高を記録した。",
+"positive_drivers_ja": [
+"マレーシアリンギット高",
+"公務員の給与引き上げ"
+],
+"constraints_ja": [
+"査証免除措置による訪中旅行への人気の高まり",
+"断食明け休暇が今年は3月末からとなった影響"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"断食明け休暇の期ずれ"
+],
+"policy_or_regulation_notes_ja": [
+"査証免除措置による訪中旅行への人気の高まり"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"holiday_effect",
+"regulatory_constraint",
+"record_high",
+"april_record_high"
+]
+},
+{
+"market_key": "ID",
+"name_ja": "インドネシア",
+"name_en": "Indonesia",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 61400,
+"comparison_year": 2024,
+"comparison_value": 62515,
+"change_pct_vs_comparison_year": -1.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.57,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 232300,
+"comparison_year": 2024,
+"comparison_value": 179496,
+"change_pct_vs_comparison_year": 29.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.61,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "ジャカルタ～成田間、ジャカルタ～羽田間の増便などによる直行便数の増加等があるものの、前年は4月中旬からであった断食明け休暇が今年は3月末からとなった影響等もあり、訪日外客数は61,400人、前年同月比1.8%減となった。",
+"positive_drivers_ja": [
+"ジャカルタ～成田間、ジャカルタ～羽田間の増便などによる直行便数の増加"
+],
+"constraints_ja": [
+"断食明け休暇が今年は3月末からとなった影響"
+],
+"aviation_updates_ja": [
+"ジャカルタ～成田間、ジャカルタ～羽田間の増便",
+"直行便数の増加"
+],
+"demand_events_ja": [
+"断食明け休暇の期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "PH",
+"name_ja": "フィリピン",
+"name_en": "Philippines",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 91000,
+"comparison_year": 2024,
+"comparison_value": 68499,
+"change_pct_vs_comparison_year": 32.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.33,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 302200,
+"comparison_year": 2024,
+"comparison_value": 269313,
+"change_pct_vs_comparison_year": 12.2,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.09,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": true,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "4月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "マニラ～新千歳間の復便や好調な経済状況を背景とする海外旅行需要の増加、前年は3月下旬からであったイースター休暇が今年は4月中旬からとなった影響等もあり、訪日外客数は91,000人、前年同月比32.8%増となり、4月として過去最高を記録した。",
+"positive_drivers_ja": [
+"マニラ～新千歳間の復便",
+"好調な経済状況を背景とする海外旅行需要の増加",
+"イースター休暇の時期が4月中旬となった影響"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"マニラ～新千歳間の復便"
+],
+"demand_events_ja": [
+"イースター休暇の期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"route_resumption",
+"holiday_effect",
+"easter_shift",
+"record_high",
+"april_record_high"
+]
+},
+{
+"market_key": "VN",
+"name_ja": "ベトナム",
+"name_en": "Vietnam",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 64100,
+"comparison_year": 2024,
+"comparison_value": 61607,
+"change_pct_vs_comparison_year": 4.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.64,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 252400,
+"comparison_year": 2024,
+"comparison_value": 233865,
+"change_pct_vs_comparison_year": 7.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.75,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": true,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "4月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "割安かつ査証免除・取得が容易な東南アジアや中国等への旅行需要の高まり等の影響があるものの、ホーチミン～中部間、ホーチミン～福岡間の増便、ホーチミン～福島間でのチャーター便などによる直行便数の増加、祝日等の影響もあり、訪日外客数は64,100人、前年同月比4.0%増となり、4月として過去最高を記録した。",
+"positive_drivers_ja": [
+"ホーチミン～中部間、ホーチミン～福岡間の増便",
+"ホーチミン～福島間でのチャーター便などによる直行便数の増加",
+"祝日による需要"
+],
+"constraints_ja": [
+"割安かつ査証免除・取得が容易な東南アジアや中国等への旅行需要の高まり"
+],
+"aviation_updates_ja": [
+"ホーチミン～中部間、ホーチミン～福岡間の増便",
+"ホーチミン～福島間でのチャーター便",
+"直行便数の増加"
+],
+"demand_events_ja": [
+"祝日"
+],
+"policy_or_regulation_notes_ja": [
+"査証免除・取得が容易な東南アジアや中国等への旅行需要の高まり"
+],
+"special_notes_ja": [
+"留学、技能実習等を含むその他客の多い市場であることに留意する。"
+]
+},
+"dashboard_tags": [
+"moderate_growth",
+"aviation_increase",
+"holiday_effect",
+"regulatory_constraint",
+"record_high",
+"april_record_high"
+]
+},
+{
+"market_key": "IN",
+"name_ja": "インド",
+"name_en": "India",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 37300,
+"comparison_year": 2024,
+"comparison_value": 23162,
+"change_pct_vs_comparison_year": 61.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.95,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 99400,
+"comparison_year": 2024,
+"comparison_value": 72941,
+"change_pct_vs_comparison_year": 36.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.69,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": true,
+"record_note_ja": "単月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "直行便座席の不足等があるものの、予約の早期化による旅行手配の効率化やベンガルール～成田間の増便、経由便の利便性の向上等もあり、訪日外客数は37,300人、前年同月比61.0%増となり、単月として過去最高を記録した。",
+"positive_drivers_ja": [
+"予約の早期化による旅行手配の効率化",
+"ベンガルール～成田間の増便",
+"経由便の利便性の向上"
+],
+"constraints_ja": [
+"直行便座席の不足"
+],
+"aviation_updates_ja": [
+"ベンガルール～成田間の増便",
+"経由便の利便性の向上"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"aviation_increase",
+"record_high",
+"all_time_record_high"
+]
+},
+{
+"market_key": "AU",
+"name_ja": "豪州",
+"name_en": "Australia",
+"region_ja": "豪州",
+"region_en": "Australia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 115200,
+"comparison_year": 2024,
+"comparison_value": 80812,
+"change_pct_vs_comparison_year": 42.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.95,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 429000,
+"comparison_year": 2024,
+"comparison_value": 333698,
+"change_pct_vs_comparison_year": 28.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.97,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": true,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "4月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "前年は3月下旬からであったイースター休暇が今年は4月中旬からとなったことに加え、豪州からのアウトバウンド需要自体が増加していることの影響等もあり、訪日外客数は115,200人、前年同月比42.6%増となり、4月として過去最高を記録した。",
+"positive_drivers_ja": [
+"豪州からのアウトバウンド需要自体の増加",
+"イースター休暇の時期が4月中旬となった影響"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"イースター休暇の期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"holiday_effect",
+"easter_shift",
+"record_high",
+"april_record_high"
+]
+},
+{
+"market_key": "US",
+"name_ja": "米国",
+"name_en": "U.S.A.",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 327500,
+"comparison_year": 2024,
+"comparison_value": 228900,
+"change_pct_vs_comparison_year": 43.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 8.38,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 1044400,
+"comparison_year": 2024,
+"comparison_value": 799549,
+"change_pct_vs_comparison_year": 30.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 7.23,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": true,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "4月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "前年は3月下旬からであったイースター休暇が今年は4月中旬からとなったことに加え、継続する訪日旅行の人気や幕張で開催された映画関連イベントの影響もあり、訪日外客数は327,500人、前年同月比43.1%増となり、4月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行の人気",
+"幕張で開催された映画関連イベント",
+"イースター休暇の時期が4月中旬となった影響"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"イースター休暇の期ずれ",
+"幕張で開催された映画関連イベント"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"continued_japan_popularity",
+"holiday_effect",
+"easter_shift",
+"record_high",
+"april_record_high"
+]
+},
+{
+"market_key": "CA",
+"name_ja": "カナダ",
+"name_en": "Canada",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 72600,
+"comparison_year": 2024,
+"comparison_value": 52118,
+"change_pct_vs_comparison_year": 39.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.86,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 227500,
+"comparison_year": 2024,
+"comparison_value": 175464,
+"change_pct_vs_comparison_year": 29.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.57,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": true,
+"record_note_ja": "単月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "前年は3月下旬からであったイースター休暇が今年は4月中旬からとなったことに加え、継続する訪日旅行の人気や前年同月と比較して直行便数が増加したことの影響等もあり、訪日外客数は72,600人、前年同月比39.3%増となり、単月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行の人気",
+"前年同月と比較して直行便数が増加",
+"イースター休暇の時期が4月中旬となった影響"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"前年同月と比較して直行便数が増加"
+],
+"demand_events_ja": [
+"イースター休暇の期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"continued_japan_popularity",
+"aviation_increase",
+"holiday_effect",
+"easter_shift",
+"record_high",
+"all_time_record_high"
+]
+},
+{
+"market_key": "MX",
+"name_ja": "メキシコ",
+"name_en": "Mexico",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 21800,
+"comparison_year": 2024,
+"comparison_value": 11786,
+"change_pct_vs_comparison_year": 85.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.56,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 56500,
+"comparison_year": 2024,
+"comparison_value": 41747,
+"change_pct_vs_comparison_year": 35.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.39,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": true,
+"record_note_ja": "単月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "前年は3月下旬からであったイースター休暇が今年は4月中旬からとなったことに加え、継続する訪日旅行人気や経由便の多様化の影響等もあり、訪日外客数は21,800人、前年同月比85.0%増となり、単月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"経由便の多様化",
+"イースター休暇の時期が4月中旬となった影響"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"経由便の多様化"
+],
+"demand_events_ja": [
+"イースター休暇の期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"continued_japan_popularity",
+"holiday_effect",
+"easter_shift",
+"record_high",
+"all_time_record_high"
+]
+},
+{
+"market_key": "GB",
+"name_ja": "英国",
+"name_en": "United Kingdom",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 69500,
+"comparison_year": 2024,
+"comparison_value": 48407,
+"change_pct_vs_comparison_year": 43.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.78,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 185400,
+"comparison_year": 2024,
+"comparison_value": 150543,
+"change_pct_vs_comparison_year": 23.2,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.28,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": true,
+"record_note_ja": "単月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "4月上旬から始まったスクールホリデーや前年は3月下旬からであったイースター休暇が今年は4月中旬からとなったことに加え、継続する訪日旅行人気や中国および中東経由等の経由便の多様化の影響等もあり、訪日外客数は69,500人、前年同月比43.6%増となり、単月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"中国および中東経由等の経由便の多様化",
+"スクールホリデー",
+"イースター休暇の時期が4月中旬となった影響"
+],
+"constraints_ja": [
+"欧州地域ではウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が懸念材料となっている"
+],
+"aviation_updates_ja": [
+"中国および中東経由等の経由便の多様化"
+],
+"demand_events_ja": [
+"スクールホリデー",
+"イースター休暇の期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"continued_japan_popularity",
+"holiday_effect",
+"easter_shift",
+"geopolitical_risk",
+"record_high",
+"all_time_record_high"
+]
+},
+{
+"market_key": "FR",
+"name_ja": "フランス",
+"name_en": "France",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 57100,
+"comparison_year": 2024,
+"comparison_value": 51619,
+"change_pct_vs_comparison_year": 10.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.46,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 136600,
+"comparison_year": 2024,
+"comparison_value": 123016,
+"change_pct_vs_comparison_year": 11.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.95,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": true,
+"record_note_ja": "単月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "4月上旬から始まったスクールホリデーや前年は3月下旬からであったイースター休暇が今年は4月中旬からとなったことに加え、継続する訪日旅行人気や若年層の訪日需要の高まりもあり、訪日外客数は57,100人、前年同月比10.6%増となり、単月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"若年層の訪日需要の高まり",
+"スクールホリデー",
+"イースター休暇の時期が4月中旬となった影響"
+],
+"constraints_ja": [
+"欧州地域ではウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が懸念材料となっている"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"スクールホリデー",
+"イースター休暇の期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"continued_japan_popularity",
+"holiday_effect",
+"easter_shift",
+"geopolitical_risk",
+"record_high",
+"all_time_record_high"
+]
+},
+{
+"market_key": "DE",
+"name_ja": "ドイツ",
+"name_en": "Germany",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 57200,
+"comparison_year": 2024,
+"comparison_value": 36029,
+"change_pct_vs_comparison_year": 58.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.46,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 136700,
+"comparison_year": 2024,
+"comparison_value": 108846,
+"change_pct_vs_comparison_year": 25.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.95,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": true,
+"record_note_ja": "単月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "前年は3月下旬からであったイースター休暇が今年は4月中旬からとなったことに加え、継続する訪日旅行人気やクルーズ需要の高まりおよび経由便の多様化の影響等もあり、訪日外客数は57,200人、前年同月比58.8%増となり、単月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"クルーズ需要の高まり",
+"経由便の多様化",
+"イースター休暇の時期が4月中旬となった影響"
+],
+"constraints_ja": [
+"欧州地域ではウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が懸念材料となっている"
+],
+"aviation_updates_ja": [
+"経由便の多様化"
+],
+"demand_events_ja": [
+"イースター休暇の期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"クルーズ需要の高まり"
+]
+},
+"dashboard_tags": [
+"strong_growth",
+"continued_japan_popularity",
+"holiday_effect",
+"easter_shift",
+"geopolitical_risk",
+"record_high",
+"all_time_record_high"
+]
+},
+{
+"market_key": "IT",
+"name_ja": "イタリア",
+"name_en": "Italy",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 45600,
+"comparison_year": 2024,
+"comparison_value": 24855,
+"change_pct_vs_comparison_year": 83.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.17,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 90900,
+"comparison_year": 2024,
+"comparison_value": 63683,
+"change_pct_vs_comparison_year": 42.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.63,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": true,
+"record_note_ja": "単月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "前年は3月下旬からであったイースター休暇が今年は4月中旬からとなったことに加え、継続する訪日旅行人気や2024年12月の羽田～ミラノ間の新規就航や経由便の多様化の影響等もあり、訪日外客数は45,600人、前年同月比83.5%増となり、単月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"2024年12月の羽田～ミラノ間の新規就航",
+"経由便の多様化",
+"イースター休暇の時期が4月中旬となった影響"
+],
+"constraints_ja": [
+"欧州地域ではウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が懸念材料となっている"
+],
+"aviation_updates_ja": [
+"2024年12月の羽田～ミラノ間の新規就航",
+"経由便の多様化"
+],
+"demand_events_ja": [
+"イースター休暇の期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"continued_japan_popularity",
+"new_route",
+"holiday_effect",
+"easter_shift",
+"geopolitical_risk",
+"record_high",
+"all_time_record_high"
+]
+},
+{
+"market_key": "ES",
+"name_ja": "スペイン",
+"name_en": "Spain",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 24200,
+"comparison_year": 2024,
+"comparison_value": 11722,
+"change_pct_vs_comparison_year": 106.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.62,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 59200,
+"comparison_year": 2024,
+"comparison_value": 39611,
+"change_pct_vs_comparison_year": 49.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.41,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": true,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "4月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "前年は3月下旬からであったイースター休暇が今年は4月中旬からとなったことに加え、2024年10月に再開した直行便によるアクセス性の向上と航空座席数の増加および経由便の多様化の影響や継続する訪日旅行人気等もあり、訪日外客数は24,200人、前年同月比106.4%増となり、4月として過去最高を記録した。",
+"positive_drivers_ja": [
+"2024年10月に再開した直行便によるアクセス性の向上",
+"航空座席数の増加",
+"経由便の多様化",
+"継続する訪日旅行人気",
+"イースター休暇の時期が4月中旬となった影響"
+],
+"constraints_ja": [
+"欧州地域ではウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が懸念材料となっている"
+],
+"aviation_updates_ja": [
+"2024年10月に再開した直行便",
+"航空座席数の増加",
+"経由便の多様化"
+],
+"demand_events_ja": [
+"イースター休暇の期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"continued_japan_popularity",
+"aviation_increase",
+"route_resumption",
+"holiday_effect",
+"easter_shift",
+"geopolitical_risk",
+"record_high",
+"april_record_high"
+]
+},
+{
+"market_key": "RU",
+"name_ja": "ロシア",
+"name_en": "Russia",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 23200,
+"comparison_year": 2024,
+"comparison_value": 10748,
+"change_pct_vs_comparison_year": 115.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.59,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 52600,
+"comparison_year": 2024,
+"comparison_value": 27476,
+"change_pct_vs_comparison_year": 91.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.36,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": true,
+"record_note_ja": "単月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "ウクライナ侵攻による各国からの制裁等による影響が続いているものの、3月下旬から始まったスクールホリデーの影響やクルーズ需要の高まりのほか、中国経由をはじめとした経由便の多様化もあり、訪日外客数は23,200人、前年同月比115.9%増となり、単月として過去最高を記録した。",
+"positive_drivers_ja": [
+"3月下旬から始まったスクールホリデー",
+"クルーズ需要の高まり",
+"中国経由をはじめとした経由便の多様化"
+],
+"constraints_ja": [
+"ウクライナ侵攻による各国からの制裁等による影響が続いている"
+],
+"aviation_updates_ja": [
+"中国経由をはじめとした経由便の多様化"
+],
+"demand_events_ja": [
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"クルーズ需要の高まり"
+]
+},
+"dashboard_tags": [
+"strong_growth",
+"holiday_effect",
+"geopolitical_risk",
+"record_high",
+"all_time_record_high"
+]
+},
+{
+"market_key": "NORDIC",
+"name_ja": "北欧地域",
+"name_en": "Nordic Countries",
+"region_ja": "北欧地域",
+"region_en": "Nordic Countries",
+"is_region_aggregate": true,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 22800,
+"comparison_year": 2024,
+"comparison_value": 12955,
+"change_pct_vs_comparison_year": 76.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.58,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 60600,
+"comparison_year": 2024,
+"comparison_value": 47388,
+"change_pct_vs_comparison_year": 27.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.42,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": true,
+"record_note_ja": "単月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "2025年1月末からのストックホルム～羽田間の新規就航により訪日旅行に関する報道が増えていることに加え、前年は3月下旬からであったイースター休暇が今年は4月中旬からとなったこともあり、訪日外客数は22,800人、前年同月比76.0%増となり、単月として過去最高を記録した。",
+"positive_drivers_ja": [
+"2025年1月末からのストックホルム～羽田間の新規就航",
+"訪日旅行に関する報道の増加",
+"イースター休暇の時期が4月中旬となった影響"
+],
+"constraints_ja": [
+"欧州地域ではウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が懸念材料となっている"
+],
+"aviation_updates_ja": [
+"2025年1月末からのストックホルム～羽田間の新規就航"
+],
+"demand_events_ja": [
+"イースター休暇の期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"北欧地域はスウェーデン、デンマーク、ノルウェー、フィンランドを指す。"
+]
+},
+"dashboard_tags": [
+"strong_growth",
+"new_route",
+"holiday_effect",
+"easter_shift",
+"geopolitical_risk",
+"record_high",
+"all_time_record_high"
+]
+},
+{
+"market_key": "ME",
+"name_ja": "中東地域",
+"name_en": "Middle East",
+"region_ja": "中東地域",
+"region_en": "Middle East",
+"is_region_aggregate": true,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 28400,
+"comparison_year": 2024,
+"comparison_value": 23157,
+"change_pct_vs_comparison_year": 22.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.73,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 75200,
+"comparison_year": 2024,
+"comparison_value": 47143,
+"change_pct_vs_comparison_year": 59.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.52,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": true,
+"record_note_ja": "単月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "前年は4月中旬からであった断食明け休暇が今年は3月末からとなったものの、イスラエルで4月上旬から始まったスクールホリデーや4月中旬の祝日に加え、前年同月と比較して直行便数が増加したこと等の影響もあり、訪日外客数は28,400人、前年同月比22.6%増となり、単月として過去最高を記録した。",
+"positive_drivers_ja": [
+"イスラエルで4月上旬から始まったスクールホリデー",
+"4月中旬の祝日",
+"前年同月と比較して直行便数が増加"
+],
+"constraints_ja": [
+"断食明け休暇が今年は3月末からとなった"
+],
+"aviation_updates_ja": [
+"前年同月と比較して直行便数が増加"
+],
+"demand_events_ja": [
+"断食明け休暇の期ずれ",
+"イスラエルのスクールホリデー",
+"4月中旬の祝日"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"中東地域はイスラエル、トルコ、GCC6か国（サウジアラビア、アラブ首長国連邦（UAE）、バーレーン、オマーン、カタール、クウェート）を指す。"
+]
+},
+"dashboard_tags": [
+"strong_growth",
+"aviation_increase",
+"holiday_effect",
+"record_high",
+"all_time_record_high"
+]
+},
+{
+"market_key": "OTHERS",
+"name_ja": "その他",
+"name_en": "Others",
+"region_ja": "その他",
+"region_en": "Others",
+"is_region_aggregate": true,
+"visitor_arrivals": {
+"month": {
+"period": "2025-04",
+"current_year": 2025,
+"current_value": 232400,
+"comparison_year": 2024,
+"comparison_value": 160231,
+"change_pct_vs_comparison_year": 45.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 5.95,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2025-01_2025-04",
+"current_year": 2025,
+"current_value": 597400,
+"comparison_year": 2024,
+"comparison_value": 454422,
+"change_pct_vs_comparison_year": 31.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 4.14,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": null,
+"positive_drivers_ja": [],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth"
+]
+}
+],
+"dashboard_hints": {
+"primary_metric": "visitor_arrivals.month.current_value",
+"comparison_metric": "visitor_arrivals.month.change_pct_vs_comparison_year",
+"context_metric": "market_context.status_summary_ja",
+"group_by": [
+"region_ja",
+"market_key"
+],
+"suggested_charts": [
+"国・地域別の月次訪日外客数ランキング",
+"国・地域別の前年同月比または2019年同月比",
+"地域別の回復・増減状況",
+"航空便・休暇・規制要因の一覧",
+"過去最高を記録した市場のハイライト"
+]
+},
+"quality_checks": {
+"has_country_table": true,
+"has_market_context": true,
+"missing_context_markets": [
+"OTHERS"
+],
+"warnings": [
+"「その他」は国・地域別表にはあるが、市場別概況本文がないため、market_contextはnullまたは空配列にしている。"
+]
+}
+}
