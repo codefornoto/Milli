@@ -4,12 +4,12 @@
 "report": {
 "source_name_ja": "日本政府観光局（JNTO）",
 "source_name_en": "Japan National Tourism Organization",
-"report_title_ja": "訪日外客数（2025年1月推計値）",
-"published_date": "2025-02-19",
-"data_month": "2025-01",
+"report_title_ja": "訪日外客数（2025年2月推計値）",
+"published_date": "2025-03-19",
+"data_month": "2025-02",
 "data_year": 2025,
-"data_month_number": 1,
-"as_of_date": "2025-02-12",
+"data_month_number": 2,
+"as_of_date": "2025-03-12",
 "primary_comparison": {
 "type": "year_over_year",
 "base_year": 2024,
@@ -28,32 +28,32 @@
 "overall": {
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 3781200,
+"current_value": 3258100,
 "comparison_year": 2024,
-"comparison_value": 2688478,
-"change_pct_vs_comparison_year": 40.6,
+"comparison_value": 2788224,
+"change_pct_vs_comparison_year": 16.9,
 "comparison_type": "year_over_year",
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 3781200,
+"current_value": 7039300,
 "comparison_year": 2024,
-"comparison_value": 2688478,
-"change_pct_vs_comparison_year": 40.6,
+"comparison_value": 5476702,
+"change_pct_vs_comparison_year": 28.5,
 "comparison_type": "year_over_year",
 "data_status": "preliminary_estimate"
 }
 },
-"headline_summary_ja": "2025年1月の訪日外客数は3,781,200人で、前年同月比40.6%増となった。過去最高であった2024年12月の3,489,800人を大きく上回り、単月過去最高を記録し、単月として初めて370万人を突破した。",
+"headline_summary_ja": "2025年2月の訪日外客数は3,258,100人で、前年同月比16.9%増となった。2月として過去最高であった2024年の2,788,224人を大きく上回り、同月過去最高を記録し、2月として初めて300万人を突破した。",
 "overall_context_ja": [
-"2024年は2月であった旧正月（春節）が2025年は1月となり、アジアの多くの市場で旧正月に合わせた旅行需要の高まりが見られた。",
-"ウィンタースポーツ需要等により豪州や米国などを中心に前年同月に比べ旅行者数が増加した。",
-"23市場のうち3市場で単月過去最高を更新した。",
-"17市場で1月として過去最高を記録した。"
+"一部市場において旧正月（春節）休暇が2月初旬まで続き、旅行需要の高まりが見られた。",
+"前月に引き続きスノー需要が高まる時期であり、豪州と米国を中心に訪日外客数が増加した。",
+"ベトナムで単月過去最高を更新した。",
+"19市場で2月として過去最高を記録した。"
 ],
 "common_market_conditions_ja": [
 "COVID-19の拡大以降、航空・旅行会社を取り巻く人手不足や旅行費用の高騰等の課題が多くの市場で見られている。",
@@ -72,39 +72,37 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 967100,
+"current_value": 847300,
 "comparison_year": 2024,
-"comparison_value": 857039,
-"change_pct_vs_comparison_year": 12.8,
+"comparison_value": 818562,
+"change_pct_vs_comparison_year": 3.5,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 25.58,
+"share_of_total_current_pct": 26.01,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 967100,
+"current_value": 1814400,
 "comparison_year": 2024,
-"comparison_value": 857039,
-"change_pct_vs_comparison_year": 12.8,
+"comparison_value": 1675601,
+"change_pct_vs_comparison_year": 8.3,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 25.58,
+"share_of_total_current_pct": 25.78,
 "data_status": "preliminary_estimate"
 }
 },
 "record": {
 "april_record": false,
 "month_record": true,
-"all_time_monthly_record": true,
-"record_note_ja": "単月として過去最高（1月としても過去最高）"
+"all_time_monthly_record": false,
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "為替レートがウォン安傾向になったものの、臨時公休日の追加により旧正月における海外旅行需要自体が増加したことや、仁川～熊本間や仁川～新千歳間等の期間増便、チャーター便運航等の影響もあり、訪日外客数は967,100人、前年同月比12.8%増となり、単月として過去最高を記録した。",
+"status_summary_ja": "為替レートがウォン安傾向になったものの、仁川～熊本間や仁川～新千歳間等の期間増便、清州～帯広間等のチャーター便運航等の影響もあり、訪日外客数は847,300人、前年同月比3.5%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
-"臨時公休日の追加",
-"旧正月における海外旅行需要の増加",
 "期間増便",
 "チャーター便運航"
 ],
@@ -112,22 +110,18 @@
 "ウォン安傾向"
 ],
 "aviation_updates_ja": [
-"仁川～熊本間や仁川～新千歳間等の期間増便",
-"チャーター便運航"
+"仁川～熊本間の期間増便",
+"仁川～新千歳間の期間増便",
+"清州～帯広間等のチャーター便運航"
 ],
-"demand_events_ja": [
-"旧正月",
-"臨時公休日"
-],
+"demand_events_ja": [],
 "policy_or_regulation_notes_ja": [],
 "special_notes_ja": []
 },
 "dashboard_tags": [
 "moderate_growth",
 "record_high",
-"all_time_record_high",
-"aviation_increase",
-"holiday_effect"
+"aviation_increase"
 ]
 },
 {
@@ -139,58 +133,57 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 980300,
+"current_value": 722700,
 "comparison_year": 2024,
-"comparison_value": 416088,
-"change_pct_vs_comparison_year": 135.6,
+"comparison_value": 459463,
+"change_pct_vs_comparison_year": 57.3,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 25.93,
+"share_of_total_current_pct": 22.18,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 980300,
+"current_value": 1703000,
 "comparison_year": 2024,
-"comparison_value": 416088,
-"change_pct_vs_comparison_year": 135.6,
+"comparison_value": 875551,
+"change_pct_vs_comparison_year": 94.5,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 25.93,
+"share_of_total_current_pct": 24.19,
 "data_status": "preliminary_estimate"
 }
 },
 "record": {
 "april_record": false,
-"month_record": true,
+"month_record": false,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": null
 },
 "market_context": {
-"status_summary_ja": "1月下旬から始まった冬休みと春節に加え、地方路線を含む増便等の影響や一部で旅行先を競合国から日本に変更する動きが見られたこともあり、訪日外客数は980,300人、前年同月比135.6%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "1月下旬から始まったスクールホリデーと春節休暇に加え、大連～成田間、深セン～成田間、広州～福岡間等の増便等の影響や、昨今の情勢を踏まえ競合国よりも日本を選択する動きが見られたこともあり、訪日外客数は722,700人、前年同月比57.3%増となり、前年同月を上回った。",
 "positive_drivers_ja": [
-"冬休み",
-"春節",
-"地方路線を含む増便",
-"一部で旅行先を競合国から日本に変更する動き"
+"スクールホリデー",
+"春節休暇",
+"増便",
+"競合国よりも日本を選択する動き"
 ],
 "constraints_ja": [],
 "aviation_updates_ja": [
-"北京～新千歳間の増便",
-"上海～那覇間の増便",
+"大連～成田間の増便",
+"深セン～成田間の増便",
 "広州～福岡間の増便"
 ],
 "demand_events_ja": [
-"冬休み",
-"春節"
+"スクールホリデー",
+"春節休暇"
 ],
 "policy_or_regulation_notes_ja": [],
 "special_notes_ja": []
 },
 "dashboard_tags": [
 "strong_growth",
-"record_high",
 "aviation_increase",
 "holiday_effect"
 ]
@@ -204,54 +197,56 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 593400,
+"current_value": 507300,
 "comparison_year": 2024,
-"comparison_value": 492288,
-"change_pct_vs_comparison_year": 20.5,
+"comparison_value": 502237,
+"change_pct_vs_comparison_year": 1.0,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 15.69,
+"share_of_total_current_pct": 15.57,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 593400,
+"current_value": 1100700,
 "comparison_year": 2024,
-"comparison_value": 492288,
-"change_pct_vs_comparison_year": 20.5,
+"comparison_value": 994525,
+"change_pct_vs_comparison_year": 10.7,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 15.69,
+"share_of_total_current_pct": 15.64,
 "data_status": "preliminary_estimate"
 }
 },
 "record": {
 "april_record": false,
 "month_record": true,
-"all_time_monthly_record": true,
-"record_note_ja": "単月として過去最高（1月としても過去最高）"
+"all_time_monthly_record": false,
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "1月下旬から始まった旧正月に加え、チャーター便を含む地方路線による航空座席数の増加の影響もあり、訪日外客数は593,400人、前年同月比20.5%増となり、単月として過去最高を記録した。",
+"status_summary_ja": "1月下旬から始まったスクールホリデーと旧正月休暇に加え、台北～新千歳間や台北～北九州間等のチャーター便を含む地方路線による航空座席数の増加の影響もあり、訪日外客数は507,300人、前年同月比1.0%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
-"旧正月",
+"スクールホリデー",
+"旧正月休暇",
 "チャーター便を含む地方路線による航空座席数の増加"
 ],
 "constraints_ja": [],
 "aviation_updates_ja": [
-"高雄～新千歳間や台北～北九州間等のチャーター便を含む地方路線"
+"台北～新千歳間等のチャーター便を含む地方路線",
+"台北～北九州間等のチャーター便を含む地方路線"
 ],
 "demand_events_ja": [
-"旧正月"
+"スクールホリデー",
+"旧正月休暇"
 ],
 "policy_or_regulation_notes_ja": [],
 "special_notes_ja": []
 },
 "dashboard_tags": [
-"strong_growth",
+"moderate_growth",
 "record_high",
-"all_time_record_high",
 "aviation_increase",
 "holiday_effect"
 ]
@@ -265,54 +260,54 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 243700,
+"current_value": 195500,
 "comparison_year": 2024,
-"comparison_value": 186300,
-"change_pct_vs_comparison_year": 30.8,
+"comparison_value": 205884,
+"change_pct_vs_comparison_year": -5.0,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 6.45,
+"share_of_total_current_pct": 6.0,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 243700,
+"current_value": 439200,
 "comparison_year": 2024,
-"comparison_value": 186300,
-"change_pct_vs_comparison_year": 30.8,
+"comparison_value": 392184,
+"change_pct_vs_comparison_year": 12.0,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 6.45,
+"share_of_total_current_pct": 6.24,
 "data_status": "preliminary_estimate"
 }
 },
 "record": {
 "april_record": false,
-"month_record": true,
+"month_record": false,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": null
 },
 "market_context": {
-"status_summary_ja": "1月下旬から始まった旧正月に加え、前年同月と比較して地方路線を含む増便等の影響により航空座席数が増加したこともあり、訪日外客数は243,700人、前年同月比30.8%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "前年同月と比較して地方路線を含む増便等の影響により航空座席数が増加したものの、前年は2月中旬からであった旧正月休暇が2025年は1月下旬からとなったこともあり、訪日外客数は195,500人、前年同月比5.0%減となり、前年同月を下回った。",
 "positive_drivers_ja": [
-"旧正月",
 "地方路線を含む増便",
 "航空座席数の増加"
 ],
-"constraints_ja": [],
+"constraints_ja": [
+"旧正月休暇が前年の2月中旬から2025年は1月下旬に移動した影響"
+],
 "aviation_updates_ja": [
 "地方路線を含む増便"
 ],
 "demand_events_ja": [
-"旧正月"
+"旧正月休暇時期のずれ"
 ],
 "policy_or_regulation_notes_ja": [],
 "special_notes_ja": []
 },
 "dashboard_tags": [
-"strong_growth",
-"record_high",
+"decline",
 "aviation_increase",
 "holiday_effect"
 ]
@@ -326,43 +321,42 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 96800,
+"current_value": 116800,
 "comparison_year": 2024,
-"comparison_value": 90585,
-"change_pct_vs_comparison_year": 6.9,
+"comparison_value": 101443,
+"change_pct_vs_comparison_year": 15.1,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 2.56,
+"share_of_total_current_pct": 3.58,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 96800,
+"current_value": 213600,
 "comparison_year": 2024,
-"comparison_value": 90585,
-"change_pct_vs_comparison_year": 6.9,
+"comparison_value": 192028,
+"change_pct_vs_comparison_year": 11.2,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 2.56,
+"share_of_total_current_pct": 3.03,
 "data_status": "preliminary_estimate"
 }
 },
 "record": {
 "april_record": false,
-"month_record": false,
+"month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": null
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "査証免除措置による訪中旅行への人気の高まり、消費者購買力の低下等があるものの、継続する冬季の日本人気や、バンコク～中部間の増便など、直行便数の増加等の影響もあり、訪日外客数は96,800人、前年同月比6.9%増となり、前年同月を上回った。",
+"status_summary_ja": "査証免除措置による訪中旅行への人気の高まり等があるものの、継続する冬季の日本人気や、バンコク～中部間の増便など直行便数の増加等の影響もあり、訪日外客数は116,800人、前年同月比15.1%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
 "継続する冬季の日本人気",
 "直行便数の増加"
 ],
 "constraints_ja": [
-"査証免除措置による訪中旅行への人気の高まり",
-"消費者購買力の低下"
+"査証免除措置による訪中旅行への人気の高まり"
 ],
 "aviation_updates_ja": [
 "バンコク～中部間の増便"
@@ -377,6 +371,7 @@
 },
 "dashboard_tags": [
 "moderate_growth",
+"record_high",
 "aviation_increase",
 "continued_japan_popularity"
 ]
@@ -390,25 +385,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 45700,
+"current_value": 42300,
 "comparison_year": 2024,
-"comparison_value": 34140,
-"change_pct_vs_comparison_year": 33.9,
+"comparison_value": 36915,
+"change_pct_vs_comparison_year": 14.6,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 1.21,
+"share_of_total_current_pct": 1.3,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 45700,
+"current_value": 88000,
 "comparison_year": 2024,
-"comparison_value": 34140,
-"change_pct_vs_comparison_year": 33.9,
+"comparison_value": 71055,
+"change_pct_vs_comparison_year": 23.8,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 1.21,
+"share_of_total_current_pct": 1.25,
 "data_status": "preliminary_estimate"
 }
 },
@@ -416,31 +411,28 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "シンガポール～関西間などの直行便の増加、広告や旅行博等の各種プロモーションに加え、旧正月の影響等もあり、訪日外客数は45,700人、前年同月比33.9%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "シンガポール～関西間などの直行便の増加、広告などの各種プロモーションの影響等もあり、訪日外客数は42,300人、前年同月比14.6%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
 "直行便の増加",
-"広告や旅行博等の各種プロモーション",
-"旧正月"
+"広告などの各種プロモーション"
 ],
 "constraints_ja": [],
 "aviation_updates_ja": [
 "シンガポール～関西間などの直行便の増加"
 ],
 "demand_events_ja": [
-"旧正月",
-"広告や旅行博等の各種プロモーション"
+"広告などの各種プロモーション"
 ],
 "policy_or_regulation_notes_ja": [],
 "special_notes_ja": []
 },
 "dashboard_tags": [
-"strong_growth",
+"moderate_growth",
 "record_high",
 "aviation_increase",
-"holiday_effect",
 "promotion_effect"
 ]
 },
@@ -453,25 +445,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 75000,
+"current_value": 64900,
 "comparison_year": 2024,
-"comparison_value": 32079,
-"change_pct_vs_comparison_year": 133.8,
+"comparison_value": 60178,
+"change_pct_vs_comparison_year": 7.8,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 1.98,
+"share_of_total_current_pct": 1.99,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 75000,
+"current_value": 139900,
 "comparison_year": 2024,
-"comparison_value": 32079,
-"change_pct_vs_comparison_year": 133.8,
+"comparison_value": 92257,
+"change_pct_vs_comparison_year": 51.6,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 1.98,
+"share_of_total_current_pct": 1.99,
 "data_status": "preliminary_estimate"
 }
 },
@@ -479,14 +471,14 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "査証免除措置による訪中旅行への人気の高まり等があるものの、クアラルンプール～新千歳間の増便、旧正月とスクールホリデーの重なり、マレーシアリンギット高騰等の影響もあり、訪日外客数は75,000人、前年同月比133.8%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "査証免除措置による訪中旅行への人気の高まり等があるものの、クアラルンプール～新千歳間の増便、マレーシアリンギット高や景況感の回復等の影響もあり、訪日外客数は64,900人、前年同月比7.8%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
 "クアラルンプール～新千歳間の増便",
-"旧正月とスクールホリデーの重なり",
-"マレーシアリンギット高騰"
+"マレーシアリンギット高",
+"景況感の回復"
 ],
 "constraints_ja": [
 "査証免除措置による訪中旅行への人気の高まり"
@@ -494,20 +486,16 @@
 "aviation_updates_ja": [
 "クアラルンプール～新千歳間の増便"
 ],
-"demand_events_ja": [
-"旧正月",
-"スクールホリデー"
-],
+"demand_events_ja": [],
 "policy_or_regulation_notes_ja": [
 "査証免除措置による訪中旅行への人気の高まり"
 ],
 "special_notes_ja": []
 },
 "dashboard_tags": [
-"strong_growth",
+"moderate_growth",
 "record_high",
-"aviation_increase",
-"holiday_effect"
+"aviation_increase"
 ]
 },
 {
@@ -519,25 +507,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 63200,
+"current_value": 47000,
 "comparison_year": 2024,
-"comparison_value": 41287,
-"change_pct_vs_comparison_year": 53.1,
+"comparison_value": 38246,
+"change_pct_vs_comparison_year": 22.9,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 1.67,
+"share_of_total_current_pct": 1.44,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 63200,
+"current_value": 110200,
 "comparison_year": 2024,
-"comparison_value": 41287,
-"change_pct_vs_comparison_year": 53.1,
+"comparison_value": 79533,
+"change_pct_vs_comparison_year": 38.6,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 1.67,
+"share_of_total_current_pct": 1.57,
 "data_status": "preliminary_estimate"
 }
 },
@@ -545,14 +533,13 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "割安な訪中旅行への人気の高まり等があるものの、ジャカルタ～羽田間の増便などによる直行便数の増加、航空機材の大型化等の影響や、祝日の影響もあり、訪日外客数は63,200人、前年同月比53.1%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "割安な訪中旅行への人気の高まり等があるものの、ジャカルタ～羽田間の増便などによる直行便数の増加、スノー需要の影響もあり、訪日外客数は47,000人、前年同月比22.9%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
 "直行便数の増加",
-"航空機材の大型化",
-"祝日"
+"スノー需要"
 ],
 "constraints_ja": [
 "割安な訪中旅行への人気の高まり"
@@ -561,7 +548,7 @@
 "ジャカルタ～羽田間の増便"
 ],
 "demand_events_ja": [
-"祝日"
+"スノー需要"
 ],
 "policy_or_regulation_notes_ja": [],
 "special_notes_ja": []
@@ -570,7 +557,7 @@
 "strong_growth",
 "record_high",
 "aviation_increase",
-"holiday_effect"
+"winter_sports_demand"
 ]
 },
 {
@@ -582,25 +569,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 72200,
+"current_value": 66700,
 "comparison_year": 2024,
-"comparison_value": 56776,
-"change_pct_vs_comparison_year": 27.2,
+"comparison_value": 65217,
+"change_pct_vs_comparison_year": 2.3,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 1.91,
+"share_of_total_current_pct": 2.05,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 72200,
+"current_value": 138900,
 "comparison_year": 2024,
-"comparison_value": 56776,
-"change_pct_vs_comparison_year": 27.2,
+"comparison_value": 121993,
+"change_pct_vs_comparison_year": 13.9,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 1.91,
+"share_of_total_current_pct": 1.97,
 "data_status": "preliminary_estimate"
 }
 },
@@ -608,15 +595,17 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "マニラ～新千歳間の復便や好調な経済状況を背景とする海外旅行需要の増加の影響もあり、訪日外客数は72,200人、前年同月比27.2%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "2月は祭日がなく海外旅行需要が減少する時期であるものの、マニラ～新千歳間の復便や好調な経済状況を背景とする海外旅行需要の増加等の影響もあり、訪日外客数は66,700人、前年同月比2.3%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
 "マニラ～新千歳間の復便",
 "好調な経済状況を背景とする海外旅行需要の増加"
 ],
-"constraints_ja": [],
+"constraints_ja": [
+"2月は祭日がなく海外旅行需要が減少する時期"
+],
 "aviation_updates_ja": [
 "マニラ～新千歳間の復便"
 ],
@@ -625,7 +614,7 @@
 "special_notes_ja": []
 },
 "dashboard_tags": [
-"strong_growth",
+"moderate_growth",
 "record_high",
 "route_resumption"
 ]
@@ -639,48 +628,45 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 50400,
+"current_value": 73700,
 "comparison_year": 2024,
-"comparison_value": 44602,
-"change_pct_vs_comparison_year": 13.0,
+"comparison_value": 60181,
+"change_pct_vs_comparison_year": 22.5,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 1.33,
+"share_of_total_current_pct": 2.26,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 50400,
+"current_value": 124100,
 "comparison_year": 2024,
-"comparison_value": 44602,
-"change_pct_vs_comparison_year": 13.0,
+"comparison_value": 104783,
+"change_pct_vs_comparison_year": 18.4,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 1.33,
+"share_of_total_current_pct": 1.76,
 "data_status": "preliminary_estimate"
 }
 },
 "record": {
 "april_record": false,
-"month_record": false,
-"all_time_monthly_record": false,
-"record_note_ja": null
+"month_record": true,
+"all_time_monthly_record": true,
+"record_note_ja": "単月として過去最高（2月としても過去最高）"
 },
 "market_context": {
-"status_summary_ja": "割安かつ査証免除・取得が容易な東南アジアや中国等への旅行需要の高まり等があるものの、ダナン～那覇間のチャーター便の運航や旧正月の影響もあり、訪日外客数は50,400人、前年同月比13.0%増となり、前年同月を上回った。",
+"status_summary_ja": "割安かつ査証免除・取得が容易な東南アジアや中国等への旅行需要の高まり等があるものの、テト休暇の影響もあり、訪日外客数は73,700人、前年同月比22.5%増となり、単月として過去最高を更新した。",
 "positive_drivers_ja": [
-"ダナン～那覇間のチャーター便の運航",
-"旧正月"
+"テト休暇"
 ],
 "constraints_ja": [
 "割安かつ査証免除・取得が容易な東南アジアや中国等への旅行需要の高まり"
 ],
-"aviation_updates_ja": [
-"ダナン～那覇間のチャーター便の運航"
-],
+"aviation_updates_ja": [],
 "demand_events_ja": [
-"旧正月"
+"テト休暇"
 ],
 "policy_or_regulation_notes_ja": [
 "東南アジアや中国等への旅行で査証免除・取得が容易な点が影響"
@@ -690,7 +676,9 @@
 ]
 },
 "dashboard_tags": [
-"moderate_growth",
+"strong_growth",
+"record_high",
+"all_time_record_high",
 "holiday_effect"
 ]
 },
@@ -703,25 +691,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 16200,
+"current_value": 12900,
 "comparison_year": 2024,
-"comparison_value": 12608,
-"change_pct_vs_comparison_year": 28.5,
+"comparison_value": 9965,
+"change_pct_vs_comparison_year": 29.5,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.43,
+"share_of_total_current_pct": 0.4,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 16200,
+"current_value": 29100,
 "comparison_year": 2024,
-"comparison_value": 12608,
-"change_pct_vs_comparison_year": 28.5,
+"comparison_value": 22573,
+"change_pct_vs_comparison_year": 28.9,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.43,
+"share_of_total_current_pct": 0.41,
 "data_status": "preliminary_estimate"
 }
 },
@@ -729,16 +717,17 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "海外旅行ブームを背景とした旅行時期の分散や、ベンガルール～成田間の増便、経由便の利便性の向上等もあり、訪日外客数は16,200人、前年同月比28.5%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "海外旅行需要の低下する時期であるものの、ベンガルール～成田間の増便、経由便の利便性の向上等もあり、訪日外客数は12,900人、前年同月比29.5%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
-"海外旅行ブームを背景とした旅行時期の分散",
 "ベンガルール～成田間の増便",
 "経由便の利便性の向上"
 ],
-"constraints_ja": [],
+"constraints_ja": [
+"海外旅行需要の低下する時期"
+],
 "aviation_updates_ja": [
 "ベンガルール～成田間の増便"
 ],
@@ -761,41 +750,40 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 140200,
+"current_value": 88800,
 "comparison_year": 2024,
-"comparison_value": 103604,
-"change_pct_vs_comparison_year": 35.3,
+"comparison_value": 66501,
+"change_pct_vs_comparison_year": 33.5,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 3.71,
+"share_of_total_current_pct": 2.73,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 140200,
+"current_value": 229000,
 "comparison_year": 2024,
-"comparison_value": 103604,
-"change_pct_vs_comparison_year": 35.3,
+"comparison_value": 170105,
+"change_pct_vs_comparison_year": 34.6,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 3.71,
+"share_of_total_current_pct": 3.25,
 "data_status": "preliminary_estimate"
 }
 },
 "record": {
 "april_record": false,
 "month_record": true,
-"all_time_monthly_record": true,
-"record_note_ja": "単月として過去最高（1月としても過去最高）"
+"all_time_monthly_record": false,
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "豪州からのアウトバウンド需要自体が増加している中、継続する訪日旅行の人気やウィンタースポーツ等を目的とした訪日需要とスクールホリデーに加え、前年同月と比較して直行便数が増加したことの影響等もあり、訪日外客数は140,200人、前年同月比35.3%増となり、単月として過去最高を記録した。",
+"status_summary_ja": "豪州からのアウトバウンド需要自体が増加している中、継続する訪日旅行の人気やウィンタースポーツ等を目的とした訪日需要に加え、前年同月と比較して直行便数が増加したことの影響等もあり、訪日外客数は88,800人、前年同月比33.5%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
 "豪州からのアウトバウンド需要自体の増加",
 "継続する訪日旅行の人気",
 "ウィンタースポーツ等を目的とした訪日需要",
-"スクールホリデー",
 "直行便数の増加"
 ],
 "constraints_ja": [],
@@ -803,8 +791,7 @@
 "前年同月と比較して直行便数が増加"
 ],
 "demand_events_ja": [
-"ウィンタースポーツ需要",
-"スクールホリデー"
+"ウィンタースポーツ需要"
 ],
 "policy_or_regulation_notes_ja": [],
 "special_notes_ja": []
@@ -812,11 +799,9 @@
 "dashboard_tags": [
 "strong_growth",
 "record_high",
-"all_time_record_high",
 "continued_japan_popularity",
-"aviation_increase",
-"holiday_effect",
-"winter_sports_demand"
+"winter_sports_demand",
+"aviation_increase"
 ]
 },
 {
@@ -828,25 +813,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 182500,
+"current_value": 191500,
 "comparison_year": 2024,
-"comparison_value": 131855,
-"change_pct_vs_comparison_year": 38.4,
+"comparison_value": 148719,
+"change_pct_vs_comparison_year": 28.8,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 4.83,
+"share_of_total_current_pct": 5.88,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 182500,
+"current_value": 374000,
 "comparison_year": 2024,
-"comparison_value": 131855,
-"change_pct_vs_comparison_year": 38.4,
+"comparison_value": 280574,
+"change_pct_vs_comparison_year": 33.3,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 4.83,
+"share_of_total_current_pct": 5.31,
 "data_status": "preliminary_estimate"
 }
 },
@@ -854,13 +839,13 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "継続する訪日旅行の人気に加え、混雑するシーズンを避け1月に訪日する動きやウィンタースポーツ等を目的とした訪日需要もあり、訪日外客数は182,500人、前年同月比38.4%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "継続する訪日旅行の人気や、混雑するシーズンを避け2月に訪日する動き、ウィンタースポーツ等を目的とした訪日需要もあり、訪日外客数は191,500人、前年同月比28.8%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
 "継続する訪日旅行の人気",
-"混雑するシーズンを避け1月に訪日する動き",
+"混雑するシーズンを避け2月に訪日する動き",
 "ウィンタースポーツ等を目的とした訪日需要"
 ],
 "constraints_ja": [],
@@ -888,25 +873,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 42300,
+"current_value": 44500,
 "comparison_year": 2024,
-"comparison_value": 31672,
-"change_pct_vs_comparison_year": 33.6,
+"comparison_value": 33895,
+"change_pct_vs_comparison_year": 31.3,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 1.12,
+"share_of_total_current_pct": 1.37,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 42300,
+"current_value": 86800,
 "comparison_year": 2024,
-"comparison_value": 31672,
-"change_pct_vs_comparison_year": 33.6,
+"comparison_value": 65567,
+"change_pct_vs_comparison_year": 32.4,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 1.12,
+"share_of_total_current_pct": 1.23,
 "data_status": "preliminary_estimate"
 }
 },
@@ -914,19 +899,22 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "継続する訪日旅行の人気に加え、前年同月と比較して直行便数が増加したことの影響等もあり、訪日外客数は42,300人、前年同月比33.6%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "継続する訪日旅行の人気に加え、ウィンタースポーツ等を目的とした訪日需要や、前年同月と比較して直行便数が増加したことの影響等もあり、訪日外客数は44,500人、前年同月比31.3%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
 "継続する訪日旅行の人気",
+"ウィンタースポーツ等を目的とした訪日需要",
 "直行便数の増加"
 ],
 "constraints_ja": [],
 "aviation_updates_ja": [
 "前年同月と比較して直行便数が増加"
 ],
-"demand_events_ja": [],
+"demand_events_ja": [
+"ウィンタースポーツ需要"
+],
 "policy_or_regulation_notes_ja": [],
 "special_notes_ja": []
 },
@@ -934,6 +922,7 @@
 "strong_growth",
 "record_high",
 "continued_japan_popularity",
+"winter_sports_demand",
 "aviation_increase"
 ]
 },
@@ -946,25 +935,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 9300,
+"current_value": 10800,
 "comparison_year": 2024,
-"comparison_value": 6805,
-"change_pct_vs_comparison_year": 36.7,
+"comparison_value": 7684,
+"change_pct_vs_comparison_year": 40.6,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.25,
+"share_of_total_current_pct": 0.33,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 9300,
+"current_value": 20100,
 "comparison_year": 2024,
-"comparison_value": 6805,
-"change_pct_vs_comparison_year": 36.7,
+"comparison_value": 14489,
+"change_pct_vs_comparison_year": 38.7,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.25,
+"share_of_total_current_pct": 0.29,
 "data_status": "preliminary_estimate"
 }
 },
@@ -972,30 +961,26 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "継続する訪日旅行人気やスクールホリデーおよび年始休暇に加え、経由便の多様化の影響等もあり、訪日外客数は9,300人、前年同月比36.7%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "継続する訪日旅行人気に加え、経由便の多様化の影響等もあり、訪日外客数は10,800人、前年同月比40.6%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
 "継続する訪日旅行人気",
-"スクールホリデー",
-"年始休暇",
 "経由便の多様化"
 ],
 "constraints_ja": [],
-"aviation_updates_ja": [],
-"demand_events_ja": [
-"スクールホリデー",
-"年始休暇"
+"aviation_updates_ja": [
+"経由便の多様化"
 ],
+"demand_events_ja": [],
 "policy_or_regulation_notes_ja": [],
 "special_notes_ja": []
 },
 "dashboard_tags": [
 "strong_growth",
 "record_high",
-"continued_japan_popularity",
-"holiday_effect"
+"continued_japan_popularity"
 ]
 },
 {
@@ -1007,25 +992,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 26400,
+"current_value": 31400,
 "comparison_year": 2024,
-"comparison_value": 19809,
-"change_pct_vs_comparison_year": 33.3,
+"comparison_value": 25877,
+"change_pct_vs_comparison_year": 21.3,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.7,
+"share_of_total_current_pct": 0.96,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 26400,
+"current_value": 57800,
 "comparison_year": 2024,
-"comparison_value": 19809,
-"change_pct_vs_comparison_year": 33.3,
+"comparison_value": 45686,
+"change_pct_vs_comparison_year": 26.5,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.7,
+"share_of_total_current_pct": 0.82,
 "data_status": "preliminary_estimate"
 }
 },
@@ -1033,10 +1018,10 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "継続する訪日旅行人気に加え、特にスノー需要の伸びが増加に貢献したことや、中国経由に加えてオランダ経由等の経由便の多様化の影響等もあり、訪日外客数は26,400人、前年同月比33.3%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "継続する訪日旅行人気やスノー需要の伸びに加え、中国経由等の経由便の多様化の影響等もあり、訪日外客数は31,400人、前年同月比21.3%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
 "継続する訪日旅行人気",
 "スノー需要の伸び",
@@ -1044,7 +1029,7 @@
 ],
 "constraints_ja": [],
 "aviation_updates_ja": [
-"中国経由に加えてオランダ経由等の経由便の多様化"
+"中国経由等の経由便の多様化"
 ],
 "demand_events_ja": [
 "スノー需要"
@@ -1068,25 +1053,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 16500,
+"current_value": 26500,
 "comparison_year": 2024,
-"comparison_value": 14444,
-"change_pct_vs_comparison_year": 14.2,
+"comparison_value": 22268,
+"change_pct_vs_comparison_year": 19.0,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.44,
+"share_of_total_current_pct": 0.81,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 16500,
+"current_value": 43000,
 "comparison_year": 2024,
-"comparison_value": 14444,
-"change_pct_vs_comparison_year": 14.2,
+"comparison_value": 36712,
+"change_pct_vs_comparison_year": 17.1,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.44,
+"share_of_total_current_pct": 0.61,
 "data_status": "preliminary_estimate"
 }
 },
@@ -1094,26 +1079,28 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "継続する訪日旅行人気に加え、スクールホリデーの有無に影響されない若年層を中心に訪日需要が高まったこともあり、訪日外客数は16,500人、前年同月比14.2%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "継続する訪日旅行人気や若年層の訪日需要の高まりに加え、2月中旬から始まったスクールホリデーの影響もあり、訪日外客数は26,500人、前年同月比19.0%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
 "継続する訪日旅行人気",
-"若年層を中心とした訪日需要の高まり"
+"若年層の訪日需要の高まり",
+"スクールホリデー"
 ],
 "constraints_ja": [],
 "aviation_updates_ja": [],
-"demand_events_ja": [],
+"demand_events_ja": [
+"スクールホリデー"
+],
 "policy_or_regulation_notes_ja": [],
-"special_notes_ja": [
-"スクールホリデーの有無に影響されない若年層を中心に訪日需要が高まった。"
-]
+"special_notes_ja": []
 },
 "dashboard_tags": [
 "moderate_growth",
 "record_high",
-"continued_japan_popularity"
+"continued_japan_popularity",
+"holiday_effect"
 ]
 },
 {
@@ -1125,25 +1112,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 12700,
+"current_value": 18600,
 "comparison_year": 2024,
-"comparison_value": 10402,
-"change_pct_vs_comparison_year": 22.1,
+"comparison_value": 14862,
+"change_pct_vs_comparison_year": 25.2,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.34,
+"share_of_total_current_pct": 0.57,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 12700,
+"current_value": 31300,
 "comparison_year": 2024,
-"comparison_value": 10402,
-"change_pct_vs_comparison_year": 22.1,
+"comparison_value": 25264,
+"change_pct_vs_comparison_year": 23.9,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.34,
+"share_of_total_current_pct": 0.44,
 "data_status": "preliminary_estimate"
 }
 },
@@ -1151,10 +1138,10 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "冬のロングホール旅行の需要は限定的であるものの、継続する訪日旅行人気や経由便の多様化の影響等もあり、訪日外客数は12,700人、前年同月比22.1%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "冬のロングホール旅行の需要は限定的であるものの、継続する訪日旅行人気や経由便の多様化の影響等もあり、訪日外客数は18,600人、前年同月比25.2%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
 "継続する訪日旅行人気",
 "経由便の多様化"
@@ -1184,25 +1171,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 8800,
+"current_value": 11100,
 "comparison_year": 2024,
-"comparison_value": 6879,
-"change_pct_vs_comparison_year": 27.9,
+"comparison_value": 7555,
+"change_pct_vs_comparison_year": 46.9,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.23,
+"share_of_total_current_pct": 0.34,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 8800,
+"current_value": 19900,
 "comparison_year": 2024,
-"comparison_value": 6879,
-"change_pct_vs_comparison_year": 27.9,
+"comparison_value": 14434,
+"change_pct_vs_comparison_year": 37.9,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.23,
+"share_of_total_current_pct": 0.28,
 "data_status": "preliminary_estimate"
 }
 },
@@ -1210,23 +1197,23 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "年末年始の休暇シーズンは1月初旬までであるものの、ロングホールの旅行先として日本が人気旅行先の一つとなっていることや、2024年12月の羽田～ミラノ間の新規就航、経由便の多様化の影響等もあり、訪日外客数は8,800人、前年同月比27.9%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "2月は祝日もなくロングホール旅行の需要は限定的であるものの、継続する訪日旅行人気や2024年12月の羽田～ミラノ間の新規就航、経由便の多様化の影響等もあり、訪日外客数は11,100人、前年同月比46.9%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
-"日本がロングホールの人気旅行先の一つとなっていること",
+"継続する訪日旅行人気",
 "羽田～ミラノ間の新規就航",
 "経由便の多様化"
 ],
-"constraints_ja": [],
+"constraints_ja": [
+"2月は祝日もなくロングホール旅行の需要は限定的"
+],
 "aviation_updates_ja": [
 "2024年12月の羽田～ミラノ間の新規就航",
 "経由便の多様化"
 ],
-"demand_events_ja": [
-"年末年始の休暇シーズン"
-],
+"demand_events_ja": [],
 "policy_or_regulation_notes_ja": [],
 "special_notes_ja": []
 },
@@ -1246,25 +1233,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 7400,
+"current_value": 9800,
 "comparison_year": 2024,
-"comparison_value": 4769,
-"change_pct_vs_comparison_year": 55.2,
+"comparison_value": 6323,
+"change_pct_vs_comparison_year": 55.0,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.2,
+"share_of_total_current_pct": 0.3,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 7400,
+"current_value": 17200,
 "comparison_year": 2024,
-"comparison_value": 4769,
-"change_pct_vs_comparison_year": 55.2,
+"comparison_value": 11092,
+"change_pct_vs_comparison_year": 55.1,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.2,
+"share_of_total_current_pct": 0.24,
 "data_status": "preliminary_estimate"
 }
 },
@@ -1272,10 +1259,10 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "2024年10月に再開した直行便によるアクセス性の向上と航空座席数の増加に加え、継続する訪日旅行人気や経由便の多様化の影響等もあり、訪日外客数は7,400人、前年同月比55.2%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "2024年10月に再開した直行便によるアクセス性の向上と航空座席数の増加に加え、継続する訪日旅行人気や経由便の多様化の影響等もあり、訪日外客数は9,800人、前年同月比55.0%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
 "直行便再開によるアクセス性の向上",
 "航空座席数の増加",
@@ -1307,25 +1294,25 @@
 "is_region_aggregate": false,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 4900,
+"current_value": 5700,
 "comparison_year": 2024,
-"comparison_value": 3242,
-"change_pct_vs_comparison_year": 51.1,
+"comparison_value": 2907,
+"change_pct_vs_comparison_year": 96.1,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.13,
+"share_of_total_current_pct": 0.17,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 4900,
+"current_value": 10600,
 "comparison_year": 2024,
-"comparison_value": 3242,
-"change_pct_vs_comparison_year": 51.1,
+"comparison_value": 6149,
+"change_pct_vs_comparison_year": 72.4,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.13,
+"share_of_total_current_pct": 0.15,
 "data_status": "preliminary_estimate"
 }
 },
@@ -1336,12 +1323,16 @@
 "record_note_ja": null
 },
 "market_context": {
-"status_summary_ja": "ウクライナ侵攻による各国からの制裁等による影響が続いている中、訪日外客数は4,900人、前年同月比51.1%増となった。",
-"positive_drivers_ja": [],
+"status_summary_ja": "ウクライナ侵攻による各国からの制裁等による影響が続いているものの、経由便の多様化等の影響もあり、訪日外客数は5,700人、前年同月比96.1%増となり、前年同月を上回った。",
+"positive_drivers_ja": [
+"経由便の多様化"
+],
 "constraints_ja": [
 "ウクライナ侵攻による各国からの制裁等による影響"
 ],
-"aviation_updates_ja": [],
+"aviation_updates_ja": [
+"経由便の多様化"
+],
 "demand_events_ja": [],
 "policy_or_regulation_notes_ja": [],
 "special_notes_ja": []
@@ -1360,25 +1351,25 @@
 "is_region_aggregate": true,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 9200,
+"current_value": 12000,
 "comparison_year": 2024,
-"comparison_value": 7439,
-"change_pct_vs_comparison_year": 23.7,
+"comparison_value": 8919,
+"change_pct_vs_comparison_year": 34.5,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.24,
+"share_of_total_current_pct": 0.37,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 9200,
+"current_value": 21200,
 "comparison_year": 2024,
-"comparison_value": 7439,
-"change_pct_vs_comparison_year": 23.7,
+"comparison_value": 16358,
+"change_pct_vs_comparison_year": 29.6,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.24,
+"share_of_total_current_pct": 0.3,
 "data_status": "preliminary_estimate"
 }
 },
@@ -1386,19 +1377,21 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "訪日旅行の人気が高まる中、2025年1月末からのストックホルム～羽田間の新規就航に向けた訪日旅行に関する報道等の増加もあり、訪日外客数は9,200人、前年同月比23.7%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "2025年1月末からのストックホルム～羽田間の新規就航により訪日旅行に関する報道が増えていることやスクールホリデーの影響もあり、訪日外客数は12,000人、前年同月比34.5%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
-"訪日旅行の人気の高まり",
-"ストックホルム～羽田間の新規就航に向けた訪日旅行に関する報道等の増加"
+"ストックホルム～羽田間の新規就航による訪日旅行に関する報道の増加",
+"スクールホリデー"
 ],
 "constraints_ja": [],
 "aviation_updates_ja": [
 "2025年1月末からストックホルム～羽田間が新規就航"
 ],
-"demand_events_ja": [],
+"demand_events_ja": [
+"スクールホリデー"
+],
 "policy_or_regulation_notes_ja": [],
 "special_notes_ja": [
 "北欧地域はスウェーデン、デンマーク、ノルウェー、フィンランドを指す。"
@@ -1407,9 +1400,9 @@
 "dashboard_tags": [
 "strong_growth",
 "record_high",
-"continued_japan_popularity",
 "new_route",
-"promotion_effect"
+"promotion_effect",
+"holiday_effect"
 ]
 },
 {
@@ -1421,25 +1414,25 @@
 "is_region_aggregate": true,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 11900,
+"current_value": 10800,
 "comparison_year": 2024,
-"comparison_value": 5886,
-"change_pct_vs_comparison_year": 102.2,
+"comparison_value": 6224,
+"change_pct_vs_comparison_year": 73.5,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.31,
+"share_of_total_current_pct": 0.33,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 11900,
+"current_value": 22700,
 "comparison_year": 2024,
-"comparison_value": 5886,
-"change_pct_vs_comparison_year": 102.2,
+"comparison_value": 12110,
+"change_pct_vs_comparison_year": 87.4,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 0.31,
+"share_of_total_current_pct": 0.32,
 "data_status": "preliminary_estimate"
 }
 },
@@ -1447,12 +1440,12 @@
 "april_record": false,
 "month_record": true,
 "all_time_monthly_record": false,
-"record_note_ja": "1月として過去最高"
+"record_note_ja": "2月として過去最高"
 },
 "market_context": {
-"status_summary_ja": "スクールホリデーに加え、前年同月と比較して直行便数が増加したこと等の影響もあり、訪日外客数は11,900人、前年同月比102.2%増となり、1月として過去最高を記録した。",
+"status_summary_ja": "2024年2月にイスラエルからの訪日者数が減少したことによる反動増や、前年同月と比較して直行便数が増加したこと等の影響もあり、訪日外客数は10,800人、前年同月比73.5%増となり、2月として過去最高を記録した。",
 "positive_drivers_ja": [
-"スクールホリデー",
+"イスラエルからの訪日者数減少による反動増",
 "直行便数の増加"
 ],
 "constraints_ja": [],
@@ -1460,7 +1453,7 @@
 "前年同月と比較して直行便数が増加"
 ],
 "demand_events_ja": [
-"スクールホリデー"
+"反動増"
 ],
 "policy_or_regulation_notes_ja": [],
 "special_notes_ja": [
@@ -1470,8 +1463,7 @@
 "dashboard_tags": [
 "strong_growth",
 "record_high",
-"aviation_increase",
-"holiday_effect"
+"aviation_increase"
 ]
 },
 {
@@ -1483,25 +1475,25 @@
 "is_region_aggregate": true,
 "visitor_arrivals": {
 "month": {
-"period": "2025-01",
+"period": "2025-02",
 "current_year": 2025,
-"current_value": 105100,
+"current_value": 99500,
 "comparison_year": 2024,
-"comparison_value": 77880,
-"change_pct_vs_comparison_year": 35.0,
+"comparison_value": 78199,
+"change_pct_vs_comparison_year": 27.2,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 2.78,
+"share_of_total_current_pct": 3.05,
 "data_status": "preliminary_estimate"
 },
 "cumulative": {
-"period": "2025-01_2025-01",
+"period": "2025-01_2025-02",
 "current_year": 2025,
-"current_value": 105100,
+"current_value": 204600,
 "comparison_year": 2024,
-"comparison_value": 77880,
-"change_pct_vs_comparison_year": 35.0,
+"comparison_value": 156079,
+"change_pct_vs_comparison_year": 31.1,
 "comparison_type": "year_over_year",
-"share_of_total_current_pct": 2.78,
+"share_of_total_current_pct": 2.91,
 "data_status": "preliminary_estimate"
 }
 },
@@ -1539,7 +1531,7 @@
 "地域別の回復・増減状況",
 "航空便・休暇・規制要因の一覧",
 "単月過去最高を記録した市場のハイライト",
-"1月として過去最高を記録した市場の一覧"
+"2月として過去最高を記録した市場の一覧"
 ]
 },
 "quality_checks": {
@@ -1549,11 +1541,12 @@
 "OTHERS"
 ],
 "warnings": [
-"2025年1月レポートの主比較は2024年同月比であり、本JSONのvisitor_arrivals比較値は2024年比を格納した。",
+"2025年2月レポートの主比較は2024年同月比であり、本JSONのvisitor_arrivals比較値は2024年比を格納した。",
 "2024年の数値は暫定値、2025年の数値は推計値として扱った。",
-"recordスキーマに1月過去最高専用フィールドがないため、1月として過去最高を記録した市場はrecord.month_record=trueおよびrecord_note_jaに格納した。",
-"record.april_recordは1月レポートのため全市場falseとした。",
-"1月単月レポートのためcumulativeはmonthと同一期間・同一値で格納した。"
+"recordスキーマに2月過去最高専用フィールドがないため、2月として過去最高を記録した市場はrecord.month_record=trueおよびrecord_note_jaに格納した。",
+"record.april_recordは2月レポートのため全市場falseとした。",
+"ベトナムは単月過去最高としてrecord.all_time_monthly_record=trueにし、同時に2月としても過去最高と解釈してrecord.month_record=trueとした。",
+"本文で明示された2月として過去最高の19市場は、韓国、台湾、タイ、シンガポール、マレーシア、インドネシア、フィリピン、インド、豪州、米国、カナダ、メキシコ、英国、フランス、ドイツ、イタリア、スペイン、北欧地域、中東地域として反映した。"
 ]
 }
 }
