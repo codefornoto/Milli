@@ -1,0 +1,1557 @@
+{
+"schema_version": "1.1.0",
+"dataset_type": "jnto_monthly_visitor_arrivals_country_status",
+"report": {
+"source_name_ja": "日本政府観光局（JNTO）",
+"source_name_en": "Japan National Tourism Organization",
+"report_title_ja": "訪日外客数（2023年6月推計値）",
+"published_date": "2023-07-19",
+"data_month": "2023年6月",
+"data_year": 2023,
+"data_month_number": 6,
+"as_of_date": "2023-07-12",
+"primary_comparison": {
+"type": "vs_2019",
+"base_year": 2019,
+"target_year": 2023,
+"label_ja": "2019年同月比"
+},
+"notes_ja": [
+"本資料では、過去の数値との比較に当たっては、COVID-19の影響を避けるため、2019年実績との比較を行っている。",
+"訪日外客数のうち、2023年の＊印の斜体部分は推計値、その他の値は暫定値、2019年の値は確定値である。",
+"訪日外客数及び＊印の出国日本人数は法務省資料を基にJNTOが算出している。",
+"中東地域はイスラエル、トルコ、GCC6か国（サウジアラビア、アラブ首長国連邦、バーレーン、オマーン、カタール、クウェート）を指す。",
+"北欧地域はスウェーデン、デンマーク、ノルウェー、フィンランドを指す。",
+"日本政府が全ての帰国者・入国者に求めていたワクチン接種証明書または出国前72時間以内の検査陰性証明書の提出措置は、2023年4月29日に終了した。"
+],
+"definition_ja": "訪日外客数とは、法務省集計による出入国管理統計に基づき算出したものである。訪日外客は、外国人正規入国者から日本を主たる居住国とする永住者等の外国人を除き、これに外国人一時上陸客等を加えた入国外国人旅行者のことである。駐在員やその家族、留学生等の入国者・再入国者は訪日外客に含まれる。乗員は含まれない。"
+},
+"overall": {
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 2073300,
+"comparison_year": 2019,
+"comparison_value": 2880041,
+"change_pct_vs_comparison_year": -28.0,
+"comparison_type": "vs_2019",
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 10712000,
+"comparison_year": 2019,
+"comparison_value": 16633614,
+"change_pct_vs_comparison_year": -35.6,
+"comparison_type": "vs_2019",
+"data_status": "preliminary_estimate"
+}
+},
+"headline_summary_ja": "2023年6月の訪日外客数は2073300人で、2019年同月比28.0%減、2019年同月の72.0%となった。新型コロナウイルス感染症の拡大により訪日外客数が大幅に減少した2020年2月以降、初めて200万人を突破し、2023年1～6月累計は10712000人となり上半期で1000万人を超えた。",
+"overall_context_ja": [
+"台湾をはじめとした東アジア地域において訪日外客数が増加した。",
+"欧米豪中東地域では、特に米国や豪州等において2019年同月比を超える回復が見られた。",
+"国際線定期便は、2023年夏ダイヤ時点でコロナ禍前の約6割まで運航便数が回復し、その後も東アジアを中心に増便・復便が続いている。",
+"新たな観光立国推進基本計画等を踏まえ、観光地・観光産業の稼ぐ力向上、地方誘客、消費拡大、高付加価値旅行、アドベンチャートラベル、MICE誘致等の取組強化が求められる。"
+],
+"common_market_conditions_ja": [
+"COVID-19の拡大以降減少した日本路線の航空座席供給量は回復途上にある。",
+"物価の高騰や航空券代の高騰、航空・旅行会社を取り巻く人手不足等の課題が多くの市場で見られている。",
+"欧州地域では、ウクライナ情勢に伴う飛行ルート変更によるフライト時間増加も訪日旅行の懸念材料となっている。",
+"日本政府が全ての帰国者・入国者に求めていたワクチン接種証明書または出国前72時間以内の検査陰性証明書の提出措置は、2023年4月29日に終了した。"
+]
+},
+"markets": [
+{
+"market_key": "KR",
+"name_ja": "韓国",
+"name_en": "South Korea",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 545100,
+"comparison_year": 2019,
+"comparison_value": 611867,
+"change_pct_vs_comparison_year": -10.9,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 26.29,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 3128500,
+"comparison_year": 2019,
+"comparison_value": 3862658,
+"change_pct_vs_comparison_year": -19.0,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 29.21,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "旅行のオフシーズンを迎えたものの、日本側の水際規制緩和や日本各地への地方路線復便の影響もあり、訪日外客数は545100人、2019年同月比10.9%減となった。",
+"positive_drivers_ja": [
+"日本側の水際規制緩和",
+"日本各地への地方路線復便"
+],
+"constraints_ja": [
+"旅行のオフシーズン"
+],
+"aviation_updates_ja": [
+"仁川～大分間の復便",
+"仁川～新千歳間の増便",
+"清州～関西間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"日本側の水際規制緩和"
+],
+"special_notes_ja": [
+"2019年7月以降、日韓情勢等により訪日韓国人旅行者数が減少傾向にあったため、2022年7月～12月の2019年同月比を見る際に注意を要する。"
+]
+},
+"dashboard_tags": [
+"decline",
+"aviation_increase",
+"route_resumption"
+]
+},
+{
+"market_key": "CN",
+"name_ja": "中国",
+"name_en": "China",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 208500,
+"comparison_year": 2019,
+"comparison_value": 880651,
+"change_pct_vs_comparison_year": -76.3,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 10.06,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 594600,
+"comparison_year": 2019,
+"comparison_value": 4532465,
+"change_pct_vs_comparison_year": -86.9,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 5.55,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本行きの海外旅行制限措置等があるものの、日本と中国双方の水際規制緩和の影響等により、訪日外客数は208500人、2019年同月比76.3%減となった。",
+"positive_drivers_ja": [
+"日本と中国双方の水際規制緩和"
+],
+"constraints_ja": [
+"中国文化旅游部による日本行き団体旅行・パッケージツアー商品の販売禁止措置の継続"
+],
+"aviation_updates_ja": [
+"上海～福岡間の復便",
+"上海～関西間の増便",
+"北京～羽田間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"中国文化旅游部より日本行き団体旅行・パッケージツアー商品の販売禁止措置が継続",
+"日本と中国双方の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"severe_decline",
+"aviation_increase",
+"route_resumption",
+"regulatory_constraint"
+]
+},
+{
+"market_key": "TW",
+"name_ja": "台湾",
+"name_en": "Taiwan",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 389000,
+"comparison_year": 2019,
+"comparison_value": 461085,
+"change_pct_vs_comparison_year": -15.6,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 18.76,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 1770600,
+"comparison_year": 2019,
+"comparison_value": 2480849,
+"change_pct_vs_comparison_year": -28.6,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 16.53,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "出境規制等があるものの、日本と台湾双方の水際措置緩和、端午節の影響等により、訪日外客数は389000人、2019年同月比15.6%減となった。",
+"positive_drivers_ja": [
+"日本と台湾双方の水際措置緩和"
+],
+"constraints_ja": [
+"台湾における渡航警戒レベルで、渡航の是非検討等に日本が含まれている"
+],
+"aviation_updates_ja": [
+"台北～成田間の増便",
+"台北～関西間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [
+"端午節"
+],
+"policy_or_regulation_notes_ja": [
+"台湾における渡航警戒レベルで、渡航の是非検討等に日本が含まれている"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"aviation_increase",
+"holiday_effect",
+"regulatory_constraint"
+]
+},
+{
+"market_key": "HK",
+"name_ja": "香港",
+"name_en": "Hong Kong",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 186300,
+"comparison_year": 2019,
+"comparison_value": 209030,
+"change_pct_vs_comparison_year": -10.9,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 8.99,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 909700,
+"comparison_year": 2019,
+"comparison_value": 1097889,
+"change_pct_vs_comparison_year": -17.1,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 8.49,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本と香港双方の水際規制緩和の影響等により、訪日外客数は186300人、2019年同月比10.9%減となった。",
+"positive_drivers_ja": [
+"日本と香港双方の水際規制緩和"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"香港～成田間の増便",
+"香港～中部間の増便",
+"香港～鹿児島間の復便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"日本と香港双方の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"aviation_increase",
+"route_resumption"
+]
+},
+{
+"market_key": "TH",
+"name_ja": "タイ",
+"name_en": "Thailand",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 51300,
+"comparison_year": 2019,
+"comparison_value": 62984,
+"change_pct_vs_comparison_year": -18.6,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 2.47,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 497700,
+"comparison_year": 2019,
+"comparison_value": 683595,
+"change_pct_vs_comparison_year": -27.2,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 4.65,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本の水際規制緩和、仏誕節の影響等により、訪日外客数は51300人、2019年同月比18.6%減となった。",
+"positive_drivers_ja": [
+"日本の水際規制緩和"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"チェンマイ～関西間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [
+"仏誕節"
+],
+"policy_or_regulation_notes_ja": [
+"日本の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "SG",
+"name_ja": "シンガポール",
+"name_en": "Singapore",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 54600,
+"comparison_year": 2019,
+"comparison_value": 47264,
+"change_pct_vs_comparison_year": 15.5,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 2.63,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 252700,
+"comparison_year": 2019,
+"comparison_value": 214083,
+"change_pct_vs_comparison_year": 18.0,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 2.36,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本の水際規制緩和、学校の夏季休暇の影響等により、訪日外客数は54600人、2019年同月比15.5%増となった。",
+"positive_drivers_ja": [
+"日本の水際規制緩和"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"シンガポール～羽田間の増便",
+"シンガポール～成田間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [
+"学校の夏季休暇"
+],
+"policy_or_regulation_notes_ja": [
+"日本の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "MY",
+"name_ja": "マレーシア",
+"name_en": "Malaysia",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 22000,
+"comparison_year": 2019,
+"comparison_value": 30534,
+"change_pct_vs_comparison_year": -27.9,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 1.06,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 194200,
+"comparison_year": 2019,
+"comparison_value": 237929,
+"change_pct_vs_comparison_year": -18.4,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 1.81,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本の水際規制緩和の影響等により、訪日外客数は22000人、2019年同月比27.9%減となった。",
+"positive_drivers_ja": [
+"日本の水際規制緩和"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"クアラルンプール～関西間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"日本の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"severe_decline",
+"aviation_increase"
+]
+},
+{
+"market_key": "ID",
+"name_ja": "インドネシア",
+"name_en": "Indonesia",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 39300,
+"comparison_year": 2019,
+"comparison_value": 49290,
+"change_pct_vs_comparison_year": -20.3,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 1.9,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 201700,
+"comparison_year": 2019,
+"comparison_value": 215873,
+"change_pct_vs_comparison_year": -6.6,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 1.88,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本とインドネシア双方の水際規制緩和、祝日等による連休、学校の夏季休暇等の影響により、訪日外客数は39300人、2019年同月比20.3%減となった。",
+"positive_drivers_ja": [
+"日本とインドネシア双方の水際規制緩和"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"ジャカルタ～羽田間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [
+"祝日等による連休",
+"学校の夏季休暇"
+],
+"policy_or_regulation_notes_ja": [
+"日本とインドネシア双方の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"severe_decline",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "PH",
+"name_ja": "フィリピン",
+"name_en": "Philippines",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 54200,
+"comparison_year": 2019,
+"comparison_value": 46842,
+"change_pct_vs_comparison_year": 15.7,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 2.61,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 277100,
+"comparison_year": 2019,
+"comparison_value": 295120,
+"change_pct_vs_comparison_year": -6.1,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 2.59,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "帰国時の入国制限の継続等があるものの、日本の水際規制緩和の影響等により、訪日外客数は54200人、2019年同月比15.7%増となった。",
+"positive_drivers_ja": [
+"日本の水際規制緩和"
+],
+"constraints_ja": [
+"帰国時の入国制限の継続"
+],
+"aviation_updates_ja": [
+"マニラ～関西間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"自国民の日本からの入国については、ワクチン接種証明書の提示等が必要"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"aviation_increase",
+"regulatory_constraint"
+]
+},
+{
+"market_key": "VN",
+"name_ja": "ベトナム",
+"name_en": "Vietnam",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 38900,
+"comparison_year": 2019,
+"comparison_value": 35419,
+"change_pct_vs_comparison_year": 9.8,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 1.88,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 301000,
+"comparison_year": 2019,
+"comparison_value": 253247,
+"change_pct_vs_comparison_year": 18.9,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 2.81,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本の水際規制緩和、学校の夏季休暇の影響等により、訪日外客数は38900人、2019年同月比9.8%増となった。ただし、ベトナムは2019年以前も留学、技能実習等を含むその他客の多い市場であった点に注意が必要である。",
+"positive_drivers_ja": [
+"日本の水際規制緩和",
+"日本への直行便数が2019年同月を上回っている"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"ダナン～成田間の増便",
+"日本への直行便数は2019年同月を上回っている"
+],
+"demand_events_ja": [
+"学校の夏季休暇"
+],
+"policy_or_regulation_notes_ja": [
+"日本の水際規制緩和"
+],
+"special_notes_ja": [
+"ベトナムは2019年以前も留学、技能実習等を含むその他客の多い市場であった点は2019年同月比を見る際に注意を要する。"
+]
+},
+"dashboard_tags": [
+"moderate_growth",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "IN",
+"name_ja": "インド",
+"name_en": "India",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 14200,
+"comparison_year": 2019,
+"comparison_value": 15359,
+"change_pct_vs_comparison_year": -7.5,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.68,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 79400,
+"comparison_year": 2019,
+"comparison_value": 92940,
+"change_pct_vs_comparison_year": -14.6,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.74,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "帰国時の入国制限の継続等があるものの、日本の水際規制緩和の影響等により、訪日外客数は14200人、2019年同月比7.5%減となった。",
+"positive_drivers_ja": [
+"日本の水際規制緩和"
+],
+"constraints_ja": [
+"帰国時の入国制限の継続"
+],
+"aviation_updates_ja": [
+"デリー～羽田間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"自国民の日本からの入国については、2月13日より到着時にランダムPCR検査が行われている"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"aviation_increase",
+"regulatory_constraint"
+]
+},
+{
+"market_key": "AU",
+"name_ja": "豪州",
+"name_en": "Australia",
+"region_ja": "豪州",
+"region_en": "Australia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 42400,
+"comparison_year": 2019,
+"comparison_value": 37283,
+"change_pct_vs_comparison_year": 13.7,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 2.05,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 274700,
+"comparison_year": 2019,
+"comparison_value": 326906,
+"change_pct_vs_comparison_year": -16.0,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 2.56,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本の水際規制緩和、学校の冬期休暇の影響により、訪日外客数は42400人、2019年同月比13.7%増となった。",
+"positive_drivers_ja": [
+"日本の水際規制緩和"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"ケアンズ～羽田間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [
+"学校の冬期休暇"
+],
+"policy_or_regulation_notes_ja": [
+"日本の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "US",
+"name_ja": "米国",
+"name_en": "U.S.A.",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 226800,
+"comparison_year": 2019,
+"comparison_value": 175491,
+"change_pct_vs_comparison_year": 29.2,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 10.94,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 972200,
+"comparison_year": 2019,
+"comparison_value": 875124,
+"change_pct_vs_comparison_year": 11.1,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 9.08,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本の水際規制緩和、学校の夏期休暇の影響等により、訪日外客数は226800人、2019年同月比29.2%増となった。",
+"positive_drivers_ja": [
+"日本の水際規制緩和"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"ロサンゼルス～関西間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [
+"学校の夏期休暇"
+],
+"policy_or_regulation_notes_ja": [
+"日本の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "CA",
+"name_ja": "カナダ",
+"name_en": "Canada",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 30000,
+"comparison_year": 2019,
+"comparison_value": 25402,
+"change_pct_vs_comparison_year": 18.1,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 1.45,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 183300,
+"comparison_year": 2019,
+"comparison_value": 183769,
+"change_pct_vs_comparison_year": -0.3,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 1.71,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本の水際規制緩和等の影響により、訪日外客数は30000人、2019年同月比18.1%増となった。",
+"positive_drivers_ja": [
+"日本の水際規制緩和",
+"日本への直行便数が2019年同月を上回っている"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"バンクーバー～関西間の増便",
+"日本への直行便数は2019年同月を上回っている"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"日本の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"aviation_increase"
+]
+},
+{
+"market_key": "MX",
+"name_ja": "メキシコ",
+"name_en": "Mexico",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 6800,
+"comparison_year": 2019,
+"comparison_value": 5676,
+"change_pct_vs_comparison_year": 19.8,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.33,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 35000,
+"comparison_year": 2019,
+"comparison_value": 31624,
+"change_pct_vs_comparison_year": 10.7,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.33,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本側の水際規制緩和等の影響により、訪日外客数は6800人、2019年同月比19.8%増となった。",
+"positive_drivers_ja": [
+"日本側の水際規制緩和"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"2023年3月のメキシコシティ～成田間の復便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"日本側の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"route_resumption"
+]
+},
+{
+"market_key": "GB",
+"name_ja": "英国",
+"name_en": "United Kingdom",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 20400,
+"comparison_year": 2019,
+"comparison_value": 25801,
+"change_pct_vs_comparison_year": -20.9,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.98,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 150100,
+"comparison_year": 2019,
+"comparison_value": 185698,
+"change_pct_vs_comparison_year": -19.2,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 1.4,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本側の水際規制緩和等の影響により、訪日外客数は20400人、2019年同月比20.9%減となった。",
+"positive_drivers_ja": [
+"日本側の水際規制緩和"
+],
+"constraints_ja": [
+"欧州地域ではウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が懸念材料"
+],
+"aviation_updates_ja": [
+"ヒースロー～羽田間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"日本側の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"severe_decline",
+"aviation_increase",
+"geopolitical_risk"
+]
+},
+{
+"market_key": "FR",
+"name_ja": "フランス",
+"name_en": "France",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 17700,
+"comparison_year": 2019,
+"comparison_value": 21317,
+"change_pct_vs_comparison_year": -17.0,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.85,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 122200,
+"comparison_year": 2019,
+"comparison_value": 160310,
+"change_pct_vs_comparison_year": -23.8,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 1.14,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本側の水際規制緩和等の影響により、訪日外客数は17700人、2019年同月比17.0%減となった。",
+"positive_drivers_ja": [
+"日本側の水際規制緩和"
+],
+"constraints_ja": [
+"欧州地域ではウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が懸念材料"
+],
+"aviation_updates_ja": [
+"パリ～羽田間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"日本側の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"aviation_increase",
+"geopolitical_risk"
+]
+},
+{
+"market_key": "DE",
+"name_ja": "ドイツ",
+"name_en": "Germany",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 13700,
+"comparison_year": 2019,
+"comparison_value": 15697,
+"change_pct_vs_comparison_year": -12.7,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.66,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 106700,
+"comparison_year": 2019,
+"comparison_value": 118479,
+"change_pct_vs_comparison_year": -9.9,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 1.0,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本側の水際規制緩和等の影響により、訪日外客数は13700人、2019年同月比12.7%減となった。",
+"positive_drivers_ja": [
+"日本側の水際規制緩和"
+],
+"constraints_ja": [
+"欧州地域ではウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が懸念材料"
+],
+"aviation_updates_ja": [
+"ミュンヘン～羽田間の増便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"日本側の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"aviation_increase",
+"geopolitical_risk"
+]
+},
+{
+"market_key": "IT",
+"name_ja": "イタリア",
+"name_en": "Italy",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 10200,
+"comparison_year": 2019,
+"comparison_value": 11357,
+"change_pct_vs_comparison_year": -10.2,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.49,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 59300,
+"comparison_year": 2019,
+"comparison_value": 74768,
+"change_pct_vs_comparison_year": -20.7,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.55,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本の水際規制緩和、学校の夏期休暇等の影響により、訪日外客数は10200人、2019年同月比10.2%減となった。",
+"positive_drivers_ja": [
+"日本の水際規制緩和"
+],
+"constraints_ja": [
+"欧州地域ではウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が懸念材料"
+],
+"aviation_updates_ja": [
+"ローマ～羽田間の2022年11月の新規就航により、COVID-19の拡大以降運休が続いていた日本への直行便が再開"
+],
+"demand_events_ja": [
+"学校の夏期休暇"
+],
+"policy_or_regulation_notes_ja": [
+"日本の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"new_route",
+"route_resumption",
+"holiday_effect",
+"geopolitical_risk"
+]
+},
+{
+"market_key": "ES",
+"name_ja": "スペイン",
+"name_en": "Spain",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 8700,
+"comparison_year": 2019,
+"comparison_value": 9762,
+"change_pct_vs_comparison_year": -10.9,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.42,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 39600,
+"comparison_year": 2019,
+"comparison_value": 51422,
+"change_pct_vs_comparison_year": -23.0,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.37,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本の水際規制緩和等の影響があったものの、COVID-19拡大以降日本への直行便は運休が続いており、訪日外客数は8700人、2019年同月比10.9%減となった。",
+"positive_drivers_ja": [
+"日本の水際規制緩和"
+],
+"constraints_ja": [
+"COVID-19の拡大以降、日本への直行便は運休が続いている",
+"欧州地域ではウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が懸念材料"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"日本の水際規制緩和"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"seat_capacity_decline",
+"geopolitical_risk"
+]
+},
+{
+"market_key": "RU",
+"name_ja": "ロシア",
+"name_en": "Russia",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 2400,
+"comparison_year": 2019,
+"comparison_value": 8844,
+"change_pct_vs_comparison_year": -72.9,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.12,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 16200,
+"comparison_year": 2019,
+"comparison_value": 55940,
+"change_pct_vs_comparison_year": -71.0,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.15,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "ウクライナ侵攻による各国からの制裁等の影響が続いており、訪日外客数は2400人、2019年同月比72.9%減となった。",
+"positive_drivers_ja": [],
+"constraints_ja": [
+"ウクライナ侵攻による各国からの制裁等の影響が継続",
+"COVID-19の拡大以降、日本への直行便は運休が続いている"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"severe_decline",
+"geopolitical_risk",
+"seat_capacity_decline"
+]
+},
+{
+"market_key": "NORDIC",
+"name_ja": "北欧地域",
+"name_en": "Nordic Countries",
+"region_ja": "北欧地域",
+"region_en": "Nordic Countries",
+"is_region_aggregate": true,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 11400,
+"comparison_year": 2019,
+"comparison_value": 12808,
+"change_pct_vs_comparison_year": -11.0,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.55,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 53100,
+"comparison_year": 2019,
+"comparison_value": 72345,
+"change_pct_vs_comparison_year": -26.6,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.5,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本の水際規制緩和等の影響により、訪日外客数は11400人、2019年同月比11.0%減となった。",
+"positive_drivers_ja": [
+"日本の水際規制緩和"
+],
+"constraints_ja": [
+"欧州地域ではウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が懸念材料"
+],
+"aviation_updates_ja": [
+"2023年3月のヘルシンキ～関西間の復便",
+"日本への直行便数は前年同月に比べ回復傾向"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"日本の水際規制緩和"
+],
+"special_notes_ja": [
+"北欧地域はスウェーデン、デンマーク、ノルウェー、フィンランドを指す。"
+]
+},
+"dashboard_tags": [
+"decline",
+"route_resumption",
+"geopolitical_risk"
+]
+},
+{
+"market_key": "ME",
+"name_ja": "中東地域",
+"name_en": "Middle East",
+"region_ja": "中東地域",
+"region_en": "Middle East",
+"is_region_aggregate": true,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 9100,
+"comparison_year": 2019,
+"comparison_value": 7747,
+"change_pct_vs_comparison_year": 17.5,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.44,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 51900,
+"comparison_year": 2019,
+"comparison_value": 46070,
+"change_pct_vs_comparison_year": 12.7,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 0.48,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "日本の水際規制緩和、一部の中東地域の国における新たな査証申請・手続きの緩和等により、訪日外客数は9100人、2019年同月比17.5%増となった。",
+"positive_drivers_ja": [
+"日本の水際規制緩和",
+"一部の中東地域の国における新たな査証申請・手続きの緩和",
+"日本への直行便数が2019年同月を上回っている"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"ドーハ～羽田間の増便",
+"日本への直行便数は2019年同月を上回っている"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [
+"2022年11月よりUAE国民への査証免除",
+"2023年3月よりサウジアラビア国民・居住者へのオンラインビザ申請",
+"2023年4月よりカタール国民に対する事前登録制に基づく査証免除措置が開始"
+],
+"special_notes_ja": [
+"中東地域はイスラエル、トルコ、GCC6か国を指す。"
+]
+},
+"dashboard_tags": [
+"moderate_growth",
+"aviation_increase"
+]
+},
+{
+"market_key": "OTHERS",
+"name_ja": "その他",
+"name_en": "Others",
+"region_ja": "その他",
+"region_en": "Others",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2023-06",
+"current_year": 2023,
+"current_value": 70300,
+"comparison_year": 2019,
+"comparison_value": 72531,
+"change_pct_vs_comparison_year": -3.1,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 3.39,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2023-01_2023-06",
+"current_year": 2023,
+"current_value": 440500,
+"comparison_year": 2019,
+"comparison_value": 484511,
+"change_pct_vs_comparison_year": -9.1,
+"comparison_type": "vs_2019",
+"share_of_total_current_pct": 4.11,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "訪日外客数は70300人、2019年同月比3.1%減となった。市場別概況本文で個別の背景説明は示されていない。",
+"positive_drivers_ja": [],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline"
+]
+}
+],
+"dashboard_hints": {
+"primary_metric": "visitor_arrivals.month.current_value",
+"comparison_metric": "visitor_arrivals.month.change_pct_vs_comparison_year",
+"context_metric": "market_context.status_summary_ja",
+"group_by": [
+"region_ja",
+"market_key"
+],
+"suggested_charts": [
+"国・地域別の月次訪日外客数ランキング",
+"国・地域別の前年同月比または2019年同月比",
+"地域別の回復・増減状況",
+"航空便・休暇・規制要因の一覧",
+"過去最高を記録した市場のハイライト"
+]
+},
+"quality_checks": {
+"has_country_table": true,
+"has_market_context": true,
+"missing_context_markets": [
+"OTHERS"
+],
+"warnings": [
+"「その他」は国・地域別表にはあるが、市場別概況本文で個別の背景説明は示されていない。"
+]
+}
+}
