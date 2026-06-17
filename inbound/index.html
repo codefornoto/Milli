@@ -9,13 +9,14 @@
     <link rel="icon" href="./favicon.ico">
     <link rel="apple-touch-icon" href="./logo.png">
     <link rel="manifest" href="./manifest.json">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <!-- Babel -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Babel (最新版の不具合を避けるため安定版の7.23.6にバージョンを固定) -->
+    <script src="https://unpkg.com/@babel/standalone@7.23.6/babel.min.js"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- PapaParse (CSV読み込み用) -->
@@ -55,7 +56,7 @@
             align-items: center; justify-content: center; font-weight: bold; color: white;
             flex-shrink: 0;
         }
-        .rank-1 { background-color: #4FD1C5; } /* TIFOカラー */
+        .rank-1 { background-color: #4FD1C5; }
         .rank-2 { background-color: #CBD5E0; }
         .rank-3 { background-color: #A0AEC0; }
         .rank-default { background-color: #E2E8F0; color: #4A5568; }
@@ -1830,8 +1831,13 @@
 
                     <div className="mt-12 pt-6 border-t border-slate-200 text-right flex flex-col items-end gap-2">
                         <p className="text-sm text-slate-500 font-medium">
-                            出典: {isJntoTab ? (currentJnto?.report?.source_name_ja || '日本政府観光局(JNTO)') : 'Milli'}
+                            出典: {isJntoTab ? (currentJnto?.report?.source_name_ja || '日本政府観光局（JNTO）') : 'Milli'}
                         </p>
+                        {!isJntoTab && activeTab !== 'survey' && (
+                            <a href="https://docs.google.com/spreadsheets/d/1HdaqmIPXDChGrc2XynYPtzkDRIIBQObh41GS9T4ohlo/edit" target="_blank" className="text-xs text-slate-400 hover:text-teal-600 underline inline-flex items-center gap-1">
+                                <i className="fa-solid fa-arrow-up-right-from-square"></i> 元データ (Google Spreadsheet)
+                            </a>
+                        )}
                     </div>
                 </div>
             );
