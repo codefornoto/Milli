@@ -9,6 +9,10 @@
         /* ==========================================
            TIFO トンマナ & 基本変数
            ========================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         :root {
             --tifo-bg: #F7FAFC;
             --tifo-text: #2D3748;
@@ -97,8 +101,9 @@
            ========================================== */
         h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--tifo-primary-dark); }
         h2 { font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; border-bottom: 3px solid var(--tifo-primary); padding-bottom: 0.5rem; display: inline-block; }
-        h3 { font-size: 1.4rem; margin-top: 1.5rem; color: #4A5568; }
-        p { line-height: 1.8; font-size: 1.1rem; }
+        h3 { font-size: 1.4rem; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #4A5568; }
+        h4 { font-size: 1.2rem; margin-top: 1rem; margin-bottom: 0.5rem; color: var(--tifo-primary-dark); }
+        p { line-height: 1.8; font-size: 1.1rem; margin-top: 0; margin-bottom: 1rem;}
         ul, ol { line-height: 1.8; font-size: 1.1rem; }
         li { margin-bottom: 0.5rem; }
 
@@ -147,8 +152,7 @@
             border: 1px solid var(--tifo-card-border);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
+            /* 余白が空きすぎるのを防ぐため space-between を削除 */
         }
         .card-grid {
             display: grid;
@@ -267,6 +271,164 @@
         ::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 5px; }
         ::-webkit-scrollbar-thumb:hover { background: #a0aec0; }
 
+        /* ==========================================
+           タイトルスライド用 近未来的アニメーション & スタイル
+           ========================================== */
+        .hero-slide {
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #ffffff 0%, var(--tifo-bg) 100%);
+        }
+
+        /* デジタルグリッド */
+        .cyber-grid {
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background-image: 
+                linear-gradient(rgba(79, 209, 197, 0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(79, 209, 197, 0.2) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(600px) rotateX(60deg) translateY(-100px);
+            animation: gridMove 10s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(600px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(600px) rotateX(60deg) translateY(50px); }
+        }
+
+        /* スキャンライン */
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: var(--tifo-primary);
+            box-shadow: 0 0 15px var(--tifo-primary);
+            opacity: 0.2;
+            animation: scan 6s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
+
+        /* 浮遊するデータパーティクル */
+        .particle {
+            position: absolute;
+            background: var(--tifo-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--tifo-primary-dark), 0 0 20px var(--tifo-primary);
+            animation: float-particle infinite ease-in-out alternate;
+            z-index: 1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .p1 { width: 8px; height: 8px; left: 15%; top: 25%; animation-duration: 4s; }
+        .p2 { width: 12px; height: 12px; left: 85%; top: 15%; animation-duration: 6s; animation-delay: -2s; background: var(--tifo-accent); box-shadow: 0 0 10px var(--tifo-accent), 0 0 20px var(--tifo-accent); }
+        .p3 { width: 6px; height: 6px; left: 70%; top: 75%; animation-duration: 5s; animation-delay: -1s; }
+        .p4 { width: 10px; height: 10px; left: 25%; top: 85%; animation-duration: 7s; animation-delay: -3s; }
+        .p5 { width: 15px; height: 15px; left: 50%; top: 45%; animation-duration: 8s; animation-delay: -4s; opacity: 0.2;}
+
+        @keyframes float-particle {
+            0% { transform: translateY(0) scale(0.8); opacity: 0.2; }
+            100% { transform: translateY(-40px) scale(1.2); opacity: 0.7; }
+        }
+
+        /* タイトル文字のスタイル */
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.2;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--tifo-primary-dark), #2B6CB0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleFadeIn 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            text-align: center;
+            position: relative;
+        }
+
+        /* タイトルを横切るシャインエフェクト */
+        .hero-title::after {
+            content: "バイブコーディング研修";
+            position: absolute;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.8) 50%, transparent 60%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s infinite linear;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
+        }
+
+        /* サイバー感のあるグラスカード */
+        .hero-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(79, 209, 197, 0.4);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05), 0 0 20px rgba(79, 209, 197, 0.1);
+            margin: 0 auto 2rem;
+            max-width: 800px;
+            animation: titleFadeIn 1s ease-out 0.4s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            text-align: center;
+            position: relative;
+        }
+
+        /* カード四隅のサイバーチックなフレーム */
+        .hero-card::before, .hero-card::after {
+            content: '';
+            position: absolute;
+            width: 20px; height: 20px;
+            border: 3px solid var(--tifo-primary);
+            border-radius: 3px;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        .hero-card::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .hero-card::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+        .hero-author {
+            font-size: 1.2rem;
+            color: #4A5568;
+            margin-bottom: 2rem;
+            animation: titleFadeIn 1s ease-out 0.6s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            text-align: center;
+        }
+
+        .hero-btn-wrap {
+            animation: titleFadeIn 1s ease-out 0.8s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes titleFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -274,7 +436,7 @@
 <div id="app-container">
     <!-- ヘッダー -->
     <header class="app-header">
-        <div class="header-title">💻 石川県観光連盟 バイブコーディング研修</div>
+        <div class="header-title">石川県観光連盟 バイブコーディング研修</div>
         <div class="slide-counter"><span id="current-page">1</span> / <span id="total-pages">X</span></div>
     </header>
 
@@ -284,21 +446,30 @@
         <!-- ==========================================
              スライド 1: タイトル
              ========================================== -->
-        <section class="slide active">
-            <div style="display:flex; flex-direction:column; justify-content:center; height:100%; max-width:900px; margin:0 auto;">
-                <h1 style="font-size: 3.5rem; line-height:1.2; margin-bottom: 1rem;">石川県観光連盟<br>バイブコーディング研修</h1>
-                <p class="subtitle" style="font-size: 1.5rem;">6/22(月)</p>
+        <section class="slide active hero-slide">
+            <!-- 近未来背景アニメーション -->
+            <div class="cyber-grid"></div>
+            <div class="scanline"></div>
+            <div class="particle p1"></div>
+            <div class="particle p2"></div>
+            <div class="particle p3"></div>
+            <div class="particle p4"></div>
+            <div class="particle p5"></div>
+
+            <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%; position:relative; z-index:10;">
+                <h1 class="hero-title">バイブコーディング研修</h1>
                 
-                <div class="tifo-card" style="margin-bottom: 3rem; background: linear-gradient(135deg, #E6FFFA 0%, #FFFFFF 100%);">
-                    <p style="font-size: 1.4rem; font-weight: bold; color: var(--tifo-primary-dark); margin: 0; text-align:center;">
+                <div class="hero-card">
+                    <p style="font-size: 1.5rem; font-weight: bold; color: var(--tifo-primary-dark); margin: 0; line-height: 1.6;">
                         EXCEL、パワポ、BIツールから卒業。<br>
                         データ分析レポートアプリを開発して、共有出来るようになろう。
                     </p>
                 </div>
 
-                <p class="author">講師：石川県データアナリスト 羽生田文登</p>
-                <div class="text-center">
-                    <button class="tifo-button" style="font-size: 1.2rem; padding: 1rem 3rem;" onclick="nextSlide()">研修をはじめる</button>
+                <p class="hero-author">講師：石川県データアナリスト 羽生田文登</p>
+                
+                <div class="hero-btn-wrap">
+                    <button class="tifo-button" style="font-size: 1.3rem; padding: 1rem 4rem; box-shadow: 0 10px 20px rgba(79, 209, 197, 0.3);" onclick="nextSlide()">研修をはじめる</button>
                 </div>
             </div>
         </section>
@@ -315,27 +486,32 @@
                 </p>
             </div>
 
-            <h3>AIを活用したアプリ・レポートの実例</h3>
+            <h3 style="margin-top: 2rem;">AIを活用したアプリ・レポートの実例</h3>
             <p>すでに石川県内でも、バイブコーディングの手法を用いて様々な分析アプリが作られています。</p>
             
             <div class="card-grid">
                 <div class="tifo-card">
-                    <h4 style="margin-top:0; color:var(--tifo-primary-dark); font-size:1.2rem;">TIFO</h4>
+                    <h4 style="margin-top:0;">TIFO</h4>
                     <p style="font-size:0.95rem;">Milli（石川県観光データ基盤）をもっと見やすく使いやすくしたダッシュボード。</p>
                     <a href="https://codefornoto.github.io/TIFO/ishikawa/" target="_blank" class="tifo-button" style="padding: 0.5rem 1rem; font-size:0.9rem; margin-top:auto;">サイトを見る</a>
                 </div>
                 <div class="tifo-card">
-                    <h4 style="margin-top:0; color:var(--tifo-primary-dark); font-size:1.2rem;">Milli for Inbound</h4>
+                    <h4 style="margin-top:0;">Milli for Inbound</h4>
                     <p style="font-size:0.95rem;">石川県のインバウンドマーケティング用の分析アプリ。</p>
                     <a href="https://codefornoto.github.io/Milli/inbound/" target="_blank" class="tifo-button" style="padding: 0.5rem 1rem; font-size:0.9rem; margin-top:auto;">サイトを見る</a>
                 </div>
                 <div class="tifo-card">
-                    <h4 style="margin-top:0; color:var(--tifo-primary-dark); font-size:1.2rem;">いしかわ動物園分析</h4>
+                    <h4 style="margin-top:0;">混雑度マップ（金大と共同開発中）</h4>
+                    <p style="font-size:0.95rem;">Leafletというライブラリを使えば、マップ機能を持たせたアプリも作れます。</p>
+                    <a href="https://beeb-c4n.github.io/crowdedmap2/" target="_blank" class="tifo-button" style="padding: 0.5rem 1rem; font-size:0.9rem; margin-top:auto;">サイトを見る</a>
+                </div>
+                <div class="tifo-card">
+                    <h4 style="margin-top:0;">いしかわ動物園分析</h4>
                     <p style="font-size:0.95rem;">来園者アンケート等のデータを可視化した分析レポート。</p>
                     <a href="https://beeb-c4n.github.io/Milli/zoo/" target="_blank" class="tifo-button" style="padding: 0.5rem 1rem; font-size:0.9rem; margin-top:auto;">サイトを見る</a>
                 </div>
                 <div class="tifo-card">
-                    <h4 style="margin-top:0; color:var(--tifo-primary-dark); font-size:1.2rem;">白山一里野温泉スキー場</h4>
+                    <h4 style="margin-top:0;">白山一里野温泉スキー場</h4>
                     <p style="font-size:0.95rem;">スキー場の観光アンケートデータの分析レポート。</p>
                     <a href="https://beeb-c4n.github.io/Milli/ichirino/" target="_blank" class="tifo-button" style="padding: 0.5rem 1rem; font-size:0.9rem; margin-top:auto;">サイトを見る</a>
                 </div>
@@ -372,17 +548,17 @@
             <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
                 <div class="tifo-card" style="border-top: 8px solid #E34F26;">
                     <h3 style="margin-top:0; color:#E34F26;">HTML</h3>
-                    <p style="font-weight:bold; font-size:1.1rem;">骨組み・構造</p>
+                    <p style="font-weight:bold; font-size:1.1rem; margin-bottom: 0.5rem;">骨組み・構造</p>
                     <p style="font-size:0.95rem; color:#4A5568;">文章、画像、リンクなど、ページに「何を表示するか」を定義します。家の建築で言えば「柱や壁」です。</p>
                 </div>
                 <div class="tifo-card" style="border-top: 8px solid #1572B6;">
                     <h3 style="margin-top:0; color:#1572B6;">CSS</h3>
-                    <p style="font-weight:bold; font-size:1.1rem;">装飾・デザイン</p>
+                    <p style="font-weight:bold; font-size:1.1rem; margin-bottom: 0.5rem;">装飾・デザイン</p>
                     <p style="font-size:0.95rem; color:#4A5568;">色、大きさ、配置など、ページを「どう見せるか」を定義します。家の建築で言えば「壁紙や塗装」です。</p>
                 </div>
                 <div class="tifo-card" style="border-top: 8px solid #F7DF1E;">
                     <h3 style="margin-top:0; color:#B8A000;">JavaScript</h3>
-                    <p style="font-weight:bold; font-size:1.1rem;">動き・機能</p>
+                    <p style="font-weight:bold; font-size:1.1rem; margin-bottom: 0.5rem;">動き・機能</p>
                     <p style="font-size:0.95rem; color:#4A5568;">クリックで開く、データでグラフを描くなど「どう動かすか」を定義します。家の建築で言えば「電気や水道」です。</p>
                 </div>
             </div>
@@ -699,15 +875,42 @@
         </section>
 
         <!-- ==========================================
-             スライド 9: プロンプトを作ろう
+             スライド 9: プロンプトの基本要素 (NEW)
              ========================================== -->
         <section class="slide">
-            <h2>プロンプトを作ろう（AIへの指示書）</h2>
-            <p>いよいよ分析レポートを作ります。AIにイメージ通りのレポートを作ってもらうためには、<strong>「データ」</strong>と<strong>「的確な指示」</strong>が必要です。</p>
+            <h2>プロンプト（AIへの指示書）を作ろう</h2>
+            <p>AIにイメージ通りのレポートを作ってもらうためには、以下の<strong>4つの要素</strong>をプロンプトに含めることが重要です。</p>
+
+            <div class="card-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="tifo-card" style="border-left: 5px solid #E34F26;">
+                    <h3 style="margin-top:0;">1. 出力形式</h3>
+                    <p>「HTMLベースのレポートを作りたい」と明確に伝えます。</p>
+                </div>
+                <div class="tifo-card" style="border-left: 5px solid #1572B6;">
+                    <h3 style="margin-top:0;">2. データの説明</h3>
+                    <p>「石川県の観光アンケートデータです」など、入力するデータがどんなものなのかを説明します。</p>
+                </div>
+                <div class="tifo-card" style="border-left: 5px solid #F6AD55;">
+                    <h3 style="margin-top:0;">3. レポートに欲しい機能</h3>
+                    <p>「グラフやランキングでまとめて」「自由記述はすべて見られるようにして」など、具体的な要件を書きます。</p>
+                </div>
+                <div class="tifo-card" style="border-left: 5px solid #69B340;">
+                    <h3 style="margin-top:0;">4. トンマナの指示</h3>
+                    <p>「全体的に明るいポップな色を使って」「夏を感じるカラートーンにして」など、デザインの雰囲気を伝えます。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             スライド 10: データの準備とターゲット
+             ========================================== -->
+        <section class="slide">
+            <h2>プロンプトを作る準備</h2>
+            <p>プロンプトを書く前に、データの中身と「誰に見せるのか」を整理しておきましょう。</p>
 
             <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
                 <div class="tifo-card">
-                    <h3 style="margin-top:0;"><span style="background-color: var(--tifo-primary); color:white; padding: 4px 12px; border-radius: 999px; font-size:1rem; vertical-align:middle; margin-right:8px;">1</span> データを用意する</h3>
+                    <h3 style="margin-top:0;"><span style="background-color: var(--tifo-primary); color:white; padding: 4px 12px; border-radius: 999px; font-size:1rem; vertical-align:middle; margin-right:8px;">A</span> データを用意する</h3>
                     <ul>
                         <li>Milliの全データでは処理が重すぎる場合があります。<br>EXCELのフィルター機能などで、施設や期間を絞ることをオススメします。（目安：〜数千件くらい）</li>
                         <li>ChatGPTなら、EXCELファイルをそのままアップロードして解析してくれます。</li>
@@ -716,30 +919,19 @@
                 </div>
                 
                 <div class="tifo-card">
-                    <h3 style="margin-top:0;"><span style="background-color: var(--tifo-primary); color:white; padding: 4px 12px; border-radius: 999px; font-size:1rem; vertical-align:middle; margin-right:8px;">2</span> 指示を考える</h3>
-                    <ul>
-                        <li><strong>レポートに何を入れる？</strong><br>グラフ？ ランキング？ フィルター機能？</li>
-                        <li><strong>誰に見てもらう？（ターゲット）</strong><br>社長？ 行政関係者？ 事業者？ 現場のスタッフ？<br>→ ターゲットによって、必要な見せ方（経営者視点、改善点など）が変わります。</li>
-                    </ul>
+                    <h3 style="margin-top:0;"><span style="background-color: var(--tifo-primary); color:white; padding: 4px 12px; border-radius: 999px; font-size:1rem; vertical-align:middle; margin-right:8px;">B</span> ターゲットを考える</h3>
+                    <p><strong>誰に見てもらう？</strong><br>社長？ 行政関係者？ 事業者？ 現場のスタッフ？</p>
+                    <p>→ ターゲットによって、必要な見せ方（経営者視点、課題の改善点、評価されている点など）が変わります。プロンプトにも「〇〇に見せる用です」と記載しましょう。</p>
                 </div>
             </div>
         </section>
 
         <!-- ==========================================
-             スライド 10: プロンプトの例とTIPS
+             スライド 11: プロンプトの例とTIPS
              ========================================== -->
         <section class="slide">
-            <h2>プロンプトの例とTIPS</h2>
-
-            <div class="highlight-box">
-                <h3 style="margin-top:0;">良いプロンプトの構成要素（TIPS）</h3>
-                <ol>
-                    <li><strong>出力形式：</strong> 「HTMLベースのレポートを作りたい。」</li>
-                    <li><strong>データの説明：</strong> 「石川県の観光アンケートデータです。」</li>
-                    <li><strong>欲しい機能：</strong> 「可能な限りすべてのデータをグラフやランキングでまとめて。属性、満足度、旅の内容などカテゴリ分けして。自由記述はすべて見られるようにして。」</li>
-                    <li><strong>トンマナの指示：</strong> 「全体的に明るいポップな色を使って。」「夏を感じるカラートーンにして。」など。</li>
-                </ol>
-            </div>
+            <h2>プロンプトの例</h2>
+            <p>先ほどの要素を組み合わせた、実践的なプロンプトの例です。</p>
 
             <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
                 <div class="tifo-card" style="border-left: 5px solid #3182CE;">
@@ -762,7 +954,7 @@
         </section>
 
         <!-- ==========================================
-             スライド 11: TIFOのトンマナを適用する
+             スライド 12: TIFOのトンマナを適用する
              ========================================== -->
         <section class="slide">
             <h2>TIFOのトンマナ（デザイン）を適用する裏技</h2>
@@ -831,7 +1023,7 @@
         </section>
 
         <!-- ==========================================
-             スライド 12: ハンズオン実践
+             スライド 13: ハンズオン実践
              ========================================== -->
         <section class="slide">
             <h2>いざ実践！ハンズオン課題</h2>
@@ -846,16 +1038,19 @@
                     <h3 style="margin-top:0; color:var(--tifo-primary-dark);">A班</h3>
                     <p style="font-weight:bold; font-size:1.2rem; border-bottom:2px solid var(--tifo-card-border); padding-bottom:10px;">白山比咩神社</p>
                     <p style="font-size:0.95rem;">【ターゲット】<br>白山市役所・白山市観光連盟に見せる用</p>
+                    <a href="./Milli_hakusanhimejinja.xlsx" download class="tifo-button" style="margin-top:auto; font-size:0.9rem; padding: 0.5rem;">📥 データDL (Excel)</a>
                 </div>
                 <div class="tifo-card">
                     <h3 style="margin-top:0; color:var(--tifo-primary-dark);">B班</h3>
-                    <p style="font-weight:bold; font-size:1.2rem; border-bottom:2px solid var(--tifo-card-border); padding-bottom:10px;">金沢蓄音機館</p>
+                    <p style="font-weight:bold; font-size:1.2rem; border-bottom:2px solid var(--tifo-card-border); padding-bottom:10px;">金沢蓄音器館</p>
                     <p style="font-size:0.95rem;">【ターゲット】<br>館長および施設職員に見せる用</p>
+                    <a href="./Milli_kanazawachikuonkikan.xlsx" download class="tifo-button" style="margin-top:auto; font-size:0.9rem; padding: 0.5rem;">📥 データDL (Excel)</a>
                 </div>
                 <div class="tifo-card">
                     <h3 style="margin-top:0; color:var(--tifo-primary-dark);">C班</h3>
                     <p style="font-weight:bold; font-size:1.2rem; border-bottom:2px solid var(--tifo-card-border); padding-bottom:10px;">和倉温泉お祭り会館</p>
                     <p style="font-size:0.95rem;">【ターゲット】<br>お祭り会館関係者、ななお・なかのとDMOに見せる用</p>
+                    <a href="./Milli_wakuraonsenomatsurikaikan.xlsx" download class="tifo-button" style="margin-top:auto; font-size:0.9rem; padding: 0.5rem;">📥 データDL (Excel)</a>
                 </div>
             </div>
 
@@ -873,7 +1068,7 @@
         </section>
 
         <!-- ==========================================
-             スライド 13: 公開する
+             スライド 14: 公開する
              ========================================== -->
         <section class="slide">
             <h2>作ったレポートを共有・公開する</h2>
@@ -894,10 +1089,42 @@
                     <li>Googleアカウントにログインする。</li>
                     <li><a href="https://sites.google.com/" target="_blank" style="color:var(--tifo-primary-dark); font-weight:bold;">Googleサイト (sites.google.com)</a> にアクセスする。</li>
                     <li>「空白」のサイトを新規作成する。</li>
-                    <li>右側のメニューから「埋め込む」＞「埋め込みコード」を選択。</li>
-                    <li>作成したHTMLコードをすべて貼り付けて挿入する。</li>
+                    <li>右側のメニューから<strong>「ページ」</strong>タブを選択。</li>
+                    <li>下部にある「＋」ボタンにカーソルを合わせ、<strong>「ページ全体の埋め込み」</strong>を選択。</li>
+                    <li>ページ名（例：レポート）を入力し「完了」。</li>
+                    <li><strong>「埋め込みコードを追加」</strong>をクリックし、作成したHTMLコードをすべて貼り付けて挿入する。</li>
                     <li>右上の「公開」ボタンを押し、適切な公開範囲（組織内のみ、など）を設定して公開。</li>
                 </ol>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             スライド 15: GitHub Pages (NEW)
+             ========================================== -->
+        <section class="slide">
+            <h2>【応用編】 GitHub Pages による公開</h2>
+            <p>FTASやTIFOなどは、<strong>GitHub</strong> をベースにアプリを公開しています。</p>
+
+            <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="tifo-card">
+                    <h3 style="margin-top:0; color:var(--tifo-primary-dark);">GitHub とは？</h3>
+                    <p>元々はソースコードを管理・共有するためのサービスですが、<strong>「Pages機能」</strong>を使うことで、Webサイトとして無料でホスティング（公開）することができます。</p>
+                </div>
+                <div class="tifo-card">
+                    <h3 style="margin-top:0; color:var(--tifo-primary-dark);">GitHub Pages のメリット</h3>
+                    <ul style="padding-left: 1.2rem;">
+                        <li>画像の参照や複数のデータファイルの読み込みなど、<strong>複雑な構成のサイトも公開可能</strong>。</li>
+                        <li>完全無料で独自ドメインの設定も可能。</li>
+                        <li>更新履歴（バージョン）の管理が容易。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 2rem; background-color: #EBF8FF; border-left-color: #3182CE;">
+                <h3 style="margin-top:0; color:#2B6CB0; font-size: 1.2rem;">💬 羽生田からのコメント</h3>
+                <p style="margin:0; font-size:1.1rem;">
+                    現状、TIFOは「Code for Noto」のアカウントで運用されていますが、将来的には<strong>石川県観光連盟で1つアカウントを持っておいても良い</strong>と思います！
+                </p>
             </div>
         </section>
 
