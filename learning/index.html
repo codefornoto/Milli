@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>石川県観光連盟バイブコーディング研修</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================
+           TIFO トンマナ & 基本変数
+           ========================================== */
+        :root {
+            --tifo-bg: #F7FAFC;
+            --tifo-text: #2D3748;
+            --tifo-primary: #4FD1C5;
+            --tifo-primary-dark: #38B2AC;
+            --tifo-card-border: #E2E8F0;
+            --tifo-card-bg: #FFFFFF;
+            --tifo-accent: #F6AD55; /* オレンジ系のアクセント */
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--tifo-bg);
+            color: var(--tifo-text);
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* スライドコンテナ内でスクロールさせる */
+        }
+
+        /* ==========================================
+           スライドアプリ全体のレイアウト
+           ========================================== */
+        #app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* ヘッダー */
+        header.app-header {
+            background-color: var(--tifo-card-bg);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+        .header-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--tifo-primary-dark);
+        }
+        .slide-counter {
+            font-weight: bold;
+            color: #A0AEC0;
+        }
+
+        /* スライド表示領域 */
+        main.slide-viewport {
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            padding: 2rem 4rem;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            background-color: var(--tifo-bg);
+        }
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 5;
+        }
+
+        /* フッター（ナビゲーション） */
+        footer.app-footer {
+            background-color: var(--tifo-card-bg);
+            padding: 1rem 2rem;
+            border-top: 1px solid var(--tifo-card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        /* ==========================================
+           共通コンポーネント
+           ========================================== */
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--tifo-primary-dark); }
+        h2 { font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem; border-bottom: 3px solid var(--tifo-primary); padding-bottom: 0.5rem; display: inline-block; }
+        h3 { font-size: 1.4rem; margin-top: 1.5rem; color: #4A5568; }
+        p { line-height: 1.8; font-size: 1.1rem; }
+        ul, ol { line-height: 1.8; font-size: 1.1rem; }
+        li { margin-bottom: 0.5rem; }
+
+        .subtitle { font-size: 1.2rem; color: #718096; margin-bottom: 2rem; font-weight: bold; }
+        .author { font-size: 1.2rem; margin-bottom: 3rem; text-align: right; color: #4A5568; }
+
+        /* TIFO風ボタン */
+        .tifo-button {
+            background-color: var(--tifo-primary);
+            color: white;
+            font-weight: bold;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            border: none;
+            border-bottom: 4px solid var(--tifo-primary-dark);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .tifo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px -3px rgba(79, 209, 197, 0.4);
+        }
+        .tifo-button:active {
+            transform: translateY(2px);
+            border-bottom-width: 2px;
+        }
+        .tifo-button:disabled {
+            background-color: #CBD5E0;
+            border-bottom-color: #A0AEC0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* TIFO風カード */
+        .tifo-card {
+            background-color: var(--tifo-card-bg);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--tifo-card-border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* ハイライトボックス */
+        .highlight-box {
+            background-color: #E6FFFA;
+            border-left: 6px solid var(--tifo-primary);
+            padding: 1.5rem;
+            border-radius: 0 1rem 1rem 0;
+            margin: 2rem 0;
+        }
+
+        .emphasis-box {
+            background-color: #FFF5F5;
+            border: 3px dashed #FC8181;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #C53030;
+            box-shadow: 0 10px 15px -3px rgba(252, 129, 129, 0.2);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* ==========================================
+           コード＆プレビュー スプリットビュー
+           ========================================== */
+        .split-view {
+            display: flex;
+            gap: 1.5rem;
+            height: calc(100vh - 280px); /* スライド内の高さを計算 */
+            margin-top: 1rem;
+        }
+        .split-view > div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        .code-wrapper, .preview-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--tifo-card-border);
+            border-radius: 1rem;
+            overflow: hidden;
+            background: var(--tifo-card-bg);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .code-header, .preview-header {
+            background-color: #EDF2F7;
+            padding: 0.75rem 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--tifo-card-border);
+            color: #4A5568;
+        }
+        .code-body {
+            flex-grow: 1;
+            margin: 0;
+            overflow: auto;
+            background-color: #2D3748;
+            padding: 1rem;
+        }
+        .code-body code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #E2E8F0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            white-space: pre;
+        }
+        .preview-frame {
+            width: 100%;
+            flex-grow: 1;
+            border: none;
+            background-color: white;
+        }
+
+        .copy-btn {
+            background-color: white;
+            border: 1px solid #CBD5E0;
+            color: #4A5568;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            background-color: #E2E8F0;
+        }
+
+        /* ユーティリティ */
+        .text-center { text-align: center; }
+        .mt-4 { margin-top: 1rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        
+        /* スクロールバーのカスタマイズ */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a0aec0; }
+
+    </style>
+</head>
+<body>
+
+<div id="app-container">
+    <!-- ヘッダー -->
+    <header class="app-header">
+        <div class="header-title">💻 石川県観光連盟 バイブコーディング研修</div>
+        <div class="slide-counter"><span id="current-page">1</span> / <span id="total-pages">X</span></div>
+    </header>
+
+    <!-- スライド表示領域 -->
+    <main class="slide-viewport">
+
+        <!-- ==========================================
+             スライド 1: タイトル
+             ========================================== -->
+        <section class="slide active">
+            <div style="display:flex; flex-direction:column; justify-content:center; height:100%; max-width:900px; margin:0 auto;">
+                <h1 style="font-size: 3.5rem; line-height:1.2; margin-bottom: 1rem;">石川県観光連盟<br>バイブコーディング研修</h1>
+                <p class="subtitle" style="font-size: 1.5rem;">6/22(月)</p>
+                
+                <div class="tifo-card" style="margin-bottom: 3rem; background: linear-gradient(135deg, #E6FFFA 0%, #FFFFFF 100%);">
+                    <p style="font-size: 1.4rem; font-weight: bold; color: var(--tifo-primary-dark); margin: 0; text-align:center;">
+                        EXCEL、パワポ、BIツールから卒業。<br>
+                        データ分析レポートアプリを開発して、共有出来るようになろう。
+                    </p>
+                </div>
+
+                <p class="author">講師：石川県データアナリスト 羽生田文登</p>
+                <div class="text-center">
+                    <button class="tifo-button" style="font-size: 1.2rem; padding: 1rem 3rem;" onclick="nextSlide()">研修をはじめる</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             スライド 2: バイブコーディングとは
+             ========================================== -->
+        <section class="slide">
+            <h2>バイブコーディングとは？</h2>
+            
+            <div class="highlight-box">
+                <p style="font-size: 1.2rem; margin:0;">
+                    <strong>バイブコーディング（Vibe Coding）</strong>とは、プログラミングの難しい専門知識がなくても、AI（ChatGPTやGeminiなど）と自然言語で対話しながら、まるで<strong>会話のノリ（バイブス）で直感的にアプリやレポートを開発していく手法</strong>のことです。
+                </p>
+            </div>
+
+            <h3>AIを活用したアプリ・レポートの実例</h3>
+            <p>すでに石川県内でも、バイブコーディングの手法を用いて様々な分析アプリが作られています。</p>
+            
+            <div class="card-grid">
+                <div class="tifo-card">
+                    <h4 style="margin-top:0; color:var(--tifo-primary-dark); font-size:1.2rem;">TIFO</h4>
+                    <p style="font-size:0.95rem;">Milli（石川県観光データ基盤）をもっと見やすく使いやすくしたダッシュボード。</p>
+                    <a href="https://codefornoto.github.io/TIFO/ishikawa/" target="_blank" class="tifo-button" style="padding: 0.5rem 1rem; font-size:0.9rem; margin-top:auto;">サイトを見る</a>
+                </div>
+                <div class="tifo-card">
+                    <h4 style="margin-top:0; color:var(--tifo-primary-dark); font-size:1.2rem;">Milli for Inbound</h4>
+                    <p style="font-size:0.95rem;">石川県のインバウンドマーケティング用の分析アプリ。</p>
+                    <a href="https://codefornoto.github.io/Milli/inbound/" target="_blank" class="tifo-button" style="padding: 0.5rem 1rem; font-size:0.9rem; margin-top:auto;">サイトを見る</a>
+                </div>
+                <div class="tifo-card">
+                    <h4 style="margin-top:0; color:var(--tifo-primary-dark); font-size:1.2rem;">いしかわ動物園分析</h4>
+                    <p style="font-size:0.95rem;">来園者アンケート等のデータを可視化した分析レポート。</p>
+                    <a href="https://beeb-c4n.github.io/Milli/zoo/" target="_blank" class="tifo-button" style="padding: 0.5rem 1rem; font-size:0.9rem; margin-top:auto;">サイトを見る</a>
+                </div>
+                <div class="tifo-card">
+                    <h4 style="margin-top:0; color:var(--tifo-primary-dark); font-size:1.2rem;">白山一里野温泉スキー場</h4>
+                    <p style="font-size:0.95rem;">スキー場の観光アンケートデータの分析レポート。</p>
+                    <a href="https://beeb-c4n.github.io/Milli/ichirino/" target="_blank" class="tifo-button" style="padding: 0.5rem 1rem; font-size:0.9rem; margin-top:auto;">サイトを見る</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             スライド 3: 今日の目標
+             ========================================== -->
+        <section class="slide">
+            <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">本日のゴール</h2>
+                
+                <div class="emphasis-box">
+                    今日はいしかわ動物園・白山一里野温泉などの<br>
+                    分析レポート（Webアプリ）を<br>
+                    自分たちで作れるようになることを目指す！
+                </div>
+                
+                <p style="font-size: 1.3rem; margin-top: 2rem;">
+                    プログラミングをしたことがなくても大丈夫。<br>
+                    AIへの「指示の出し方（プロンプト）」をマスターしましょう。
+                </p>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             スライド 4: HTMLの構成
+             ========================================== -->
+        <section class="slide">
+            <h2>Webアプリを構成する3つの言語</h2>
+            <p>AIに指示を出す前に、Webページが何で出来ているか、ざっくり理解しておきましょう。</p>
+
+            <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="tifo-card" style="border-top: 8px solid #E34F26;">
+                    <h3 style="margin-top:0; color:#E34F26;">HTML</h3>
+                    <p style="font-weight:bold; font-size:1.1rem;">骨組み・構造</p>
+                    <p style="font-size:0.95rem; color:#4A5568;">文章、画像、リンクなど、ページに「何を表示するか」を定義します。家の建築で言えば「柱や壁」です。</p>
+                </div>
+                <div class="tifo-card" style="border-top: 8px solid #1572B6;">
+                    <h3 style="margin-top:0; color:#1572B6;">CSS</h3>
+                    <p style="font-weight:bold; font-size:1.1rem;">装飾・デザイン</p>
+                    <p style="font-size:0.95rem; color:#4A5568;">色、大きさ、配置など、ページを「どう見せるか」を定義します。家の建築で言えば「壁紙や塗装」です。</p>
+                </div>
+                <div class="tifo-card" style="border-top: 8px solid #F7DF1E;">
+                    <h3 style="margin-top:0; color:#B8A000;">JavaScript</h3>
+                    <p style="font-weight:bold; font-size:1.1rem;">動き・機能</p>
+                    <p style="font-size:0.95rem; color:#4A5568;">クリックで開く、データでグラフを描くなど「どう動かすか」を定義します。家の建築で言えば「電気や水道」です。</p>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem; font-weight: bold; font-size: 1.2rem;">
+                今回はこれら3つを <span style="color:var(--tifo-primary-dark);">1つのHTMLファイル</span> にまとめてAIに作ってもらいます。
+            </p>
+        </section>
+
+        <!-- ==========================================
+             スライド 5: Step 1 HTML
+             ========================================== -->
+        <section class="slide">
+            <h2>Step 1：HTMLだけでページを作る</h2>
+            <p>HTML（HyperText Markup Language）は、Webページの<strong>「骨組み・構造」</strong>を作る言語です。</p>
+            <p>まずはデザイン（色やレイアウト）が一切ない、純粋な骨組みだけのページを見てみましょう。コードをコピーしてメモ帳に貼り付け、ブラウザで動作を確認してみてください。</p>
+
+            <div class="split-view">
+                <div>
+                    <div class="code-wrapper">
+                        <div class="code-header">
+                            <span>index.html</span>
+                            <button class="copy-btn" onclick="copyCode(this, 'code-step1')">コードをコピー</button>
+                        </div>
+                        <pre class="code-body"><code id="code-step1" data-preview-target="preview-step1">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;石川県おすすめグルメ特設サイト&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;石川県おすすめグルメ&lt;/h1&gt;
+    &lt;p&gt;石川県の美味しいグルメを紹介します。&lt;/p&gt;
+
+    &lt;h2&gt;おすすめポイント&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt;新鮮な海鮮丼（近江町市場など）&lt;/li&gt;
+        &lt;li&gt;濃厚な金沢カレー&lt;/li&gt;
+        &lt;li&gt;絶品の能登牛&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;button&gt;詳細を見る&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+                </div>
+                <div>
+                    <div class="preview-wrapper">
+                        <div class="preview-header">ブラウザでの表示（プレビュー）</div>
+                        <iframe id="preview-step1" class="preview-frame" sandbox="allow-scripts"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             スライド 6: Step 2 CSS
+             ========================================== -->
+        <section class="slide">
+            <h2>Step 2：CSSでデザインを追加する</h2>
+            <p>CSS（Cascading Style Sheets）は、Webページに<strong>「装飾・デザイン」</strong>を施す言語です。<br>
+            先ほどのHTMLの <code>&lt;head&gt;</code> の中に <code>&lt;style&gt;</code> タグを追加し、デザインします。</p>
+
+            <div class="split-view">
+                <div>
+                    <div class="code-wrapper">
+                        <div class="code-header">
+                            <span>index.html (HTML + CSS)</span>
+                            <button class="copy-btn" onclick="copyCode(this, 'code-step2')">コードをコピー</button>
+                        </div>
+                        <pre class="code-body"><code id="code-step2" data-preview-target="preview-step2">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;石川県おすすめグルメ - CSS版&lt;/title&gt;
+    &lt;style&gt;
+        body { 
+            font-family: sans-serif; 
+            background-color: #f0fdf4;
+            padding: 20px; 
+            color: #333; 
+        }
+        h1 { 
+            color: #0B67B2;
+            border-bottom: 3px solid #0B67B2; 
+        }
+        ul { 
+            background: white; 
+            padding: 20px 40px; 
+            border-radius: 8px; 
+            border-left: 5px solid #69B340;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+        button {
+            background: #F0820F;
+            color: white; font-weight: bold;
+            border: none; padding: 10px 20px;
+            border-radius: 4px; cursor: pointer;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;石川県おすすめグルメ&lt;/h1&gt;
+    &lt;p&gt;石川県の美味しいグルメを紹介します。&lt;/p&gt;
+    &lt;h2&gt;おすすめポイント&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt;新鮮な海鮮丼（近江町市場など）&lt;/li&gt;
+        &lt;li&gt;濃厚な金沢カレー&lt;/li&gt;
+        &lt;li&gt;絶品の能登牛&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;button&gt;詳細を見る&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+                </div>
+                <div>
+                    <div class="preview-wrapper">
+                        <div class="preview-header">ブラウザでの表示（プレビュー）</div>
+                        <iframe id="preview-step2" class="preview-frame" sandbox="allow-scripts"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             スライド 7: Step 3 JavaScript 用語
+             ========================================== -->
+        <section class="slide">
+            <h2>Step 3：JavaScriptで動きをつける（機能紹介）</h2>
+            <p>JavaScript（JS）は、Webページに<strong>「動き・機能」</strong>を追加する言語です。<br>
+            AIに指示を出すためには、実現したい機能の「一般的な名称（専門用語）」を知っておくことが非常に重要です。</p>
+
+            <div class="highlight-box">
+                <h3 style="margin-top:0;">AIへの指示で役立つキーワード</h3>
+                <ul style="font-size: 1.1rem; line-height: 2;">
+                    <li><strong>ハンバーガーメニュー：</strong> スマホ等で三本線（≡）を押すと出てくるメニュー。</li>
+                    <li><strong>モーダルウィンドウ：</strong> 画面の真ん中にポンッと浮き出て、背景が暗くなる小窓。</li>
+                    <li><strong>アコーディオン：</strong> 見出しをクリックすると、ビヨーンと詳細が開閉する仕組み。</li>
+                    <li><strong>カルーセル（スライダー）：</strong> 画像や要素が横にスライドして切り替わる機能。</li>
+                    <li><strong>ドラッグ＆ドロップ：</strong> マウスで要素を掴んで、別の場所に移動させる操作。</li>
+                </ul>
+                <p style="margin-top:20px; font-weight:bold; color:var(--tifo-primary-dark);">
+                    次のページでは、上記の機能をすべて盛り込んだ<strong>「完全版のコード」</strong>を見てみましょう。
+                </p>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             スライド 8: JS実装 統合コード
+             ========================================== -->
+        <section class="slide">
+            <h2>Step 3：JavaScriptで動きをつける（実装編）</h2>
+            <p>HTMLとCSSで作成したベースに、JavaScriptで様々な機能を追加したコードです。<br>右側のプレビューで、各機能（メニュー、アコーディオン、モーダルなど）を実際に触って確認してください。</p>
+
+            <div class="split-view">
+                <div>
+                    <div class="code-wrapper">
+                        <div class="code-header">
+                            <span>index.html (HTML+CSS+JS 完成版)</span>
+                            <button class="copy-btn" onclick="copyCode(this, 'code-step3')">コードをコピー</button>
+                        </div>
+                        <pre class="code-body"><code id="code-step3" data-preview-target="preview-step3">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;石川県おすすめグルメ - 完成版&lt;/title&gt;
+    &lt;style&gt;
+        /* 基本デザイン */
+        body { font-family: sans-serif; background-color: #f0fdf4; margin: 0; color: #333; }
+        .container { padding: 20px; }
+        h1.site-title { color: white; margin: 0; font-size: 1.5rem; }
+        h2 { color: #0B67B2; border-bottom: 2px solid #0B67B2; margin-top: 30px; padding-bottom: 5px; }
+
+        /* ハンバーガーメニュー */
+        header { background: #0B67B2; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .menu-btn { font-size: 24px; cursor: pointer; background: none; border: none; color: white; }
+        nav { display: none; background: #69B340; color: white; padding: 15px 20px; }
+        nav.open { display: block; }
+        nav ul { list-style: none; padding: 0; margin: 0; }
+        nav li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.3); font-weight: bold; }
+
+        /* アコーディオン */
+        .accordion-title { background: white; padding: 15px; cursor: pointer; font-weight: bold; border: 1px solid #69B340; border-radius: 4px; margin-top: 10px; }
+        .accordion-title:hover { background: #eef8f0; }
+        .accordion-content { display: none; background: white; padding: 15px; border: 1px solid #69B340; border-top: none; }
+        .accordion-content.show { display: block; }
+
+        /* モーダル */
+        .btn-detail { background: #F0820F; color: white; font-weight: bold; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-top: 15px; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 100; }
+        .modal-overlay.show { display: flex; }
+        .modal-content { background: white; padding: 30px; border-radius: 8px; max-width: 90%; text-align: center; border-top: 5px solid #F0820F; }
+
+        /* カルーセル */
+        .carousel-wrapper { width: 100%; max-width: 400px; overflow: hidden; border-radius: 8px; margin: 15px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .carousel-track { display: flex; transition: transform 0.4s ease; }
+        .slide-item { min-width: 100%; height: 150px; display: flex; justify-content: center; align-items: center; font-size: 20px; font-weight: bold; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        .controls button { background: #333; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-right: 5px; }
+
+        /* ドラッグ＆ドロップ */
+        .dnd-container { display: flex; gap: 10px; margin-top: 15px; }
+        .drop-box { flex: 1; min-height: 120px; border: 2px dashed #0B67B2; border-radius: 8px; padding: 10px; background: white; }
+        .dnd-item { background: #69B340; color: white; font-weight: bold; padding: 10px; margin-bottom: 5px; border-radius: 4px; cursor: grab; text-align: center; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- ハンバーガーメニュー --&gt;
+    &lt;header&gt;
+        &lt;h1 class="site-title"&gt;石川県おすすめグルメ&lt;/h1&gt;
+        &lt;button class="menu-btn" onclick="toggleMenu()"&gt;≡&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;nav id="myMenu"&gt;
+        &lt;ul&gt;
+            &lt;li&gt;トップページ&lt;/li&gt;
+            &lt;li&gt;海鮮グルメ&lt;/li&gt;
+            &lt;li&gt;ご当地グルメ&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+
+    &lt;div class="container"&gt;
+        &lt;p&gt;石川県の美味しいグルメを紹介します。&lt;/p&gt;
+
+        &lt;!-- アコーディオン --&gt;
+        &lt;h2&gt;おすすめポイント&lt;/h2&gt;
+        &lt;div class="accordion-title" onclick="toggleAcc(this)"&gt;新鮮な海鮮丼を見る ▼&lt;/div&gt;
+        &lt;div class="accordion-content"&gt;近江町市場などで、日本海の新鮮な魚介類が豊富に楽しめます。&lt;/div&gt;
+        
+        &lt;div class="accordion-title" onclick="toggleAcc(this)"&gt;濃厚な金沢カレーを見る ▼&lt;/div&gt;
+        &lt;div class="accordion-content"&gt;ドロッとした濃厚なルーとカツの相性が抜群のご当地カレーです。&lt;/div&gt;
+
+        &lt;!-- モーダル --&gt;
+        &lt;h2&gt;詳細情報&lt;/h2&gt;
+        &lt;button class="btn-detail" onclick="openModal()"&gt;お得なクーポンを見る&lt;/button&gt;
+
+        &lt;!-- カルーセル --&gt;
+        &lt;h2&gt;グルメハイライト&lt;/h2&gt;
+        &lt;div class="carousel-wrapper"&gt;
+            &lt;div class="carousel-track" id="track"&gt;
+                &lt;div class="slide-item" style="background:#0B67B2;"&gt;近江町市場&lt;/div&gt;
+                &lt;div class="slide-item" style="background:#F0820F;"&gt;金沢カレー&lt;/div&gt;
+                &lt;div class="slide-item" style="background:#69B340;"&gt;能登牛&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="controls"&gt;
+            &lt;button onclick="moveSlide(-1)"&gt;前へ&lt;/button&gt;
+            &lt;button onclick="moveSlide(1)"&gt;次へ&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;!-- ドラッグ＆ドロップ --&gt;
+        &lt;h2&gt;食べたいものリスト作成&lt;/h2&gt;
+        &lt;p style="font-size: 14px;"&gt;緑のアイテムを右の箱にドラッグしてください。&lt;/p&gt;
+        &lt;div class="dnd-container"&gt;
+            &lt;div class="drop-box" ondragover="allowDrop(event)" ondrop="drop(event)"&gt;
+                &lt;div class="dnd-item" draggable="true" ondragstart="drag(event)" id="item1"&gt;海鮮丼&lt;/div&gt;
+                &lt;div class="dnd-item" draggable="true" ondragstart="drag(event)" id="item2"&gt;能登牛&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="drop-box" style="border-color:#F0820F;" ondragover="allowDrop(event)" ondrop="drop(event)"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- モーダルの実体 --&gt;
+    &lt;div id="infoModal" class="modal-overlay"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;h3 style="color:#F0820F; margin-top:0;"&gt;グルメフェス開催&lt;/h3&gt;
+            &lt;p&gt;今週末、県内各地のグルメが集結するフェスが開催されます！&lt;/p&gt;
+            &lt;button class="btn-detail" onclick="closeModal()"&gt;閉じる&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        // 1. ハンバーガーメニュー
+        function toggleMenu() { document.getElementById("myMenu").classList.toggle("open"); }
+        
+        // 2. アコーディオン
+        function toggleAcc(element) { element.nextElementSibling.classList.toggle("show"); }
+        
+        // 3. モーダル
+        function openModal() { document.getElementById("infoModal").classList.add("show"); }
+        function closeModal() { document.getElementById("infoModal").classList.remove("show"); }
+        
+        // 4. カルーセル
+        let currentIndex = 0;
+        function moveSlide(direction) {
+            currentIndex += direction;
+            if (currentIndex &lt; 0) currentIndex = 2;
+            if (currentIndex &gt; 2) currentIndex = 0;
+            document.getElementById("track").style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+        
+        // 5. ドラッグ＆ドロップ
+        function allowDrop(ev) { ev.preventDefault(); }
+        function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
+        function drop(ev) {
+            ev.preventDefault();
+            ev.target.appendChild(document.getElementById(ev.dataTransfer.getData("text")));
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+                </div>
+                <div>
+                    <div class="preview-wrapper">
+                        <div class="preview-header">ブラウザでの表示（プレビュー）</div>
+                        <iframe id="preview-step3" class="preview-frame" sandbox="allow-scripts"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             スライド 9: プロンプトを作ろう
+             ========================================== -->
+        <section class="slide">
+            <h2>プロンプトを作ろう（AIへの指示書）</h2>
+            <p>いよいよ分析レポートを作ります。AIにイメージ通りのレポートを作ってもらうためには、<strong>「データ」</strong>と<strong>「的確な指示」</strong>が必要です。</p>
+
+            <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="tifo-card">
+                    <h3 style="margin-top:0;"><span style="background-color: var(--tifo-primary); color:white; padding: 4px 12px; border-radius: 999px; font-size:1rem; vertical-align:middle; margin-right:8px;">1</span> データを用意する</h3>
+                    <ul>
+                        <li>Milliの全データでは処理が重すぎる場合があります。<br>EXCELのフィルター機能などで、施設や期間を絞ることをオススメします。（目安：〜数千件くらい）</li>
+                        <li>ChatGPTなら、EXCELファイルをそのままアップロードして解析してくれます。</li>
+                        <li>うまくいかない時は、EXCELのデータを全選択してコピー＆ペーストでもOKです。</li>
+                    </ul>
+                </div>
+                
+                <div class="tifo-card">
+                    <h3 style="margin-top:0;"><span style="background-color: var(--tifo-primary); color:white; padding: 4px 12px; border-radius: 999px; font-size:1rem; vertical-align:middle; margin-right:8px;">2</span> 指示を考える</h3>
+                    <ul>
+                        <li><strong>レポートに何を入れる？</strong><br>グラフ？ ランキング？ フィルター機能？</li>
+                        <li><strong>誰に見てもらう？（ターゲット）</strong><br>社長？ 行政関係者？ 事業者？ 現場のスタッフ？<br>→ ターゲットによって、必要な見せ方（経営者視点、改善点など）が変わります。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             スライド 10: プロンプトの例とTIPS
+             ========================================== -->
+        <section class="slide">
+            <h2>プロンプトの例とTIPS</h2>
+
+            <div class="highlight-box">
+                <h3 style="margin-top:0;">良いプロンプトの構成要素（TIPS）</h3>
+                <ol>
+                    <li><strong>出力形式：</strong> 「HTMLベースのレポートを作りたい。」</li>
+                    <li><strong>データの説明：</strong> 「石川県の観光アンケートデータです。」</li>
+                    <li><strong>欲しい機能：</strong> 「可能な限りすべてのデータをグラフやランキングでまとめて。属性、満足度、旅の内容などカテゴリ分けして。自由記述はすべて見られるようにして。」</li>
+                    <li><strong>トンマナの指示：</strong> 「全体的に明るいポップな色を使って。」「夏を感じるカラートーンにして。」など。</li>
+                </ol>
+            </div>
+
+            <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="tifo-card" style="border-left: 5px solid #3182CE;">
+                    <h4 style="margin-top:0; color:#3182CE;">例1：一里野温泉（社長に見せる用）</h4>
+                    <p style="background:#EDF2F7; padding:10px; border-radius:8px; font-size:0.95rem; font-family:monospace;">
+                        データは一里野温泉の観光アンケートデータです。<br>
+                        これらのデータをまずは可視化し、自由記述も確認出来るようなHTMLベースのWebアプリを作って。印刷しても綺麗なように。<br>
+                        このレポートアプリは<strong>一里野温泉スキー場の社長さんに見せる</strong>から、<strong>経営者視点</strong>で、改善点・評価されている点なども載せて欲しい。
+                    </p>
+                </div>
+                <div class="tifo-card" style="border-left: 5px solid #38A169;">
+                    <h4 style="margin-top:0; color:#38A169;">例2：いしかわ動物園（行政・職員に見せる用）</h4>
+                    <p style="background:#EDF2F7; padding:10px; border-radius:8px; font-size:0.95rem; font-family:monospace;">
+                        データはいしかわ動物園のアンケートデータです。<br>
+                        これらのデータをまずは可視化し、自由記述も確認出来るようなHTMLベースのWebアプリを作って。印刷しても綺麗なように。<br>
+                        このレポートアプリは<strong>行政関係者、動物園職員に見せる</strong>から、<strong>施設管理者視点</strong>で、改善点・評価されている点なども載せて欲しい。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             スライド 11: TIFOのトンマナを適用する
+             ========================================== -->
+        <section class="slide">
+            <h2>TIFOのトンマナ（デザイン）を適用する裏技</h2>
+            <p>プロンプトの中に、以下のCSSコードをコピペして<strong>「このCSSを使って、TIFOのようなデザインにして」</strong>と指示すると、プロっぽく綺麗なレポートがすぐに出力されます。</p>
+
+            <div class="code-wrapper" style="height: calc(100vh - 280px);">
+                <div class="code-header">
+                    <span>TIFO トンマナ用CSS</span>
+                    <button class="copy-btn" onclick="copyCode(this, 'code-tifo-css')">CSSをコピー</button>
+                </div>
+                <pre class="code-body"><code id="code-tifo-css">&lt;style&gt;
+    :root {
+        --tifo-bg: #F7FAFC;
+        --tifo-text: #2D3748;
+        --tifo-primary: #4FD1C5;
+        --tifo-primary-dark: #38B2AC;
+        --tifo-card-border: #E2E8F0;
+        --tifo-card-bg: #FFFFFF;
+    }
+    body {
+        font-family: 'Noto Sans JP', sans-serif;
+        background-color: var(--tifo-bg);
+        color: var(--tifo-text);
+    }
+    .tifo-card {
+        background-color: var(--tifo-card-bg);
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--tifo-card-border);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .tifo-button {
+        background-color: var(--tifo-primary);
+        color: white;
+        font-weight: bold;
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        border-bottom: 4px solid var(--tifo-primary-dark);
+        transition: all 0.2s ease;
+        border-top: none; border-left: none; border-right: none;
+        cursor: pointer;
+    }
+    .tifo-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px -3px rgba(79, 209, 197, 0.4);
+    }
+    .tifo-button:active {
+        transform: translateY(2px);
+        border-bottom-width: 2px;
+    }
+    .rank-badge {
+        width: 2rem; height: 2rem; border-radius: 50%; display: inline-flex;
+        align-items: center; justify-content: center; font-weight: bold; color: white;
+        flex-shrink: 0;
+    }
+    .rank-1 { background-color: #FFD700; }
+    .rank-2 { background-color: #C0C0C0; }
+    .rank-3 { background-color: #CD7F32; }
+    .rank-4, .rank-5 { background-color: #A9A9A9; }
+    .rank-badge.rank-default { background-color: #A9A9A9; }
+&lt;/style&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             スライド 12: ハンズオン実践
+             ========================================== -->
+        <section class="slide">
+            <h2>いざ実践！ハンズオン課題</h2>
+            
+            <div class="emphasis-box" style="padding: 1rem; margin: 1rem 0; font-size:1.3rem;">
+                以下の施設の分析レポートを作成してください。<br>
+                チーム全員でレポートを作り、最も出来の良いものを採用します！
+            </div>
+
+            <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="tifo-card">
+                    <h3 style="margin-top:0; color:var(--tifo-primary-dark);">A班</h3>
+                    <p style="font-weight:bold; font-size:1.2rem; border-bottom:2px solid var(--tifo-card-border); padding-bottom:10px;">白山比咩神社</p>
+                    <p style="font-size:0.95rem;">【ターゲット】<br>白山市役所・白山市観光連盟に見せる用</p>
+                </div>
+                <div class="tifo-card">
+                    <h3 style="margin-top:0; color:var(--tifo-primary-dark);">B班</h3>
+                    <p style="font-weight:bold; font-size:1.2rem; border-bottom:2px solid var(--tifo-card-border); padding-bottom:10px;">金沢蓄音機館</p>
+                    <p style="font-size:0.95rem;">【ターゲット】<br>館長および施設職員に見せる用</p>
+                </div>
+                <div class="tifo-card">
+                    <h3 style="margin-top:0; color:var(--tifo-primary-dark);">C班</h3>
+                    <p style="font-weight:bold; font-size:1.2rem; border-bottom:2px solid var(--tifo-card-border); padding-bottom:10px;">和倉温泉お祭り会館</p>
+                    <p style="font-size:0.95rem;">【ターゲット】<br>お祭り会館関係者、ななお・なかのとDMOに見せる用</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="margin-top:0;">ハンズオンの手順</h3>
+                <ol>
+                    <li>AIに投げる用のデータを作る（EXCELでフィルタリング等）</li>
+                    <li>プロンプトを作る（ターゲットを意識、CSSも入れる）</li>
+                    <li>AI（ChatGPTなど）に投げて、コードを生成させる</li>
+                    <li>出力されたHTMLコードをコピーして、メモ帳に貼り付ける</li>
+                    <li><strong>「〇〇.html」</strong>という名前で保存する（※ファイルの種類は「すべてのファイル」を選ぶ）</li>
+                    <li>保存したファイルをダブルクリックしてブラウザで開く</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             スライド 13: 公開する
+             ========================================== -->
+        <section class="slide">
+            <h2>作ったレポートを共有・公開する</h2>
+            <p>作成したHTMLファイルは、Googleサイトなどを使えば簡単にチームや外部と共有できます。</p>
+
+            <div style="background-color: #FFF5F5; border-left: 6px solid #E53E3E; padding: 1.5rem; margin-bottom: 2rem;">
+                <h3 style="color:#E53E3E; margin-top:0;">⚠️ セキュリティに関する超重要注意事項</h3>
+                <ul style="color:#C53030; font-weight:bold;">
+                    <li>機密情報（個人情報など）を含む場合は、絶対に一般公開設定にしないこと！</li>
+                    <li>機密情報を含むHTMLを共有する場合は、Googleドライブの「アクセス制限付き共有フォルダ」のリンクや、HTMLファイルそのものを直接送付して共有すること。</li>
+                    <li>個人情報を含まない「オープンデータ」であれば、外部公開可能です。</li>
+                </ul>
+            </div>
+
+            <div class="tifo-card">
+                <h3 style="margin-top:0;">Googleサイトでの公開手順</h3>
+                <ol>
+                    <li>Googleアカウントにログインする。</li>
+                    <li><a href="https://sites.google.com/" target="_blank" style="color:var(--tifo-primary-dark); font-weight:bold;">Googleサイト (sites.google.com)</a> にアクセスする。</li>
+                    <li>「空白」のサイトを新規作成する。</li>
+                    <li>右側のメニューから「埋め込む」＞「埋め込みコード」を選択。</li>
+                    <li>作成したHTMLコードをすべて貼り付けて挿入する。</li>
+                    <li>右上の「公開」ボタンを押し、適切な公開範囲（組織内のみ、など）を設定して公開。</li>
+                </ol>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- フッター（ナビゲーション） -->
+    <footer class="app-footer">
+        <button id="btn-prev" class="tifo-button" onclick="prevSlide()" style="background-color: #A0AEC0; border-bottom-color: #718096;">◀ 前のスライド</button>
+        <div style="font-weight:bold; color:#718096;">左右の矢印キー（← →）でも移動できます</div>
+        <button id="btn-next" class="tifo-button" onclick="nextSlide()">次のスライド ▶</button>
+    </footer>
+</div>
+
+<script>
+    // ==========================================
+    // スライド制御ロジック
+    // ==========================================
+    const slides = document.querySelectorAll('.slide');
+    const totalPagesEl = document.getElementById('total-pages');
+    const currentPageEl = document.getElementById('current-page');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    let currentSlideIndex = 0;
+
+    totalPagesEl.textContent = slides.length;
+
+    function updateSlide() {
+        slides.forEach((slide, index) => {
+            if (index === currentSlideIndex) {
+                slide.classList.add('active');
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+
+        currentPageEl.textContent = currentSlideIndex + 1;
+        
+        // ボタンの無効化制御
+        btnPrev.disabled = currentSlideIndex === 0;
+        btnNext.disabled = currentSlideIndex === slides.length - 1;
+
+        // プレビューiframeの更新 (対象スライドにiframeがある場合のみ)
+        updatePreviews(slides[currentSlideIndex]);
+    }
+
+    function nextSlide() {
+        if (currentSlideIndex < slides.length - 1) {
+            currentSlideIndex++;
+            updateSlide();
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlideIndex > 0) {
+            currentSlideIndex--;
+            updateSlide();
+        }
+    }
+
+    // キーボードナビゲーション
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+            nextSlide();
+        } else if (e.key === 'ArrowLeft') {
+            prevSlide();
+        }
+    });
+
+    // 初期化
+    updateSlide();
+
+    // ==========================================
+    // プレビューとコピー機能
+    // ==========================================
+    function updatePreviews(slide) {
+        const codeBlocks = slide.querySelectorAll('code[data-preview-target]');
+        codeBlocks.forEach(codeBlock => {
+            const targetId = codeBlock.getAttribute('data-preview-target');
+            const iframe = document.getElementById(targetId);
+            if (iframe) {
+                // iframeの中身をコードの内容で上書き
+                iframe.srcdoc = codeBlock.textContent;
+            }
+        });
+    }
+
+    // クリップボードへのコピー関数（フォールバック付き）
+    function copyTextToClipboard(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(text);
+        } else {
+            // iframe/Canvas環境等でnavigator.clipboardが使えない場合のフォールバック
+            let textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            return new Promise((res, rej) => {
+                document.execCommand('copy') ? res() : rej();
+                textArea.remove();
+            });
+        }
+    }
+
+    function copyCode(btnElement, codeId) {
+        const codeText = document.getElementById(codeId).textContent;
+        copyTextToClipboard(codeText).then(() => {
+            const originalText = btnElement.textContent;
+            btnElement.textContent = 'コピーしました！';
+            btnElement.style.backgroundColor = 'var(--tifo-primary)';
+            btnElement.style.color = 'white';
+            
+            setTimeout(() => {
+                btnElement.textContent = originalText;
+                btnElement.style.backgroundColor = '';
+                btnElement.style.color = '';
+            }, 2000);
+        }).catch(err => {
+            console.error('コピーに失敗しました', err);
+            alert('コピーに失敗しました。手動でコピーしてください。');
+        });
+    }
+
+    // 初回ロード時に全てのプレビューを一応更新しておく
+    window.addEventListener('load', () => {
+        slides.forEach(slide => updatePreviews(slide));
+    });
+
+</script>
+</body>
+</html>
