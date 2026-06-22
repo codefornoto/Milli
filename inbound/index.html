@@ -1621,6 +1621,410 @@
             );
         };
 
+
+        // ==========================================
+        // --- 観光案内所対応件数 データとロジック ---
+        // ==========================================
+        const KANAZAWA_JSONP_URL = 'https://docs.google.com/spreadsheets/d/1Omo8Dv2nxzbhmXJJCwjQfhl1yCQId3wkcQYRfMG24sU/gviz/tq?tqx=responseHandler:handleKanazawa';
+        const CHUO_JSONP_URL = 'https://docs.google.com/spreadsheets/d/1-WByy7IdT7Sg-DAqJP2e9e_8DE9Vtyre2gpEcDVDPZw/gviz/tq?tqx=responseHandler:handleChuo';
+
+        const fetchViaJSONP = (url, callbackName) => {
+            return new Promise((resolve, reject) => {
+                window[callbackName] = function(data) {
+                    resolve(data);
+                    delete window[callbackName];
+                    const scriptTag = document.getElementById(callbackName);
+                    if (scriptTag) scriptTag.remove();
+                };
+                const script = document.createElement('script');
+                script.id = callbackName;
+                script.src = url;
+                script.onerror = () => {
+                    reject(new Error('データの取得に失敗しました'));
+                    delete window[callbackName];
+                };
+                document.head.appendChild(script);
+            });
+        };
+
+        const parseGvizJSON = (jsonData) => {
+            if (!jsonData || !jsonData.table) return { headers: [], data: [] };
+            const cols = jsonData.table.cols;
+            const rows = jsonData.table.rows;
+            const headers = cols.map(c => c.label || '').filter(h => h !== '');
+            const data = rows.map(row => {
+                const rowObj = {};
+                row.c.forEach((cell, i) => {
+                    const headerName = cols[i].label;
+                    if (headerName) {
+                        let val = "0";
+                        if (cell !== null && cell !== undefined) {
+                            val = cell.f !== undefined && cell.f !== null ? cell.f : cell.v;
+                            if (val === null || val === undefined) val = "0";
+                        }
+                        rowObj[headerName] = String(val);
+                    }
+                });
+                return rowObj;
+            });
+            return { headers, data };
+        };
+
+        const parseDateString = (dateStr) => {
+            if (!dateStr) return null;
+            const parts = dateStr.split('/');
+            if (parts.length === 3) {
+                const year = parts[0];
+                const month = parts[1].padStart(2, '0');
+                const day = parts[2].padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+            return null;
+        };
+
+        const TouristInfoTab = () => {
+            const [kanazawaRaw, setKanazawaRaw] = React.useState([]);
+            const [chuoRaw, setChuoRaw] = React.useState([]);
+            const [countries, setCountries] = React.useState([]);
+            
+            const [selectedCountry, setSelectedCountry] = React.useState('台湾');
+            const [startDate, setStartDate] = React.useState('2019-01-01');
+            const [endDate, setEndDate] = React.useState('');
+            const [aggregationUnit, setAggregationUnit] = React.useState('monthly');
+            const [hiddenKanazawa, setHiddenKanazawa] = React.useState(false);
+            const [hiddenChuo, setHiddenChuo] = React.useState(false);
+            
+            const [isLoading, setIsLoading] = React.useState(true);
+            const [error, setError] = React.useState(null);
+            const [hasData, setHasData] = React.useState(true);
+
+            const chartRef = React.useRef(null);
+            const chartInstance = React.useRef(null);
+
+            React.useEffect(() => {
+                const loadData = async () => {
+                    try {
+                        const [kDataRaw, cDataRaw] = await Promise.all([
+                            fetchViaJSONP(KANAZAWA_JSONP_URL, 'handleKanazawa'),
+                            fetchViaJSONP(CHUO_JSONP_URL, 'handleChuo')
+                        ]);
+                        
+                        const kData = parseGvizJSON(kDataRaw);
+                        const cData = parseGvizJSON(cDataRaw);
+
+                        const ignoreHeaders = ['日付', '合計'];
+                        const extractedCountries = kData.headers.filter(h => !ignoreHeaders.includes(h) && h.trim() !== '');
+
+                        const totals = {};
+                        extractedCountries.forEach(c => totals[c] = 0);
+                        const addTotals = (dataRow) => {
+                            extractedCountries.forEach(c => {
+                                const val = parseInt(dataRow[c], 10);
+                                if (!isNaN(val)) totals[c] += val;
+                            });
+                        };
+                        kData.data.forEach(addTotals);
+                        cData.data.forEach(addTotals);
+
+                        const sortedCountries = extractedCountries.sort((a, b) => totals[b] - totals[a]);
+                        
+                        setCountries(sortedCountries);
+                        if (sortedCountries.length > 0 && !sortedCountries.includes(selectedCountry)) {
+                            setSelectedCountry(sortedCountries[0]);
+                        }
+                        
+                        setKanazawaRaw(kData.data);
+                        setChuoRaw(cData.data);
+
+                        let maxD = '0000-00-00';
+                        const checkDate = (d) => {
+                            const ds = parseDateString(d['日付']);
+                            if(ds && ds > maxD) maxD = ds;
+                        }
+                        kData.data.forEach(checkDate);
+                        cData.data.forEach(checkDate);
+                        if(maxD !== '0000-00-00') setEndDate(maxD);
+
+                    } catch (err) {
+                        setError('データの取得に失敗しました。');
+                    } finally {
+                        setIsLoading(false);
+                    }
+                };
+                loadData();
+            }, []);
+
+            const resetDates = () => {
+                let minD = '9999-99-99';
+                let maxD = '0000-00-00';
+                const checkDate = (d) => {
+                    const ds = parseDateString(d['日付']);
+                    if (!ds) return;
+                    if (ds < minD) minD = ds;
+                    if (ds > maxD) maxD = ds;
+                };
+                kanazawaRaw.forEach(checkDate);
+                chuoRaw.forEach(checkDate);
+                if (minD !== '9999-99-99') setStartDate(minD);
+                if (maxD !== '0000-00-00') setEndDate(maxD);
+            };
+
+            React.useEffect(() => {
+                if (isLoading || error) return;
+                if (!chartRef.current) return;
+
+                const dateMap = new Map();
+                const processData = (dataArray, keyPrefix) => {
+                    dataArray.forEach(row => {
+                        let dateStr = parseDateString(row['日付']);
+                        if (!dateStr) return;
+                        if (aggregationUnit === 'monthly') {
+                            dateStr = dateStr.substring(0, 7);
+                        }
+                        if (!dateMap.has(dateStr)) {
+                            dateMap.set(dateStr, { date: dateStr, kanazawa: 0, chuo: 0 });
+                        }
+                        const val = parseInt(row[selectedCountry], 10);
+                        const entry = dateMap.get(dateStr);
+                        entry[keyPrefix] += isNaN(val) ? 0 : val;
+                    });
+                };
+
+                processData(kanazawaRaw, 'kanazawa');
+                processData(chuoRaw, 'chuo');
+
+                let mergedArray = Array.from(dateMap.values());
+                mergedArray.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+
+                if (startDate && endDate) {
+                    const sDate = aggregationUnit === 'monthly' ? startDate.substring(0, 7) : startDate;
+                    const eDate = aggregationUnit === 'monthly' ? endDate.substring(0, 7) : endDate;
+                    mergedArray = mergedArray.filter(d => d.date >= sDate && d.date <= eDate);
+                }
+
+                if (mergedArray.length === 0) {
+                    setHasData(false);
+                    if (chartInstance.current) {
+                        chartInstance.current.data.labels = [];
+                        chartInstance.current.data.datasets.forEach(ds => ds.data = []);
+                        chartInstance.current.update();
+                    }
+                    return;
+                }
+                
+                setHasData(true);
+
+                const labels = mergedArray.map(d => d.date);
+                const kanazawaData = mergedArray.map(d => d.kanazawa);
+                const chuoData = mergedArray.map(d => d.chuo);
+
+                if (chartInstance.current) {
+                    chartInstance.current.data.labels = labels;
+                    chartInstance.current.data.datasets[0].data = kanazawaData;
+                    chartInstance.current.data.datasets[1].data = chuoData;
+                    chartInstance.current.data.datasets[0].hidden = hiddenKanazawa;
+                    chartInstance.current.data.datasets[1].hidden = hiddenChuo;
+                    chartInstance.current.update();
+                } else {
+                    const ctx = chartRef.current.getContext('2d');
+                    chartInstance.current = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: '金沢駅',
+                                    data: kanazawaData,
+                                    borderColor: '#4FD1C5',
+                                    backgroundColor: 'rgba(79, 209, 197, 0.1)',
+                                    borderWidth: 3,
+                                    fill: true,
+                                    tension: 0.1,
+                                    pointBackgroundColor: '#38B2AC',
+                                    pointRadius: 2,
+                                    pointHoverRadius: 6,
+                                    hidden: hiddenKanazawa
+                                },
+                                {
+                                    label: '中央観光案内所',
+                                    data: chuoData,
+                                    borderColor: '#F6AD55',
+                                    backgroundColor: 'rgba(246, 173, 85, 0.1)',
+                                    borderWidth: 3,
+                                    fill: true,
+                                    tension: 0.1,
+                                    pointBackgroundColor: '#ED8936',
+                                    pointRadius: 2,
+                                    pointHoverRadius: 6,
+                                    hidden: hiddenChuo
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            interaction: { mode: 'index', intersect: false },
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    backgroundColor: 'rgba(255, 255, 255, 0.98)',
+                                    titleColor: '#2D3748',
+                                    bodyColor: '#2D3748',
+                                    borderColor: '#E2E8F0',
+                                    borderWidth: 1,
+                                    padding: 12,
+                                    boxPadding: 6,
+                                    usePointStyle: true,
+                                    callbacks: {
+                                        label: function(context) {
+                                            let label = context.dataset.label || '';
+                                            if (label) label += ': ';
+                                            if (context.parsed.y !== null) label += context.parsed.y.toLocaleString() + ' 件';
+                                            return label;
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { color: '#718096', callback: function(value) { return value.toLocaleString(); } },
+                                    grid: { color: '#F1F5F9' },
+                                    border: { display: false }
+                                },
+                                x: {
+                                    ticks: { color: '#718096' },
+                                    grid: { display: false },
+                                    border: { display: false }
+                                }
+                            }
+                        }
+                    });
+                }
+            }, [kanazawaRaw, chuoRaw, selectedCountry, startDate, endDate, aggregationUnit, hiddenKanazawa, hiddenChuo, isLoading, error]);
+
+            // Unmount cleanup
+            React.useEffect(() => {
+                return () => {
+                    if (chartInstance.current) {
+                        chartInstance.current.destroy();
+                        chartInstance.current = null;
+                    }
+                };
+            }, []);
+
+            if (isLoading) {
+                return (
+                    <div className="py-20 flex flex-col items-center justify-center text-[var(--tifo-primary)]">
+                        <div className="dot-typing mb-6"><span></span><span></span><span></span></div>
+                        <p className="font-bold text-slate-500">データを読み込んでいます...</p>
+                    </div>
+                );
+            }
+
+            if (error) {
+                return (
+                    <div className="py-20 flex flex-col items-center justify-center">
+                        <div className="tifo-card max-w-md text-center border-t-8 border-t-[var(--tifo-secondary)]">
+                            <i className="fa-solid fa-circle-exclamation text-4xl mb-4 text-[var(--tifo-secondary)]"></i>
+                            <h2 className="text-xl font-black mb-2 text-slate-800">エラーが発生しました</h2>
+                            <p className="text-slate-500 text-sm font-bold">{error}</p>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="space-y-6 animate-fade-in">
+                    <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+                        <div className="text-xs font-bold text-slate-400 mb-2 px-1">分析対象国を選択:</div>
+                        <div className="flex flex-nowrap overflow-x-auto custom-scrollbar pb-3 gap-2">
+                            {countries.map(c => (
+                                <button
+                                    key={c}
+                                    onClick={() => setSelectedCountry(c)}
+                                    className={`flex-shrink-0 px-4 py-2 rounded-full border transition-all font-bold text-sm ${selectedCountry === c ? 'bg-teal-400 text-white border-teal-500 shadow-md' : 'bg-white text-slate-600 border-slate-200 hover:bg-teal-50 hover:border-teal-200'}`}
+                                >
+                                    {c}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        <div className="tifo-card lg:col-span-1 h-fit space-y-8 justify-start">
+                            <div className="space-y-3">
+                                <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
+                                    <i className="fa-solid fa-chart-column text-teal-500"></i> 表示単位
+                                </label>
+                                <div className="flex bg-slate-100 p-1 rounded-xl">
+                                    <button onClick={() => setAggregationUnit('daily')} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${aggregationUnit === 'daily' ? 'bg-white shadow-sm text-slate-800' : 'text-slate-500 hover:text-slate-700'}`}>日次</button>
+                                    <button onClick={() => setAggregationUnit('monthly')} className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${aggregationUnit === 'monthly' ? 'bg-white shadow-sm text-slate-800' : 'text-slate-500 hover:text-slate-700'}`}>月次</button>
+                                </div>
+                            </div>
+
+                            <hr className="border-slate-100" />
+
+                            <div className="space-y-4">
+                                <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
+                                    <i className="fa-regular fa-calendar text-teal-500"></i> 表示期間
+                                </label>
+                                <div className="space-y-3">
+                                    <div>
+                                        <span className="text-xs text-slate-500 mb-1 block">開始日</span>
+                                        <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-full border-2 border-slate-200 rounded-xl p-2.5 text-slate-700 font-medium focus:border-teal-400 outline-none transition-colors bg-white" />
+                                    </div>
+                                    <div className="text-center text-slate-400 font-bold">↓</div>
+                                    <div>
+                                        <span className="text-xs text-slate-500 mb-1 block">終了日</span>
+                                        <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="w-full border-2 border-slate-200 rounded-xl p-2.5 text-slate-700 font-medium focus:border-teal-400 outline-none transition-colors bg-white" />
+                                    </div>
+                                </div>
+                                <button onClick={resetDates} className="w-full mt-2 flex items-center justify-center gap-2 py-2.5 bg-slate-100 text-slate-600 font-bold rounded-full hover:bg-slate-200 transition-colors">
+                                    <i className="fa-solid fa-rotate-right"></i> 全期間にリセット
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="tifo-card lg:col-span-3 min-h-[500px]">
+                            <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div>
+                                    <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+                                        <i className="fa-solid fa-location-dot text-slate-400"></i>
+                                        「{selectedCountry}」の対応件数推移
+                                    </h2>
+                                    <p className="text-sm text-slate-500 mt-1">
+                                        {startDate} 〜 {endDate}
+                                    </p>
+                                </div>
+                                
+                                <div className="flex gap-4 bg-slate-50 p-2 rounded-xl border border-slate-100">
+                                    <button onClick={() => setHiddenKanazawa(!hiddenKanazawa)} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white shadow-sm transition-all ${hiddenKanazawa ? 'opacity-40 grayscale shadow-none bg-transparent' : ''}`}>
+                                        <div className="w-3 h-3 rounded-full bg-teal-400"></div>
+                                        <span className="font-bold text-sm text-slate-700">金沢駅</span>
+                                    </button>
+                                    <button onClick={() => setHiddenChuo(!hiddenChuo)} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white shadow-sm transition-all ${hiddenChuo ? 'opacity-40 grayscale shadow-none bg-transparent' : ''}`}>
+                                        <div className="w-3 h-3 rounded-full bg-orange-400"></div>
+                                        <span className="font-bold text-sm text-slate-700">中央案内所</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="w-full h-[400px] relative">
+                                <canvas ref={chartRef}></canvas>
+                                {!hasData && (
+                                    <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-medium bg-white">
+                                        該当する期間のデータがありません
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+
         // ==========================================
         // --- App コンポーネント (統合) ---
         // ==========================================
@@ -1788,6 +2192,9 @@
                         <button className={`feedback-tab-button ${activeTab === 'kanazawa' ? 'active' : ''}`} onClick={() => setActiveTab('kanazawa')}>
                             <i className="fa-solid fa-chess-rook"></i> 金沢城公園
                         </button>
+                        <button className={`feedback-tab-button ${activeTab === 'touristInfo' ? 'active' : ''}`} onClick={() => setActiveTab('touristInfo')}>
+                            <i className="fa-solid fa-circle-info"></i> 観光案内所
+                        </button>
                         <button className={`feedback-tab-button ${activeTab === 'survey' ? 'active' : ''}`} onClick={() => setActiveTab('survey')}>
                             <i className="fa-solid fa-clipboard-list"></i> アンケート
                         </button>
@@ -1822,6 +2229,9 @@
                                 <ParkDashboard parkType={activeTab} parkData={parkData} />
                             )
                         )}
+
+                        {/* 観光案内所コンテンツ */}
+                        {activeTab === 'touristInfo' && <TouristInfoTab />}
 
                         {/* Surveyコンテンツ */}
                         {activeTab === 'survey' && (
