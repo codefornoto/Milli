@@ -774,6 +774,7 @@
 
                 const labels = sourceData.map(d => `${d.date.getFullYear()}/${d.date.getMonth()+1}`);
                 const chartData = sourceData.map(d => d[targetKey]);
+                const inboundData = sourceData.map(d => d.inboundCount); // インバウンドデータを追加
 
                 if (chartInstance.current) chartInstance.current.destroy();
                 const ctx = chartRef.current.getContext('2d');
@@ -781,17 +782,27 @@
                     type: 'line',
                     data: {
                         labels: labels,
-                        datasets: [{
-                            label: '入園者数',
-                            data: chartData,
-                            borderColor: themeColorHex,
-                            backgroundColor: themeColorHex + '33',
-                            borderWidth: 3, fill: true, tension: 0.4, pointRadius: 2
-                        }]
+                        datasets: [
+                            {
+                                label: '全体入園者数',
+                                data: chartData,
+                                borderColor: themeColorHex,
+                                backgroundColor: themeColorHex + '33',
+                                borderWidth: 3, fill: true, tension: 0.4, pointRadius: 2
+                            },
+                            {
+                                label: 'インバウンド',
+                                data: inboundData,
+                                borderColor: '#ED8936',
+                                backgroundColor: '#ED893633',
+                                borderWidth: 3, fill: true, tension: 0.4, pointRadius: 2
+                            }
+                        ]
                     },
                     options: {
                         responsive: true, maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: { legend: { display: true, position: 'top', align: 'end' } },
                         scales: { y: { beginAtZero: true, ticks: { callback: v => v.toLocaleString() } } }
                     }
                 });
@@ -824,6 +835,7 @@
                 const labels = Object.keys(aggData).sort();
                 const displayLabels = labels.map(key => aggType === 'fiscal' ? `${key}年度` : `${key}年`);
                 const fyData = labels.map(key => aggData[key][targetKey]);
+                const inboundData = labels.map(key => aggData[key].inbound); // インバウンドデータを追加
 
                 if (chartInstance.current) chartInstance.current.destroy();
                 const ctx = chartRef.current.getContext('2d');
@@ -831,11 +843,15 @@
                     type: 'bar',
                     data: {
                         labels: displayLabels,
-                        datasets: [{ label: '入園者数', data: fyData, backgroundColor: themeColorHex, borderRadius: 4 }]
+                        datasets: [
+                            { label: '全体入園者数', data: fyData, backgroundColor: themeColorHex, borderRadius: 4 },
+                            { label: 'インバウンド', data: inboundData, backgroundColor: '#ED8936', borderRadius: 4 }
+                        ]
                     },
                     options: {
                         responsive: true, maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: { legend: { display: true, position: 'top', align: 'end' } },
                         scales: { y: { beginAtZero: true, ticks: { callback: v => v.toLocaleString() } } }
                     }
                 });
