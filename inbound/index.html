@@ -741,15 +741,24 @@
             }).filter(d => !isNaN(d.date.getTime())).sort((a, b) => a.date - b.date);
 
             const yearlyAgg = {};
+            const calendarYearlyAgg = {};
             monthlyData.forEach(row => {
+                // 年度集計 (4月始まり)
                 const fy = getFiscalYear(row.month);
                 if (!yearlyAgg[fy]) yearlyAgg[fy] = { kenrokuen: 0, kanazawa: 0, inbound: 0 };
                 yearlyAgg[fy].kenrokuen += row.kenrokuen;
                 yearlyAgg[fy].kanazawa += row.kanazawa;
                 yearlyAgg[fy].inbound += row.inboundCount;
+
+                // 年別集計 (1月始まり)
+                const cy = row.date.getFullYear();
+                if (!calendarYearlyAgg[cy]) calendarYearlyAgg[cy] = { kenrokuen: 0, kanazawa: 0, inbound: 0 };
+                calendarYearlyAgg[cy].kenrokuen += row.kenrokuen;
+                calendarYearlyAgg[cy].kanazawa += row.kanazawa;
+                calendarYearlyAgg[cy].inbound += row.inboundCount;
             });
 
-            return { monthlyData, yearlyAgg };
+            return { monthlyData, yearlyAgg, calendarYearlyAgg };
         };
 
         // --- Park 用のコンポーネント ---
@@ -803,21 +812,25 @@
             );
         };
 
-        const ParkYearlyChart = ({ yearlyAgg, targetKey, themeColorHex }) => {
+        const ParkYearlyChart = ({ parkData, targetKey, themeColorHex }) => {
             const chartRef = React.useRef(null);
             const chartInstance = React.useRef(null);
+            const [aggType, setAggType] = React.useState('fiscal');
 
             React.useEffect(() => {
-                if (!chartRef.current) return;
-                const fyLabels = Object.keys(yearlyAgg).sort();
-                const fyData = fyLabels.map(fy => yearlyAgg[fy][targetKey]);
+                if (!chartRef.current || !parkData) return;
+                
+                const aggData = aggType === 'fiscal' ? parkData.yearlyAgg : parkData.calendarYearlyAgg;
+                const labels = Object.keys(aggData).sort();
+                const displayLabels = labels.map(key => aggType === 'fiscal' ? `${key}年度` : `${key}年`);
+                const fyData = labels.map(key => aggData[key][targetKey]);
 
                 if (chartInstance.current) chartInstance.current.destroy();
                 const ctx = chartRef.current.getContext('2d');
                 chartInstance.current = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: fyLabels.map(fy => `${fy}年度`),
+                        labels: displayLabels,
                         datasets: [{ label: '入園者数', data: fyData, backgroundColor: themeColorHex, borderRadius: 4 }]
                     },
                     options: {
@@ -827,11 +840,17 @@
                     }
                 });
                 return () => { if (chartInstance.current) chartInstance.current.destroy(); };
-            }, [yearlyAgg, targetKey, themeColorHex]);
+            }, [parkData, targetKey, themeColorHex, aggType]);
 
             return (
                 <div className="tifo-card bg-white border-slate-200">
-                    <h2 className="text-sm font-bold text-slate-700 mb-4 flex items-center gap-2"><i className="fa-solid fa-chart-bar"></i> 年度別 入園者数推移</h2>
+                    <div className="flex flex-wrap justify-between items-center mb-4 gap-4">
+                        <h2 className="text-sm font-bold text-slate-700 flex items-center gap-2"><i className="fa-solid fa-chart-bar"></i> {aggType === 'fiscal' ? '年度別' : '年別'} 入園者数推移</h2>
+                        <div className="flex bg-slate-100 rounded-lg p-1">
+                            <button onClick={() => setAggType('fiscal')} className={`px-3 py-1 text-sm font-bold rounded-md transition-colors ${aggType === 'fiscal' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>年度</button>
+                            <button onClick={() => setAggType('calendar')} className={`px-3 py-1 text-sm font-bold rounded-md transition-colors ${aggType === 'calendar' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>年</button>
+                        </div>
+                    </div>
                     <div className="h-72 relative"><canvas ref={chartRef}></canvas></div>
                 </div>
             );
@@ -1056,28 +1075,37 @@
             );
         };
 
-        const ParkYearlyTable = ({ yearlyAgg, isKenrokuen, targetKey }) => {
-            const fyLabels = Object.keys(yearlyAgg).sort((a, b) => b - a); // 降順
+        const ParkYearlyTable = ({ parkData, isKenrokuen, targetKey }) => {
+            const [aggType, setAggType] = React.useState('fiscal');
+            const aggData = aggType === 'fiscal' ? parkData.yearlyAgg : parkData.calendarYearlyAgg;
+            const labels = Object.keys(aggData).sort((a, b) => b - a); // 降順
+
             return (
                 <div className="tifo-card bg-white border-slate-200">
-                    <h2 className="text-sm font-bold text-slate-700 mb-4 flex items-center gap-2"><i className="fa-solid fa-table"></i> 年度別 データ表</h2>
+                    <div className="flex flex-wrap justify-between items-center mb-4 gap-4">
+                        <h2 className="text-sm font-bold text-slate-700 flex items-center gap-2"><i className="fa-solid fa-table"></i> {aggType === 'fiscal' ? '年度別' : '年別'} データ表</h2>
+                        <div className="flex bg-slate-100 rounded-lg p-1">
+                            <button onClick={() => setAggType('fiscal')} className={`px-3 py-1 text-sm font-bold rounded-md transition-colors ${aggType === 'fiscal' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>年度</button>
+                            <button onClick={() => setAggType('calendar')} className={`px-3 py-1 text-sm font-bold rounded-md transition-colors ${aggType === 'calendar' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>年</button>
+                        </div>
+                    </div>
                     <div className="overflow-x-auto custom-scrollbar max-h-[350px]">
                         <table className="min-w-full text-sm text-left">
                             <thead className="bg-slate-50 text-slate-600 sticky top-0 z-10 shadow-sm">
                                 <tr>
-                                    <th className="py-3 px-4 rounded-tl-lg whitespace-nowrap">年度</th>
+                                    <th className="py-3 px-4 rounded-tl-lg whitespace-nowrap">{aggType === 'fiscal' ? '年度' : '年'}</th>
                                     <th className="py-3 px-4 text-right whitespace-nowrap">入園者数(人)</th>
-                                    <th className="py-3 px-4 text-right whitespace-nowrap">前年度比</th>
+                                    <th className="py-3 px-4 text-right whitespace-nowrap">{aggType === 'fiscal' ? '前年度比' : '前年比'}</th>
                                     {isKenrokuen && <th className="py-3 px-4 text-right rounded-tr-lg whitespace-nowrap">インバウンド(人)</th>}
                                     {!isKenrokuen && <th className="py-3 px-4 rounded-tr-lg"></th>}
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100">
-                                {fyLabels.map((fy, i) => {
-                                    const count = yearlyAgg[fy][targetKey];
+                                {labels.map((key, i) => {
+                                    const count = aggData[key][targetKey];
                                     let compareText = '-';
-                                    if (i < fyLabels.length - 1) { // 降順なので、i+1 が前年度
-                                        const prevCount = yearlyAgg[fyLabels[i+1]][targetKey];
+                                    if (i < labels.length - 1) { // 降順なので、i+1 が前年(度)
+                                        const prevCount = aggData[labels[i+1]][targetKey];
                                         if (prevCount > 0) {
                                             const diff = ((count - prevCount) / prevCount * 100).toFixed(1);
                                             const color = diff > 0 ? '#48BB78' : '#F56565';
@@ -1086,11 +1114,11 @@
                                         }
                                     }
                                     return (
-                                        <tr key={fy} className="hover:bg-slate-50 transition-colors">
-                                            <td className="py-3 px-4 font-bold text-slate-700 whitespace-nowrap">{fy}年度</td>
+                                        <tr key={key} className="hover:bg-slate-50 transition-colors">
+                                            <td className="py-3 px-4 font-bold text-slate-700 whitespace-nowrap">{key}{aggType === 'fiscal' ? '年度' : '年'}</td>
                                             <td className="py-3 px-4 text-right font-medium text-slate-800">{formatNumber(count)}</td>
                                             <td className="py-3 px-4 text-right whitespace-nowrap" dangerouslySetInnerHTML={{__html: compareText}}></td>
-                                            {isKenrokuen && <td className="py-3 px-4 text-right font-medium text-teal-700">{formatNumber(yearlyAgg[fy].inbound)}</td>}
+                                            {isKenrokuen && <td className="py-3 px-4 text-right font-medium text-teal-700">{formatNumber(aggData[key].inbound)}</td>}
                                             {!isKenrokuen && <td></td>}
                                         </tr>
                                     );
@@ -1147,9 +1175,9 @@
                         </div>
                     </div>
                     <ParkMonthlyChart data={monthlyData} targetKey={targetKey} themeColorHex={themeColorHex} />
-                    <ParkYearlyChart yearlyAgg={yearlyAgg} targetKey={targetKey} themeColorHex={themeColorHex} />
+                    <ParkYearlyChart parkData={parkData} targetKey={targetKey} themeColorHex={themeColorHex} />
                     {isKenrokuen && <ParkInboundSection monthlyData={monthlyData} />}
-                    <ParkYearlyTable yearlyAgg={yearlyAgg} isKenrokuen={isKenrokuen} targetKey={targetKey} />
+                    <ParkYearlyTable parkData={parkData} isKenrokuen={isKenrokuen} targetKey={targetKey} />
                 </div>
             );
         };
@@ -2189,9 +2217,6 @@
                         <button className={`feedback-tab-button ${activeTab === 'kenrokuen' ? 'active' : ''}`} onClick={() => setActiveTab('kenrokuen')}>
                             <i className="fa-solid fa-tree"></i> 兼六園
                         </button>
-                        <button className={`feedback-tab-button ${activeTab === 'kanazawa' ? 'active' : ''}`} onClick={() => setActiveTab('kanazawa')}>
-                            <i className="fa-solid fa-chess-rook"></i> 金沢城公園
-                        </button>
                         <button className={`feedback-tab-button ${activeTab === 'touristInfo' ? 'active' : ''}`} onClick={() => setActiveTab('touristInfo')}>
                             <i className="fa-solid fa-circle-info"></i> 観光案内所
                         </button>
@@ -2217,7 +2242,7 @@
                         )}
 
                         {/* Parkコンテンツ */}
-                        {(activeTab === 'kenrokuen' || activeTab === 'kanazawa') && (
+                        {activeTab === 'kenrokuen' && (
                             isParkLoading ? (
                                 <div className="py-20 flex flex-col items-center justify-center">
                                     <div className="w-12 h-12 border-4 border-teal-200 border-t-teal-500 rounded-full animate-spin mb-4"></div>
