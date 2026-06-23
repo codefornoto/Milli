@@ -152,7 +152,7 @@
             Calendar: () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>,
             Plane: () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>,
             Trophy: () => <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>,
-            BarChart: () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>,
+            BarChart: () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>,
             Map: () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
         };
 
@@ -873,7 +873,7 @@
                         const detail = d.foreignDetails.find(fd => fd.country === country);
                         dataCounts.push(detail ? detail.count : 0);
                     });
-                } else {
+                } else if (period === 'fiscal_yearly') {
                     const yearlyAgg = {};
                     filteredData.forEach(d => {
                         const fy = getFiscalYear(d.month);
@@ -883,6 +883,16 @@
                     });
                     const fyLabels = Object.keys(yearlyAgg).sort();
                     fyLabels.forEach(fy => { labels.push(`${fy}年度`); dataCounts.push(yearlyAgg[fy]); });
+                } else if (period === 'calendar_yearly') {
+                    const calendarAgg = {};
+                    filteredData.forEach(d => {
+                        const cy = d.date.getFullYear();
+                        if (!calendarAgg[cy]) calendarAgg[cy] = 0;
+                        const detail = d.foreignDetails.find(fd => fd.country === country);
+                        if (detail) calendarAgg[cy] += detail.count;
+                    });
+                    const cyLabels = Object.keys(calendarAgg).sort();
+                    cyLabels.forEach(cy => { labels.push(`${cy}年`); dataCounts.push(calendarAgg[cy]); });
                 }
 
                 if (chartInstance.current) chartInstance.current.destroy();
@@ -895,7 +905,7 @@
                             label: `${country} (人)`, data: dataCounts,
                             borderColor: '#4FD1C5', backgroundColor: period === 'monthly' ? '#4FD1C533' : '#4FD1C5',
                             borderWidth: period === 'monthly' ? 2 : 0, fill: period === 'monthly', tension: 0.4,
-                            pointRadius: period === 'monthly' ? 2 : 0, borderRadius: period === 'yearly' ? 4 : 0
+                            pointRadius: period === 'monthly' ? 2 : 0, borderRadius: period !== 'monthly' ? 4 : 0
                         }]
                     },
                     options: {
@@ -916,7 +926,8 @@
                         <div className="flex justify-end mb-4">
                             <div className="flex bg-slate-100 rounded-lg p-1">
                                 <button onClick={() => setPeriod('monthly')} className={`px-3 py-1 text-sm font-bold rounded-md transition-colors ${period === 'monthly' ? 'bg-white text-teal-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>月別推移</button>
-                                <button onClick={() => setPeriod('yearly')} className={`px-3 py-1 text-sm font-bold rounded-md transition-colors ${period === 'yearly' ? 'bg-white text-teal-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>年度別推移</button>
+                                <button onClick={() => setPeriod('fiscal_yearly')} className={`px-3 py-1 text-sm font-bold rounded-md transition-colors ${period === 'fiscal_yearly' ? 'bg-white text-teal-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>年度別推移</button>
+                                <button onClick={() => setPeriod('calendar_yearly')} className={`px-3 py-1 text-sm font-bold rounded-md transition-colors ${period === 'calendar_yearly' ? 'bg-white text-teal-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>年別推移</button>
                             </div>
                         </div>
                         <div className="h-72 relative"><canvas ref={chartRef}></canvas></div>
@@ -937,11 +948,30 @@
             const years = [...new Set(monthlyData.map(d => d.date.getFullYear()))];
             
             let targetData = null;
-            if (rankingType === 'yearly') {
+            if (rankingType === 'fiscal_yearly') {
                 let totalKenrokuen = 0, totalInbound = 0;
                 const foreignMap = {};
                 monthlyData.forEach(d => {
                     if (getFiscalYear(d.month) === selectedYear) {
+                        totalKenrokuen += d.kenrokuen;
+                        totalInbound += d.inboundCount;
+                        d.foreignDetails.forEach(fd => {
+                            if (!foreignMap[fd.country]) foreignMap[fd.country] = 0;
+                            foreignMap[fd.country] += fd.count;
+                        });
+                    }
+                });
+                if (totalKenrokuen > 0) {
+                    targetData = {
+                        kenrokuen: totalKenrokuen, inboundCount: totalInbound, inboundIndex: (totalInbound / totalKenrokuen) * 100,
+                        foreignDetails: Object.keys(foreignMap).map(country => ({ country, count: foreignMap[country] })).sort((a, b) => b.count - a.count)
+                    };
+                }
+            } else if (rankingType === 'calendar_yearly') {
+                let totalKenrokuen = 0, totalInbound = 0;
+                const foreignMap = {};
+                monthlyData.forEach(d => {
+                    if (d.date.getFullYear() === selectedYear) {
                         totalKenrokuen += d.kenrokuen;
                         totalInbound += d.inboundCount;
                         d.foreignDetails.forEach(fd => {
@@ -1000,12 +1030,14 @@
                             <select value={selectedYear} onChange={e => setSelectedYear(parseInt(e.target.value))} className="border border-slate-200 rounded p-1 text-sm bg-slate-50 outline-none focus:border-teal-500">
                                 {years.map(y => <option key={y} value={y}>{y}年</option>)}
                             </select>
-                            <select value={rankingType === 'yearly' ? 'yearly' : selectedMonth} onChange={e => {
-                                if (e.target.value === 'yearly') setRankingType('yearly');
+                            <select value={rankingType === 'fiscal_yearly' ? 'fiscal_yearly' : (rankingType === 'calendar_yearly' ? 'calendar_yearly' : selectedMonth)} onChange={e => {
+                                if (e.target.value === 'fiscal_yearly') setRankingType('fiscal_yearly');
+                                else if (e.target.value === 'calendar_yearly') setRankingType('calendar_yearly');
                                 else { setRankingType('monthly'); setSelectedMonth(parseInt(e.target.value)); }
                             }} className="border border-slate-200 rounded p-1 text-sm bg-slate-50 outline-none focus:border-teal-500">
                                 {[1,2,3,4,5,6,7,8,9,10,11,12].map(m => <option key={m} value={m}>{m}月</option>)}
-                                <option value="yearly">年度</option>
+                                <option value="fiscal_yearly">年度</option>
+                                <option value="calendar_yearly">年</option>
                             </select>
                         </div>
                     </div>
