@@ -1,0 +1,1550 @@
+{
+"schema_version": "1.1.0",
+"dataset_type": "jnto_monthly_visitor_arrivals_country_status",
+"report": {
+"source_name_ja": "日本政府観光局（JNTO）",
+"source_name_en": "Japan National Tourism Organization",
+"report_title_ja": "訪日外客数（2026年6月推計値）",
+"published_date": "2026-07-15",
+"data_month": "2026年6月",
+"data_year": 2026,
+"data_month_number": 6,
+"as_of_date": "2026-07-10",
+"primary_comparison": {
+"type": "year_over_year",
+"base_year": 2025,
+"target_year": 2026,
+"label_ja": "前年同月比"
+},
+"notes_ja": [
+"2025年の数値は暫定値、2026年の数値はJNTO推計値である。",
+"6月として過去最高を記録した15市場は、韓国、台湾、ベトナム、インド、豪州、米国、カナダ、メキシコ、英国、フランス、イタリア、スペイン、ロシア、北欧地域、中東地域である。",
+"本資料を引用する際は、出典名を「日本政府観光局（JNTO）」と明示する必要がある。",
+"入力資料: "
+],
+"definition_ja": "訪日外客数は、法務省集計の出入国管理統計に基づき、外国人正規入国者から日本を主たる居住国とする永住者等を除き、寄港地上陸、通過上陸、船舶観光上陸の外国人を加えたもの。駐在員やその家族、留学生等の入国者・再入国者を含み、乗員は含まない。"
+},
+"overall": {
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 3148600,
+"comparison_year": 2025,
+"comparison_value": 3377985,
+"change_pct_vs_comparison_year": -6.8,
+"comparison_type": "year_over_year",
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 21084800,
+"comparison_year": 2025,
+"comparison_value": 21518575,
+"change_pct_vs_comparison_year": -2.0,
+"comparison_type": "year_over_year",
+"data_status": "preliminary_estimate"
+}
+},
+"headline_summary_ja": "2026年6月の訪日外客数は3,148,600人で前年同月比6.8%減となった一方、15市場で6月として過去最高を記録した。2026年1月～6月の累計は21,084,800人で、前年同期比2.0%減となった。",
+"overall_context_ja": [
+"多くの市場で訪日需要が落ち着く時期で、一部市場では航空便の減便や台風による欠航の影響が見られた。",
+"祝日やスクールホリデーに合わせた訪日需要の高まりが見られ、東アジアでは台湾・韓国、東南アジアではインド・ベトナム、欧米豪では米国・北欧地域などで訪日外客数が増加した。",
+"韓国、台湾、ベトナム、インド、豪州、米国、カナダ、メキシコ、英国、フランス、イタリア、スペイン、ロシア、北欧地域、中東地域の15市場で6月として過去最高を記録した。",
+"2026年3月策定の第5次観光立国推進基本計画では、リピーター数を含む旅行者数、旅行消費額、地方部延べ宿泊者数などの政府目標が掲げられている。"
+],
+"common_market_conditions_ja": [
+"多くの市場において円安傾向が継続している。",
+"欧州地域では、ウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が訪日旅行の懸念材料となっている。",
+"2026年6月は台風による航空便の欠航があった。"
+]
+},
+"markets": [
+{
+"market_key": "KR",
+"name_ja": "韓国",
+"name_en": "South Korea",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 787100,
+"comparison_year": 2025,
+"comparison_value": 729860,
+"change_pct_vs_comparison_year": 7.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 25.0,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 5675100,
+"comparison_year": 2025,
+"comparison_value": 4783598,
+"change_pct_vs_comparison_year": 18.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 26.92,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気に加え、前年同月比で航空座席数が増加したことなどにより、訪日外客数は787,100人、前年同月比7.8%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"前年同月比での航空座席数増加"
+],
+"constraints_ja": [
+"前年は祝日による3連休があったが、今年は連休にならなかった"
+],
+"aviation_updates_ja": [
+"前年同月比で航空座席数が増加"
+],
+"demand_events_ja": [
+"前年は祝日による3連休があったが、今年は連休にならなかった"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"record_high",
+"aviation_increase",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "CN",
+"name_ja": "中国",
+"name_en": "China",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 340700,
+"comparison_year": 2025,
+"comparison_value": 798001,
+"change_pct_vs_comparison_year": -57.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 10.82,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 2058200,
+"comparison_year": 2025,
+"comparison_value": 4718540,
+"change_pct_vs_comparison_year": -56.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 9.76,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "中国政府による日本への渡航回避の注意喚起や航空便の減便などの影響により、訪日外客数は340,700人、前年同月比57.3%減となった。",
+"positive_drivers_ja": [
+"端午節が前年の5月末開始から今年は6月中旬となったことによる需要"
+],
+"constraints_ja": [
+"中国政府による日本への渡航回避の注意喚起",
+"航空便の減便"
+],
+"aviation_updates_ja": [
+"航空便の減便"
+],
+"demand_events_ja": [
+"端午節が前年の5月末開始から今年は6月中旬に移動"
+],
+"policy_or_regulation_notes_ja": [
+"中国政府が日本への渡航を避けるよう注意喚起"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"severe_decline",
+"seat_capacity_decline",
+"holiday_effect",
+"regulatory_constraint"
+]
+},
+{
+"market_key": "TW",
+"name_ja": "台湾",
+"name_en": "Taiwan",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 670400,
+"comparison_year": 2025,
+"comparison_value": 585070,
+"change_pct_vs_comparison_year": 14.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 21.29,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 3972200,
+"comparison_year": 2025,
+"comparison_value": 3284799,
+"change_pct_vs_comparison_year": 20.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 18.84,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気に加え、端午節の時期や前年同月比で航空座席数が増加したことなどにより、訪日外客数は670,400人、前年同月比14.6%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"前年同月比での航空座席数増加"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"前年同月比で航空座席数が増加"
+],
+"demand_events_ja": [
+"端午節が前年の5月末開始から今年は6月中旬に移動"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"record_high",
+"aviation_increase",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "HK",
+"name_ja": "香港",
+"name_en": "Hong Kong",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 214300,
+"comparison_year": 2025,
+"comparison_value": 166764,
+"change_pct_vs_comparison_year": 28.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 6.81,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 1298500,
+"comparison_year": 2025,
+"comparison_value": 1271056,
+"change_pct_vs_comparison_year": 2.2,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 6.16,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "端午節の時期や大学生による訪日需要の高まりに加え、前年は日本で地震が発生するとの情報がSNS等で拡散されていた反動もあり、訪日外客数は214,300人、前年同月比28.5%増となった。",
+"positive_drivers_ja": [
+"大学生による訪日需要の高まり",
+"前年の地震情報拡散による需要低下の反動"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"端午節が前年の5月末開始から今年は6月中旬に移動",
+"大学生による訪日需要の高まり"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"前年は日本で地震が発生するとの情報がSNS等で拡散されていた"
+]
+},
+"dashboard_tags": [
+"strong_growth",
+"holiday_effect"
+]
+},
+{
+"market_key": "TH",
+"name_ja": "タイ",
+"name_en": "Thailand",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 48000,
+"comparison_year": 2025,
+"comparison_value": 52059,
+"change_pct_vs_comparison_year": -7.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.52,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 704600,
+"comparison_year": 2025,
+"comparison_value": 680469,
+"change_pct_vs_comparison_year": 3.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 3.34,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気はあるものの、夏場にかけ需要が落ち着く時期であること、航空便の減便や訪中旅行の継続的な人気などの影響により、訪日外客数は48,000人、前年同月比7.8%減となった。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [
+"夏場にかけ訪日需要が落ち着く時期",
+"航空便の減便",
+"訪中旅行の継続的な人気"
+],
+"aviation_updates_ja": [
+"航空便の減便"
+],
+"demand_events_ja": [
+"夏場にかけ訪日需要が落ち着く時期"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"seat_capacity_decline",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "SG",
+"name_ja": "シンガポール",
+"name_en": "Singapore",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 68400,
+"comparison_year": 2025,
+"comparison_value": 68629,
+"change_pct_vs_comparison_year": -0.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.17,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 378700,
+"comparison_year": 2025,
+"comparison_value": 345156,
+"change_pct_vs_comparison_year": 9.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.8,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気はあるものの、祝日の期ずれで需要の一部が5月末に先行したことや訪中旅行の継続的な人気などの影響により、訪日外客数は68,400人、前年同月比0.3%減となった。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [
+"祝日の期ずれにより訪日需要の一部が5月末に先行",
+"訪中旅行の継続的な人気"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"祝日の期ずれにより訪日需要の一部が5月末に先行"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "MY",
+"name_ja": "マレーシア",
+"name_en": "Malaysia",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 29900,
+"comparison_year": 2025,
+"comparison_value": 28106,
+"change_pct_vs_comparison_year": 6.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.95,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 371400,
+"comparison_year": 2025,
+"comparison_value": 323961,
+"change_pct_vs_comparison_year": 14.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.76,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "夏場にかけ需要が落ち着く時期で、スクールホリデーの期ずれや訪中旅行人気の影響はあったものの、継続する訪日旅行人気などにより、訪日外客数は29,900人、前年同月比6.4%増となった。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [
+"夏場にかけ訪日需要が落ち着く時期",
+"スクールホリデーの期ずれ",
+"訪中旅行の継続的な人気"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"夏場にかけ訪日需要が落ち着く時期",
+"スクールホリデーの期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "ID",
+"name_ja": "インドネシア",
+"name_en": "Indonesia",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 52700,
+"comparison_year": 2025,
+"comparison_value": 51462,
+"change_pct_vs_comparison_year": 2.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.67,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 379700,
+"comparison_year": 2025,
+"comparison_value": 335977,
+"change_pct_vs_comparison_year": 13.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.8,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "航空便の運休はあったものの、スクールホリデーや継続する訪日旅行人気などにより、訪日外客数は52,700人、前年同月比2.4%増となった。",
+"positive_drivers_ja": [
+"スクールホリデーによる需要",
+"継続する訪日旅行人気"
+],
+"constraints_ja": [
+"航空便の運休"
+],
+"aviation_updates_ja": [
+"航空便の運休"
+],
+"demand_events_ja": [
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"seat_capacity_decline",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "PH",
+"name_ja": "フィリピン",
+"name_en": "Philippines",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 59900,
+"comparison_year": 2025,
+"comparison_value": 63203,
+"change_pct_vs_comparison_year": -5.2,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.9,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 474300,
+"comparison_year": 2025,
+"comparison_value": 448115,
+"change_pct_vs_comparison_year": 5.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.25,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "夏場にかけ需要が落ち着く時期であるなか、祝日とスクールホリデーの期ずれや航空便の減便などの影響により、訪日外客数は59,900人、前年同月比5.2%減となった。",
+"positive_drivers_ja": [],
+"constraints_ja": [
+"夏場にかけ訪日需要が落ち着く時期",
+"祝日とスクールホリデーの期ずれ",
+"航空便の減便"
+],
+"aviation_updates_ja": [
+"航空便の減便"
+],
+"demand_events_ja": [
+"夏場にかけ訪日需要が落ち着く時期",
+"祝日とスクールホリデーの期ずれ"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"seat_capacity_decline",
+"holiday_effect"
+]
+},
+{
+"market_key": "VN",
+"name_ja": "ベトナム",
+"name_en": "Vietnam",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 56500,
+"comparison_year": 2025,
+"comparison_value": 52935,
+"change_pct_vs_comparison_year": 6.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.79,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 396500,
+"comparison_year": 2025,
+"comparison_value": 364638,
+"change_pct_vs_comparison_year": 8.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.88,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "航空便の減便や訪中旅行人気の影響はあるものの、スクールホリデーやハノイ～静岡間の新規就航などにより、訪日外客数は56,500人、前年同月比6.7%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"スクールホリデーによる需要",
+"ハノイ～静岡間の新規就航"
+],
+"constraints_ja": [
+"航空便の減便",
+"訪中旅行の継続的な人気"
+],
+"aviation_updates_ja": [
+"航空便の減便",
+"ハノイ～静岡間の新規就航（2026年4月）"
+],
+"demand_events_ja": [
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"留学、技能実習等を含むその他客の多い市場である"
+]
+},
+"dashboard_tags": [
+"moderate_growth",
+"record_high",
+"new_route",
+"seat_capacity_decline",
+"holiday_effect"
+]
+},
+{
+"market_key": "IN",
+"name_ja": "インド",
+"name_en": "India",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 36100,
+"comparison_year": 2025,
+"comparison_value": 28623,
+"change_pct_vs_comparison_year": 26.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.15,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 210300,
+"comparison_year": 2025,
+"comparison_value": 171126,
+"change_pct_vs_comparison_year": 22.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.0,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "夏場にかけ需要が落ち着く時期であるものの、複数路線の新規就航・増便やスクールホリデーなどにより、訪日外客数は36,100人、前年同月比26.1%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"複数路線の新規就航・増便",
+"スクールホリデーによる需要"
+],
+"constraints_ja": [
+"夏場にかけ訪日需要が落ち着く時期"
+],
+"aviation_updates_ja": [
+"デリー～成田間の新規就航（2026年1月）",
+"デリー～羽田間の増便",
+"ムンバイ～成田間の増便",
+"ムンバイ～羽田間の新規就航"
+],
+"demand_events_ja": [
+"夏場にかけ訪日需要が落ち着く時期",
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase",
+"new_route",
+"holiday_effect"
+]
+},
+{
+"market_key": "AU",
+"name_ja": "豪州",
+"name_en": "Australia",
+"region_ja": "豪州",
+"region_en": "Australia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 63900,
+"comparison_year": 2025,
+"comparison_value": 59422,
+"change_pct_vs_comparison_year": 7.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.03,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 593300,
+"comparison_year": 2025,
+"comparison_value": 567244,
+"change_pct_vs_comparison_year": 4.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.81,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気に加え、一部州でスクールホリデーが前年より早く6月下旬から始まったことなどにより、訪日外客数は63,900人、前年同月比7.5%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"一部州でスクールホリデーが6月下旬から開始"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"一部州でスクールホリデーが前年の7月上旬から今年は6月下旬開始に前倒し"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"record_high",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "US",
+"name_ja": "米国",
+"name_en": "U.S.A.",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 354500,
+"comparison_year": 2025,
+"comparison_value": 345150,
+"change_pct_vs_comparison_year": 2.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 11.26,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 1821700,
+"comparison_year": 2025,
+"comparison_value": 1701427,
+"change_pct_vs_comparison_year": 7.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 8.64,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気に加え、多くの地域で6月から始まったスクールホリデーなどにより、訪日外客数は354,500人、前年同月比2.7%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"スクールホリデーによる需要"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"多くの地域で6月から始まったスクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"record_high",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "CA",
+"name_ja": "カナダ",
+"name_en": "Canada",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 44000,
+"comparison_year": 2025,
+"comparison_value": 41588,
+"change_pct_vs_comparison_year": 5.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.4,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 362900,
+"comparison_year": 2025,
+"comparison_value": 335402,
+"change_pct_vs_comparison_year": 8.2,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.72,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "6月は需要が落ち着く時期であるものの、継続する訪日旅行人気や6月下旬から始まったスクールホリデーなどにより、訪日外客数は44,000人、前年同月比5.8%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"6月下旬から始まったスクールホリデー"
+],
+"constraints_ja": [
+"6月は訪日需要が落ち着く時期"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"6月は訪日需要が落ち着く時期",
+"6月下旬から始まったスクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"record_high",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "MX",
+"name_ja": "メキシコ",
+"name_en": "Mexico",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 13300,
+"comparison_year": 2025,
+"comparison_value": 13242,
+"change_pct_vs_comparison_year": 0.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.42,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 109600,
+"comparison_year": 2025,
+"comparison_value": 84843,
+"change_pct_vs_comparison_year": 29.2,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.52,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "FIFAワールドカップ2026の自国開催による旅行控えはあったものの、継続する訪日旅行人気などにより、訪日外客数は13,300人、前年同月比0.4%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [
+"FIFAワールドカップ2026の自国開催による旅行控え"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"FIFAワールドカップ2026の自国開催"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"record_high",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "GB",
+"name_ja": "英国",
+"name_en": "United Kingdom",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 36200,
+"comparison_year": 2025,
+"comparison_value": 33525,
+"change_pct_vs_comparison_year": 8.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.15,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 286600,
+"comparison_year": 2025,
+"comparison_value": 271042,
+"change_pct_vs_comparison_year": 5.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.36,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "6月は需要が落ち着く時期であるものの、継続する訪日旅行人気や経由便の多様化などにより、訪日外客数は36,200人、前年同月比8.0%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"経由便の多様化"
+],
+"constraints_ja": [
+"6月は訪日需要が落ち着く時期"
+],
+"aviation_updates_ja": [
+"経由便の多様化"
+],
+"demand_events_ja": [
+"6月は訪日需要が落ち着く時期"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"record_high",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "FR",
+"name_ja": "フランス",
+"name_en": "France",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 28100,
+"comparison_year": 2025,
+"comparison_value": 27105,
+"change_pct_vs_comparison_year": 3.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.89,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 227300,
+"comparison_year": 2025,
+"comparison_value": 209731,
+"change_pct_vs_comparison_year": 8.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.08,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気に加え、若年層を中心とした訪日需要の高まりなどにより、訪日外客数は28,100人、前年同月比3.7%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"若年層を中心とした訪日需要の高まり"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"若年層を中心とした訪日需要の高まり"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"record_high",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "DE",
+"name_ja": "ドイツ",
+"name_en": "Germany",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 20500,
+"comparison_year": 2025,
+"comparison_value": 23912,
+"change_pct_vs_comparison_year": -14.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.65,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 218000,
+"comparison_year": 2025,
+"comparison_value": 202812,
+"change_pct_vs_comparison_year": 7.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.03,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気はあるものの、前年は6月上旬だった祝日が今年は5月下旬となった影響などにより、訪日外客数は20,500人、前年同月比14.3%減となった。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [
+"祝日が前年の6月上旬から今年は5月下旬に移動"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"祝日が前年の6月上旬から今年は5月下旬に移動"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "IT",
+"name_ja": "イタリア",
+"name_en": "Italy",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 21500,
+"comparison_year": 2025,
+"comparison_value": 20126,
+"change_pct_vs_comparison_year": 6.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.68,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 135200,
+"comparison_year": 2025,
+"comparison_value": 136017,
+"change_pct_vs_comparison_year": -0.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.64,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気に加え、6月中旬から始まったスクールホリデーなどにより、訪日外客数は21,500人、前年同月比6.8%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"6月中旬から始まったスクールホリデー"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"6月中旬から始まったスクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"record_high",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "ES",
+"name_ja": "スペイン",
+"name_en": "Spain",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 20500,
+"comparison_year": 2025,
+"comparison_value": 18160,
+"change_pct_vs_comparison_year": 12.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.65,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 106000,
+"comparison_year": 2025,
+"comparison_value": 98261,
+"change_pct_vs_comparison_year": 7.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.5,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気に加え、若年層を中心とした需要の高まりや6月下旬から始まったスクールホリデーなどにより、訪日外客数は20,500人、前年同月比12.9%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"若年層を中心とした訪日需要の高まり",
+"6月下旬から始まったスクールホリデー"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"若年層を中心とした訪日需要の高まり",
+"6月下旬から始まったスクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"record_high",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "RU",
+"name_ja": "ロシア",
+"name_en": "Russia",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 12800,
+"comparison_year": 2025,
+"comparison_value": 11947,
+"change_pct_vs_comparison_year": 7.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.41,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 104400,
+"comparison_year": 2025,
+"comparison_value": 83691,
+"change_pct_vs_comparison_year": 24.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.5,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "ウクライナ侵攻に伴う各国の制裁などの影響が続く一方、経由便の多様化などにより、訪日外客数は12,800人、前年同月比7.1%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"経由便の多様化"
+],
+"constraints_ja": [
+"ウクライナ侵攻に伴う各国の制裁等の影響"
+],
+"aviation_updates_ja": [
+"経由便の多様化"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"record_high",
+"geopolitical_risk"
+]
+},
+{
+"market_key": "NORDIC",
+"name_ja": "北欧地域",
+"name_en": "Nordic Countries",
+"region_ja": "北欧地域",
+"region_en": "Nordic Countries",
+"is_region_aggregate": true,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 22100,
+"comparison_year": 2025,
+"comparison_value": 18326,
+"change_pct_vs_comparison_year": 20.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.7,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 109300,
+"comparison_year": 2025,
+"comparison_value": 94421,
+"change_pct_vs_comparison_year": 15.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.52,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "6月から始まったスクールホリデー、現地での訪日旅行に関する報道増加、ヘルシンキ～羽田間の期間増便などにより、訪日外客数は22,100人、前年同月比20.6%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"スクールホリデーによる需要",
+"訪日旅行に関する現地報道の増加",
+"ヘルシンキ～羽田間の期間増便"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"ヘルシンキ～羽田間の期間増便"
+],
+"demand_events_ja": [
+"6月から始まったスクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"北欧地域はスウェーデン、デンマーク、ノルウェー、フィンランドを指す"
+]
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "ME",
+"name_ja": "中東地域",
+"name_en": "Middle East",
+"region_ja": "中東地域",
+"region_en": "Middle East",
+"is_region_aggregate": true,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 22600,
+"comparison_year": 2025,
+"comparison_value": 17420,
+"change_pct_vs_comparison_year": 29.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.72,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 128200,
+"comparison_year": 2025,
+"comparison_value": 115790,
+"change_pct_vs_comparison_year": 10.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.61,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "6月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "イスラム教の祝日が前年の6月上旬から今年は5月下旬に移った影響はあったものの、継続する訪日旅行人気、一部路線の再開・増便、スクールホリデーなどにより、訪日外客数は22,600人、前年同月比29.7%増となり、6月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"一部路線における航空便の再開・増便",
+"スクールホリデーによる需要"
+],
+"constraints_ja": [
+"イスラム教の祝日が前年の6月上旬から今年は5月下旬に移動"
+],
+"aviation_updates_ja": [
+"一部路線における航空便の再開",
+"一部路線における航空便の増便"
+],
+"demand_events_ja": [
+"イスラム教の祝日が前年の6月上旬から今年は5月下旬に移動",
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"中東地域はイスラエル、トルコ、GCC6か国（サウジアラビア、UAE、バーレーン、オマーン、カタール、クウェート）を指す"
+]
+},
+"dashboard_tags": [
+"strong_growth",
+"record_high",
+"aviation_increase",
+"route_resumption",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "OTHERS",
+"name_ja": "その他",
+"name_en": "Others",
+"region_ja": "その他",
+"region_en": "Others",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-06",
+"current_year": 2026,
+"current_value": 124600,
+"comparison_year": 2025,
+"comparison_value": 123350,
+"change_pct_vs_comparison_year": 1.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 3.96,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-06",
+"current_year": 2026,
+"current_value": 962800,
+"comparison_year": 2025,
+"comparison_value": 890459,
+"change_pct_vs_comparison_year": 8.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 4.57,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": null,
+"positive_drivers_ja": [],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth"
+]
+}
+],
+"dashboard_hints": {
+"primary_metric": "visitor_arrivals.month.current_value",
+"comparison_metric": "visitor_arrivals.month.change_pct_vs_comparison_year",
+"context_metric": "market_context.status_summary_ja",
+"group_by": [
+"region_ja",
+"market_key"
+],
+"suggested_charts": [
+"国・地域別の月次訪日外客数ランキング",
+"国・地域別の前年同月比または2019年同月比",
+"地域別の回復・増減状況",
+"航空便・休暇・規制要因の一覧",
+"過去最高を記録した市場のハイライト"
+]
+},
+"quality_checks": {
+"has_country_table": true,
+"has_market_context": true,
+"missing_context_markets": [
+"OTHERS"
+],
+"warnings": [
+"「その他」は数値表に含まれるが、市場別概況本文がないためmarket_context.status_summary_jaをnullとした。"
+]
+}
+}
