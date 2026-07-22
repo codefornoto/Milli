@@ -1,0 +1,1736 @@
+<!doctype html>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Hokuriku Persona Flow Network</title>
+<style>:root {
+  color-scheme: light dark;
+  background-color: transparent !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --main-surface-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: light-dark(rgb(26 28 31), rgb(255 255 255));
+  --card: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --card-foreground: var(--foreground);
+  --popover: light-dark(rgb(255 255 255), rgb(45 45 45));
+  --popover-foreground: var(--foreground);
+  --primary: light-dark(rgb(51 156 255), rgb(131 195 255));
+  --primary-foreground: light-dark(rgb(255 255 255), rgb(13 13 13));
+  --secondary: light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: light-dark(
+    rgb(26 28 31 / 49.4%),
+    rgb(255 255 255 / 49.8%)
+  );
+  --accent: light-dark(rgb(229 242 255), rgb(13 39 63));
+  --accent-foreground: var(--primary);
+  --destructive: light-dark(rgb(226 85 7), rgb(255 133 73));
+  --border: light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%));
+  --input: light-dark(
+    rgb(26 28 31 / 11.8%),
+    color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+  );
+  --ring: light-dark(rgb(51 156 255), rgb(131 195 255 / 76%));
+  --font-size-base: 14px;
+  --red: light-dark(rgb(186 38 35), rgb(250 66 62));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, "Segoe UI", sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: 10px;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 17'%3E%3Cpath d='M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z'/%3E%3C/svg%3E");
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+  --color-background-primary: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-border-secondary: var(--border);
+}
+
+:root[data-visualize-standalone] {
+  background-color: var(--background) !important;
+}
+
+/* Generic mobile code-block hosts provide light/dark mode but no series palette.
+   AppBlock hosts set all six variables themselves. */
+:root:not([data-app-block-surface]) {
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(#f3883b, #f59a56);
+  --viz-series-3: light-dark(#5dc977, #74d58b);
+  --viz-series-4: light-dark(#eb77b1, #f08fc0);
+  --viz-series-5: light-dark(#9b79ec, #aa91ef);
+  --viz-series-6: light-dark(#3ab9b1, #5acbc2);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html > body {
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+:root:not([data-app-block-surface]) > body {
+  padding: 12px;
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive > .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align="right"]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align="center"]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget > :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* The bundled tooltip runtime owns [data-tooltip]. AppBlock's CSS-only
+   pseudo-tooltip can widen dense grids even while hidden. */
+main [data-tooltip]::after {
+  content: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls > .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls > .form-label > :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--interactive-label-primary-default, var(--primary-foreground));
+  background: var(--interactive-bg-primary-default, var(--foreground));
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(
+    in srgb,
+    var(--interactive-label-primary-default, var(--primary-foreground)) 50%,
+    transparent
+  );
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type="file"] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type="file"]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type="file"]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type="color"] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: "";
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type="radio"] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type="radio"]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: "";
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed="true"],
+    [aria-selected="true"],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed="true"], [aria-selected="true"], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget > svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+</style>
+</head>
+<body>
+<div id="hokuriku-flow-app">
+  <div class="flow-controls viz-controls" aria-label="表示条件">
+    <div class="flow-persona-control">
+      <div class="flow-control-heading">
+        <span>ペルソナを選択</span>
+        <small>カードをクリックすると地図と属性が切り替わります</small>
+      </div>
+      <div id="flow-persona-tabs" class="flow-persona-tabs" role="tablist" aria-label="ペルソナ選択"></div>
+    </div>
+    <label class="form-label flow-threshold" for="flow-threshold">
+      表示する併訪仮説スコア <strong id="flow-threshold-value">15以上</strong>
+      <input id="flow-threshold" class="form-range" type="range" min="5" max="40" step="5" value="15">
+    </label>
+  </div>
+
+  <div class="flow-selected card" aria-live="polite">
+    <div class="flow-persona-intro">
+      <p class="flow-kicker">SELECTED PERSONA</p>
+      <h2 id="flow-persona-name"></h2>
+      <p id="flow-persona-market"></p>
+      <p id="flow-persona-summary"></p>
+    </div>
+    <div class="flow-profile-panel">
+      <div class="flow-profile-grid">
+        <div class="flow-profile-item flow-stay-item"><span>日本旅行全体</span><strong id="flow-persona-trip-nights"></strong><small id="flow-persona-trip-days"></small></div>
+        <div class="flow-profile-item flow-stay-item"><span>金沢を含む石川県</span><strong id="flow-persona-ishikawa-nights"></strong><small>金沢単独の宿泊数は未取得</small></div>
+        <div class="flow-profile-item"><span>主な同伴者</span><strong id="flow-persona-companion"></strong></div>
+        <div class="flow-profile-item flow-spend"><span>消費額中央値〈概算〉</span><strong id="flow-persona-spend"></strong><small>1人あたり・国際航空運賃を除く</small></div>
+      </div>
+      <div class="flow-source-block">
+        <span>主に使う情報源</span>
+        <div id="flow-persona-sources" class="flow-source-chips"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-layout">
+    <div id="flow-map-wrap" class="flow-map-wrap">
+      <svg id="flow-map" role="img" aria-labelledby="flow-map-title flow-map-desc">
+        <title id="flow-map-title">ペルソナ別の中部・北陸広域併訪ネットワーク</title>
+        <desc id="flow-map-desc">同じ旅行で一緒に選ばれやすい地域の組み合わせを、向きのない線と太さで示します。</desc>
+      </svg>
+      <div class="flow-map-legend" aria-label="線の太さの凡例">
+        <span><i class="flow-legend-line flow-thin"></i>スコア10</span>
+        <span><i class="flow-legend-line flow-medium"></i>スコア30</span>
+        <span><i class="flow-legend-line flow-thick"></i>スコア50以上</span>
+      </div>
+    </div>
+
+    <aside class="flow-side card" aria-labelledby="flow-ranking-title">
+      <div class="flow-side-heading">
+        <p class="flow-kicker">CO-VISIT PAIRS</p>
+        <h3 id="flow-ranking-title">強く結びつく併訪地</h3>
+      </div>
+      <ol id="flow-ranking" class="flow-ranking"></ol>
+      <div class="flow-note">
+        <strong>数値の読み方</strong>
+        <p><strong>線に方向はありません。</strong> 訪問順・前後関係はアンケートから判断できないため、「白川郷 ↔ 金沢」のような同一旅行内の併訪関係だけを示しています。スコアは移動確率や実測の遷移率ではなく、併訪回答・属性・旅行日数・地理的近接性をもとに比較用に指数化した仮説値です。</p>
+      </div>
+    </aside>
+  </div>
+
+  <div class="flow-corridor-legend" aria-label="ルートテーマの凡例">
+    <span><i data-color="heritage"></i>歴史・世界遺産</span>
+    <span><i data-color="alpine"></i>山岳・自然</span>
+    <span><i data-color="onsen"></i>温泉・福井</span>
+    <span><i data-color="gateway"></i>広域ゲートウェイ</span>
+  </div>
+  <p class="flow-source">ペルソナ属性はアンケート回答の分布をもとにした代表像です。日本全体の泊数は回答された旅行日数から1日を引いた換算値です。宿泊設問は石川県全体を対象としており、金沢単独の宿泊数は取得していません。消費額は入力揺れが大きいため概算参考値です。</p>
+  <p class="flow-source">県境：国土交通省「国土数値情報 行政区域データ」由来（簡略化）／地点は公開座標をもとに概略表示</p>
+</div>
+
+<style>
+  #hokuriku-flow-app {
+    --tifo-bg: #F7FAFC;
+    --tifo-text: #1A202C;
+    --tifo-primary: #4FD1C5;
+    --tifo-primary-dark: #38B2AC;
+    --tifo-card-border: #E2E8F0;
+    --tifo-card-bg: #FFFFFF;
+    --flow-bg: var(--tifo-bg);
+    --flow-card: var(--tifo-card-bg);
+    --flow-text: var(--tifo-text);
+    --flow-muted: #2D3748;
+    --flow-border: var(--tifo-card-border);
+    --flow-water: #EAF7F6;
+    --flow-land: #FFFFFF;
+    --flow-heritage: var(--tifo-primary-dark);
+    --flow-alpine: #5A67D8;
+    --flow-onsen: #ED8936;
+    --flow-gateway: #805AD5;
+    display: grid;
+    gap: 1rem;
+    color: var(--flow-text);
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--tifo-bg);
+    padding: 0.25rem;
+  }
+  #hokuriku-flow-app * { box-sizing: border-box; }
+  #hokuriku-flow-app p,
+  #hokuriku-flow-app h2,
+  #hokuriku-flow-app h3 { margin: 0; }
+  #hokuriku-flow-app .flow-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.22fr);
+    align-items: end;
+    gap: 1rem;
+  }
+  #hokuriku-flow-app .flow-persona-control { min-width: 0; }
+  #hokuriku-flow-app .flow-control-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--flow-text);
+    font-weight: 600;
+  }
+  #hokuriku-flow-app .flow-control-heading small {
+    color: var(--flow-muted);
+    font-weight: 400;
+  }
+  #hokuriku-flow-app .flow-persona-tabs {
+    display: flex;
+    gap: 0.65rem;
+    min-width: 0;
+    padding: 0.1rem 0.1rem 0.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-color: var(--tifo-primary) #EDF2F7;
+  }
+  #hokuriku-flow-app .flow-persona-button {
+    flex: 0 0 10.75rem;
+    min-height: 4.6rem;
+    padding: 0.7rem 0.8rem 0.6rem;
+    border: 1px solid var(--tifo-card-border);
+    border-bottom: 4px solid #CBD5E0;
+    border-radius: 1rem;
+    background: var(--tifo-card-bg);
+    color: var(--flow-text);
+    text-align: left;
+    cursor: pointer;
+    scroll-snap-align: start;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+  }
+  #hokuriku-flow-app .flow-persona-button:hover {
+    transform: translateY(-2px);
+    border-bottom-color: var(--tifo-primary-dark);
+    box-shadow: 0 6px 12px -3px rgba(79, 209, 197, 0.35);
+  }
+  #hokuriku-flow-app .flow-persona-button[aria-selected="true"] {
+    background: var(--tifo-primary);
+    color: #102A2A;
+    border-color: var(--tifo-primary-dark);
+    border-bottom-color: var(--tifo-primary-dark);
+  }
+  #hokuriku-flow-app .flow-persona-button-code {
+    display: block;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    opacity: 0.82;
+  }
+  #hokuriku-flow-app .flow-persona-button-name {
+    display: block;
+    margin-top: 0.18rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  #hokuriku-flow-app .form-label { display: grid; gap: 0.4rem; }
+  #hokuriku-flow-app .form-select {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--tifo-card-border);
+    border-radius: 0.9rem;
+    background: var(--tifo-card-bg);
+    color: var(--tifo-text);
+  }
+  #hokuriku-flow-app .card,
+  #hokuriku-flow-app .flow-map-wrap {
+    background-color: var(--tifo-card-bg);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--tifo-card-border);
+  }
+  #hokuriku-flow-app .flow-threshold strong { color: var(--flow-text); }
+  #hokuriku-flow-app .flow-selected {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.45fr);
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+  #hokuriku-flow-app .flow-selected h2 { margin-top: 0.2rem; color: var(--flow-text); font-weight: 600; }
+  #hokuriku-flow-app .flow-persona-intro { display: grid; align-content: start; gap: 0.35rem; }
+  #hokuriku-flow-app .flow-persona-intro > p:last-child { margin-top: 0.55rem; color: var(--flow-text); font-weight: 400; line-height: 1.75; }
+  #hokuriku-flow-app #flow-persona-market { color: var(--flow-text); font-weight: 400; }
+  #hokuriku-flow-app .flow-profile-panel {
+    display: grid;
+    gap: 0.9rem;
+    padding: 1rem;
+    border: 1px solid #D7E5E4;
+    border-radius: 1.1rem;
+    background: #F0FBFA;
+  }
+  #hokuriku-flow-app .flow-profile-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+  #hokuriku-flow-app .flow-profile-item {
+    min-width: 0;
+    padding: 0.75rem;
+    border-radius: 0.85rem;
+    background: #FFFFFF;
+    border: 1px solid var(--tifo-card-border);
+  }
+  #hokuriku-flow-app .flow-profile-item span,
+  #hokuriku-flow-app .flow-source-block > span {
+    display: block;
+    color: var(--flow-muted);
+    font-size: 0.76rem;
+    font-weight: 400;
+  }
+  #hokuriku-flow-app .flow-profile-item strong {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--flow-text);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+  #hokuriku-flow-app .flow-spend strong { color: #285E61; font-size: 1.12rem; }
+  #hokuriku-flow-app .flow-profile-item small { display: block; margin-top: 0.15rem; color: var(--flow-text); font-size: 0.67rem; font-weight: 400; }
+  #hokuriku-flow-app .flow-stay-item { border-left: 4px solid var(--tifo-primary-dark); }
+  #hokuriku-flow-app .flow-source-block { display: grid; gap: 0.45rem; }
+  #hokuriku-flow-app .flow-source-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  #hokuriku-flow-app .flow-source-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.85rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 9999px;
+    background: #FFFFFF;
+    border: 1px solid #BEE3E0;
+    color: #234E52;
+    font-size: 0.78rem;
+    font-weight: 400;
+  }
+  #hokuriku-flow-app .flow-kicker {
+    color: var(--flow-heritage);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+  #hokuriku-flow-app .flow-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(15rem, 1fr);
+    gap: 1rem;
+    align-items: stretch;
+  }
+  #hokuriku-flow-app .flow-map-wrap {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    background: var(--flow-water);
+    padding: 0;
+  }
+  #hokuriku-flow-app #flow-map {
+    display: block;
+    width: 100%;
+  }
+  #hokuriku-flow-app .flow-prefecture {
+    fill: var(--flow-land);
+    stroke: var(--flow-border);
+    stroke-width: 1.2;
+    vector-effect: non-scaling-stroke;
+  }
+  #hokuriku-flow-app .flow-pref-label {
+    fill: #2D3748;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-anchor: middle;
+    pointer-events: none;
+  }
+  #hokuriku-flow-app .flow-link {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+  #hokuriku-flow-app .flow-link-label {
+    fill: var(--flow-text);
+    font-weight: 600;
+    paint-order: stroke;
+    stroke: var(--flow-card);
+    stroke-linejoin: round;
+    stroke-width: 4px;
+    text-anchor: middle;
+    pointer-events: none;
+  }
+  #hokuriku-flow-app .flow-node-halo { fill: color-mix(in srgb, var(--flow-heritage) 18%, transparent); }
+  #hokuriku-flow-app .flow-node {
+    fill: var(--flow-card);
+    stroke: var(--flow-text);
+    stroke-width: 1.6;
+    vector-effect: non-scaling-stroke;
+  }
+  #hokuriku-flow-app .flow-node-label {
+    fill: var(--flow-text);
+    font-weight: 500;
+    paint-order: stroke;
+    stroke: var(--flow-card);
+    stroke-linejoin: round;
+    stroke-width: 4px;
+    pointer-events: none;
+  }
+  #hokuriku-flow-app .flow-map-legend {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    padding: 0.45rem 0.65rem;
+    background: color-mix(in srgb, var(--flow-card) 92%, transparent);
+    color: var(--flow-muted);
+  }
+  #hokuriku-flow-app .flow-map-legend span,
+  #hokuriku-flow-app .flow-corridor-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  #hokuriku-flow-app .flow-legend-line { display: inline-block; width: 1.8rem; border-top: solid var(--flow-heritage); border-radius: 9999px; }
+  #hokuriku-flow-app .flow-thin { border-top-width: 2px; }
+  #hokuriku-flow-app .flow-medium { border-top-width: 6px; }
+  #hokuriku-flow-app .flow-thick { border-top-width: 11px; }
+  #hokuriku-flow-app .flow-side { display: flex; flex-direction: column; min-width: 0; color: var(--flow-text); }
+  #hokuriku-flow-app .flow-side h3 { color: var(--flow-text); font-weight: 600; }
+  #hokuriku-flow-app .flow-ranking {
+    display: grid;
+    gap: 0.8rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  #hokuriku-flow-app .flow-ranking li { display: grid; gap: 0.25rem; }
+  #hokuriku-flow-app .flow-ranking-row { display: flex; justify-content: space-between; gap: 0.75rem; }
+  #hokuriku-flow-app .flow-ranking-row strong { color: var(--flow-text) !important; font-weight: 500; }
+  #hokuriku-flow-app .flow-ranking-row span { color: var(--flow-text) !important; font-weight: 500; white-space: nowrap; }
+  #hokuriku-flow-app .flow-ranking li { color: var(--flow-text); }
+  #hokuriku-flow-app .flow-ranking-track { height: 0.5rem; overflow: hidden; border-radius: 9999px; background: var(--muted, #EDF2F7); }
+  #hokuriku-flow-app .flow-ranking-fill { height: 100%; border-radius: inherit; }
+  #hokuriku-flow-app .flow-note { margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--flow-border); }
+  #hokuriku-flow-app .flow-note strong { color: var(--flow-text); font-weight: 600; }
+  #hokuriku-flow-app .flow-note p { margin-top: 0.35rem; color: var(--flow-text); font-weight: 400; line-height: 1.75; }
+  #hokuriku-flow-app .flow-corridor-legend { display: flex; flex-wrap: wrap; gap: 0.9rem; color: var(--flow-muted); }
+  #hokuriku-flow-app .flow-corridor-legend i { display: inline-block; width: 0.75rem; height: 0.75rem; border-radius: 50%; }
+  #hokuriku-flow-app .flow-corridor-legend i[data-color="heritage"] { background: var(--flow-heritage); }
+  #hokuriku-flow-app .flow-corridor-legend i[data-color="alpine"] { background: var(--flow-alpine); }
+  #hokuriku-flow-app .flow-corridor-legend i[data-color="onsen"] { background: var(--flow-onsen); }
+  #hokuriku-flow-app .flow-corridor-legend i[data-color="gateway"] { background: var(--flow-gateway); }
+  #hokuriku-flow-app .flow-source { margin-top: -0.4rem; color: var(--flow-text); font-weight: 400; line-height: 1.65; }
+  @media (max-width: 820px) {
+    #hokuriku-flow-app .flow-controls,
+    #hokuriku-flow-app .flow-selected,
+    #hokuriku-flow-app .flow-layout { grid-template-columns: 1fr; }
+    #hokuriku-flow-app .flow-note { margin-top: 1rem; }
+    #hokuriku-flow-app .flow-profile-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 520px) {
+    #hokuriku-flow-app .flow-map-legend { position: static; }
+    #hokuriku-flow-app .flow-corridor-legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script>
+(() => {
+  const root = document.getElementById("hokuriku-flow-app");
+  if (!root) return;
+
+  const prefectures = {"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"富山県"},"geometry":{"type":"MultiPolygon","coordinates":[[[[137.7113,36.9441],[137.7205,36.9267],[137.7135,36.8914],[137.7341,36.8688],[137.7301,36.8264],[137.7493,36.8096],[137.7543,36.7966],[137.7495,36.7802],[137.7634,36.7682],[137.7518,36.7511],[137.7593,36.7407],[137.7508,36.7266],[137.75,36.7047],[137.7619,36.6662],[137.7535,36.6578],[137.7546,36.6391],[137.7442,36.6175],[137.7531,36.5935],[137.7479,36.5869],[137.7243,36.5865],[137.6877,36.5621],[137.6846,36.5378],[137.7106,36.5357],[137.7028,36.5247],[137.7055,36.5179],[137.6943,36.5107],[137.6774,36.5144],[137.6687,36.5095],[137.6668,36.4938],[137.652,36.4882],[137.6554,36.4592],[137.6399,36.4458],[137.6365,36.4284],[137.6081,36.4194],[137.6054,36.4025],[137.5924,36.3897],[137.5409,36.3914],[137.5042,36.4257],[137.4741,36.4254],[137.4608,36.4122],[137.4097,36.4247],[137.3952,36.4364],[137.3962,36.4505],[137.3899,36.4599],[137.3615,36.4501],[137.3586,36.4368],[137.3512,36.4329],[137.3384,36.4339],[137.3186,36.4244],[137.305,36.4358],[137.3178,36.4512],[137.317,36.4608],[137.3085,36.4638],[137.2985,36.4582],[137.2785,36.465],[137.2564,36.4511],[137.2476,36.462],[137.2056,36.4276],[137.1917,36.4552],[137.1748,36.4501],[137.1607,36.4566],[137.1323,36.4346],[137.122,36.4172],[137.1115,36.4154],[137.1019,36.3992],[137.0919,36.3965],[137.0949,36.384],[137.0787,36.3843],[137.0595,36.3735],[137.0622,36.3661],[137.0489,36.3455],[137.0587,36.3425],[137.0515,36.3281],[137.0376,36.3174],[137.0197,36.3183],[137.0126,36.2931],[136.9862,36.2863],[136.9753,36.2744],[136.9577,36.2779],[136.9733,36.3099],[136.9549,36.3394],[136.9075,36.3608],[136.8901,36.3456],[136.8748,36.3428],[136.8757,36.3501],[136.8696,36.3507],[136.8763,36.3579],[136.8712,36.3675],[136.8651,36.3497],[136.8372,36.3472],[136.8425,36.3327],[136.8324,36.3068],[136.7911,36.3006],[136.7847,36.3438],[136.8082,36.3587],[136.8001,36.3703],[136.7951,36.4013],[136.7698,36.415],[136.7687,36.4288],[136.7967,36.4447],[136.7882,36.4527],[136.7983,36.4615],[136.7956,36.4749],[136.8028,36.485],[136.794,36.497],[136.7951,36.5108],[136.8172,36.5524],[136.8024,36.5688],[136.791,36.5696],[136.7953,36.5848],[136.7831,36.6168],[136.7848,36.6285],[136.7999,36.6364],[136.8006,36.6466],[136.8238,36.6702],[136.8206,36.6839],[136.8101,36.6864],[136.8156,36.7005],[136.7892,36.719],[136.7961,36.7296],[136.8199,36.7306],[136.822,36.7403],[136.8393,36.7452],[136.849,36.759],[136.8527,36.7703],[136.8432,36.7825],[136.8541,36.795],[136.848,36.8099],[136.86,36.8291],[136.8564,36.8398],[136.8672,36.8509],[136.8624,36.8603],[136.883,36.8768],[136.879,36.9063],[136.8956,36.9247],[136.9156,36.9308],[136.931,36.9506],[136.9538,36.9561],[136.9737,36.9443],[136.9869,36.9673],[137.0051,36.9611],[137.0377,36.9671],[137.0517,36.9592],[137.0274,36.94],[137.0326,36.9239],[137.0255,36.9141],[136.9934,36.8794],[136.9851,36.8773],[136.9884,36.8631],[136.9933,36.8632],[136.989,36.8628],[136.991,36.854],[137.0568,36.8016],[137.0579,36.8064],[137.0693,36.8017],[137.0641,36.7976],[137.0823,36.7844],[137.1142,36.782],[137.1079,36.7793],[137.1136,36.7746],[137.0939,36.7756],[137.0974,36.7714],[137.0926,36.7697],[137.1121,36.7679],[137.109,36.7631],[137.1306,36.7568],[137.1344,36.7606],[137.1183,36.7665],[137.1189,36.7842],[137.1411,36.7728],[137.1379,36.7695],[137.1838,36.7574],[137.2257,36.7654],[137.2283,36.7616],[137.2344,36.7654],[137.2291,36.7669],[137.3011,36.7557],[137.3335,36.7624],[137.3477,36.7811],[137.393,36.8075],[137.3921,36.8237],[137.4112,36.8478],[137.4089,36.8601],[137.4187,36.8741],[137.4186,36.8933],[137.4145,36.8897],[137.4089,36.8973],[137.4258,36.925],[137.4908,36.9543],[137.5746,36.9641],[137.5875,36.9748],[137.635,36.9798],[137.6666,36.9502],[137.6877,36.9431],[137.7113,36.9441]]]]}},{"type":"Feature","properties":{"name":"石川県"},"geometry":{"type":"MultiPolygon","coordinates":[[[[136.3441,36.173],[136.329,36.2033],[136.3323,36.2298],[136.317,36.2347],[136.3153,36.2459],[136.3012,36.2582],[136.2668,36.2651],[136.2642,36.2783],[136.2563,36.2797],[136.2586,36.2893],[136.2429,36.2969],[136.2752,36.3188],[136.2994,36.3524],[136.3135,36.3519],[136.3454,36.3648],[136.4125,36.4159],[136.4775,36.4901],[136.5624,36.5732],[136.5855,36.5987],[136.5809,36.6075],[136.5861,36.601],[136.5922,36.6154],[136.6068,36.6217],[136.6036,36.6281],[136.6116,36.64],[136.6275,36.6468],[136.6749,36.7085],[136.728,36.7961],[136.7526,36.8489],[136.7677,36.9033],[136.7653,36.9198],[136.7556,36.9211],[136.7579,36.9246],[136.7549,36.9203],[136.7495,36.9312],[136.7618,36.9439],[136.7565,36.9533],[136.7631,36.9528],[136.768,36.9617],[136.7695,36.9984],[136.743,37.0124],[136.7466,37.0302],[136.7402,37.0299],[136.7338,37.0495],[136.7191,37.0589],[136.7179,37.0784],[136.7279,37.0828],[136.7213,37.0863],[136.7296,37.0981],[136.7274,37.1353],[136.7096,37.1487],[136.7001,37.1493],[136.7,37.1388],[136.685,37.136],[136.6855,37.1408],[136.6764,37.1381],[136.6695,37.1472],[136.6767,37.1655],[136.6759,37.1893],[136.6823,37.1949],[136.6797,37.207],[136.7016,37.2236],[136.7051,37.2311],[136.6996,37.2424],[136.7209,37.2559],[136.7339,37.2795],[136.7343,37.2897],[136.7248,37.2929],[136.7276,37.3052],[136.7212,37.3204],[136.7387,37.3378],[136.7372,37.3477],[136.7488,37.3432],[136.7564,37.3504],[136.7505,37.3572],[136.7565,37.3649],[136.7824,37.3682],[136.791,37.3777],[136.8017,37.3762],[136.8432,37.4007],[136.872,37.4074],[136.8926,37.4013],[136.8985,37.4071],[136.9033,37.3975],[136.925,37.3951],[137.0089,37.4305],[137.0293,37.4327],[137.0459,37.4504],[137.0728,37.4555],[137.0934,37.4719],[137.0939,37.4791],[137.1445,37.499],[137.2103,37.5061],[137.2203,37.5164],[137.2335,37.5165],[137.2389,37.5235],[137.2443,37.5195],[137.2465,37.5261],[137.2753,37.5334],[137.2824,37.527],[137.3281,37.5291],[137.3288,37.5194],[137.3461,37.5154],[137.3434,37.5107],[137.3517,37.5014],[137.3402,37.4827],[137.3575,37.4649],[137.3605,37.4507],[137.311,37.4366],[137.2993,37.4429],[137.2827,37.4415],[137.2643,37.4348],[137.2656,37.4291],[137.2595,37.4328],[137.2534,37.4281],[137.2377,37.3789],[137.2489,37.3541],[137.2662,37.358],[137.2616,37.3451],[137.2525,37.3404],[137.2677,37.3366],[137.247,37.3075],[137.2389,37.3029],[137.2302,37.3116],[137.2352,37.3058],[137.2291,37.3036],[137.2365,37.3016],[137.2283,37.3009],[137.234,37.2947],[137.215,37.2981],[137.212,37.2936],[137.2045,37.2955],[137.2081,37.302],[137.1951,37.2979],[137.164,37.3048],[137.1648,37.2989],[137.156,37.2971],[137.158,37.3026],[137.1511,37.3067],[137.1545,37.2952],[137.1438,37.2989],[137.0982,37.2785],[137.0903,37.2621],[137.0943,37.2564],[137.0762,37.2454],[137.0679,37.2316],[137.0695,37.2179],[137.0578,37.2079],[137.0256,37.2047],[137.0338,37.1956],[137.0252,37.1876],[137.0174,37.1914],[137.0109,37.1833],[136.9828,37.2053],[136.9711,37.201],[136.9669,37.2092],[136.9653,37.2035],[136.9572,37.2086],[136.9541,37.2198],[136.946,37.2163],[136.9668,37.2341],[136.9479,37.2333],[136.9432,37.2243],[136.9244,37.2338],[136.9323,37.2205],[136.9194,37.2206],[136.916,37.2278],[136.9063,37.2179],[136.9234,37.2144],[136.9285,37.2026],[136.9256,37.1986],[136.9244,37.2058],[136.9154,37.2],[136.9063,37.2032],[136.9129,37.1944],[136.8732,37.1457],[136.8797,37.1353],[136.8861,37.1444],[136.9007,37.1361],[136.8929,37.1108],[136.8832,37.1151],[136.8805,37.1096],[136.8674,37.1112],[136.8654,37.0975],[136.8719,37.0872],[136.8592,37.0761],[136.8878,37.0683],[136.8899,37.0744],[136.9021,37.0741],[136.9074,37.0894],[136.9344,37.0871],[136.9437,37.0836],[136.9353,37.0789],[136.9368,37.071],[136.9625,37.0673],[136.9557,37.0572],[136.9727,37.0469],[136.9762,37.0532],[136.9856,37.048],[136.994,37.0513],[136.9885,37.0564],[137.0011,37.0623],[136.9952,37.0598],[137.0052,37.0571],[137.0074,37.0629],[137.0007,37.0647],[137.007,37.0766],[137.0116,37.0735],[137.0116,37.087],[137.0218,37.1015],[137.0577,37.1089],[137.0495,37.1012],[137.0545,37.075],[137.0456,37.0377],[137.0519,37.0217],[137.0463,37.011],[137.0538,36.9948],[137.0503,36.9762],[137.0566,36.9677],[137.0517,36.9592],[137.0377,36.9671],[137.0051,36.9611],[136.9869,36.9673],[136.9737,36.9443],[136.948,36.9554],[136.931,36.9506],[136.9156,36.9308],[136.8956,36.9247],[136.879,36.9063],[136.883,36.8768],[136.8624,36.8603],[136.8672,36.8509],[136.8564,36.8398],[136.86,36.8291],[136.8488,36.8132],[136.8541,36.7947],[136.8431,36.7823],[136.8527,36.7703],[136.8492,36.7592],[136.8393,36.7452],[136.822,36.7403],[136.8199,36.7306],[136.7961,36.7296],[136.7892,36.719],[136.8156,36.7005],[136.8101,36.6864],[136.8226,36.681],[136.8238,36.6697],[136.8006,36.6466],[136.7999,36.6364],[136.7848,36.6285],[136.7831,36.6168],[136.7953,36.5848],[136.791,36.5696],[136.8024,36.5688],[136.8172,36.5521],[136.7951,36.5108],[136.794,36.497],[136.8028,36.485],[136.7956,36.4749],[136.7983,36.4615],[136.7882,36.4527],[136.7967,36.4447],[136.7696,36.4309],[136.7684,36.4235],[136.7702,36.4147],[136.7951,36.4013],[136.8001,36.3703],[136.8082,36.3587],[136.7847,36.3438],[136.7911,36.3006],[136.8146,36.2664],[136.8337,36.2658],[136.8518,36.2471],[136.821,36.2107],[136.8226,36.2015],[136.8023,36.1874],[136.7984,36.1726],[136.7664,36.1626],[136.7735,36.1572],[136.78,36.1342],[136.7562,36.0991],[136.7547,36.0868],[136.6623,36.0676],[136.6513,36.0922],[136.6149,36.1082],[136.6017,36.1295],[136.5632,36.1446],[136.5598,36.1532],[136.5107,36.1461],[136.488,36.1591],[136.4642,36.1376],[136.4406,36.1373],[136.4245,36.1543],[136.4143,36.1566],[136.4093,36.1722],[136.3583,36.1651],[136.3441,36.173]]],[[[136.9016,37.1522],[136.9081,37.1492],[136.9114,37.155],[136.9241,37.147],[136.9248,37.1302],[136.9404,37.1462],[136.9489,37.1387],[136.9636,37.1469],[136.977,37.14],[136.9669,37.1483],[136.9675,37.1553],[136.9784,37.1468],[136.9865,37.151],[136.9889,37.1423],[137.0049,37.1352],[137.0087,37.143],[137.0221,37.1424],[137.0344,37.1679],[137.0465,37.1633],[137.0543,37.1487],[137.0412,37.1404],[137.0503,37.1293],[137.0411,37.1171],[137.0217,37.1112],[137.0077,37.1153],[137.0072,37.1208],[137.0048,37.1121],[136.9955,37.1184],[136.9756,37.0969],[136.9635,37.1042],[136.9458,37.091],[136.9404,37.1143],[136.9208,37.1244],[136.917,37.1326],[136.9062,37.1336],[136.9016,37.1522]]],[[[136.9131,37.8445],[136.9157,37.853],[136.9243,37.8552],[136.9131,37.8445]]]]}},{"type":"Feature","properties":{"name":"福井県"},"geometry":{"type":"MultiPolygon","coordinates":[[[[136.8323,35.8593],[136.8251,35.8454],[136.802,35.8437],[136.7958,35.8088],[136.7874,35.7985],[136.776,35.7988],[136.7744,35.8067],[136.7639,35.8106],[136.7411,35.8011],[136.7234,35.8082],[136.71,35.792],[136.677,35.7933],[136.6577,35.7835],[136.6452,35.8068],[136.6379,35.7973],[136.6266,35.7968],[136.6221,35.7868],[136.5991,35.7985],[136.5707,35.7774],[136.5449,35.7788],[136.5228,35.7882],[136.5059,35.7503],[136.4857,35.7765],[136.4309,35.775],[136.3767,35.7952],[136.3465,35.776],[136.3279,35.7751],[136.3184,35.7511],[136.3252,35.7436],[136.324,35.7167],[136.3118,35.712],[136.3095,35.7035],[136.2918,35.6905],[136.2989,35.6777],[136.2807,35.6586],[136.2344,35.6825],[136.2126,35.6817],[136.1983,35.6897],[136.1911,35.7025],[136.1514,35.6984],[136.1345,35.6694],[136.1502,35.6594],[136.1599,35.6252],[136.1768,35.5983],[136.1664,35.5825],[136.1698,35.5659],[136.1212,35.5762],[136.1138,35.5829],[136.1054,35.5556],[136.1065,35.529],[136.0829,35.5406],[136.0694,35.5263],[136.0486,35.5345],[136.0265,35.5295],[136.0288,35.5234],[136.0043,35.491],[135.9895,35.4927],[135.9812,35.4866],[135.9726,35.5002],[135.9524,35.5062],[135.947,35.5205],[135.9396,35.5205],[135.9159,35.4709],[135.9098,35.447],[135.9142,35.4321],[135.893,35.4198],[135.8906,35.4032],[135.8647,35.3944],[135.8543,35.4008],[135.8532,35.4115],[135.8137,35.4133],[135.8075,35.3854],[135.7909,35.3866],[135.7907,35.3788],[135.7596,35.3531],[135.7447,35.359],[135.7359,35.351],[135.7184,35.3554],[135.7009,35.3437],[135.6421,35.3669],[135.6364,35.3637],[135.6151,35.3711],[135.6111,35.3668],[135.5955,35.3729],[135.5881,35.3683],[135.5791,35.3751],[135.5299,35.379],[135.5258,35.4204],[135.5108,35.4246],[135.502,35.42],[135.4953,35.4261],[135.4979,35.4374],[135.4882,35.4391],[135.4861,35.4486],[135.4709,35.454],[135.4583,35.4683],[135.4704,35.4891],[135.4762,35.4894],[135.4762,35.5055],[135.4494,35.526],[135.4605,35.5485],[135.4866,35.5579],[135.4688,35.5303],[135.4814,35.5353],[135.4809,35.5219],[135.4906,35.5306],[135.4928,35.5229],[135.502,35.5241],[135.5028,35.5333],[135.5099,35.5346],[135.4943,35.5387],[135.5022,35.5424],[135.4991,35.5538],[135.5163,35.5513],[135.5172,35.5264],[135.5073,35.5057],[135.5144,35.496],[135.5361,35.4889],[135.5519,35.4973],[135.557,35.4903],[135.5738,35.4928],[135.6034,35.5153],[135.6191,35.5194],[135.632,35.5378],[135.6614,35.5476],[135.6634,35.543],[135.6572,35.5433],[135.6662,35.5386],[135.6595,35.535],[135.6695,35.5246],[135.6558,35.5312],[135.631,35.5222],[135.6417,35.5194],[135.6372,35.5131],[135.6422,35.508],[135.6269,35.4887],[135.5922,35.4946],[135.581,35.4901],[135.6473,35.4782],[135.6624,35.4937],[135.6817,35.4873],[135.7009,35.4945],[135.7139,35.4832],[135.7209,35.4922],[135.7386,35.4953],[135.741,35.4994],[135.734,35.5008],[135.7492,35.5138],[135.752,35.5324],[135.7626,35.5305],[135.7648,35.5354],[135.7387,35.5359],[135.7332,35.5241],[135.7179,35.5198],[135.7168,35.5407],[135.6886,35.5463],[135.7146,35.5699],[135.7499,35.5666],[135.7571,35.5433],[135.77,35.5439],[135.7659,35.5573],[135.7933,35.5415],[135.786,35.5345],[135.7984,35.525],[135.8048,35.5331],[135.8072,35.5276],[135.8153,35.5295],[135.8127,35.5377],[135.8333,35.5355],[135.826,35.5519],[135.8014,35.5713],[135.8077,35.5698],[135.8113,35.5774],[135.8373,35.5622],[135.8553,35.579],[135.8576,35.5893],[135.8524,35.5918],[135.8535,35.6031],[135.8279,35.6074],[135.8389,35.6209],[135.8238,35.6241],[135.8236,35.6313],[135.8331,35.6309],[135.8226,35.6375],[135.8148,35.6321],[135.8146,35.6422],[135.8461,35.6355],[135.8437,35.6264],[135.8592,35.6237],[135.8568,35.6149],[135.8676,35.6081],[135.8851,35.6178],[135.8936,35.6117],[135.8949,35.6212],[135.907,35.6253],[135.9123,35.6101],[135.9263,35.6102],[135.9389,35.6144],[135.9513,35.6279],[135.95,35.6339],[135.9623,35.6225],[135.9743,35.6247],[135.9861,35.6425],[135.9746,35.6547],[135.9632,35.6572],[135.9689,35.6692],[135.9653,35.6743],[135.9772,35.6854],[135.976,35.696],[135.9707,35.7121],[135.9606,35.7052],[135.9659,35.7067],[135.9662,35.7011],[135.9558,35.703],[135.9596,35.7162],[135.9542,35.7218],[135.9679,35.7356],[135.9811,35.7331],[136.0175,35.7641],[136.0325,35.7507],[136.0376,35.7388],[136.024,35.75],[136.0225,35.7452],[136.0384,35.7267],[136.0377,35.7098],[136.0443,35.7055],[136.0442,35.6911],[136.0329,35.6927],[136.0255,35.6803],[136.0419,35.6706],[136.0458,35.6577],[136.0726,35.661],[136.058,35.6644],[136.0743,35.6674],[136.0743,35.6781],[136.0634,35.6795],[136.0861,35.6847],[136.0785,35.7033],[136.0924,35.711],[136.0987,35.7258],[136.0965,35.7356],[136.0857,35.7392],[136.0999,35.7467],[136.1001,35.7786],[136.0706,35.8246],[135.9937,35.8876],[135.9974,35.9348],[135.9577,35.9825],[135.9638,35.9973],[135.9856,36.0089],[136.0106,36.0333],[136.0082,36.0435],[136.0163,36.049],[136.0306,36.0864],[136.0278,36.0958],[136.0484,36.1095],[136.0547,36.1291],[136.0933,36.153],[136.0904,36.1605],[136.1143,36.1926],[136.1124,36.2053],[136.1144,36.1927],[136.1288,36.1916],[136.1343,36.2047],[136.1263,36.1984],[136.1186,36.2005],[136.135,36.2222],[136.1252,36.2367],[136.131,36.2421],[136.1222,36.2491],[136.1486,36.2555],[136.1604,36.2498],[136.175,36.2537],[136.2429,36.2953],[136.2586,36.2893],[136.2563,36.2797],[136.2642,36.2783],[136.2668,36.2651],[136.3012,36.2582],[136.3153,36.2459],[136.317,36.2347],[136.3323,36.2298],[136.3279,36.2088],[136.3357,36.1849],[136.358,36.1651],[136.4093,36.1722],[136.4143,36.1566],[136.4245,36.1543],[136.4406,36.1373],[136.4566,36.1363],[136.488,36.1591],[136.5107,36.1461],[136.5598,36.1532],[136.5632,36.1446],[136.6017,36.1295],[136.6149,36.1082],[136.6513,36.0922],[136.6623,36.0676],[136.7552,36.0859],[136.765,36.0694],[136.7328,36.0489],[136.7357,36.0323],[136.7267,35.9959],[136.7523,35.9886],[136.7529,35.9565],[136.7932,35.946],[136.7839,35.9257],[136.8137,35.9109],[136.8238,35.8928],[136.819,35.8817],[136.8323,35.8593]]]]}},{"type":"Feature","properties":{"name":"長野県"},"geometry":{"type":"MultiPolygon","coordinates":[[[[137.5787,35.1985],[137.5787,35.2194],[137.5526,35.2403],[137.546,35.2532],[137.5579,35.2652],[137.5558,35.2745],[137.5708,35.2829],[137.5564,35.2955],[137.5566,35.3094],[137.6039,35.3332],[137.5985,35.379],[137.5774,35.3904],[137.5752,35.4],[137.6181,35.3917],[137.6348,35.4009],[137.632,35.4107],[137.6215,35.4124],[137.6155,35.4306],[137.593,35.447],[137.6182,35.4678],[137.6318,35.47],[137.6244,35.4938],[137.6316,35.5099],[137.6078,35.5333],[137.6024,35.5307],[137.5739,35.5447],[137.5721,35.5612],[137.5641,35.5686],[137.5713,35.5842],[137.5376,35.5845],[137.5138,35.608],[137.5266,35.6343],[137.5384,35.6386],[137.5454,35.6511],[137.5354,35.6658],[137.4972,35.6885],[137.4976,35.6981],[137.4857,35.706],[137.4852,35.7247],[137.4666,35.7412],[137.4648,35.7564],[137.4526,35.7634],[137.4402,35.7586],[137.4344,35.771],[137.4235,35.7752],[137.3933,35.7777],[137.397,35.7854],[137.3918,35.7986],[137.3376,35.7982],[137.325,35.8167],[137.3358,35.844],[137.3611,35.8462],[137.3676,35.8607],[137.3644,35.8789],[137.3808,35.8924],[137.4349,35.9055],[137.4583,35.8894],[137.4765,35.8942],[137.4842,35.9161],[137.5036,35.9399],[137.5245,35.9425],[137.5326,35.9616],[137.542,35.9666],[137.5435,35.9829],[137.5757,35.9955],[137.5948,36.0129],[137.5979,36.0424],[137.6137,36.0596],[137.614,36.0764],[137.5968,36.0758],[137.578,36.0851],[137.5549,36.1055],[137.5502,36.1129],[137.5606,36.1302],[137.5547,36.1402],[137.5951,36.172],[137.5909,36.1859],[137.5951,36.1907],[137.5786,36.1975],[137.5731,36.2187],[137.583,36.2204],[137.6147,36.2648],[137.6478,36.2891],[137.6531,36.3047],[137.6454,36.3417],[137.6355,36.3425],[137.618,36.3651],[137.5871,36.372],[137.5867,36.388],[137.6054,36.4025],[137.6081,36.4194],[137.6365,36.4284],[137.6399,36.4458],[137.6554,36.4592],[137.652,36.4882],[137.6668,36.4938],[137.6687,36.5095],[137.6774,36.5144],[137.6943,36.5107],[137.7055,36.5179],[137.7028,36.5247],[137.7106,36.5357],[137.6846,36.5378],[137.6877,36.5621],[137.7243,36.5865],[137.751,36.5885],[137.7442,36.6175],[137.7546,36.6391],[137.7535,36.6578],[137.7619,36.666],[137.75,36.7047],[137.7508,36.7266],[137.7593,36.7407],[137.7521,36.7527],[137.7674,36.7705],[137.7848,36.7743],[137.7933,36.7867],[137.8306,36.8077],[137.8316,36.8194],[137.854,36.8402],[137.8582,36.8531],[137.8765,36.8662],[137.8778,36.8733],[137.8687,36.8773],[137.8616,36.8911],[137.8716,36.9011],[137.8621,36.9077],[137.8681,36.9159],[137.8933,36.91],[137.9206,36.92],[137.9485,36.9128],[137.9579,36.9028],[137.9696,36.9108],[138.0137,36.904],[138.0157,36.8931],[138.0312,36.8913],[138.0325,36.881],[138.0137,36.8605],[138.0202,36.8424],[138.0035,36.8264],[138.0289,36.8171],[138.0338,36.8088],[138.0515,36.8076],[138.0538,36.8],[138.0707,36.8053],[138.0816,36.8301],[138.1124,36.8495],[138.169,36.8451],[138.2034,36.8571],[138.2138,36.8711],[138.235,36.8637],[138.2547,36.87],[138.2716,36.8555],[138.2718,36.8426],[138.2876,36.8457],[138.2961,36.8558],[138.2885,36.869],[138.2994,36.8867],[138.2903,36.8968],[138.2963,36.9108],[138.3176,36.9252],[138.3432,36.9208],[138.3576,36.9336],[138.3694,36.9639],[138.3823,36.9764],[138.3787,36.9804],[138.3947,36.9972],[138.4314,37.0061],[138.4551,37.0196],[138.4907,37.0199],[138.5141,37.0297],[138.525,37.0303],[138.5365,37.0209],[138.5659,37.0213],[138.5759,36.9963],[138.5868,36.988],[138.5829,36.9287],[138.5921,36.9253],[138.5888,36.914],[138.5964,36.907],[138.621,36.9041],[138.6178,36.8919],[138.6254,36.8824],[138.6355,36.8834],[138.6574,36.868],[138.6813,36.8655],[138.6932,36.8548],[138.6902,36.8327],[138.6796,36.8211],[138.6958,36.8079],[138.6867,36.7903],[138.669,36.7788],[138.6727,36.7704],[138.6882,36.7656],[138.6959,36.7385],[138.6222,36.7204],[138.6109,36.7064],[138.5957,36.7145],[138.5839,36.7012],[138.5598,36.707],[138.521,36.694],[138.514,36.6904],[138.5199,36.6891],[138.518,36.6768],[138.5346,36.6656],[138.5288,36.6546],[138.4901,36.6412],[138.4731,36.644],[138.4586,36.6344],[138.455,36.6139],[138.4416,36.6107],[138.4413,36.5997],[138.4266,36.5945],[138.4203,36.574],[138.4284,36.5687],[138.4288,36.5562],[138.4124,36.5415],[138.4128,36.5293],[138.4039,36.5213],[138.406,36.5074],[138.397,36.4895],[138.4033,36.4669],[138.4007,36.4355],[138.457,36.4202],[138.4597,36.4048],[138.489,36.4009],[138.4952,36.414],[138.5389,36.4025],[138.555,36.4178],[138.5924,36.4244],[138.6372,36.4172],[138.6478,36.4093],[138.6496,36.3792],[138.6572,36.3689],[138.6501,36.3525],[138.6533,36.3244],[138.6478,36.3156],[138.6535,36.3031],[138.6445,36.2933],[138.6003,36.2784],[138.606,36.2668],[138.6021,36.2491],[138.6125,36.2409],[138.6117,36.2296],[138.6222,36.2146],[138.6347,36.2137],[138.6367,36.2043],[138.6228,36.1969],[138.6363,36.1721],[138.6132,36.1687],[138.6095,36.1614],[138.5944,36.1657],[138.5906,36.1779],[138.5833,36.1788],[138.5773,36.1681],[138.5932,36.1532],[138.6008,36.1355],[138.6343,36.1339],[138.6454,36.1202],[138.6402,36.1172],[138.6476,36.1066],[138.6452,36.0988],[138.6305,36.0912],[138.6428,36.0687],[138.6442,36.0498],[138.6319,36.0272],[138.6614,36.0164],[138.6619,36.0116],[138.6796,36.0117],[138.6887,35.9918],[138.713,35.985],[138.7142,35.9655],[138.7393,35.9391],[138.729,35.9092],[138.7081,35.9098],[138.6858,35.8939],[138.6762,35.8698],[138.6575,35.8759],[138.6342,35.8701],[138.6109,35.8736],[138.605,35.8938],[138.6123,35.9092],[138.591,35.9198],[138.5766,35.9114],[138.5555,35.9191],[138.5291,35.9145],[138.5106,35.9223],[138.4947,35.9113],[138.4901,35.8964],[138.4717,35.8962],[138.4601,35.9036],[138.4546,35.8998],[138.4443,35.9179],[138.4544,35.9386],[138.4447,35.9502],[138.3705,35.9714],[138.3599,35.9507],[138.345,35.9413],[138.3422,35.926],[138.3265,35.9033],[138.2836,35.8593],[138.2515,35.885],[138.2387,35.8829],[138.2047,35.8281],[138.2057,35.8157],[138.1856,35.7955],[138.1912,35.7845],[138.2059,35.7827],[138.2369,35.758],[138.1801,35.7145],[138.1936,35.6969],[138.1933,35.6723],[138.2187,35.6445],[138.2033,35.632],[138.2061,35.6082],[138.1895,35.5768],[138.1844,35.5731],[138.1709,35.5824],[138.1621,35.5813],[138.1414,35.5551],[138.1542,35.5535],[138.1594,35.5449],[138.1383,35.5222],[138.1463,35.5186],[138.1396,35.5011],[138.1647,35.4936],[138.1584,35.4868],[138.1569,35.46],[138.1198,35.4534],[138.1204,35.4301],[138.1397,35.4227],[138.1348,35.4078],[138.1531,35.3972],[138.1413,35.3696],[138.1181,35.3662],[138.097,35.3543],[138.0961,35.3397],[138.0844,35.3379],[138.0612,35.3471],[138.0262,35.3204],[138.0277,35.3116],[138.0198,35.3016],[137.9921,35.3017],[137.9824,35.2924],[137.9737,35.2932],[137.9666,35.2827],[137.9293,35.2755],[137.9184,35.2543],[137.8954,35.258],[137.8825,35.2481],[137.8849,35.2362],[137.8723,35.2188],[137.8474,35.2219],[137.8381,35.2125],[137.8215,35.2156],[137.7791,35.2028],[137.7677,35.2069],[137.768,35.2185],[137.7597,35.2221],[137.7234,35.2216],[137.7216,35.2309],[137.6815,35.2352],[137.6541,35.2269],[137.6446,35.209],[137.6149,35.2105],[137.5787,35.1985]]]]}},{"type":"Feature","properties":{"name":"岐阜県"},"geometry":{"type":"MultiPolygon","coordinates":[[[[137.6454,36.3417],[137.6524,36.322],[137.6478,36.2891],[137.6147,36.2648],[137.583,36.2204],[137.5731,36.2187],[137.5786,36.1975],[137.5951,36.1907],[137.5909,36.1859],[137.5951,36.172],[137.5547,36.1402],[137.5606,36.1302],[137.5502,36.1129],[137.5734,36.0877],[137.5968,36.0758],[137.614,36.0764],[137.6137,36.0596],[137.5979,36.0424],[137.5948,36.0129],[137.5757,35.9955],[137.5435,35.9829],[137.542,35.9666],[137.5326,35.9616],[137.5245,35.9425],[137.5036,35.9399],[137.4842,35.9161],[137.4765,35.8942],[137.4583,35.8894],[137.4349,35.9055],[137.3808,35.8924],[137.3644,35.8789],[137.3676,35.8607],[137.3611,35.8462],[137.3333,35.842],[137.3246,35.812],[137.3381,35.798],[137.3918,35.7986],[137.397,35.7854],[137.3933,35.7777],[137.4343,35.7712],[137.4402,35.7586],[137.4597,35.7614],[137.4666,35.741],[137.4852,35.7247],[137.4857,35.706],[137.4976,35.6981],[137.4972,35.6885],[137.5354,35.6658],[137.5454,35.6511],[137.5384,35.6386],[137.5266,35.6343],[137.5138,35.608],[137.5376,35.5845],[137.5713,35.5842],[137.5641,35.5686],[137.5721,35.5612],[137.5739,35.5447],[137.6024,35.5307],[137.6078,35.5333],[137.6316,35.5099],[137.6244,35.4938],[137.6318,35.47],[137.6182,35.4678],[137.593,35.447],[137.6155,35.4306],[137.6215,35.4124],[137.632,35.4107],[137.635,35.4013],[137.6181,35.3917],[137.5752,35.4],[137.5774,35.3904],[137.5985,35.379],[137.6039,35.3332],[137.557,35.3099],[137.5619,35.2833],[137.5189,35.2833],[137.5206,35.2734],[137.4296,35.2229],[137.4171,35.2403],[137.4082,35.2348],[137.4007,35.2418],[137.387,35.2409],[137.3832,35.2602],[137.3441,35.2579],[137.34,35.2645],[137.3446,35.2737],[137.3081,35.2912],[137.2751,35.2905],[137.2627,35.2852],[137.2572,35.2724],[137.224,35.2562],[137.2123,35.2599],[137.207,35.2531],[137.1865,35.2531],[137.1729,35.2649],[137.1771,35.2692],[137.1652,35.2834],[137.1456,35.2798],[137.1317,35.2936],[137.1023,35.3016],[137.096,35.2906],[137.0813,35.2922],[137.0818,35.3051],[137.0668,35.309],[137.0635,35.3182],[137.073,35.3265],[137.0682,35.3357],[137.0472,35.3368],[137.047,35.3661],[137.0149,35.3816],[137.0022,35.3814],[136.989,35.4012],[136.9783,35.4032],[136.9932,35.4241],[136.9885,35.4248],[136.9644,35.4209],[136.9617,35.3998],[136.9242,35.3801],[136.8649,35.3726],[136.8343,35.356],[136.8008,35.3609],[136.7929,35.3635],[136.7945,35.3683],[136.7681,35.3669],[136.7257,35.2956],[136.6784,35.243],[136.6834,35.2023],[136.6723,35.1888],[136.6696,35.1337],[136.6555,35.1613],[136.6464,35.1658],[136.6452,35.1446],[136.6156,35.1499],[136.6023,35.178],[136.5877,35.1845],[136.5761,35.2023],[136.5598,35.2066],[136.557,35.2206],[136.5475,35.2202],[136.5504,35.2331],[136.5409,35.2374],[136.5342,35.2571],[136.516,35.2539],[136.506,35.2351],[136.4824,35.2398],[136.4798,35.2343],[136.4617,35.2362],[136.4408,35.2167],[136.4309,35.2294],[136.412,35.2184],[136.3774,35.243],[136.397,35.2577],[136.391,35.29],[136.4068,35.3053],[136.4223,35.3484],[136.4214,35.3539],[136.4106,35.3525],[136.412,35.3701],[136.4365,35.3788],[136.4444,35.3894],[136.4118,35.4186],[136.4262,35.4484],[136.4205,35.466],[136.4016,35.47],[136.3867,35.4888],[136.3941,35.5063],[136.4057,35.5135],[136.4004,35.5301],[136.3843,35.5331],[136.3728,35.5597],[136.3626,35.5587],[136.3567,35.5399],[136.346,35.5361],[136.3373,35.5503],[136.3175,35.5474],[136.3244,35.5842],[136.315,35.6061],[136.3237,35.6164],[136.3158,35.6234],[136.2937,35.6182],[136.2792,35.6367],[136.2831,35.6437],[136.2766,35.6547],[136.2989,35.6777],[136.2918,35.6905],[136.3095,35.7035],[136.3118,35.712],[136.324,35.7167],[136.3216,35.7651],[136.3279,35.7751],[136.3465,35.776],[136.3778,35.7952],[136.4309,35.775],[136.4857,35.7765],[136.5059,35.7503],[136.5228,35.7882],[136.5449,35.7788],[136.5707,35.7774],[136.5991,35.7985],[136.6221,35.7868],[136.6266,35.7968],[136.6379,35.7973],[136.6452,35.8068],[136.6577,35.7835],[136.677,35.7933],[136.71,35.792],[136.7234,35.8082],[136.7411,35.8011],[136.7639,35.8106],[136.7744,35.8067],[136.776,35.7988],[136.7893,35.7994],[136.8022,35.844],[136.8209,35.8439],[136.8311,35.8519],[136.8301,35.8658],[136.819,35.8817],[136.8238,35.8928],[136.812,35.9125],[136.7848,35.924],[136.7932,35.946],[136.7529,35.9565],[136.7523,35.9886],[136.7267,35.9959],[136.7357,36.0323],[136.7328,36.0489],[136.765,36.0694],[136.754,36.0902],[136.7808,36.1415],[136.7664,36.1626],[136.7984,36.1726],[136.8023,36.1874],[136.8226,36.2015],[136.821,36.2107],[136.8518,36.2471],[136.8337,36.2658],[136.8146,36.2664],[136.7923,36.2985],[136.8042,36.3062],[136.8262,36.3025],[136.8324,36.3068],[136.8425,36.3327],[136.8372,36.3472],[136.8651,36.3497],[136.8712,36.3675],[136.8763,36.3579],[136.8696,36.3507],[136.8757,36.3501],[136.8748,36.3428],[136.8901,36.3456],[136.9075,36.3608],[136.9468,36.3458],[136.9733,36.3099],[136.9577,36.2779],[136.9753,36.2744],[136.9862,36.2863],[137.0126,36.2931],[137.0197,36.3183],[137.0376,36.3174],[137.0515,36.3281],[137.0587,36.3425],[137.0489,36.3455],[137.0622,36.3661],[137.0595,36.3735],[137.0787,36.3843],[137.0949,36.384],[137.0919,36.3965],[137.1019,36.3992],[137.1115,36.4154],[137.122,36.4172],[137.1323,36.4346],[137.1597,36.4564],[137.1751,36.4501],[137.1917,36.4552],[137.2056,36.4276],[137.2471,36.4617],[137.2564,36.4511],[137.279,36.4651],[137.2985,36.4582],[137.3066,36.4639],[137.317,36.4608],[137.3139,36.4417],[137.305,36.4358],[137.3138,36.425],[137.3512,36.4329],[137.3586,36.4368],[137.3615,36.4501],[137.3899,36.4599],[137.3962,36.4505],[137.3952,36.4364],[137.4039,36.4271],[137.436,36.4204],[137.4453,36.413],[137.4494,36.4168],[137.4608,36.4122],[137.4741,36.4254],[137.5108,36.4242],[137.515,36.4113],[137.5409,36.3914],[137.5873,36.3898],[137.5871,36.372],[137.618,36.3651],[137.6355,36.3425],[137.6454,36.3417]]]]}},{"type":"Feature","properties":{"name":"静岡県"},"geometry":{"type":"MultiPolygon","coordinates":[[[[137.485,34.6741],[137.4918,34.7025],[137.4741,34.7499],[137.4767,34.7748],[137.4929,34.7869],[137.4943,34.8022],[137.487,34.8117],[137.5013,34.8227],[137.5027,34.8335],[137.5298,34.8436],[137.5423,34.842],[137.5516,34.8519],[137.5873,34.8496],[137.5975,34.8725],[137.6163,34.8753],[137.6413,34.8931],[137.6405,34.905],[137.6581,34.943],[137.6757,34.9454],[137.6895,34.9568],[137.6946,34.9703],[137.7072,34.972],[137.6998,34.9844],[137.7081,34.9945],[137.701,35.0035],[137.7172,35.0351],[137.7755,35.0776],[137.7783,35.0996],[137.7926,35.0954],[137.8012,35.106],[137.7931,35.1352],[137.8059,35.1311],[137.8149,35.1406],[137.8146,35.1523],[137.8219,35.148],[137.829,35.1519],[137.8213,35.1584],[137.8255,35.1682],[137.8032,35.1831],[137.8164,35.188],[137.8219,35.2036],[137.831,35.2052],[137.8277,35.2112],[137.837,35.2116],[137.8474,35.2219],[137.8735,35.2195],[137.8849,35.2362],[137.884,35.2499],[137.8954,35.258],[137.9184,35.2543],[137.9293,35.2755],[137.9666,35.2827],[137.9737,35.2932],[137.9824,35.2924],[137.9921,35.3017],[138.0198,35.3016],[138.0277,35.3116],[138.0262,35.3204],[138.0612,35.3471],[138.0844,35.3379],[138.0961,35.3397],[138.097,35.3543],[138.1181,35.3662],[138.1416,35.37],[138.1531,35.3972],[138.1348,35.4078],[138.1397,35.4227],[138.1204,35.4301],[138.1198,35.4534],[138.1569,35.46],[138.1584,35.4868],[138.1647,35.4936],[138.1396,35.5011],[138.1463,35.5186],[138.1383,35.5222],[138.1594,35.5449],[138.1542,35.5535],[138.1414,35.5551],[138.1621,35.5813],[138.1709,35.5824],[138.1844,35.5731],[138.1895,35.5768],[138.2061,35.6082],[138.2033,35.632],[138.2187,35.6445],[138.2288,35.6459],[138.2323,35.6401],[138.2283,35.627],[138.2369,35.6211],[138.2351,35.6074],[138.2433,35.5974],[138.2405,35.5762],[138.2457,35.5615],[138.2596,35.5529],[138.2573,35.5308],[138.269,35.5143],[138.2602,35.5057],[138.2552,35.4689],[138.244,35.4586],[138.2593,35.4321],[138.2581,35.4075],[138.2464,35.3998],[138.232,35.3712],[138.2513,35.3635],[138.2571,35.339],[138.2487,35.3316],[138.2577,35.3166],[138.2842,35.3043],[138.2959,35.3163],[138.3258,35.3276],[138.3484,35.3157],[138.3586,35.3175],[138.3725,35.2994],[138.367,35.2702],[138.3862,35.2462],[138.3945,35.207],[138.3987,35.2003],[138.4184,35.1993],[138.4309,35.1804],[138.4779,35.1781],[138.4915,35.1684],[138.5154,35.1982],[138.5331,35.2007],[138.5274,35.2168],[138.5323,35.2234],[138.5142,35.2622],[138.5217,35.2838],[138.5121,35.3137],[138.5351,35.3306],[138.5282,35.379],[138.5358,35.3899],[138.5317,35.4093],[138.5531,35.4232],[138.5589,35.4342],[138.5819,35.4457],[138.5973,35.4327],[138.6091,35.3932],[138.6636,35.3982],[138.6712,35.3928],[138.6805,35.3577],[138.7991,35.3766],[138.8217,35.3741],[138.851,35.3905],[138.8628,35.3901],[138.8743,35.3792],[138.9154,35.4006],[138.9991,35.4021],[138.9987,35.3837],[139.0068,35.3614],[139.0133,35.3588],[139.0081,35.3505],[139.0106,35.3384],[139.019,35.3293],[139.0046,35.2899],[138.9962,35.2878],[138.9755,35.2638],[138.9761,35.2356],[138.9876,35.201],[139.0093,35.1832],[139.0216,35.182],[139.0291,35.1703],[139.029,35.1502],[139.1116,35.1414],[139.1092,35.1303],[139.0768,35.0977],[139.0748,35.0918],[139.0815,35.0942],[139.082,35.0859],[139.0742,35.0787],[139.0797,35.0693],[139.0694,35.0537],[139.0741,35.0468],[139.0936,35.05],[139.1005,35.0449],[139.1,35.0089],[139.0863,35.0079],[139.0829,35.001],[139.0958,34.9863],[139.0938,34.9779],[139.1057,34.9698],[139.104,34.9738],[139.1128,34.9737],[139.1285,34.9689],[139.1329,34.952],[139.1468,34.9552],[139.1433,34.9407],[139.1481,34.9304],[139.1318,34.8984],[139.1408,34.8909],[139.1301,34.8776],[139.1026,34.8697],[139.098,34.8575],[139.0828,34.8537],[139.0768,34.8414],[139.0783,34.8195],[139.062,34.8008],[139.0583,34.7848],[139.0415,34.7739],[139.0483,34.7682],[139.0277,34.7672],[139.0206,34.754],[139.0064,34.7527],[138.9968,34.743],[138.9983,34.7296],[138.9885,34.7233],[138.9928,34.7177],[138.9791,34.7089],[138.9734,34.691],[138.9812,34.6813],[138.9727,34.6744],[138.978,34.6677],[138.9858,34.6691],[138.9874,34.6582],[138.9812,34.6616],[138.977,34.653],[138.9674,34.6569],[138.958,34.6528],[138.9549,34.6655],[138.9641,34.6729],[138.9482,34.6738],[138.9545,34.6692],[138.9363,34.6669],[138.9415,34.6622],[138.9183,34.6527],[138.9077,34.6313],[138.8912,34.6349],[138.8897,34.6243],[138.849,34.6134],[138.8487,34.6049],[138.8424,34.6088],[138.8434,34.6009],[138.8257,34.6058],[138.8246,34.6154],[138.814,34.6161],[138.8101,34.628],[138.7947,34.6222],[138.7898,34.6385],[138.7767,34.64],[138.7732,34.6555],[138.784,34.6624],[138.7911,34.66],[138.7897,34.6695],[138.7778,34.6671],[138.7774,34.6756],[138.7569,34.6916],[138.7391,34.6901],[138.7436,34.7002],[138.7393,34.7266],[138.7475,34.7281],[138.7497,34.7364],[138.7563,34.7333],[138.7555,34.7394],[138.7616,34.7393],[138.7549,34.7468],[138.7758,34.7545],[138.7769,34.7599],[138.7737,34.7688],[138.7634,34.7701],[138.771,34.7741],[138.7525,34.8005],[138.766,34.8085],[138.7538,34.8135],[138.7528,34.8243],[138.7606,34.8295],[138.7691,34.823],[138.7598,34.8429],[138.7759,34.8536],[138.7528,34.8683],[138.7581,34.8704],[138.7563,34.8845],[138.7898,34.9082],[138.7658,34.9523],[138.7622,34.9724],[138.7672,34.9777],[138.7644,34.9724],[138.7772,34.971],[138.7689,34.9828],[138.7874,35.0303],[138.7876,35.0236],[138.8109,35.0192],[138.829,35.0236],[138.845,35.0142],[138.8777,35.0279],[138.8786,35.0195],[138.8849,35.0254],[138.8914,35.017],[138.8986,35.0239],[138.8921,35.032],[138.8975,35.0438],[138.9073,35.0485],[138.8918,35.0517],[138.886,35.0462],[138.8737,35.0693],[138.8517,35.0787],[138.8572,35.0838],[138.8509,35.08],[138.8443,35.0955],[138.8183,35.1119],[138.7525,35.1315],[138.6999,35.1353],[138.6954,35.1393],[138.7006,35.1429],[138.6949,35.1449],[138.6849,35.1441],[138.698,35.1344],[138.6447,35.1175],[138.5787,35.1118],[138.5568,35.1016],[138.54,35.0639],[138.5191,35.0477],[138.5237,35.0427],[138.5158,35.038],[138.5111,35.0432],[138.5113,35.0354],[138.5084,35.0444],[138.5085,35.0335],[138.5011,35.0364],[138.5025,35.0313],[138.493,35.03],[138.4982,35.0324],[138.4991,35.0267],[138.4972,35.0173],[138.4909,35.0223],[138.4975,34.9962],[138.5082,34.9899],[138.496,34.9928],[138.5032,34.9859],[138.5115,34.9928],[138.5011,35.0023],[138.5067,35.0035],[138.5041,35.0154],[138.5195,35.0079],[138.5158,35.0209],[138.5332,35.0145],[138.5163,34.9845],[138.4723,34.9607],[138.4147,34.9428],[138.3957,34.9287],[138.3719,34.9206],[138.3672,34.9244],[138.3712,34.9196],[138.3558,34.9137],[138.3313,34.8739],[138.3338,34.8679],[138.3244,34.8726],[138.3292,34.8499],[138.324,34.8487],[138.3297,34.8464],[138.3317,34.854],[138.3377,34.8284],[138.3018,34.7788],[138.2887,34.7812],[138.3057,34.7775],[138.2184,34.7174],[138.2171,34.7025],[138.2073,34.6887],[138.2111,34.6864],[138.1959,34.6659],[138.1958,34.6349],[138.2063,34.6205],[138.2201,34.6144],[138.2179,34.6091],[138.2251,34.6072],[138.2222,34.6145],[138.2339,34.6053],[138.2272,34.5951],[138.1913,34.6009],[138.0577,34.6485],[137.9736,34.665],[137.9249,34.6681],[137.9074,34.6616],[137.9107,34.667],[137.8995,34.6672],[137.9074,34.66],[137.8996,34.666],[137.8002,34.6462],[137.6723,34.6707],[137.5821,34.6799],[137.485,34.6741]]],[[[139.1765,35.0395],[139.1678,35.0366],[139.164,35.043],[139.1765,35.0395]]],[[[138.2231,34.6228],[138.2191,34.6183],[138.206,34.6251],[138.2106,34.63],[138.2231,34.6228]]]]}},{"type":"Feature","properties":{"name":"愛知県"},"geometry":{"type":"MultiPolygon","coordinates":[[[[136.8406,35.056],[136.855,35.0553],[136.852,35.0439],[136.8462,35.0455],[136.8502,35.0406],[136.8441,35.0416],[136.8458,35.0339],[136.8406,35.056]]],[[[136.8653,35.05],[136.8695,35.0681],[136.8813,35.0716],[136.8764,35.0537],[136.8653,35.05]]],[[[137.8381,35.2125],[137.8279,35.2114],[137.831,35.2052],[137.8219,35.2036],[137.8164,35.188],[137.8033,35.1838],[137.8255,35.1682],[137.8213,35.1584],[137.8291,35.1523],[137.8219,35.148],[137.8146,35.1523],[137.8149,35.1406],[137.8059,35.1311],[137.7928,35.1348],[137.8012,35.106],[137.7926,35.0954],[137.7783,35.0996],[137.7755,35.0776],[137.7172,35.0351],[137.701,35.0035],[137.7081,34.9945],[137.6998,34.9844],[137.7072,34.972],[137.6946,34.9703],[137.6895,34.9568],[137.6757,34.9454],[137.6581,34.943],[137.6405,34.905],[137.6413,34.8931],[137.6163,34.8753],[137.5975,34.8725],[137.5873,34.8496],[137.5516,34.8519],[137.5423,34.842],[137.5298,34.8436],[137.5027,34.8335],[137.5013,34.8227],[137.487,34.8117],[137.4943,34.8022],[137.4929,34.7869],[137.4767,34.7748],[137.4741,34.7499],[137.4918,34.7025],[137.485,34.6741],[137.3082,34.6396],[137.1893,34.6006],[137.1867,34.6087],[137.1871,34.6024],[137.1428,34.59],[137.0961,34.5909],[137.0362,34.5782],[137.0153,34.5813],[137.0273,34.5905],[137.0586,34.6515],[137.0699,34.6619],[137.0914,34.6579],[137.0851,34.6472],[137.1064,34.6427],[137.1026,34.6328],[137.1058,34.6371],[137.1192,34.6343],[137.1408,34.6456],[137.1268,34.6549],[137.1627,34.6549],[137.1877,34.67],[137.1977,34.6687],[137.2072,34.6783],[137.2252,34.6765],[137.2327,34.689],[137.2435,34.6889],[137.2327,34.6991],[137.2455,34.7094],[137.2607,34.6958],[137.2669,34.7086],[137.2585,34.7157],[137.2848,34.7309],[137.3009,34.7281],[137.3009,34.6938],[137.2905,34.6937],[137.2862,34.6802],[137.3115,34.682],[137.3158,34.6885],[137.3082,34.6921],[137.3223,34.6938],[137.3251,34.7024],[137.3085,34.7021],[137.3083,34.725],[137.328,34.7274],[137.3329,34.719],[137.3518,34.7275],[137.3203,34.7328],[137.3206,34.7702],[137.331,34.7805],[137.3256,34.7855],[137.3085,34.7788],[137.3033,34.7929],[137.3167,34.7977],[137.3021,34.8098],[137.2871,34.8125],[137.2947,34.8103],[137.2939,34.8052],[137.2807,34.8045],[137.2755,34.8099],[137.281,34.8037],[137.2731,34.8016],[137.2681,34.809],[137.2667,34.8037],[137.2513,34.8053],[137.2465,34.8142],[137.2439,34.81],[137.2161,34.8232],[137.2236,34.8156],[137.2145,34.8159],[137.2191,34.8125],[137.2137,34.8031],[137.1934,34.8088],[137.1936,34.7982],[137.1858,34.7918],[137.1906,34.7928],[137.1896,34.7762],[137.1751,34.7648],[137.1674,34.772],[137.1737,34.7703],[137.1783,34.7785],[137.1683,34.7876],[137.1526,34.7813],[137.1361,34.7891],[137.13,34.7819],[137.1068,34.7913],[137.1056,34.7842],[137.0882,34.7751],[137.0763,34.7871],[137.0299,34.775],[137.0005,34.8041],[136.9967,34.8143],[137.0015,34.8132],[136.9644,34.8228],[136.9567,34.8333],[136.9542,34.8483],[136.965,34.8522],[136.9553,34.8548],[136.9681,34.8749],[136.9759,34.8742],[136.9706,34.8775],[136.9768,34.8933],[136.9838,34.8933],[136.9769,34.8979],[136.9864,34.952],[136.981,34.9568],[136.9683,34.9147],[136.9717,34.9085],[136.9572,34.8811],[136.9642,34.8765],[136.9588,34.8711],[136.9442,34.8809],[136.9343,34.8747],[136.946,34.8742],[136.9397,34.8614],[136.9277,34.8649],[136.9281,34.8586],[136.9366,34.8561],[136.9349,34.8485],[136.9262,34.8515],[136.9354,34.83],[136.9221,34.8277],[136.9269,34.8276],[136.9261,34.8212],[136.938,34.8209],[136.9263,34.8212],[136.9201,34.8111],[136.9145,34.7715],[136.9503,34.739],[136.9657,34.733],[136.9701,34.7248],[136.9621,34.7205],[136.9728,34.7174],[136.9677,34.7097],[136.9778,34.7018],[136.9707,34.6995],[136.9722,34.6947],[136.9646,34.7012],[136.9434,34.7004],[136.9357,34.7082],[136.9334,34.7022],[136.8857,34.7223],[136.8591,34.7385],[136.8403,34.7639],[136.8581,34.7991],[136.8665,34.8392],[136.8557,34.8543],[136.8552,34.8655],[136.8372,34.8759],[136.8379,34.8844],[136.8304,34.8719],[136.8207,34.8864],[136.8269,34.8931],[136.8205,34.9075],[136.8289,34.9614],[136.8201,34.9664],[136.8387,34.9801],[136.8255,34.994],[136.8377,34.9867],[136.8546,35.0026],[136.8438,35.0047],[136.8494,35.0109],[136.8697,35.0082],[136.8706,35.0126],[136.852,35.0164],[136.8691,35.0417],[136.8893,35.0423],[136.8792,35.0474],[136.8833,35.0705],[136.8961,35.0765],[136.8902,35.0825],[136.8966,35.085],[136.8882,35.0937],[136.8685,35.0882],[136.8626,35.0698],[136.8551,35.0776],[136.8599,35.0683],[136.8555,35.0566],[136.8426,35.0593],[136.8473,35.083],[136.827,35.0821],[136.8187,35.0646],[136.8336,35.0639],[136.8301,35.0502],[136.7969,35.0515],[136.8005,35.029],[136.7808,35.0335],[136.7966,35.0223],[136.7968,35.0124],[136.7697,35.0226],[136.7534,35.053],[136.7501,35.0802],[136.6951,35.1247],[136.6764,35.1289],[136.671,35.141],[136.6723,35.1888],[136.6834,35.2023],[136.6784,35.243],[136.7257,35.2956],[136.7681,35.3669],[136.7945,35.3683],[136.7929,35.3635],[136.8008,35.3609],[136.8343,35.356],[136.8649,35.3726],[136.9242,35.3801],[136.9617,35.3998],[136.9644,35.4209],[136.9885,35.4248],[136.9932,35.4241],[136.9783,35.4032],[136.989,35.4012],[137.0022,35.3814],[137.0149,35.3816],[137.047,35.3661],[137.0472,35.3368],[137.0682,35.3357],[137.073,35.3265],[137.0635,35.3182],[137.0668,35.309],[137.0818,35.3051],[137.0813,35.2922],[137.096,35.2906],[137.1023,35.3016],[137.1317,35.2936],[137.1456,35.2798],[137.1652,35.2834],[137.1771,35.2692],[137.1729,35.2649],[137.1865,35.2531],[137.207,35.2531],[137.2123,35.2599],[137.224,35.2562],[137.2572,35.2724],[137.2627,35.2852],[137.2751,35.2905],[137.3081,35.2912],[137.3446,35.2737],[137.34,35.2645],[137.3441,35.2579],[137.3832,35.2602],[137.387,35.2409],[137.4007,35.2418],[137.4082,35.2348],[137.4171,35.2403],[137.4298,35.2229],[137.5206,35.2734],[137.5189,35.2833],[137.5615,35.2832],[137.5658,35.2902],[137.5708,35.2827],[137.5558,35.2745],[137.5579,35.2652],[137.546,35.2518],[137.5787,35.2194],[137.5788,35.1984],[137.6149,35.2105],[137.6446,35.209],[137.6541,35.2269],[137.6815,35.2352],[137.7216,35.2309],[137.7234,35.2216],[137.7597,35.2221],[137.768,35.2185],[137.7661,35.21],[137.7739,35.2033],[137.7952,35.2041],[137.823,35.2159],[137.8381,35.2125]]],[[[137.3187,34.7331],[137.3081,34.7351],[137.3143,34.7486],[137.3192,34.7485],[137.3187,34.7331]]],[[[137.3114,34.7991],[137.3015,34.798],[137.2981,34.8092],[137.3114,34.7991]]],[[[137.0305,34.7278],[137.0389,34.7332],[137.0563,34.7223],[137.047,34.7137],[137.0502,34.7191],[137.0448,34.726],[137.037,34.7203],[137.0305,34.7278]]],[[[136.8084,34.8393],[136.7998,34.8772],[136.8137,34.8735],[136.8235,34.8592],[136.8245,34.8487],[136.8127,34.8468],[136.8142,34.8402],[136.8084,34.8393]]],[[[136.811,34.9548],[136.8187,34.9643],[136.8257,34.9605],[136.8203,34.9498],[136.811,34.9548]]],[[[136.839,35.0302],[136.8124,35.0257],[136.8078,35.0485],[136.8309,35.0494],[136.839,35.0302]]],[[[137.0084,34.6858],[137.0032,34.6665],[136.9994,34.6781],[137.0069,34.6789],[137.0084,34.6858]]],[[[136.9962,34.7014],[137.0063,34.7071],[137.0009,34.7086],[137.0138,34.7065],[136.9962,34.7014]]],[[[136.8217,35.0176],[136.8154,35.0005],[136.8198,34.9976],[136.8002,35.0036],[136.8017,35.0095],[136.8217,35.0176]]]]}},{"type":"Feature","properties":{"name":"滋賀県"},"geometry":{"type":"MultiPolygon","coordinates":[[[[136.1853,35.7037],[136.2126,35.6817],[136.2342,35.6825],[136.2805,35.6613],[136.2792,35.6367],[136.2887,35.6205],[136.2984,35.6175],[136.3158,35.6234],[136.3237,35.6165],[136.315,35.6061],[136.3244,35.5842],[136.3178,35.5471],[136.3373,35.5503],[136.346,35.5361],[136.3567,35.5399],[136.3626,35.5587],[136.3728,35.5597],[136.3843,35.5331],[136.4004,35.5301],[136.4057,35.5135],[136.3941,35.5063],[136.3867,35.4888],[136.4016,35.47],[136.4205,35.466],[136.4262,35.4484],[136.4118,35.4186],[136.4444,35.3892],[136.4365,35.3788],[136.412,35.3701],[136.4106,35.3525],[136.4214,35.3539],[136.4223,35.3484],[136.4068,35.3053],[136.391,35.29],[136.397,35.2577],[136.3773,35.2433],[136.4157,35.2172],[136.418,35.2037],[136.4087,35.1872],[136.4247,35.1844],[136.4545,35.1625],[136.455,35.1524],[136.4443,35.1492],[136.4356,35.1308],[136.448,35.1238],[136.44,35.1166],[136.4421,35.086],[136.4353,35.0825],[136.4416,35.0663],[136.4178,35.0495],[136.4179,35.0307],[136.4245,35.0295],[136.4171,35.0196],[136.4214,35.0001],[136.4135,34.9954],[136.4158,34.9805],[136.3951,34.9516],[136.3857,34.9526],[136.3727,34.9423],[136.3752,34.9245],[136.3678,34.9219],[136.366,34.9049],[136.3132,34.887],[136.3129,34.8806],[136.2929,34.8703],[136.2771,34.8742],[136.2507,34.8577],[136.1981,34.8699],[136.1787,34.8798],[136.1787,34.8871],[136.1479,34.8819],[136.1368,34.8884],[136.1312,34.8831],[136.1108,34.9018],[136.098,34.8893],[136.0875,34.8906],[136.0856,34.8772],[136.1032,34.8697],[136.124,34.8725],[136.1264,34.8619],[136.1071,34.8526],[136.1045,34.8406],[136.0861,34.8376],[136.0952,34.8191],[136.0906,34.8122],[136.0267,34.7906],[136.0102,34.7997],[136.0167,34.8111],[136.0285,34.8159],[136.0279,34.8217],[136.0163,34.8289],[136.0055,34.8264],[136.0044,34.844],[135.9699,34.8378],[135.9721,34.846],[135.9614,34.8547],[135.9462,34.8518],[135.941,34.8937],[135.9127,34.8835],[135.8979,34.8713],[135.8666,34.8921],[135.8629,34.9034],[135.8712,34.9099],[135.8687,34.9195],[135.8799,34.9345],[135.8787,34.947],[135.8524,34.9708],[135.8567,34.9825],[135.8491,34.9848],[135.8493,34.9917],[135.8269,34.9912],[135.8366,35.0012],[135.8202,35.0152],[135.8355,35.0123],[135.8345,35.0221],[135.8274,35.0221],[135.8277,35.0304],[135.8148,35.0452],[135.8349,35.0556],[135.8319,35.0715],[135.8399,35.0859],[135.835,35.0913],[135.8499,35.1206],[135.8488,35.1422],[135.8568,35.1536],[135.8453,35.1655],[135.8293,35.2202],[135.838,35.2261],[135.8345,35.2411],[135.8608,35.283],[135.8571,35.289],[135.8401,35.2756],[135.8296,35.2767],[135.8093,35.3164],[135.7911,35.3235],[135.7808,35.3406],[135.7638,35.3456],[135.779,35.3734],[135.7909,35.379],[135.7909,35.3866],[135.8075,35.3854],[135.8137,35.4133],[135.8532,35.4115],[135.8543,35.4008],[135.8647,35.3944],[135.8906,35.4032],[135.893,35.4198],[135.9142,35.4321],[135.9098,35.447],[135.9159,35.4709],[135.9396,35.5205],[135.947,35.5205],[135.9524,35.5062],[135.9726,35.5002],[135.9812,35.4866],[135.9895,35.4927],[136.0043,35.491],[136.0288,35.5234],[136.0265,35.5295],[136.0486,35.5345],[136.0694,35.5263],[136.0829,35.5406],[136.1065,35.529],[136.1054,35.5556],[136.1138,35.5829],[136.1212,35.5762],[136.1623,35.5715],[136.1695,35.5657],[136.1664,35.5825],[136.1768,35.5983],[136.1599,35.6252],[136.1502,35.6594],[136.1345,35.6698],[136.1506,35.6979],[136.1853,35.7037]]]]}}]};
+  const points = {
+    nagoya: { name: "名古屋", coordinates: [136.9066, 35.1815], dx: 8, dy: 16, anchor: "start" },
+    takayama: { name: "高山", coordinates: [137.2522, 36.1461], dx: 8, dy: 16, anchor: "start" },
+    shirakawa: { name: "白川郷", coordinates: [136.8986, 36.2709], dx: -8, dy: 17, anchor: "end" },
+    gokayama: { name: "五箇山", coordinates: [136.9357, 36.4256], dx: 8, dy: -10, anchor: "start" },
+    kanazawa: { name: "金沢", coordinates: [136.6625, 36.5619], dx: -8, dy: -10, anchor: "end" },
+    kaga: { name: "加賀温泉", coordinates: [136.3509, 36.3206], dx: -8, dy: -10, anchor: "end" },
+    fukui: { name: "福井", coordinates: [136.2190, 36.0640], dx: -8, dy: 16, anchor: "end" },
+    dinosaur: { name: "恐竜博物館", coordinates: [136.5067, 36.0829], dx: 8, dy: 17, anchor: "start" },
+    toyama: { name: "富山", coordinates: [137.2167, 36.7000], dx: 8, dy: -10, anchor: "start" },
+    tateyama: { name: "立山", coordinates: [137.4455, 36.5832], dx: 8, dy: -10, anchor: "start" },
+    nagano: { name: "長野", coordinates: [138.1810, 36.6485], dx: 8, dy: -10, anchor: "start" },
+    matsumoto: { name: "松本", coordinates: [137.9720, 36.2380], dx: 8, dy: 16, anchor: "start" },
+    hakuba: { name: "白馬", coordinates: [137.8600, 36.6980], dx: 8, dy: -10, anchor: "start" },
+    fuji: { name: "富士山麓", coordinates: [138.7270, 35.3606], dx: -8, dy: 16, anchor: "end" }
+  };
+
+  const personas = [
+    {
+      id: "p1", code: "P1", name: "欧州ロングステイ文化回廊", market: "イタリア・フランス・ドイツ・スペイン・英国等",
+      summary: "高山・白川郷・金沢の併訪が中心で、長野・富山・福井も同じ旅行に組み込まれやすい長期滞在型。",
+      companion: "夫婦・パートナー", tripDays: "日本滞在14〜27日から換算", tripNights: "13〜26泊相当", ishikawaNights: "2〜4泊以上", spendMedian: "約20万円",
+      sources: ["観光公式サイト", "ブログ", "ガイドブック", "Instagram"],
+      links: [
+        ["nagoya", "takayama", 43, "gateway"], ["takayama", "shirakawa", 58, "heritage"], ["shirakawa", "kanazawa", 64, "heritage"],
+        ["kanazawa", "gokayama", 28, "heritage"], ["gokayama", "toyama", 23, "heritage"], ["toyama", "tateyama", 18, "alpine"],
+        ["kanazawa", "kaga", 22, "onsen"], ["kaga", "fukui", 17, "onsen"], ["matsumoto", "nagano", 25, "alpine"],
+        ["nagano", "kanazawa", 34, "gateway"], ["fuji", "matsumoto", 31, "gateway"]
+      ]
+    },
+    {
+      id: "p2", code: "P2", name: "英語圏ファミリー＆スロートラベル", market: "米国・カナダ・豪州・ニュージーランド・英国",
+      summary: "高山・白川郷・金沢に、富山の自然や福井の恐竜を組み合わせる家族向けの併訪パターン。",
+      companion: "子ども連れ家族", tripDays: "日本滞在14〜21日から換算", tripNights: "13〜20泊相当", ishikawaNights: "2〜3泊", spendMedian: "約30万円",
+      sources: ["Instagram", "YouTube", "口コミサイト", "観光公式サイト"],
+      links: [
+        ["nagoya", "takayama", 38, "gateway"], ["takayama", "shirakawa", 41, "heritage"], ["shirakawa", "kanazawa", 47, "heritage"],
+        ["kanazawa", "toyama", 26, "gateway"], ["toyama", "tateyama", 19, "alpine"], ["kanazawa", "dinosaur", 29, "onsen"],
+        ["dinosaur", "fukui", 24, "onsen"], ["kanazawa", "kaga", 21, "onsen"], ["matsumoto", "nagano", 23, "alpine"],
+        ["nagano", "kanazawa", 28, "gateway"], ["fuji", "matsumoto", 17, "gateway"]
+      ]
+    },
+    {
+      id: "p3", code: "P3", name: "台湾・香港リピーター温泉周遊", market: "台湾・香港",
+      summary: "金沢・富山・立山と、加賀・福井を同じ旅行で組み合わせる傾向が強い短期高密度型。",
+      companion: "夫婦・家族・友人", tripDays: "日本滞在4〜13日から換算", tripNights: "3〜12泊相当", ishikawaNights: "2〜4泊以上", spendMedian: "約10万円",
+      sources: ["Instagram", "観光公式サイト", "YouTube", "Facebook・WeChat"],
+      links: [
+        ["nagoya", "takayama", 36, "gateway"], ["takayama", "shirakawa", 42, "heritage"], ["shirakawa", "kanazawa", 49, "heritage"],
+        ["kanazawa", "toyama", 44, "gateway"], ["toyama", "tateyama", 31, "alpine"], ["kanazawa", "kaga", 46, "onsen"],
+        ["kaga", "fukui", 34, "onsen"], ["fukui", "dinosaur", 22, "onsen"], ["nagano", "kanazawa", 19, "gateway"]
+      ]
+    },
+    {
+      id: "p4", code: "P4", name: "東アジア・東南アジア家族団体", market: "中国・韓国・マレーシア等",
+      summary: "旅館・温泉と家族向け目的地を重視し、白川郷・金沢・加賀・恐竜博物館を併訪候補にする層。",
+      companion: "子ども連れ家族・団体", tripDays: "日本滞在7〜13日から換算", tripNights: "6〜12泊相当", ishikawaNights: "3〜4泊以上", spendMedian: "約10万円",
+      sources: ["旅行会社", "観光公式サイト", "YouTube", "SNS"],
+      links: [
+        ["nagoya", "shirakawa", 36, "gateway"], ["shirakawa", "kanazawa", 42, "heritage"], ["kanazawa", "kaga", 45, "onsen"],
+        ["kaga", "fukui", 31, "onsen"], ["fukui", "dinosaur", 38, "onsen"], ["kanazawa", "toyama", 28, "gateway"],
+        ["toyama", "tateyama", 20, "alpine"], ["hakuba", "nagano", 18, "alpine"], ["nagano", "kanazawa", 22, "gateway"]
+      ]
+    },
+    {
+      id: "p5", code: "P5", name: "20〜30代ソーシャル発見型", market: "国籍横断の若年FIT",
+      summary: "山岳・世界遺産・城下町など、SNSで共有しやすい景観地を一度の旅行に多く組み込む層。",
+      companion: "友人・カップル・一人", tripDays: "日本滞在14〜27日から換算", tripNights: "13〜26泊相当", ishikawaNights: "2〜3泊", spendMedian: "約15万円",
+      sources: ["Instagram", "TikTok", "YouTube", "ブログ"],
+      links: [
+        ["fuji", "matsumoto", 27, "gateway"], ["matsumoto", "nagano", 33, "alpine"], ["nagano", "kanazawa", 41, "gateway"],
+        ["nagoya", "takayama", 45, "gateway"], ["takayama", "shirakawa", 51, "heritage"], ["shirakawa", "kanazawa", 55, "heritage"],
+        ["kanazawa", "gokayama", 35, "heritage"], ["gokayama", "toyama", 33, "heritage"], ["toyama", "tateyama", 30, "alpine"],
+        ["kanazawa", "kaga", 24, "onsen"], ["kaga", "fukui", 19, "onsen"]
+      ]
+    },
+    {
+      id: "p6", code: "P6", name: "成熟プレミアム・低混雑志向", market: "欧米・豪州・シンガポール等",
+      summary: "金沢・五箇山・富山と加賀・福井を同じ旅行候補に入れ、宿泊を伴ってゆっくり滞在する層。",
+      companion: "夫婦・パートナー", tripDays: "日本滞在14〜28日以上から換算", tripNights: "13〜27泊以上", ishikawaNights: "3〜4泊以上", spendMedian: "約40万円",
+      sources: ["観光公式サイト", "ガイドブック", "口コミサイト", "YouTube"],
+      links: [
+        ["nagoya", "takayama", 34, "gateway"], ["takayama", "shirakawa", 40, "heritage"], ["shirakawa", "kanazawa", 46, "heritage"],
+        ["matsumoto", "nagano", 27, "alpine"], ["nagano", "kanazawa", 38, "gateway"], ["kanazawa", "gokayama", 30, "heritage"],
+        ["gokayama", "toyama", 29, "heritage"], ["toyama", "tateyama", 26, "alpine"], ["kanazawa", "kaga", 37, "onsen"],
+        ["kaga", "fukui", 32, "onsen"]
+      ]
+    },
+    {
+      id: "p7", code: "P7", name: "推し活・コンテンツ巡礼", market: "台湾・中国等の若年層",
+      summary: "現状は金沢への関心集中が強く、他地域との併訪には作品・イベント・限定企画による動機づけが必要。",
+      companion: "一人・友人", tripDays: "日本滞在4〜13日から換算", tripNights: "3〜12泊相当", ishikawaNights: "3泊前後", spendMedian: "約15万円",
+      sources: ["YouTube", "Instagram", "X・WeChat", "生成AI"],
+      links: [
+        ["nagoya", "kanazawa", 22, "gateway"], ["toyama", "kanazawa", 16, "gateway"], ["shirakawa", "kanazawa", 14, "heritage"],
+        ["kanazawa", "kaga", 11, "onsen"], ["kanazawa", "fukui", 9, "onsen"]
+      ]
+    }
+  ];
+
+  const state = { personaId: "p1", threshold: 15 };
+  const personaTabs = root.querySelector("#flow-persona-tabs");
+  const threshold = root.querySelector("#flow-threshold");
+  const thresholdValue = root.querySelector("#flow-threshold-value");
+  const svgNode = root.querySelector("#flow-map");
+  const mapWrap = root.querySelector("#flow-map-wrap");
+  const corridorColors = {
+    heritage: "var(--flow-heritage)", alpine: "var(--flow-alpine)",
+    onsen: "var(--flow-onsen)", gateway: "var(--flow-gateway)"
+  };
+
+  personas.forEach((persona) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "flow-persona-button";
+    button.dataset.personaId = persona.id;
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-selected", persona.id === state.personaId ? "true" : "false");
+    button.innerHTML = '<span class="flow-persona-button-code">' + persona.code + '</span><span class="flow-persona-button-name">' + persona.name + '</span>';
+    personaTabs.appendChild(button);
+  });
+
+  personaTabs.addEventListener("click", (event) => {
+    const button = event.target.closest(".flow-persona-button");
+    if (!button) return;
+    state.personaId = button.dataset.personaId;
+    render();
+  });
+  personaTabs.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    const buttons = Array.from(personaTabs.querySelectorAll(".flow-persona-button"));
+    const currentIndex = buttons.indexOf(document.activeElement);
+    const direction = event.key === "ArrowRight" ? 1 : -1;
+    const next = buttons[(Math.max(0, currentIndex) + direction + buttons.length) % buttons.length];
+    next.focus();
+    next.click();
+    event.preventDefault();
+  });
+  threshold.addEventListener("input", (event) => {
+    state.threshold = Number(event.target.value);
+    thresholdValue.textContent = state.threshold + "以上";
+    renderMap();
+    renderRanking();
+  });
+
+  function persona() {
+    return personas.find((item) => item.id === state.personaId);
+  }
+
+  function renderHeader() {
+    const item = persona();
+    personaTabs.querySelectorAll(".flow-persona-button").forEach((button) => {
+      const selected = button.dataset.personaId === item.id;
+      button.setAttribute("aria-selected", selected ? "true" : "false");
+      button.tabIndex = selected ? 0 : -1;
+    });
+    root.querySelector("#flow-persona-name").textContent = item.code + " " + item.name;
+    root.querySelector("#flow-persona-market").textContent = item.market;
+    root.querySelector("#flow-persona-summary").textContent = item.summary;
+    root.querySelector("#flow-persona-companion").textContent = item.companion;
+    root.querySelector("#flow-persona-trip-nights").textContent = item.tripNights;
+    root.querySelector("#flow-persona-trip-days").textContent = item.tripDays;
+    root.querySelector("#flow-persona-ishikawa-nights").textContent = item.ishikawaNights;
+    root.querySelector("#flow-persona-spend").textContent = item.spendMedian;
+    const sourceWrap = root.querySelector("#flow-persona-sources");
+    sourceWrap.innerHTML = "";
+    item.sources.forEach((source) => {
+      const chip = document.createElement("span");
+      chip.className = "flow-source-chip";
+      chip.textContent = source;
+      sourceWrap.appendChild(chip);
+    });
+  }
+
+  function renderRanking() {
+    const list = root.querySelector("#flow-ranking");
+    const links = persona().links.filter((link) => link[2] >= state.threshold).sort((a, b) => b[2] - a[2]).slice(0, 7);
+    list.innerHTML = "";
+    links.forEach((link) => {
+      const item = document.createElement("li");
+      item.innerHTML =
+        '<div class="flow-ranking-row"><strong>' + points[link[0]].name + " ↔ " + points[link[1]].name + "</strong><span>スコア " + link[2] + "</span></div>" +
+        '<div class="flow-ranking-track"><div class="flow-ranking-fill" style="width:' + Math.min(100, link[2] / 0.65) + "%;background:" + corridorColors[link[3]] + '"></div></div>';
+      list.appendChild(item);
+    });
+    if (!links.length) {
+      const item = document.createElement("li");
+      item.textContent = "この閾値以上の接続はありません。";
+      list.appendChild(item);
+    }
+  }
+
+  function renderMap() {
+    if (!window.d3 || !window.d3.geoMercator) return;
+    const width = Math.max(320, Math.round(mapWrap.getBoundingClientRect().width));
+    const height = width < 560 ? 640 : width < 820 ? 590 : 560;
+    svgNode.setAttribute("viewBox", "0 0 " + width + " " + height);
+    svgNode.style.height = height + "px";
+    const svg = window.d3.select(svgNode);
+    svg.selectAll("g, defs").remove();
+
+    const frame = {
+      type: "Polygon",
+      coordinates: [[[135.55, 34.82], [135.55, 37.18], [138.90, 37.18], [138.90, 34.82], [135.55, 34.82]]]
+    };
+    const projection = window.d3.geoMercator().fitExtent([[22, 22], [width - 22, height - 25]], frame);
+    const path = window.d3.geoPath(projection);
+    const labels = [
+      ["石川県", 136.55, 36.47], ["富山県", 137.03, 36.63], ["福井県", 136.18, 36.12],
+      ["岐阜県", 137.18, 35.76], ["長野県", 138.05, 36.38], ["愛知県", 136.91, 35.14],
+      ["滋賀県", 136.04, 35.25], ["静岡県", 138.42, 35.14]
+    ];
+    const base = svg.append("g").attr("aria-hidden", "true");
+    base.selectAll("path").data(prefectures.features).join("path").attr("class", "flow-prefecture").attr("d", path);
+    base.selectAll("text").data(labels).join("text")
+      .attr("class", "flow-pref-label")
+      .attr("x", (d) => projection([d[1], d[2]])[0])
+      .attr("y", (d) => projection([d[1], d[2]])[1])
+      .style("font-size", "11px")
+      .text((d) => d[0]);
+
+    const links = persona().links.filter((link) => link[2] >= state.threshold).sort((a, b) => a[2] - b[2]);
+    const widthScale = window.d3.scaleLinear().domain([5, 65]).range([1.5, 14]).clamp(true);
+    const linkLayer = svg.append("g").attr("aria-hidden", "true");
+    links.forEach((link) => {
+      const a = projection(points[link[0]].coordinates);
+      const b = projection(points[link[1]].coordinates);
+      const mx = (a[0] + b[0]) / 2;
+      const my = (a[1] + b[1]) / 2;
+      const dx = b[0] - a[0];
+      const dy = b[1] - a[1];
+      const length = Math.max(1, Math.hypot(dx, dy));
+      const bend = Math.min(28, length * 0.12);
+      const cx = mx - dy / length * bend;
+      const cy = my + dx / length * bend;
+      const curve = "M" + a[0] + "," + a[1] + " Q" + cx + "," + cy + " " + b[0] + "," + b[1];
+      linkLayer.append("path")
+        .attr("class", "flow-link")
+        .attr("d", curve)
+        .attr("stroke", corridorColors[link[3]])
+        .attr("stroke-width", widthScale(link[2]))
+        .attr("opacity", 0.38 + link[2] / 110)
+        .append("title")
+        .text(points[link[0]].name + " ↔ " + points[link[1]].name + "：併訪仮説スコア " + link[2] + "（方向・訪問順を示しません）");
+      if (link[2] >= 30) {
+        linkLayer.append("text")
+          .attr("class", "flow-link-label")
+          .attr("x", cx)
+          .attr("y", cy - 5)
+          .style("font-size", width < 560 ? "11px" : "12px")
+          .text(link[2]);
+      }
+    });
+
+    const activePointIds = new Set(links.flatMap((link) => [link[0], link[1]]));
+    const nodeLayer = svg.append("g").attr("aria-hidden", "true");
+    Array.from(activePointIds).forEach((pointId) => {
+      const point = points[pointId];
+      const xy = projection(point.coordinates);
+      const group = nodeLayer.append("g").attr("transform", "translate(" + xy[0] + "," + xy[1] + ")");
+      group.append("circle").attr("class", "flow-node-halo").attr("r", 12);
+      group.append("circle").attr("class", "flow-node").attr("r", 6);
+      group.append("text")
+        .attr("class", "flow-node-label")
+        .attr("x", point.dx)
+        .attr("y", point.dy)
+        .attr("text-anchor", point.anchor)
+        .style("font-size", width < 560 ? "11px" : "12px")
+        .text(point.name);
+    });
+    root.querySelector("#flow-map-desc").textContent = persona().name + "について、" + links.length + "組の併訪関係を表示しています。線に方向はなく、太いほど併訪仮説スコアが高いことを示します。";
+  }
+
+  function render() {
+    renderHeader();
+    renderRanking();
+    renderMap();
+  }
+
+  let resizeTimer = null;
+  const observer = new ResizeObserver(() => {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(renderMap, 80);
+  });
+  observer.observe(mapWrap);
+  render();
+})();
+</script>
+
+<script id="codex-visualization-floating-ui-core" src="https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js"></script>
+<script id="codex-visualization-floating-ui-dom" src="https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js"></script>
+<script id="codex-visualization-lucide" async src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js"></script>
+<script id="codex-visualization-tooltip">/* oxlint-disable typescript/no-unsafe-argument, typescript/no-unsafe-call, typescript/no-unsafe-return */
+// Runs inside the visualization sandbox, not the host webview.
+(() => {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set(["top", "right", "bottom", "left"]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =>
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest("[data-tooltip]")
+      : null;
+  const containsTarget = (trigger, target) =>
+    target?.nodeType != null && trigger.contains(target);
+  const getContent = (trigger) =>
+    trigger.getAttribute("data-tooltip")?.trim() ?? "";
+  const getPlacement = (trigger) => {
+    const placement = trigger.getAttribute("data-tooltip-placement");
+    return tooltipPlacements.has(placement) ? placement : "top";
+  };
+  const getTooltip = () => {
+    if (tooltip == null) {
+      tooltip = document.createElement("div");
+      tooltip.id = tooltipId;
+      tooltip.className = "tooltip";
+      tooltip.setAttribute("role", "tooltip");
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) => {
+    const ids = new Set(
+      (trigger.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute("aria-describedby");
+    } else {
+      trigger.setAttribute("aria-describedby", [...ids].join(" "));
+    }
+  };
+  const clearOpenTimeout = () => {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) => {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) => {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              "--tooltip-available-width",
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              "--tooltip-available-height",
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: "fixed",
+    })
+      .then(({ x, y }) => {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = "visible";
+      })
+      .catch(() => {
+        if (activeTrigger === trigger && request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) => {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = "hidden";
+    floating.style.transform = "translate(0, 0)";
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () => {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) => {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() < skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() => {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) => {
+    if (event.pointerType === "touch") {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(":focus-visible")) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) => {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () => {
+    closeTooltip(false);
+    document.removeEventListener("pointerover", handlePointerOpen);
+    document.removeEventListener("pointerout", handleLeave);
+    document.removeEventListener("focusin", handleFocusIn);
+    document.removeEventListener("focusout", handleLeave);
+    document.removeEventListener("keydown", handleKeyDown);
+    document.removeEventListener("contextmenu", handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener("pointerover", handlePointerOpen);
+  document.addEventListener("pointerout", handleLeave);
+  document.addEventListener("focusin", handleFocusIn);
+  document.addEventListener("focusout", handleLeave);
+  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("contextmenu", handleContextMenu);
+  window.addEventListener("pagehide", destroy, { once: true });
+})();
+</script>
+<script id="codex-visualization-lucide-initialization">(() => {
+  const initialize = () => {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById("codex-visualization-lucide")
+    ?.addEventListener("load", initialize, { once: true });
+})();
+</script>
+</body>
+</html>
