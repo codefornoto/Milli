@@ -964,6 +964,39 @@
         padding: 22px 26px 27px;
       }
 
+      .keyword-modal-toolbar {
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid #e6edf2;
+        background: #f8fbfc;
+        padding: 12px 20px;
+      }
+
+      .keyword-view-switch {
+        min-height: 38px;
+      }
+
+      .hourly-chart {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .hourly-chart text {
+        fill: #8290a0;
+        font-size: 9px;
+      }
+
+      .hourly-bar {
+        fill: var(--tifo-primary);
+        cursor: default;
+        transition: fill 0.18s ease, opacity 0.18s ease;
+      }
+
+      .hourly-bar:hover {
+        fill: var(--tifo-primary-dark);
+      }
+
       .line-chart {
         display: block;
         width: 100%;
@@ -1670,11 +1703,28 @@
       >
         <div class="modal-header">
           <div>
-            <span>24 MONTH TREND</span>
+            <span id="keywordModalEyebrow">24 MONTH TREND</span>
             <h2 id="keywordModalTitle">キーワードの推移</h2>
-            <p>過去2年間の案内内容に登場した回数</p>
+            <p id="keywordModalDescription">
+              過去2年間の案内内容に登場した回数
+            </p>
           </div>
           <button class="modal-close" type="button" aria-label="閉じる">×</button>
+        </div>
+
+        <div class="keyword-modal-toolbar">
+          <div class="segmented keyword-view-switch" aria-label="表示方法">
+            <button
+              class="active"
+              type="button"
+              data-keyword-view="monthly"
+            >
+              月別推移
+            </button>
+            <button type="button" data-keyword-view="hourly">
+              時間帯別
+            </button>
+          </div>
         </div>
 
         <div id="keywordChart" class="modal-body"></div>
@@ -1737,16 +1787,27 @@
         }
       ];
 
-      const CATEGORY_COLORS = [
-        "#ef5261",
-        "#ff7043",
-        "#f6a72b",
-        "#f6d553",
-        "#62bc6c",
-        "#5cc4c3",
-        "#9eb4d8",
-        "#8c88c9"
+      const GENRE_ORDER = [
+        "地図",
+        "観光スポット",
+        "交通手段",
+        "道路状況",
+        "食・グルメ",
+        "モデルコース",
+        "祭り",
+        "その他"
       ];
+
+      const GENRE_COLORS = {
+        "地図": "#ef5261",
+        "観光スポット": "#ff7043",
+        "交通手段": "#f6a72b",
+        "道路状況": "#f6d553",
+        "食・グルメ": "#62bc6c",
+        "モデルコース": "#5cc4c3",
+        "祭り": "#9eb4d8",
+        "その他": "#8c88c9"
+      };
 
       const STOP_WORDS = new Set([
         "能登",
@@ -1794,6 +1855,15 @@
         "欲しい"
       ]);
 
+      /*
+       * HTMLを file:// で直接開くと、ブラウザのセキュリティ制限により
+       * fetch("./stopword.txt") が拒否されます。
+       *
+       * その場合でも .site 版と同じ除外結果に近づけるため、配布時点の
+       * stopword.txt をフォールバックとしてHTML内にも保持します。
+       * Webサーバー上では、後述の loadStopWords() が ./stopword.txt を
+       * 追加で読み込みます。
+       */
       const EMBEDDED_STOPWORD_TEXT = `
 行き
 ます
@@ -1879,6 +1949,8 @@
         selectedMonth: getTokyoDateParts().month,
         keywordMode: "frequency",
         rangeMonths: 3,
+        selectedKeyword: null,
+        keywordModalView: "monthly",
         selectedMunicipality: null
       };
 
@@ -1928,6 +2000,48 @@
 
         const [year, month, day] = value.split("-");
         return `${year}.${Number(month)}.${Number(day)}`;
+      }
+
+      function extractTimeParts(value) {
+        const match = String(value || "").match(
+          /(?:^|[T\s])(\d{1,2}):(\d{2})(?::\d{2})?/
+        );
+
+        if (!match) {
+          return null;
+        }
+
+        const hour = Number(match[1]);
+        const minute = Number(match[2]);
+
+        if (
+          !Number.isInteger(hour) ||
+          !Number.isInteger(minute) ||
+          hour < 0 ||
+          hour > 23 ||
+          minute < 0 ||
+          minute > 59
+        ) {
+          return null;
+        }
+
+        return {
+          hour,
+          minute
+        };
+      }
+
+      function formatTime(value) {
+        const time = extractTimeParts(value);
+
+        if (!time) {
+          return "時刻不明";
+        }
+
+        return [
+          String(time.hour).padStart(2, "0"),
+          String(time.minute).padStart(2, "0")
+        ].join(":");
       }
 
       function monthLabel(monthKey) {
@@ -2209,6 +2323,8 @@
           .map((record) => {
             const tags = [
               `<span class="tag date">${escapeHtml(formatDate(record.date))}</span>`,
+              `<span class="tag">${escapeHtml(formatTime(record.timestamp))}</span>`,
+              `<span class="tag">${record.people > 0 ? `${record.people}名` : "人数不明"}</span>`,
               `<span class="tag">${escapeHtml(record.nationality)}</span>`,
               ...record.municipalities.map(
                 (item) => `<span class="tag">${escapeHtml(item)}</span>`
@@ -2401,13 +2517,18 @@
           .join("");
       }
 
+      function countKeywordInRecord(record, keyword) {
+        return tokenize(record.summary)
+          .filter((word) => word === keyword)
+          .length;
+      }
+
       function buildKeywordSeries(keyword) {
         return lastMonthKeys(state.currentDate.month, 24).map((month) => {
           const count = state.records
             .filter((record) => record.date.startsWith(month))
             .reduce((sum, record) => {
-              return sum +
-                tokenize(record.summary).filter((word) => word === keyword).length;
+              return sum + countKeywordInRecord(record, keyword);
             }, 0);
 
           return {
@@ -2415,6 +2536,39 @@
             value: count
           };
         });
+      }
+
+      function buildHourlyKeywordSeries(keyword) {
+        const firstMonth = shiftMonth(state.currentDate.month, -23);
+        const points = Array.from({ length: 9 }, (_, index) => {
+          const startHour = index + 9;
+
+          return {
+            startHour,
+            label: `${startHour}:00〜${startHour + 1}:00`,
+            shortLabel: `${startHour}〜${startHour + 1}`,
+            value: 0
+          };
+        });
+
+        state.records
+          .filter((record) => {
+            const month = record.date.slice(0, 7);
+            return month >= firstMonth &&
+              month <= state.currentDate.month;
+          })
+          .forEach((record) => {
+            const time = extractTimeParts(record.timestamp);
+
+            if (!time || time.hour < 9 || time.hour >= 18) {
+              return;
+            }
+
+            points[time.hour - 9].value +=
+              countKeywordInRecord(record, keyword);
+          });
+
+        return points;
       }
 
       function createLineChart(points) {
@@ -2519,15 +2673,145 @@
         `;
       }
 
+      function createHourlyHistogram(points) {
+        const width = 720;
+        const height = 330;
+        const padding = {
+          top: 30,
+          right: 18,
+          bottom: 54,
+          left: 42
+        };
+        const chartWidth = width - padding.left - padding.right;
+        const chartHeight = height - padding.top - padding.bottom;
+        const maximum = Math.max(
+          ...points.map((point) => point.value),
+          1
+        );
+        const slotWidth = chartWidth / points.length;
+        const barWidth = Math.min(48, slotWidth * 0.68);
+
+        const guides = [0, 0.25, 0.5, 0.75, 1]
+          .map((ratio) => {
+            const y = padding.top + chartHeight - ratio * chartHeight;
+            const label = Math.round(maximum * ratio);
+
+            return `
+              <line
+                x1="${padding.left}"
+                y1="${y}"
+                x2="${width - padding.right}"
+                y2="${y}"
+                stroke="#e4ebef"
+              />
+              <text x="10" y="${y + 3}">${label}</text>
+            `;
+          })
+          .join("");
+
+        const bars = points
+          .map((point, index) => {
+            const barHeight =
+              (point.value / maximum) * chartHeight;
+            const x =
+              padding.left +
+              index * slotWidth +
+              (slotWidth - barWidth) / 2;
+            const y = padding.top + chartHeight - barHeight;
+
+            return `
+              <rect
+                class="hourly-bar"
+                x="${x}"
+                y="${y}"
+                width="${barWidth}"
+                height="${Math.max(barHeight, point.value ? 3 : 0)}"
+                rx="7"
+                data-graph-tooltip="${escapeHtml(
+                  `${point.label}：${point.value}回`
+                )}"
+              />
+              <text
+                x="${x + barWidth / 2}"
+                y="${height - 21}"
+                text-anchor="middle"
+              >
+                ${point.shortLabel}
+              </text>
+              ${
+                point.value
+                  ? `
+                    <text
+                      x="${x + barWidth / 2}"
+                      y="${Math.max(y - 8, 15)}"
+                      text-anchor="middle"
+                    >
+                      ${point.value}
+                    </text>
+                  `
+                  : ""
+              }
+            `;
+          })
+          .join("");
+
+        return `
+          <svg
+            class="hourly-chart"
+            viewBox="0 0 ${width} ${height}"
+            role="img"
+            aria-label="9時から18時までのキーワード出現回数"
+          >
+            ${guides}
+            ${bars}
+          </svg>
+        `;
+      }
+
+      function renderKeywordModalChart() {
+        const keyword = state.selectedKeyword;
+
+        if (!keyword) {
+          return;
+        }
+
+        const isHourly = state.keywordModalView === "hourly";
+        const points = isHourly
+          ? buildHourlyKeywordSeries(keyword)
+          : buildKeywordSeries(keyword);
+
+        document.getElementById("keywordModalEyebrow").textContent =
+          isHourly ? "HOURLY DISTRIBUTION" : "24 MONTH TREND";
+
+        document.getElementById("keywordModalDescription").textContent =
+          isHourly
+            ? "過去2年間の案内を、9:00〜18:00の1時間帯ごとに集計"
+            : "過去2年間の案内内容に登場した回数";
+
+        document.querySelectorAll("[data-keyword-view]").forEach(
+          (button) => {
+            button.classList.toggle(
+              "active",
+              button.dataset.keywordView === state.keywordModalView
+            );
+          }
+        );
+
+        document.getElementById("keywordChart").innerHTML =
+          isHourly
+            ? createHourlyHistogram(points)
+            : createLineChart(points);
+      }
+
       function openKeywordModal(keyword) {
         const modal = document.getElementById("keywordModal");
-        const points = buildKeywordSeries(keyword);
+        state.selectedKeyword = keyword;
+        state.keywordModalView = "monthly";
 
         document.getElementById("keywordModalTitle").textContent =
           `「${keyword}」の推移`;
 
-        document.getElementById("keywordChart").innerHTML =
-          createLineChart(points);
+        renderKeywordModalChart();
 
         modal.hidden = false;
         document.body.style.overflow = "hidden";
@@ -2546,36 +2830,28 @@
           });
         });
 
-        const sortedGenres = Array.from(
+        const primaryGenres = GENRE_ORDER.filter(
+          (genre) => genre !== "その他"
+        );
+        const primaryGenreSet = new Set(primaryGenres);
+        const otherCount = Array.from(
           genreCounts,
           ([name, count]) => ({
             name,
             count
           })
-        ).sort((itemA, itemB) => itemB.count - itemA.count);
-
-        const primaryGenres = sortedGenres
-          .slice(0, 7)
-          .map((item) => item.name);
-
-        const categories = sortedGenres
-          .slice(0, 7)
-          .map((item, index) => ({
-            ...item,
-            color: CATEGORY_COLORS[index]
-          }));
-
-        const otherCount = sortedGenres
-          .slice(7)
+        )
+          .filter((item) => !primaryGenreSet.has(item.name))
           .reduce((sum, item) => sum + item.count, 0);
 
-        if (otherCount) {
-          categories.push({
-            name: "その他",
-            count: otherCount,
-            color: CATEGORY_COLORS[7]
-          });
-        }
+        const categories = GENRE_ORDER.map((name) => ({
+          name,
+          count:
+            name === "その他"
+              ? otherCount
+              : genreCounts.get(name) || 0,
+          color: GENRE_COLORS[name]
+        }));
 
         const municipalityRecords = new Map();
 
@@ -2698,22 +2974,27 @@
 
       function renderVerticalBars(categories) {
         const container = document.getElementById("verticalBars");
-
-        if (!categories.length) {
-          container.innerHTML =
-            '<div class="empty-state">この月の案内データはありません。</div>';
-          return;
-        }
-
-        const maximum = categories[0]?.count || 1;
         const total = categories.reduce(
           (sum, category) => sum + category.count,
           0
         );
 
+        if (!categories.length || !total) {
+          container.innerHTML =
+            '<div class="empty-state">この月の案内データはありません。</div>';
+          return;
+        }
+
+        const maximum = Math.max(
+          ...categories.map((category) => category.count),
+          1
+        );
+
         container.innerHTML = categories
           .map((category) => {
-            const height = Math.max(4, (category.count / maximum) * 100);
+            const height = category.count
+              ? Math.max(4, (category.count / maximum) * 100)
+              : 0;
             const percentage = total
               ? (category.count / total) * 100
               : 0;
@@ -2920,6 +3201,11 @@
         if (modal.id === "municipalityModal") {
           state.selectedMunicipality = null;
         }
+
+        if (modal.id === "keywordModal") {
+          state.selectedKeyword = null;
+          state.keywordModalView = "monthly";
+        }
       }
 
       function renderAll() {
@@ -2974,6 +3260,20 @@
           if (button) {
             openKeywordModal(button.dataset.keyword);
           }
+        }
+      );
+
+      document.getElementById("keywordModal").addEventListener(
+        "click",
+        (event) => {
+          const button = event.target.closest("[data-keyword-view]");
+
+          if (!button) {
+            return;
+          }
+
+          state.keywordModalView = button.dataset.keywordView;
+          renderKeywordModalChart();
         }
       );
 
