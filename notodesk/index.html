@@ -1,0 +1,3073 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>能登デスクポータル</title>
+    <meta
+      name="description"
+      content="能登観光案内所［能登デスク］の案内履歴・相談トレンド・月次集計をまとめたポータルです。"
+    >
+    <meta name="theme-color" content="#4FD1C5">
+
+    <link rel="icon" href="./favicon.ico">
+    <link rel="apple-touch-icon" href="./notodesklogo.png">
+    <link rel="manifest" href="./manifest.json">
+
+    <style>
+      :root {
+        --tifo-bg: #f7fafc;
+        --tifo-text: #2d3748;
+        --tifo-primary: #4fd1c5;
+        --tifo-primary-dark: #38b2ac;
+        --tifo-card-border: #e2e8f0;
+        --tifo-card-bg: #ffffff;
+        --navy: #203144;
+        --muted: #64748b;
+        --faint: #8795a8;
+        --shadow: 0 16px 40px -28px rgba(32, 49, 68, 0.4);
+        --content-width: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--tifo-bg);
+        color: var(--tifo-text);
+        font-family:
+          "Noto Sans JP",
+          "Hiragino Kaku Gothic ProN",
+          "Yu Gothic",
+          sans-serif;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .section-wrap {
+        width: min(calc(100% - 40px), var(--content-width));
+        margin-inline: auto;
+      }
+
+      .site-header {
+        position: sticky;
+        z-index: 40;
+        top: 0;
+        border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+        background: rgba(247, 250, 252, 0.92);
+        backdrop-filter: blur(14px);
+      }
+
+      .header-inner {
+        display: flex;
+        min-height: 74px;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand img {
+        width: 46px;
+        height: 46px;
+        object-fit: contain;
+      }
+
+      .brand-text {
+        display: grid;
+        gap: 2px;
+      }
+
+      .brand-text strong {
+        color: var(--navy);
+        font-size: 0.96rem;
+      }
+
+      .brand-text small {
+        color: var(--faint);
+        font-size: 0.62rem;
+        letter-spacing: 0.08em;
+      }
+
+      .desktop-nav {
+        display: flex;
+        margin-left: auto;
+        gap: 22px;
+        color: #536276;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      .desktop-nav a:hover {
+        color: var(--tifo-primary-dark);
+      }
+
+      .sheet-button {
+        display: inline-flex;
+        min-height: 42px;
+        align-items: center;
+        gap: 7px;
+        border: 1px solid #d8e2ea;
+        border-radius: 999px;
+        background: #fff;
+        padding: 0 16px;
+        color: #405066;
+        font-size: 0.76rem;
+        font-weight: 700;
+      }
+
+      .dashboard-top {
+        display: flex;
+        justify-content: flex-end;
+        padding-block: 22px 12px;
+      }
+
+      .sync-compact {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--faint);
+        font-size: 0.68rem;
+      }
+
+      .sync-compact p {
+        margin: 0;
+      }
+
+      .sync-compact strong {
+        margin-left: 4px;
+        color: var(--navy);
+      }
+
+      .sync-compact button {
+        border: 0;
+        background: transparent;
+        padding: 5px 0;
+        color: var(--tifo-primary-dark);
+        cursor: pointer;
+        font-size: 0.68rem;
+        font-weight: 800;
+      }
+
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border-radius: 999px;
+        background: #e9fbf8;
+        padding: 6px 10px;
+        color: #218b83;
+        font-size: 0.68rem;
+        font-weight: 800;
+      }
+
+      .status-badge::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: currentColor;
+        content: "";
+      }
+
+      .status-badge.loading {
+        background: #edf2f7;
+        color: #64748b;
+      }
+
+      .status-badge.cached {
+        background: #fff7dc;
+        color: #9a7414;
+      }
+
+      .status-badge.error {
+        background: #fff0f0;
+        color: #b34545;
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-bottom: 52px;
+      }
+
+      .summary-card,
+      .tifo-card {
+        border: 1px solid var(--tifo-card-border);
+        background: var(--tifo-card-bg);
+        box-shadow: var(--shadow);
+      }
+
+      .summary-card {
+        min-height: 126px;
+        border-radius: 24px;
+        padding: 22px 26px;
+      }
+
+      .summary-card.today {
+        border-color: rgba(79, 209, 197, 0.6);
+      }
+
+      .summary-card p {
+        margin: 0 0 5px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .summary-card strong {
+        display: block;
+        color: var(--navy);
+        font-size: 2.25rem;
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+      }
+
+      .summary-card strong span {
+        margin-left: 4px;
+        font-size: 0.9rem;
+      }
+
+      .summary-card small {
+        display: block;
+        margin-top: 7px;
+        color: var(--faint);
+        font-size: 0.72rem;
+      }
+
+      .content-section {
+        scroll-margin-top: 100px;
+        margin-bottom: 92px;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+
+      .section-kicker {
+        margin: 0 0 10px;
+        color: var(--tifo-primary-dark);
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.17em;
+      }
+
+      .section-heading h2 {
+        margin: 0;
+        color: var(--navy);
+        font-size: clamp(1.55rem, 3vw, 2.15rem);
+      }
+
+      .section-heading p:last-child {
+        margin: 9px 0 0;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .result-count {
+        display: flex;
+        align-items: baseline;
+        gap: 3px;
+        color: var(--muted);
+      }
+
+      .result-count strong {
+        color: var(--navy);
+        font-size: 1.55rem;
+      }
+
+      .result-count span {
+        font-size: 0.72rem;
+      }
+
+      .tifo-card {
+        border-radius: 24px;
+        padding: 24px;
+      }
+
+      .search-box {
+        display: flex;
+        min-height: 54px;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #dfe7ec;
+        border-radius: 16px;
+        background: #f9fbfc;
+        padding: 0 16px;
+      }
+
+      .search-box span {
+        color: var(--tifo-primary-dark);
+        font-size: 1.25rem;
+      }
+
+      .search-box input {
+        width: 100%;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: var(--navy);
+      }
+
+      .history-list {
+        height: 520px;
+        margin-top: 12px;
+        overflow-y: auto;
+        padding-right: 8px;
+      }
+
+      .history-item {
+        border-bottom: 1px solid #edf1f4;
+        padding: 20px 8px;
+      }
+
+      .history-item:last-child {
+        border-bottom: 0;
+      }
+
+      .history-tags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        border-radius: 999px;
+        background: #eef4f6;
+        padding: 5px 9px;
+        color: #617187;
+        font-size: 0.62rem;
+      }
+
+      .tag.date {
+        background: #def8f4;
+        color: #238f87;
+        font-weight: 800;
+      }
+
+      .history-item p {
+        margin: 13px 0 0;
+        color: #35465b;
+        font-size: 0.88rem;
+        line-height: 1.8;
+      }
+
+      .empty-state {
+        display: grid;
+        min-height: 180px;
+        place-items: center;
+        color: var(--faint);
+        font-size: 0.8rem;
+      }
+
+      .trend-section {
+        border-block: 1px solid #dfe8ed;
+        background: #eef9f8;
+        padding-block: 78px;
+      }
+
+      .trend-toolbar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .stopword-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-height: 28px;
+        border: 1px solid #d9e5e8;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.78);
+        padding: 4px 10px;
+        color: #64748b;
+        font-size: 0.66rem;
+        white-space: nowrap;
+      }
+
+      .stopword-status::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #a0aec0;
+        content: "";
+      }
+
+      .stopword-status.loaded::before {
+        background: var(--tifo-primary-dark);
+      }
+
+      .stopword-status.fallback::before {
+        background: #edb83f;
+      }
+
+      .trend-toolbar select,
+      .segmented {
+        min-height: 42px;
+        border: 1px solid #d9e5e8;
+        border-radius: 999px;
+        background: #fff;
+      }
+
+      .trend-toolbar select {
+        padding: 0 36px 0 14px;
+        color: #526176;
+        font-size: 0.72rem;
+      }
+
+      .segmented {
+        display: flex;
+        padding: 3px;
+      }
+
+      .segmented button {
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
+        padding: 8px 13px;
+        color: var(--faint);
+        cursor: pointer;
+        font-size: 0.68rem;
+        font-weight: 700;
+      }
+
+      .segmented button.active {
+        background: var(--tifo-primary);
+        color: #fff;
+      }
+
+      .trend-grid {
+        display: grid;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 18px;
+      }
+
+      .trend-note {
+        margin: 14px 2px 0;
+        color: #718096;
+        font-size: 0.7rem;
+        line-height: 1.7;
+      }
+
+      .word-cloud {
+        display: flex;
+        min-height: 360px;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        gap: 10px 16px;
+        flex-wrap: wrap;
+        padding: 28px;
+      }
+
+      .keyword-button {
+        border: 0;
+        background: transparent;
+        color: var(--navy);
+        cursor: pointer;
+        font-weight: 700;
+        transition: 0.18s ease;
+      }
+
+      .keyword-button:hover {
+        color: var(--tifo-primary-dark);
+        transform: translateY(-2px);
+      }
+
+      .ranking-list {
+        display: grid;
+        max-height: 360px;
+        gap: 8px;
+        overflow-y: auto;
+      }
+
+      .ranking-item {
+        display: grid;
+        grid-template-columns: 30px 1fr auto;
+        align-items: center;
+        gap: 10px;
+        border: 0;
+        border-radius: 13px;
+        background: #f7fafb;
+        padding: 9px 11px;
+        color: var(--navy);
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .rank-badge {
+        display: grid;
+        width: 27px;
+        height: 27px;
+        place-items: center;
+        border-radius: 50%;
+        background: #a9a9a9;
+        color: #fff;
+        font-size: 0.68rem;
+        font-weight: 800;
+      }
+
+      .ranking-item:nth-child(1) .rank-badge {
+        background: #e7b80f;
+      }
+
+      .ranking-item:nth-child(2) .rank-badge {
+        background: #9faab7;
+      }
+
+      .ranking-item:nth-child(3) .rank-badge {
+        background: #bd7745;
+      }
+
+      .ranking-item strong {
+        font-size: 0.77rem;
+      }
+
+      .ranking-item small {
+        color: var(--faint);
+        font-size: 0.62rem;
+      }
+
+      .monthly-heading {
+        align-items: center;
+      }
+
+      .month-switcher {
+        display: grid;
+        grid-template-columns: 42px 130px 42px;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .month-switcher button,
+      .modal-month button {
+        display: grid;
+        width: 40px;
+        height: 40px;
+        place-items: center;
+        border: 1px solid #d9e4ea;
+        border-radius: 50%;
+        background: #fff;
+        color: #405066;
+        cursor: pointer;
+        font-size: 1.25rem;
+      }
+
+      .month-switcher button:disabled,
+      .modal-month button:disabled {
+        cursor: default;
+        opacity: 0.3;
+      }
+
+      .month-switcher strong,
+      .modal-month strong {
+        color: var(--navy);
+        text-align: center;
+      }
+
+      .monthly-summary {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .monthly-summary article {
+        display: flex;
+        min-height: 90px;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid var(--tifo-card-border);
+        border-radius: 18px;
+        background: #fff;
+        padding: 18px 20px;
+      }
+
+      .monthly-summary span {
+        color: var(--muted);
+        font-size: 0.7rem;
+      }
+
+      .monthly-summary strong {
+        color: var(--navy);
+        font-size: 1.35rem;
+      }
+
+      .monthly-summary small {
+        margin-left: 3px;
+        font-size: 0.65rem;
+      }
+
+      .monthly-card {
+        margin-bottom: 18px;
+      }
+
+      .card-title-row {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .card-title-row > div > span {
+        color: var(--tifo-primary-dark);
+        font-size: 0.62rem;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+      }
+
+      .card-title-row h3 {
+        margin: 6px 0 0;
+        color: var(--navy);
+        font-size: 1.12rem;
+      }
+
+      .card-title-row > small {
+        color: var(--faint);
+        font-size: 0.62rem;
+      }
+
+      .vertical-bars {
+        display: flex;
+        height: 270px;
+        align-items: end;
+        justify-content: space-around;
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+      .vertical-bar-item {
+        display: grid;
+        height: 100%;
+        min-width: 58px;
+        flex: 1;
+        grid-template-rows: 22px 1fr 48px;
+        gap: 6px;
+        text-align: center;
+      }
+
+      .bar-value {
+        color: var(--muted);
+        font-size: 0.68rem;
+        font-weight: 800;
+      }
+
+      .vertical-bar-track {
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        border-bottom: 1px solid #dce5eb;
+      }
+
+      .vertical-bar-track i {
+        display: block;
+        width: min(65%, 66px);
+        min-height: 4px;
+        border-radius: 7px 7px 0 0;
+        cursor: default;
+      }
+
+      .bar-label {
+        color: #536276;
+        font-size: 0.67rem;
+        font-weight: 700;
+        line-height: 1.35;
+      }
+
+      .legend {
+        display: flex;
+        max-width: 650px;
+        justify-content: end;
+        gap: 7px 12px;
+        flex-wrap: wrap;
+      }
+
+      .legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: #728196;
+        cursor: default;
+        font-size: 0.62rem;
+      }
+
+      .legend-dot,
+      .donut-label i {
+        width: 10px;
+        height: 10px;
+        flex: 0 0 auto;
+        border-radius: 50%;
+      }
+
+      .matrix-scroll {
+        margin-top: 24px;
+        overflow-x: auto;
+      }
+
+      .matrix-table {
+        min-width: 880px;
+      }
+
+      .matrix-row {
+        display: grid;
+        min-height: 49px;
+        grid-template-columns: 62px 110px 1fr;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid #edf1f4;
+      }
+
+      .matrix-count {
+        color: var(--muted);
+        font-size: 0.68rem;
+        font-weight: 800;
+        text-align: right;
+      }
+
+      .municipality-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+        border: 0;
+        background: transparent;
+        padding: 7px 3px;
+        color: #43536a;
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .municipality-button strong {
+        font-size: 0.76rem;
+        white-space: nowrap;
+      }
+
+      .municipality-button span {
+        color: var(--tifo-primary-dark);
+        opacity: 0;
+      }
+
+      .municipality-button:hover span,
+      .municipality-button:focus-visible span {
+        opacity: 1;
+      }
+
+      .stacked-bar {
+        display: flex;
+        width: 100%;
+        height: 28px;
+        overflow: hidden;
+        border-radius: 6px;
+        background: #eef2f5;
+      }
+
+      .stacked-bar span {
+        display: grid;
+        min-width: 2px;
+        place-items: center;
+        overflow: hidden;
+        color: rgba(32, 49, 68, 0.9);
+        cursor: default;
+        font-size: 0.58rem;
+        font-weight: 800;
+      }
+
+      .links-section {
+        border-top: 1px solid #e0e7ed;
+        background: #fff;
+        padding-block: 70px;
+      }
+
+      .links-inner {
+        display: grid;
+        grid-template-columns: 0.55fr 1.45fr;
+        align-items: center;
+        gap: 54px;
+      }
+
+      .links-inner h2 {
+        margin: 0;
+        color: var(--navy);
+      }
+
+      .link-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      .link-cards a {
+        display: grid;
+        min-height: 130px;
+        grid-template-columns: 1fr auto;
+        align-content: center;
+        gap: 8px;
+        border: 1px solid var(--tifo-card-border);
+        border-radius: 20px;
+        padding: 22px;
+        transition: 0.2s ease;
+      }
+
+      .link-cards a:hover {
+        border-color: var(--tifo-primary);
+        transform: translateY(-2px);
+      }
+
+      .link-cards a > span {
+        grid-column: 1 / -1;
+        color: var(--tifo-primary-dark);
+        font-size: 0.6rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+      }
+
+      .link-cards strong {
+        color: var(--navy);
+        font-size: 0.86rem;
+      }
+
+      footer {
+        background: var(--navy);
+        color: #fff;
+      }
+
+      .footer-inner {
+        display: flex;
+        min-height: 180px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .footer-inner strong {
+        font-size: 0.78rem;
+      }
+
+      .footer-inner p {
+        margin: 9px 0 0;
+        color: #aebdca;
+        font-size: 0.68rem;
+      }
+
+      .footer-mark {
+        color: #91a2b2;
+        font-size: 0.64rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+      }
+
+      .mobile-nav {
+        display: none;
+      }
+
+      .modal-overlay {
+        position: fixed;
+        z-index: 80;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(32, 49, 68, 0.74);
+        padding: 20px;
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-overlay[hidden] {
+        display: none;
+      }
+
+      .modal-content {
+        display: flex;
+        width: min(760px, 100%);
+        max-height: 88vh;
+        overflow: hidden;
+        flex-direction: column;
+        border-radius: 26px;
+        background: #fff;
+        box-shadow: 0 28px 80px -30px rgba(15, 30, 45, 0.8);
+      }
+
+      .modal-header {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 20px;
+        border-bottom: 1px solid #e6edf2;
+        padding: 24px 27px 19px;
+      }
+
+      .modal-header > div > span {
+        color: var(--tifo-primary-dark);
+        font-size: 0.62rem;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+      }
+
+      .modal-header h2 {
+        margin: 5px 0 0;
+        color: var(--navy);
+        font-size: 1.38rem;
+      }
+
+      .modal-header p {
+        margin: 7px 0 0;
+        color: var(--faint);
+        font-size: 0.72rem;
+      }
+
+      .modal-close {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        background: #eef3f6;
+        color: var(--muted);
+        cursor: pointer;
+        font-size: 1.25rem;
+      }
+
+      .modal-body {
+        overflow-y: auto;
+        padding: 22px 26px 27px;
+      }
+
+      .line-chart {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .line-chart text {
+        fill: #8290a0;
+        font-size: 9px;
+      }
+
+      .modal-month {
+        display: grid;
+        grid-template-columns: 42px 140px 42px;
+        align-items: center;
+        align-self: center;
+        gap: 8px;
+        padding-top: 18px;
+      }
+
+      .donut-layout {
+        display: grid;
+        grid-template-columns: 230px 1fr;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .donut-chart {
+        position: relative;
+        width: 220px;
+        aspect-ratio: 1;
+      }
+
+      .donut-chart svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        transform: rotate(-90deg);
+      }
+
+      .donut-track,
+      .donut-segment {
+        fill: none;
+        stroke-width: 24;
+      }
+
+      .donut-track {
+        stroke: #edf2f7;
+      }
+
+      .donut-segment {
+        cursor: default;
+        transition: filter 0.18s ease, stroke-width 0.18s ease;
+      }
+
+      .donut-segment:hover {
+        filter: brightness(0.93);
+        stroke-width: 27;
+      }
+
+      .donut-hole {
+        position: absolute;
+        top: 21%;
+        left: 21%;
+        display: grid;
+        width: 58%;
+        aspect-ratio: 1;
+        place-content: center;
+        border-radius: 50%;
+        background: #fff;
+        text-align: center;
+      }
+
+      .donut-hole strong {
+        color: var(--navy);
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .donut-hole span {
+        margin-top: 7px;
+        color: var(--faint);
+        font-size: 0.65rem;
+      }
+
+      .donut-legend {
+        display: grid;
+        width: 100%;
+        gap: 7px;
+      }
+
+      .donut-row {
+        display: grid;
+        grid-template-columns: 1fr auto 48px;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 1px solid #edf1f4;
+        padding: 7px 0;
+      }
+
+      .donut-label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        color: #526176;
+        font-size: 0.75rem;
+      }
+
+      .donut-row strong {
+        color: var(--navy);
+        font-size: 0.76rem;
+      }
+
+      .donut-row small {
+        color: var(--faint);
+        font-size: 0.67rem;
+        text-align: right;
+      }
+
+      .graph-tooltip {
+        position: fixed;
+        z-index: 120;
+        max-width: min(280px, calc(100vw - 24px));
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        background: rgba(32, 49, 68, 0.96);
+        padding: 8px 11px;
+        color: #fff;
+        box-shadow: 0 10px 26px -14px rgba(15, 30, 45, 0.8);
+        font-size: 0.7rem;
+        font-weight: 700;
+        line-height: 1.45;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+
+      .graph-tooltip[hidden] {
+        display: none;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background: #f1f1f1;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #cbd5df;
+      }
+
+      @media (max-width: 920px) {
+        .desktop-nav {
+          display: none;
+        }
+
+        .sheet-button {
+          margin-left: auto;
+        }
+
+        .trend-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .links-inner {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+
+        .link-cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 680px) {
+        body {
+          padding-bottom: 67px;
+        }
+
+        .section-wrap {
+          width: min(calc(100% - 28px), var(--content-width));
+        }
+
+        .header-inner {
+          min-height: 68px;
+        }
+
+        .brand-text small {
+          display: none;
+        }
+
+        .brand-text strong {
+          max-width: 120px;
+          font-size: 0.88rem;
+          line-height: 1.25;
+        }
+
+        .brand img {
+          width: 40px;
+          height: 40px;
+        }
+
+        .sheet-button {
+          min-height: 38px;
+          padding-inline: 12px;
+          font-size: 0.7rem;
+        }
+
+        .dashboard-top {
+          padding-block: 12px 8px;
+        }
+
+        .sync-compact {
+          gap: 7px;
+          font-size: 0.59rem;
+        }
+
+        .status-badge {
+          padding: 5px 7px;
+          font-size: 0.58rem;
+        }
+
+        .summary-grid {
+          gap: 10px;
+          margin-bottom: 48px;
+        }
+
+        .summary-card {
+          min-height: 112px;
+          border-radius: 19px;
+          padding: 16px;
+        }
+
+        .summary-card strong {
+          font-size: 1.8rem;
+        }
+
+        .summary-card small {
+          line-height: 1.35;
+        }
+
+        .content-section {
+          margin-bottom: 68px;
+        }
+
+        .section-heading {
+          align-items: start;
+        }
+
+        .section-heading p:last-child {
+          max-width: 270px;
+          line-height: 1.6;
+        }
+
+        .history-card,
+        .word-cloud-card,
+        .ranking-card,
+        .monthly-card,
+        .matrix-card {
+          padding: 17px;
+        }
+
+        .history-list {
+          height: 520px;
+        }
+
+        .trend-section {
+          padding-block: 64px;
+        }
+
+        .trend-toolbar {
+          width: 100%;
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .segmented button {
+          flex: 1;
+        }
+
+        .word-cloud {
+          min-height: 300px;
+          padding: 20px 4px;
+        }
+
+        .monthly-heading {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .month-switcher {
+          width: 100%;
+          grid-template-columns: 42px 1fr 42px;
+        }
+
+        .monthly-summary {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+
+        .monthly-summary article {
+          min-height: 72px;
+        }
+
+        .vertical-bars {
+          height: 250px;
+          gap: 4px;
+        }
+
+        .vertical-bar-item {
+          min-width: 34px;
+          grid-template-rows: 20px 1fr 54px;
+        }
+
+        .bar-label {
+          font-size: 0.55rem;
+          word-break: break-all;
+        }
+
+        .card-title-row {
+          display: block;
+        }
+
+        .legend {
+          margin-top: 14px;
+          justify-content: start;
+        }
+
+        .matrix-table {
+          min-width: 720px;
+        }
+
+        .matrix-row {
+          grid-template-columns: 54px 112px 1fr;
+        }
+
+        .municipality-button {
+          border-radius: 9px;
+          background: #f1faf9;
+          padding: 8px 9px;
+        }
+
+        .municipality-button span {
+          opacity: 1;
+        }
+
+        .link-cards {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-inner {
+          min-height: 190px;
+          align-items: start;
+          justify-content: center;
+          flex-direction: column;
+        }
+
+        .footer-mark {
+          display: none;
+        }
+
+        .mobile-nav {
+          position: fixed;
+          z-index: 50;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          display: grid;
+          height: 67px;
+          grid-template-columns: repeat(4, 1fr);
+          border-top: 1px solid #dce5eb;
+          background: rgba(255, 255, 255, 0.96);
+          padding-bottom: env(safe-area-inset-bottom);
+          backdrop-filter: blur(12px);
+        }
+
+        .mobile-nav a {
+          display: grid;
+          place-items: center;
+          color: var(--muted);
+          font-size: 0.66rem;
+        }
+
+        .modal-overlay {
+          align-items: end;
+          padding: 0;
+        }
+
+        .modal-content {
+          width: 100%;
+          max-height: 91vh;
+          border-radius: 24px 24px 0 0;
+        }
+
+        .modal-header {
+          padding: 20px 19px 16px;
+        }
+
+        .modal-body {
+          padding: 20px 19px 25px;
+        }
+
+        .donut-layout {
+          grid-template-columns: 1fr;
+          justify-items: center;
+          gap: 22px;
+        }
+
+        .donut-chart {
+          width: min(210px, 72vw);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="section-wrap header-inner">
+        <a class="brand" href="#top" aria-label="能登デスクポータル トップへ">
+          <img src="./notodesklogo.png" alt="NOTO DESK">
+          <span class="brand-text">
+            <strong>能登デスクポータル</strong>
+            <small>NOTO DESK PORTAL</small>
+          </span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="ページ内メニュー">
+          <a href="#history">案内履歴</a>
+          <a href="#trend">トレンド</a>
+          <a href="#monthly">月次集計</a>
+          <a href="#links">各種リンク</a>
+        </nav>
+
+        <a
+          class="sheet-button"
+          href="https://docs.google.com/spreadsheets/d/1f21SWEiq3h_nFDtJBeAf8GuxwfTsFDvp2GJ5SUbVv9Q/edit?gid=1209877994#gid=1209877994"
+          target="_blank"
+          rel="noreferrer"
+        >
+          元データ
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="section-wrap dashboard-top" aria-label="データ更新状況">
+        <div class="sync-compact">
+          <span id="statusBadge" class="status-badge loading">読み込み中</span>
+          <p>
+            最終データ日
+            <strong id="latestDate">—</strong>
+          </p>
+          <button id="reloadButton" type="button">再読み込み</button>
+        </div>
+      </section>
+
+      <section class="section-wrap summary-grid" aria-label="案内件数サマリー">
+        <article class="summary-card today">
+          <p>本日の案内件数</p>
+          <strong>
+            <span id="todayCount">—</span><span>件</span>
+          </strong>
+          <small><span id="todayPeople">—</span>人をご案内</small>
+        </article>
+
+        <article class="summary-card">
+          <p>今月の案内件数</p>
+          <strong>
+            <span id="monthCount">—</span><span>件</span>
+          </strong>
+          <small><span id="monthPeople">—</span>人をご案内</small>
+        </article>
+      </section>
+
+      <section id="history" class="section-wrap content-section">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">GUIDANCE HISTORY</p>
+            <h2>案内履歴</h2>
+            <p>相談の言葉を、最新の日付からたどれます。</p>
+          </div>
+
+          <div class="result-count">
+            <strong id="historyCount">0</strong>
+            <span>件</span>
+          </div>
+        </div>
+
+        <div class="tifo-card history-card">
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="案内内容・国籍・自治体・ジャンルを検索"
+            >
+          </label>
+
+          <div
+            id="historyList"
+            class="history-list custom-scrollbar"
+            aria-live="polite"
+          >
+            <div class="empty-state">データを読み込んでいます。</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="trend" class="trend-section content-section">
+        <div class="section-wrap">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">CONSULTATION TREND</p>
+              <h2>相談トレンド</h2>
+              <p>相談文に多く登場する言葉から、旅行者の関心を見渡します。</p>
+            </div>
+
+            <div class="trend-toolbar">
+              <select id="rangeSelect" aria-label="集計期間">
+                <option value="1">直近1か月</option>
+                <option value="3" selected>直近3か月</option>
+                <option value="6">直近6か月</option>
+                <option value="12">直近12か月</option>
+              </select>
+
+              <div class="segmented" aria-label="集計方法">
+                <button class="active" type="button" data-mode="frequency">
+                  頻出
+                </button>
+                <button type="button" data-mode="tfidf">TF-IDF</button>
+              </div>
+
+              <span
+                id="stopwordStatus"
+                class="stopword-status"
+                aria-live="polite"
+              >
+                stopword.txt 確認中
+              </span>
+            </div>
+          </div>
+
+          <div class="trend-grid">
+            <article class="tifo-card word-cloud-card">
+              <div class="card-title-row">
+                <div>
+                  <span>KEYWORD CLOUD</span>
+                  <h3>頻出キーワード</h3>
+                </div>
+                <small>クリックで過去2年間の推移を表示</small>
+              </div>
+
+              <div id="wordCloud" class="word-cloud">
+                <div class="empty-state">キーワードを集計しています。</div>
+              </div>
+            </article>
+
+            <article class="tifo-card ranking-card">
+              <div class="card-title-row">
+                <div>
+                  <span>TOP KEYWORDS</span>
+                  <h3>キーワードランキング</h3>
+                </div>
+              </div>
+
+              <div
+                id="rankingList"
+                class="ranking-list custom-scrollbar"
+              ></div>
+            </article>
+          </div>
+
+          <p class="trend-note">
+            一般名詞・固有名詞に相当する語を中心に集計し、助詞・助動詞・動詞の活用語とストップワードを除外しています。
+          </p>
+        </div>
+      </section>
+
+      <section id="monthly" class="section-wrap content-section">
+        <div class="section-heading monthly-heading">
+          <div>
+            <p class="section-kicker">MONTHLY REPORT</p>
+            <h2>月次集計</h2>
+            <p>案内ジャンルと紹介自治体の組み合わせを月ごとに確認できます。</p>
+          </div>
+
+          <div class="month-switcher">
+            <button id="previousMonth" type="button" aria-label="前の月">‹</button>
+            <strong id="selectedMonthLabel">—</strong>
+            <button id="nextMonth" type="button" aria-label="次の月">›</button>
+          </div>
+        </div>
+
+        <div class="monthly-summary">
+          <article>
+            <span>案内件数</span>
+            <strong><span id="selectedCount">0</span><small>件</small></strong>
+          </article>
+
+          <article>
+            <span>案内人数</span>
+            <strong><span id="selectedPeople">0</span><small>人</small></strong>
+          </article>
+
+          <article>
+            <span>能登へ行く可能性あり</span>
+            <strong><span id="likelyRate">0</span><small>%</small></strong>
+          </article>
+        </div>
+
+        <article class="tifo-card monthly-card">
+          <div class="card-title-row">
+            <div>
+              <span>GUIDANCE CATEGORIES</span>
+              <h3>案内ジャンル</h3>
+            </div>
+            <small>複数選択はそれぞれ1件として集計</small>
+          </div>
+
+          <div id="verticalBars" class="vertical-bars"></div>
+        </article>
+
+        <article class="tifo-card matrix-card">
+          <div class="card-title-row">
+            <div>
+              <span>MUNICIPALITY × CATEGORY</span>
+              <h3>紹介自治体ごとの案内内容</h3>
+            </div>
+
+            <div id="categoryLegend" class="legend"></div>
+          </div>
+
+          <div class="matrix-scroll custom-scrollbar">
+            <div id="matrixTable" class="matrix-table"></div>
+          </div>
+        </article>
+      </section>
+
+      <section id="links" class="links-section">
+        <div class="section-wrap links-inner">
+          <div>
+            <p class="section-kicker">RELATED LINKS</p>
+            <h2>各種リンク</h2>
+          </div>
+
+          <div class="link-cards">
+            <a
+              href="https://docs.google.com/spreadsheets/d/1f21SWEiq3h_nFDtJBeAf8GuxwfTsFDvp2GJ5SUbVv9Q/edit?gid=1209877994#gid=1209877994"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span>DATA SOURCE</span>
+              <strong>元データのスプレッドシート</strong>
+              <em aria-hidden="true">↗</em>
+            </a>
+
+            <a
+              href="https://www.notohantou.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span>OFFICIAL SITE</span>
+              <strong>能登半島広域観光協会</strong>
+              <em aria-hidden="true">↗</em>
+            </a>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="section-wrap footer-inner">
+        <div>
+          <strong>
+            一般社団法人能登半島広域観光協会　能登観光案内所［能登デスク］
+          </strong>
+          <p>HP運営：Code for Noto</p>
+        </div>
+
+        <span class="footer-mark">NOTO DESK PORTAL</span>
+      </div>
+    </footer>
+
+    <nav class="mobile-nav" aria-label="スマートフォン用ページ内メニュー">
+      <a href="#history">履歴</a>
+      <a href="#trend">トレンド</a>
+      <a href="#monthly">月次</a>
+      <a href="#links">リンク</a>
+    </nav>
+
+    <div id="keywordModal" class="modal-overlay" hidden>
+      <div
+        class="modal-content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="keywordModalTitle"
+      >
+        <div class="modal-header">
+          <div>
+            <span>24 MONTH TREND</span>
+            <h2 id="keywordModalTitle">キーワードの推移</h2>
+            <p>過去2年間の案内内容に登場した回数</p>
+          </div>
+          <button class="modal-close" type="button" aria-label="閉じる">×</button>
+        </div>
+
+        <div id="keywordChart" class="modal-body"></div>
+      </div>
+    </div>
+
+    <div id="municipalityModal" class="modal-overlay" hidden>
+      <div
+        class="modal-content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="municipalityModalTitle"
+      >
+        <div class="modal-header">
+          <div>
+            <span>MUNICIPALITY DETAIL</span>
+            <h2 id="municipalityModalTitle">自治体の案内内容</h2>
+            <p>ジャンル別の構成</p>
+          </div>
+          <button class="modal-close" type="button" aria-label="閉じる">×</button>
+        </div>
+
+        <div class="modal-month">
+          <button class="modal-previous" type="button" aria-label="前の月">‹</button>
+          <strong id="modalMonthLabel">—</strong>
+          <button class="modal-next" type="button" aria-label="次の月">›</button>
+        </div>
+
+        <div id="donutBody" class="modal-body donut-layout"></div>
+      </div>
+    </div>
+
+    <div
+      id="graphTooltip"
+      class="graph-tooltip"
+      role="tooltip"
+      hidden
+    ></div>
+
+    <script>
+      "use strict";
+
+      // -----------------------------------------------------------------------
+      // 設定
+      // -----------------------------------------------------------------------
+
+      const SHEET_URL =
+        "https://docs.google.com/spreadsheets/d/" +
+        "1f21SWEiq3h_nFDtJBeAf8GuxwfTsFDvp2GJ5SUbVv9Q/" +
+        "export?format=csv&gid=1209877994";
+
+      const DATA_SOURCES = [
+        {
+          url: SHEET_URL,
+          status: "live"
+        },
+        {
+          url: "./data/notodesk.csv",
+          status: "cached"
+        }
+      ];
+
+      const CATEGORY_COLORS = [
+        "#ef5261",
+        "#ff7043",
+        "#f6a72b",
+        "#f6d553",
+        "#62bc6c",
+        "#5cc4c3",
+        "#9eb4d8",
+        "#8c88c9"
+      ];
+
+      const STOP_WORDS = new Set([
+        "能登",
+        "案内",
+        "お客様",
+        "質問",
+        "紹介",
+        "説明",
+        "情報",
+        "パンフレット",
+        "パンフ",
+        "資料",
+        "場所",
+        "今日",
+        "明日",
+        "現在",
+        "現状",
+        "希望",
+        "予定",
+        "こちら",
+        "そこ",
+        "ここ",
+        "どこ",
+        "これ",
+        "それ",
+        "もの",
+        "こと",
+        "ところ",
+        "ため",
+        "よう",
+        "さん",
+        "方",
+        "人",
+        "お渡し",
+        "する",
+        "ある",
+        "いる",
+        "なる",
+        "できる",
+        "行く",
+        "来る",
+        "見る",
+        "知る",
+        "教える",
+        "欲しい"
+      ]);
+
+      const EMBEDDED_STOPWORD_TEXT = `
+行き
+ます
+って
+渡し
+です
+勧め
+お伝え
+しま
+教え
+ありま
+行ける
+行き方
+たい
+した
+して
+から
+ので
+まで
+ない
+でした
+でしょう
+ください
+いただき
+いただく
+もらい
+もらう
+お願い
+され
+でき
+あり
+なく
+なり
+たく
+`;
+
+      const NON_NOUN_PATTERNS = [
+        /する$/,
+        /します$/,
+        /しました$/,
+        /した$/,
+        /して$/,
+        /です$/,
+        /でした$/,
+        /でしょう$/,
+        /だった$/,
+        /できる$/,
+        /ください$/,
+        /いただく$/,
+        /もらう$/,
+        /ある$/,
+        /いる$/,
+        /ない$/,
+        /なく$/,
+        /たい$/,
+        /たく$/,
+        /れる$/,
+        /られる$/,
+        /かった$/,
+        /くて$/,
+        /ので$/,
+        /から$/,
+        /まで$/,
+        /より$/
+      ];
+
+      function applyStopWordText(text) {
+        const words = String(text || "")
+          .split(/\r?\n/)
+          .map((word) => normalizeText(word))
+          .filter((word) => word && !word.startsWith("#"));
+
+        words.forEach((word) => STOP_WORDS.add(word));
+        return words.length;
+      }
+
+      // file:// で直接開いた場合にも必ず適用されるストップワード。
+      applyStopWordText(EMBEDDED_STOPWORD_TEXT);
+
+      const state = {
+        records: [],
+        currentDate: getTokyoDateParts(),
+        selectedMonth: getTokyoDateParts().month,
+        keywordMode: "frequency",
+        rangeMonths: 3,
+        selectedMunicipality: null
+      };
+
+      // -----------------------------------------------------------------------
+      // 汎用関数
+      // -----------------------------------------------------------------------
+
+      function getTokyoDateParts() {
+        const parts = new Intl.DateTimeFormat("ja-JP", {
+          timeZone: "Asia/Tokyo",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit"
+        }).formatToParts(new Date());
+
+        const values = Object.fromEntries(
+          parts.map((part) => [part.type, part.value])
+        );
+
+        return {
+          today: `${values.year}-${values.month}-${values.day}`,
+          month: `${values.year}-${values.month}`
+        };
+      }
+
+      function normalizeText(value) {
+        return String(value || "")
+          .normalize("NFKC")
+          .toLocaleLowerCase("ja")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      function escapeHtml(value) {
+        return String(value || "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function formatDate(value) {
+        if (!value) {
+          return "—";
+        }
+
+        const [year, month, day] = value.split("-");
+        return `${year}.${Number(month)}.${Number(day)}`;
+      }
+
+      function monthLabel(monthKey) {
+        const [year, month] = monthKey.split("-");
+        return `${year}年 ${Number(month)}月`;
+      }
+
+      function shiftMonth(monthKey, amount) {
+        const [year, month] = monthKey.split("-").map(Number);
+        const date = new Date(Date.UTC(year, month - 1 + amount, 1));
+
+        return [
+          date.getUTCFullYear(),
+          String(date.getUTCMonth() + 1).padStart(2, "0")
+        ].join("-");
+      }
+
+      function lastMonthKeys(endMonth, count) {
+        return Array.from(
+          { length: count },
+          (_, index) => shiftMonth(endMonth, index - count + 1)
+        );
+      }
+
+      function sumPeople(records) {
+        return records.reduce((sum, record) => sum + record.people, 0);
+      }
+
+      function splitTags(value) {
+        return String(value || "")
+          .split(/[,、，]/)
+          .map((item) => item.trim())
+          .filter(Boolean);
+      }
+
+      async function loadStopWords() {
+        const statusElement = document.getElementById("stopwordStatus");
+
+        try {
+          const response = await fetch(
+            `./stopword.txt?v=${Date.now()}`,
+            {
+              cache: "no-store"
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Stopword file unavailable");
+          }
+
+          const text = await response.text();
+          const loadedCount = applyStopWordText(text);
+
+          statusElement.textContent =
+            `stopword.txt 読込済（${loadedCount}語）`;
+          statusElement.classList.add("loaded");
+        } catch (error) {
+          statusElement.textContent =
+            `内蔵ストップワード適用（${STOP_WORDS.size}語）`;
+          statusElement.classList.add("fallback");
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // CSVの読み込みと変換
+      // -----------------------------------------------------------------------
+
+      function parseCsv(text) {
+        const rows = [];
+        let row = [];
+        let field = "";
+        let quoted = false;
+
+        for (let index = 0; index < text.length; index += 1) {
+          const character = text[index];
+          const nextCharacter = text[index + 1];
+
+          if (character === '"' && quoted && nextCharacter === '"') {
+            field += '"';
+            index += 1;
+          } else if (character === '"') {
+            quoted = !quoted;
+          } else if (character === "," && !quoted) {
+            row.push(field);
+            field = "";
+          } else if (
+            (character === "\n" || character === "\r") &&
+            !quoted
+          ) {
+            if (character === "\r" && nextCharacter === "\n") {
+              index += 1;
+            }
+
+            row.push(field);
+
+            if (row.some((cell) => cell.trim())) {
+              rows.push(row);
+            }
+
+            row = [];
+            field = "";
+          } else {
+            field += character;
+          }
+        }
+
+        if (field.length || row.length) {
+          row.push(field);
+
+          if (row.some((cell) => cell.trim())) {
+            rows.push(row);
+          }
+        }
+
+        return rows;
+      }
+
+      function csvToRecords(text) {
+        const rows = parseCsv(text);
+
+        if (rows.length < 2) {
+          return [];
+        }
+
+        const headers = rows[0].map((cell) => cell.trim());
+        const column = (label) => headers.indexOf(label);
+
+        const indexes = {
+          timestamp: column("タイムスタンプ"),
+          date: column("対応日"),
+          nationality: column("どの国籍のお客様を対応しましたか"),
+          people: column("何名のお客様を対応しましたか"),
+          municipalities: column("どの自治体を紹介しましたか"),
+          genres: column("どのような内容を紹介しましたか"),
+          summary: column("案内概要"),
+          likelyVisit: column("本日、能登に行く可能性あり")
+        };
+
+        return rows
+          .slice(1)
+          .map((cells, rowIndex) => {
+            const date = String(cells[indexes.date] || "")
+              .trim()
+              .replaceAll("/", "-");
+
+            const peopleMatch = String(
+              cells[indexes.people] || ""
+            ).match(/\d+/);
+
+            return {
+              id: `${date}-${rowIndex}`,
+              timestamp: String(cells[indexes.timestamp] || "").trim(),
+              date,
+              nationality:
+                String(cells[indexes.nationality] || "不明").trim() || "不明",
+              people: peopleMatch ? Number(peopleMatch[0]) : 0,
+              municipalities: splitTags(cells[indexes.municipalities]),
+              genres: splitTags(cells[indexes.genres]),
+              summary: String(cells[indexes.summary] || "")
+                .replace(/\s+/g, " ")
+                .trim(),
+              likelyVisit: String(
+                cells[indexes.likelyVisit] || ""
+              ).includes("可能性あり")
+            };
+          })
+          .filter((record) => record.date && record.summary)
+          .sort((recordA, recordB) => {
+            const byDate = recordB.date.localeCompare(recordA.date);
+            return byDate ||
+              recordB.timestamp.localeCompare(recordA.timestamp);
+          });
+      }
+
+      async function loadRecords() {
+        setDataStatus("loading");
+
+        for (const source of DATA_SOURCES) {
+          try {
+            const response = await fetch(source.url, {
+              cache: "no-store"
+            });
+
+            if (!response.ok) {
+              throw new Error("Data source unavailable");
+            }
+
+            const records = csvToRecords(await response.text());
+
+            if (!records.length) {
+              throw new Error("No records");
+            }
+
+            state.records = records;
+            setDataStatus(source.status);
+            renderAll();
+            return;
+          } catch (error) {
+            // 次のデータソースを試します。
+          }
+        }
+
+        state.records = [];
+        setDataStatus("error");
+        renderAll();
+      }
+
+      function setDataStatus(status) {
+        const badge = document.getElementById("statusBadge");
+        const labels = {
+          loading: "読み込み中",
+          live: "最新データ",
+          cached: "保存データ",
+          error: "読み込み失敗"
+        };
+
+        badge.className = `status-badge ${status}`;
+        badge.textContent = labels[status];
+      }
+
+      // -----------------------------------------------------------------------
+      // サマリーと案内履歴
+      // -----------------------------------------------------------------------
+
+      function renderSummary() {
+        const todayRecords = state.records.filter(
+          (record) => record.date === state.currentDate.today
+        );
+
+        const currentMonthRecords = state.records.filter(
+          (record) => record.date.startsWith(state.currentDate.month)
+        );
+
+        document.getElementById("latestDate").textContent = formatDate(
+          state.records[0]?.date
+        );
+
+        document.getElementById("todayCount").textContent =
+          todayRecords.length.toLocaleString();
+
+        document.getElementById("todayPeople").textContent =
+          sumPeople(todayRecords).toLocaleString();
+
+        document.getElementById("monthCount").textContent =
+          currentMonthRecords.length.toLocaleString();
+
+        document.getElementById("monthPeople").textContent =
+          sumPeople(currentMonthRecords).toLocaleString();
+      }
+
+      function renderHistory() {
+        const query = normalizeText(
+          document.getElementById("searchInput").value
+        );
+
+        const filteredRecords = state.records.filter((record) => {
+          const searchableText = normalizeText([
+            record.summary,
+            record.nationality,
+            ...record.municipalities,
+            ...record.genres
+          ].join(" "));
+
+          return !query || searchableText.includes(query);
+        });
+
+        document.getElementById("historyCount").textContent =
+          filteredRecords.length.toLocaleString();
+
+        const historyList = document.getElementById("historyList");
+
+        if (!filteredRecords.length) {
+          historyList.innerHTML =
+            '<div class="empty-state">該当する案内履歴はありません。</div>';
+          return;
+        }
+
+        historyList.innerHTML = filteredRecords
+          .map((record) => {
+            const tags = [
+              `<span class="tag date">${escapeHtml(formatDate(record.date))}</span>`,
+              `<span class="tag">${escapeHtml(record.nationality)}</span>`,
+              ...record.municipalities.map(
+                (item) => `<span class="tag">${escapeHtml(item)}</span>`
+              ),
+              ...record.genres.map(
+                (item) => `<span class="tag">${escapeHtml(item)}</span>`
+              )
+            ].join("");
+
+            return `
+              <article class="history-item">
+                <div class="history-tags">${tags}</div>
+                <p>${escapeHtml(record.summary)}</p>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      // -----------------------------------------------------------------------
+      // キーワード分析
+      // -----------------------------------------------------------------------
+
+      function tokenize(text) {
+        if ("Segmenter" in Intl) {
+          const segmenter = new Intl.Segmenter("ja", {
+            granularity: "word"
+          });
+
+          return Array.from(segmenter.segment(normalizeText(text)))
+            .filter((item) => item.isWordLike)
+            .map((item) => item.segment)
+            .filter(isNounCandidate);
+        }
+
+        return (
+          normalizeText(text).match(
+            /[一-龠々〆ヵヶァ-ヴー]{2,}|[a-z]{3,}/gi
+          ) || []
+        ).filter(isNounCandidate);
+      }
+
+      function isNounCandidate(word) {
+        const normalizedWord = normalizeText(word);
+
+        return (
+          normalizedWord.length >= 2 &&
+          normalizedWord.length < 18 &&
+          !STOP_WORDS.has(normalizedWord) &&
+          !/^[\d０-９]+$/.test(normalizedWord) &&
+          !/^[a-z]$/i.test(normalizedWord) &&
+          !/^[ぁ-んー]{2,}$/.test(normalizedWord) &&
+          !NON_NOUN_PATTERNS.some(
+            (pattern) => pattern.test(normalizedWord)
+          )
+        );
+      }
+
+      function analyzeKeywords(records) {
+        const documents = records.map((record) => tokenize(record.summary));
+        const counts = new Map();
+        const documentFrequency = new Map();
+        const tfidfScores = new Map();
+
+        documents.forEach((tokens) => {
+          const local = new Map();
+
+          tokens.forEach((token) => {
+            counts.set(token, (counts.get(token) || 0) + 1);
+            local.set(token, (local.get(token) || 0) + 1);
+          });
+
+          local.forEach((value, token) => {
+            documentFrequency.set(
+              token,
+              (documentFrequency.get(token) || 0) + 1
+            );
+          });
+        });
+
+        documents.forEach((tokens) => {
+          const local = new Map();
+
+          tokens.forEach((token) => {
+            local.set(token, (local.get(token) || 0) + 1);
+          });
+
+          local.forEach((frequency, token) => {
+            const documentCount = documentFrequency.get(token) || 1;
+            const termFrequency = 1 + Math.log(frequency);
+            const inverseFrequency =
+              Math.log((documents.length + 1) / (documentCount + 1)) + 1;
+
+            tfidfScores.set(
+              token,
+              (tfidfScores.get(token) || 0) +
+                termFrequency * inverseFrequency
+            );
+          });
+        });
+
+        return Array.from(counts, ([word, count]) => ({
+          word,
+          count,
+          score: tfidfScores.get(word) || 0
+        }))
+          .filter((item) => item.count >= (records.length > 100 ? 2 : 1))
+          .sort((itemA, itemB) => {
+            if (state.keywordMode === "frequency") {
+              return itemB.count - itemA.count ||
+                itemB.score - itemA.score;
+            }
+
+            return itemB.score - itemA.score ||
+              itemB.count - itemA.count;
+          })
+          .slice(0, 35);
+      }
+
+      function renderTrends() {
+        const firstMonth = shiftMonth(
+          state.currentDate.month,
+          -(state.rangeMonths - 1)
+        );
+
+        const trendRecords = state.records.filter((record) => {
+          const month = record.date.slice(0, 7);
+          return month >= firstMonth && month <= state.currentDate.month;
+        });
+
+        const keywords = analyzeKeywords(trendRecords);
+        const wordCloud = document.getElementById("wordCloud");
+        const rankingList = document.getElementById("rankingList");
+
+        if (!keywords.length) {
+          wordCloud.innerHTML =
+            '<div class="empty-state">キーワードがありません。</div>';
+          rankingList.innerHTML = "";
+          return;
+        }
+
+        const maximumValue =
+          state.keywordMode === "frequency"
+            ? keywords[0].count
+            : keywords[0].score;
+
+        wordCloud.innerHTML = keywords
+          .slice(0, 25)
+          .map((item, index) => {
+            const value =
+              state.keywordMode === "frequency" ? item.count : item.score;
+
+            const ratio = maximumValue ? value / maximumValue : 0;
+            const size = 0.8 + ratio * 1.45;
+            const color = index % 4 === 0 ? "#38b2ac" : "#203144";
+
+            return `
+              <button
+                class="keyword-button"
+                type="button"
+                data-keyword="${escapeHtml(item.word)}"
+                style="font-size: ${size.toFixed(2)}rem; color: ${color};"
+              >
+                ${escapeHtml(item.word)}
+              </button>
+            `;
+          })
+          .join("");
+
+        rankingList.innerHTML = keywords
+          .slice(0, 30)
+          .map((item, index) => {
+            const metric =
+              state.keywordMode === "frequency"
+                ? `${item.count}回`
+                : item.score.toFixed(1);
+
+            return `
+              <button
+                class="ranking-item"
+                type="button"
+                data-keyword="${escapeHtml(item.word)}"
+              >
+                <span class="rank-badge">${index + 1}</span>
+                <strong>${escapeHtml(item.word)}</strong>
+                <small>${metric}</small>
+              </button>
+            `;
+          })
+          .join("");
+      }
+
+      function buildKeywordSeries(keyword) {
+        return lastMonthKeys(state.currentDate.month, 24).map((month) => {
+          const count = state.records
+            .filter((record) => record.date.startsWith(month))
+            .reduce((sum, record) => {
+              return sum +
+                tokenize(record.summary).filter((word) => word === keyword).length;
+            }, 0);
+
+          return {
+            month,
+            value: count
+          };
+        });
+      }
+
+      function createLineChart(points) {
+        const width = 720;
+        const height = 330;
+        const padding = {
+          top: 30,
+          right: 18,
+          bottom: 42,
+          left: 38
+        };
+
+        const maximum = Math.max(...points.map((point) => point.value), 1);
+        const chartWidth = width - padding.left - padding.right;
+        const chartHeight = height - padding.top - padding.bottom;
+
+        const coordinate = (point, index) => ({
+          x:
+            padding.left +
+            (index / Math.max(points.length - 1, 1)) * chartWidth,
+          y:
+            padding.top +
+            chartHeight -
+            (point.value / maximum) * chartHeight
+        });
+
+        const linePoints = points
+          .map((point, index) => {
+            const coordinateValue = coordinate(point, index);
+            return `${coordinateValue.x},${coordinateValue.y}`;
+          })
+          .join(" ");
+
+        const guides = [0, 0.25, 0.5, 0.75, 1]
+          .map((ratio) => {
+            const y = padding.top + chartHeight - ratio * chartHeight;
+            const label = Math.round(maximum * ratio);
+
+            return `
+              <line
+                x1="${padding.left}"
+                y1="${y}"
+                x2="${width - padding.right}"
+                y2="${y}"
+                stroke="#e4ebef"
+              />
+              <text x="8" y="${y + 3}">${label}</text>
+            `;
+          })
+          .join("");
+
+        const pointsMarkup = points
+          .map((point, index) => {
+            const coordinateValue = coordinate(point, index);
+            const showLabel =
+              index % 3 === 0 || index === points.length - 1;
+
+            return `
+              <circle
+                cx="${coordinateValue.x}"
+                cy="${coordinateValue.y}"
+                r="4"
+                fill="#ffffff"
+                stroke="#38b2ac"
+                stroke-width="3"
+              />
+              ${
+                showLabel
+                  ? `
+                    <text
+                      x="${coordinateValue.x}"
+                      y="${height - 15}"
+                      text-anchor="middle"
+                    >
+                      ${point.month.slice(2).replace("-", ".")}
+                    </text>
+                  `
+                  : ""
+              }
+            `;
+          })
+          .join("");
+
+        return `
+          <svg
+            class="line-chart"
+            viewBox="0 0 ${width} ${height}"
+            role="img"
+            aria-label="過去2年間のキーワード出現回数"
+          >
+            ${guides}
+            <polyline
+              points="${linePoints}"
+              fill="none"
+              stroke="#38b2ac"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3.5"
+            />
+            ${pointsMarkup}
+          </svg>
+        `;
+      }
+
+      function openKeywordModal(keyword) {
+        const modal = document.getElementById("keywordModal");
+        const points = buildKeywordSeries(keyword);
+
+        document.getElementById("keywordModalTitle").textContent =
+          `「${keyword}」の推移`;
+
+        document.getElementById("keywordChart").innerHTML =
+          createLineChart(points);
+
+        modal.hidden = false;
+        document.body.style.overflow = "hidden";
+      }
+
+      // -----------------------------------------------------------------------
+      // 月次集計
+      // -----------------------------------------------------------------------
+
+      function buildMonthlyData(records) {
+        const genreCounts = new Map();
+
+        records.forEach((record) => {
+          record.genres.forEach((genre) => {
+            genreCounts.set(genre, (genreCounts.get(genre) || 0) + 1);
+          });
+        });
+
+        const sortedGenres = Array.from(
+          genreCounts,
+          ([name, count]) => ({
+            name,
+            count
+          })
+        ).sort((itemA, itemB) => itemB.count - itemA.count);
+
+        const primaryGenres = sortedGenres
+          .slice(0, 7)
+          .map((item) => item.name);
+
+        const categories = sortedGenres
+          .slice(0, 7)
+          .map((item, index) => ({
+            ...item,
+            color: CATEGORY_COLORS[index]
+          }));
+
+        const otherCount = sortedGenres
+          .slice(7)
+          .reduce((sum, item) => sum + item.count, 0);
+
+        if (otherCount) {
+          categories.push({
+            name: "その他",
+            count: otherCount,
+            color: CATEGORY_COLORS[7]
+          });
+        }
+
+        const municipalityRecords = new Map();
+
+        records.forEach((record) => {
+          const municipalities = record.municipalities.length
+            ? record.municipalities
+            : ["なし"];
+
+          municipalities.forEach((municipality) => {
+            municipalityRecords.set(municipality, [
+              ...(municipalityRecords.get(municipality) || []),
+              record
+            ]);
+          });
+        });
+
+        const rows = Array.from(
+          municipalityRecords,
+          ([name, municipalityRows]) => {
+            const local = new Map();
+
+            municipalityRows.forEach((record) => {
+              record.genres.forEach((genre) => {
+                const key = primaryGenres.includes(genre)
+                  ? genre
+                  : "その他";
+
+                local.set(key, (local.get(key) || 0) + 1);
+              });
+            });
+
+            const total =
+              Array.from(local.values()).reduce(
+                (sum, value) => sum + value,
+                0
+              ) || 1;
+
+            const values = categories
+              .map((category) => {
+                const count = local.get(category.name) || 0;
+
+                return {
+                  genre: category.name,
+                  count,
+                  percentage: (count / total) * 100,
+                  color: category.color
+                };
+              })
+              .filter((item) => item.count);
+
+            return {
+              name,
+              count: municipalityRows.length,
+              values
+            };
+          }
+        ).sort((itemA, itemB) => itemB.count - itemA.count);
+
+        return {
+          categories,
+          rows
+        };
+      }
+
+      function getSelectedMonthRecords() {
+        return state.records.filter((record) =>
+          record.date.startsWith(state.selectedMonth)
+        );
+      }
+
+      function getEarliestMonth() {
+        return state.records.at(-1)?.date.slice(0, 7) ||
+          state.currentDate.month;
+      }
+
+      function updateMonthButtons() {
+        const earliestMonth = getEarliestMonth();
+        const isFirstMonth = state.selectedMonth <= earliestMonth;
+        const isLastMonth = state.selectedMonth >= state.currentDate.month;
+
+        document.getElementById("previousMonth").disabled = isFirstMonth;
+        document.getElementById("nextMonth").disabled = isLastMonth;
+
+        document.querySelector(".modal-previous").disabled = isFirstMonth;
+        document.querySelector(".modal-next").disabled = isLastMonth;
+      }
+
+      function renderMonthly() {
+        const monthRecords = getSelectedMonthRecords();
+        const monthlyData = buildMonthlyData(monthRecords);
+        const likelyCount = monthRecords.filter(
+          (record) => record.likelyVisit
+        ).length;
+
+        document.getElementById("selectedMonthLabel").textContent =
+          monthLabel(state.selectedMonth);
+
+        document.getElementById("modalMonthLabel").textContent =
+          monthLabel(state.selectedMonth);
+
+        document.getElementById("selectedCount").textContent =
+          monthRecords.length.toLocaleString();
+
+        document.getElementById("selectedPeople").textContent =
+          sumPeople(monthRecords).toLocaleString();
+
+        document.getElementById("likelyRate").textContent =
+          monthRecords.length
+            ? Math.round((likelyCount / monthRecords.length) * 100)
+            : 0;
+
+        updateMonthButtons();
+        renderVerticalBars(monthlyData.categories);
+        renderMatrix(monthlyData);
+
+        if (state.selectedMunicipality) {
+          renderMunicipalityModal(monthlyData);
+        }
+      }
+
+      function renderVerticalBars(categories) {
+        const container = document.getElementById("verticalBars");
+
+        if (!categories.length) {
+          container.innerHTML =
+            '<div class="empty-state">この月の案内データはありません。</div>';
+          return;
+        }
+
+        const maximum = categories[0]?.count || 1;
+        const total = categories.reduce(
+          (sum, category) => sum + category.count,
+          0
+        );
+
+        container.innerHTML = categories
+          .map((category) => {
+            const height = Math.max(4, (category.count / maximum) * 100);
+            const percentage = total
+              ? (category.count / total) * 100
+              : 0;
+
+            return `
+              <div class="vertical-bar-item">
+                <span class="bar-value">${category.count}</span>
+                <div class="vertical-bar-track">
+                  <i
+                    data-graph-tooltip="${escapeHtml(category.name)}｜${category.count}件｜${percentage.toFixed(1)}%"
+                    style="
+                      height: ${height}%;
+                      background: ${category.color};
+                    "
+                  ></i>
+                </div>
+                <span class="bar-label">${escapeHtml(category.name)}</span>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      function renderMatrix(monthlyData) {
+        const legend = document.getElementById("categoryLegend");
+        const table = document.getElementById("matrixTable");
+
+        legend.innerHTML = monthlyData.categories
+          .map((category) => {
+            return `
+              <span
+                class="legend-item"
+              >
+                <i
+                  class="legend-dot"
+                  style="background: ${category.color};"
+                ></i>
+                ${escapeHtml(category.name)}
+              </span>
+            `;
+          })
+          .join("");
+
+        if (!monthlyData.rows.length) {
+          table.innerHTML =
+            '<div class="empty-state">自治体別データはありません。</div>';
+          return;
+        }
+
+        table.innerHTML = monthlyData.rows
+          .slice(0, 11)
+          .map((row) => {
+            const segments = row.values
+              .map((value) => {
+                const label =
+                  value.percentage >= 10
+                    ? `${value.percentage.toFixed(0)}%`
+                    : "";
+
+                return `
+                  <span
+                    data-graph-tooltip="${escapeHtml(value.genre)}｜${value.count}件｜${value.percentage.toFixed(1)}%"
+                    style="
+                      width: ${value.percentage}%;
+                      background: ${value.color};
+                    "
+                  >
+                    ${label}
+                  </span>
+                `;
+              })
+              .join("");
+
+            return `
+              <div class="matrix-row">
+                <span class="matrix-count">${row.count}件</span>
+                <button
+                  class="municipality-button"
+                  type="button"
+                  data-municipality="${escapeHtml(row.name)}"
+                  aria-label="${escapeHtml(row.name)}の案内内容を円グラフで表示"
+                >
+                  <strong>${escapeHtml(row.name)}</strong>
+                  <span aria-hidden="true">›</span>
+                </button>
+                <div
+                  class="stacked-bar"
+                  aria-label="${escapeHtml(row.name)}の案内内容"
+                >
+                  ${segments}
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      function createDonutSegments(values) {
+        let offset = 0;
+
+        return values.map((value) => {
+          const segmentOffset = offset;
+          offset += value.percentage;
+
+          return `
+            <circle
+              class="donut-segment"
+              cx="60"
+              cy="60"
+              r="48"
+              pathLength="100"
+              stroke="${value.color}"
+              stroke-dasharray="${value.percentage} ${100 - value.percentage}"
+              stroke-dashoffset="${-segmentOffset}"
+              data-graph-tooltip="${escapeHtml(value.genre)}｜${value.count}件｜${value.percentage.toFixed(1)}%"
+            ></circle>
+          `;
+        }).join("");
+      }
+
+      function renderMunicipalityModal(monthlyData) {
+        const row = monthlyData.rows.find(
+          (item) => item.name === state.selectedMunicipality
+        );
+
+        document.getElementById("municipalityModalTitle").textContent =
+          `${state.selectedMunicipality}の案内内容`;
+
+        const values = row?.values || [];
+
+        const legend = values.length
+          ? `
+            <div class="donut-legend">
+              ${values.map((value) => `
+                <div class="donut-row">
+                  <span class="donut-label">
+                    <i style="background: ${value.color};"></i>
+                    ${escapeHtml(value.genre)}
+                  </span>
+                  <strong>${value.count}件</strong>
+                  <small>${value.percentage.toFixed(1)}%</small>
+                </div>
+              `).join("")}
+            </div>
+          `
+          : '<div class="empty-state">この月の案内データはありません。</div>';
+
+        document.getElementById("donutBody").innerHTML = `
+          <div
+            class="donut-chart"
+            role="img"
+            aria-label="${escapeHtml(state.selectedMunicipality)}の案内内容内訳"
+          >
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle
+                class="donut-track"
+                cx="60"
+                cy="60"
+                r="48"
+                pathLength="100"
+              ></circle>
+              ${createDonutSegments(values)}
+            </svg>
+            <div class="donut-hole">
+              <strong>${row?.count || 0}</strong>
+              <span>案内件数</span>
+            </div>
+          </div>
+          ${legend}
+        `;
+      }
+
+      function openMunicipalityModal(name) {
+        state.selectedMunicipality = name;
+        renderMunicipalityModal(buildMonthlyData(getSelectedMonthRecords()));
+
+        document.getElementById("municipalityModal").hidden = false;
+        document.body.style.overflow = "hidden";
+      }
+
+      function moveSelectedMonth(amount) {
+        const nextMonth = shiftMonth(state.selectedMonth, amount);
+        const earliestMonth = getEarliestMonth();
+
+        if (
+          nextMonth < earliestMonth ||
+          nextMonth > state.currentDate.month
+        ) {
+          return;
+        }
+
+        state.selectedMonth = nextMonth;
+        renderMonthly();
+      }
+
+      // -----------------------------------------------------------------------
+      // モーダルとイベント
+      // -----------------------------------------------------------------------
+
+      function closeModal(modal) {
+        modal.hidden = true;
+        document.body.style.overflow = "";
+
+        if (modal.id === "municipalityModal") {
+          state.selectedMunicipality = null;
+        }
+      }
+
+      function renderAll() {
+        renderSummary();
+        renderHistory();
+        renderTrends();
+        renderMonthly();
+      }
+
+      document.getElementById("reloadButton").addEventListener(
+        "click",
+        loadRecords
+      );
+
+      document.getElementById("searchInput").addEventListener(
+        "input",
+        renderHistory
+      );
+
+      document.getElementById("rangeSelect").addEventListener(
+        "change",
+        (event) => {
+          state.rangeMonths = Number(event.target.value);
+          renderTrends();
+        }
+      );
+
+      document.querySelector(".segmented").addEventListener(
+        "click",
+        (event) => {
+          const button = event.target.closest("[data-mode]");
+
+          if (!button) {
+            return;
+          }
+
+          state.keywordMode = button.dataset.mode;
+
+          document.querySelectorAll("[data-mode]").forEach((item) => {
+            item.classList.toggle("active", item === button);
+          });
+
+          renderTrends();
+        }
+      );
+
+      document.getElementById("trend").addEventListener(
+        "click",
+        (event) => {
+          const button = event.target.closest("[data-keyword]");
+
+          if (button) {
+            openKeywordModal(button.dataset.keyword);
+          }
+        }
+      );
+
+      document.getElementById("matrixTable").addEventListener(
+        "click",
+        (event) => {
+          const button = event.target.closest("[data-municipality]");
+
+          if (button) {
+            openMunicipalityModal(button.dataset.municipality);
+          }
+        }
+      );
+
+      document.getElementById("previousMonth").addEventListener(
+        "click",
+        () => moveSelectedMonth(-1)
+      );
+
+      document.getElementById("nextMonth").addEventListener(
+        "click",
+        () => moveSelectedMonth(1)
+      );
+
+      document.querySelector(".modal-previous").addEventListener(
+        "click",
+        () => moveSelectedMonth(-1)
+      );
+
+      document.querySelector(".modal-next").addEventListener(
+        "click",
+        () => moveSelectedMonth(1)
+      );
+
+      document.querySelectorAll(".modal-overlay").forEach((modal) => {
+        modal.addEventListener("mousedown", (event) => {
+          if (
+            event.target === modal ||
+            event.target.closest(".modal-close")
+          ) {
+            closeModal(modal);
+          }
+        });
+      });
+
+      document.addEventListener("pointermove", (event) => {
+        const target = event.target.closest?.("[data-graph-tooltip]");
+        const tooltip = document.getElementById("graphTooltip");
+
+        if (!target) {
+          tooltip.hidden = true;
+          return;
+        }
+
+        tooltip.textContent = target.dataset.graphTooltip;
+        tooltip.hidden = false;
+
+        const left = Math.min(
+          event.clientX + 14,
+          window.innerWidth - tooltip.offsetWidth - 12
+        );
+
+        const top = Math.min(
+          event.clientY + 14,
+          window.innerHeight - tooltip.offsetHeight - 12
+        );
+
+        tooltip.style.left = `${Math.max(12, left)}px`;
+        tooltip.style.top = `${Math.max(12, top)}px`;
+      });
+
+      window.addEventListener("scroll", () => {
+        document.getElementById("graphTooltip").hidden = true;
+      }, { passive: true });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") {
+          return;
+        }
+
+        document.querySelectorAll(".modal-overlay").forEach((modal) => {
+          if (!modal.hidden) {
+            closeModal(modal);
+          }
+        });
+      });
+
+      async function initializePortal() {
+        await loadStopWords();
+        await loadRecords();
+      }
+
+      // 初期表示
+      initializePortal();
+    </script>
+  </body>
+</html>
