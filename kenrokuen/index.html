@@ -388,8 +388,9 @@
 
 <!-- データ取得中のローディング画面 -->
 <div id="loading-overlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--tifo-bg); z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-    <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 3rem; color: var(--tifo-primary); margin-bottom: 1rem;"></i>
-    <div style="font-weight: bold; color: var(--tifo-muted);">スプレッドシートからデータを取得中...</div>
+    <i id="loading-icon" class="fa-solid fa-circle-notch fa-spin" style="font-size: 3rem; color: var(--tifo-primary); margin-bottom: 1rem;"></i>
+    <div id="loading-message" style="font-weight: bold; color: var(--tifo-muted);">スプレッドシートからデータを取得中...</div>
+    <button id="loading-retry" type="button" onclick="retryDataLoad()" style="display: none; margin-top: 1rem; border: 0; border-radius: 999px; padding: 0.7rem 1.4rem; background: var(--tifo-primary-dark); color: #fff; font: inherit; font-weight: 700; cursor: pointer;">再読み込み</button>
 </div>
 
 <div class="app-container">
@@ -561,6 +562,7 @@
     const SHEET_ID = '1HdaqmIPXDChGrc2XynYPtzkDRIIBQObh41GS9T4ohlo';
     const URL_VISITORS = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=兼六園金沢城公園`;
     const URL_FOREIGN = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=兼六園外国人国別`;
+    const FETCH_TIMEOUT_MS = 15000;
 
     let monthlyData = []; // 整形後のデータ格納用
     let currentTab = 'kenrokuen'; 
@@ -570,6 +572,7 @@
     let monthlyChartInstance = null;
     let yearlyChartInstance = null;
     let inboundChartInstance = null;
+    let initInFlight = false;
     
     // モーダル用状態
     let modalCountry = '';
@@ -586,8 +589,10 @@
 
     // --- 2. データ取得・パース ---
     async function fetchCSV(url) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
         try {
-            const response = await fetch(url);
+            const response = await fetch(url, { signal: controller.signal, cache: 'no-store' });
             if (!response.ok) throw new Error('Network response error');
             const csvText = await response.text();
             return new Promise((resolve, reject) => {
@@ -601,75 +606,107 @@
         } catch (error) {
             console.error('CSV Fetch Error:', error);
             return [];
+        } finally {
+            clearTimeout(timeoutId);
         }
+    }
+
+    function showLoading() {
+        const overlay = document.getElementById('loading-overlay');
+        const icon = document.getElementById('loading-icon');
+        overlay.style.display = 'flex';
+        icon.className = 'fa-solid fa-circle-notch fa-spin';
+        icon.style.color = 'var(--tifo-primary)';
+        document.getElementById('loading-message').textContent = 'スプレッドシートからデータを取得中...';
+        document.getElementById('loading-retry').style.display = 'none';
+    }
+
+    function showLoadingError() {
+        const icon = document.getElementById('loading-icon');
+        icon.className = 'fa-solid fa-triangle-exclamation';
+        icon.style.color = 'var(--tifo-secondary)';
+        document.getElementById('loading-message').textContent = 'データを取得できませんでした。通信環境を確認して再読み込みしてください。';
+        document.getElementById('loading-retry').style.display = 'inline-block';
+    }
+
+    function retryDataLoad() {
+        initData();
     }
 
     // 初期化とデータフェッチ
     async function initData() {
-        const [rawVisitors, rawForeign] = await Promise.all([
-            fetchCSV(URL_VISITORS),
-            fetchCSV(URL_FOREIGN)
-        ]);
+        if (initInFlight) return;
+        initInFlight = true;
+        showLoading();
 
-        if (rawVisitors.length === 0) {
-            alert('データの取得に失敗しました。スプレッドシートの公開設定等をご確認ください。');
+        try {
+            const [rawVisitors, rawForeign] = await Promise.all([
+                fetchCSV(URL_VISITORS),
+                fetchCSV(URL_FOREIGN)
+            ]);
+
+            if (rawVisitors.length === 0) {
+                throw new Error('Visitor data is empty');
+            }
+
+            // 外国人データの集計 (月ごとにまとめる)
+            const foreignAgg = {};
+            rawForeign.forEach(row => {
+                const m = row['年月'];
+                const count = parseInt((row['人数'] || '0').replace(/,/g, ''), 10);
+                if (!m) return;
+                
+                if (!foreignAgg[m]) {
+                    foreignAgg[m] = { total: 0, countries: [] };
+                }
+                foreignAgg[m].total += count;
+                if (count > 0) {
+                    foreignAgg[m].countries.push({
+                        country: row['国と地域'],
+                        count: count
+                    });
+                }
+            });
+
+            // メインデータの構築
+            monthlyData = rawVisitors.map(row => {
+                const m = row['年月'];
+                // カンマ等を取り除いて数値化
+                const kenrokuen = parseInt((row['兼六園入園者数'] || '0').replace(/,/g, ''), 10) || 0;
+                const kanazawa = parseInt((row['金沢城公園入園者数'] || '0').replace(/,/g, ''), 10) || 0;
+                
+                let inboundCount = 0;
+                let foreignDetails = [];
+                if (foreignAgg[m]) {
+                    inboundCount = foreignAgg[m].total;
+                    // 人数が多い順にソートしておく
+                    foreignDetails = foreignAgg[m].countries.sort((a, b) => b.count - a.count);
+                }
+                
+                const inboundIndex = kenrokuen > 0 ? (inboundCount / kenrokuen) * 100 : 0;
+
+                return {
+                    month: m,
+                    kenrokuen: kenrokuen,
+                    kanazawa: kanazawa,
+                    inboundCount: inboundCount,
+                    inboundIndex: inboundIndex,
+                    foreignDetails: foreignDetails
+                };
+            });
+
+            // 古い順にソート（スプレッドシートの並び順崩れ対策）
+            monthlyData.sort((a, b) => new Date(a.month) - new Date(b.month));
+
+            initRankingSelects();
+            updateDashboard();
             document.getElementById('loading-overlay').style.display = 'none';
-            return;
+        } catch (error) {
+            console.error('Initialization Error:', error);
+            showLoadingError();
+        } finally {
+            initInFlight = false;
         }
-
-        // 外国人データの集計 (月ごとにまとめる)
-        const foreignAgg = {};
-        rawForeign.forEach(row => {
-            const m = row['年月'];
-            const count = parseInt((row['人数'] || '0').replace(/,/g, ''), 10);
-            if (!m) return;
-            
-            if (!foreignAgg[m]) {
-                foreignAgg[m] = { total: 0, countries: [] };
-            }
-            foreignAgg[m].total += count;
-            if (count > 0) {
-                foreignAgg[m].countries.push({
-                    country: row['国と地域'],
-                    count: count
-                });
-            }
-        });
-
-        // メインデータの構築
-        monthlyData = rawVisitors.map(row => {
-            const m = row['年月'];
-            // カンマ等を取り除いて数値化
-            const kenrokuen = parseInt((row['兼六園入園者数'] || '0').replace(/,/g, ''), 10) || 0;
-            const kanazawa = parseInt((row['金沢城公園入園者数'] || '0').replace(/,/g, ''), 10) || 0;
-            
-            let inboundCount = 0;
-            let foreignDetails = [];
-            if (foreignAgg[m]) {
-                inboundCount = foreignAgg[m].total;
-                // 人数が多い順にソートしておく
-                foreignDetails = foreignAgg[m].countries.sort((a, b) => b.count - a.count);
-            }
-            
-            const inboundIndex = kenrokuen > 0 ? (inboundCount / kenrokuen) * 100 : 0;
-
-            return {
-                month: m,
-                kenrokuen: kenrokuen,
-                kanazawa: kanazawa,
-                inboundCount: inboundCount,
-                inboundIndex: inboundIndex,
-                foreignDetails: foreignDetails
-            };
-        });
-
-        // 古い順にソート（スプレッドシートの並び順崩れ対策）
-        monthlyData.sort((a, b) => new Date(a.month) - new Date(b.month));
-
-        // ローディング非表示とUIの初期化
-        document.getElementById('loading-overlay').style.display = 'none';
-        initRankingSelects();
-        updateDashboard();
     }
 
     // --- 3. ユーティリティ関数 ---
@@ -841,6 +878,8 @@
     function initRankingSelects() {
         const yearSelect = document.getElementById('select-year');
         const monthSelect = document.getElementById('select-month');
+        yearSelect.innerHTML = '';
+        monthSelect.innerHTML = '';
         
         const years = [...new Set(monthlyData.map(d => new Date(d.month).getFullYear()))];
         years.forEach(y => {
@@ -1045,7 +1084,9 @@
             return `${date.getFullYear()}/${date.getMonth()+1}`;
         });
         const chartData = chartSourceData.map(d => d[targetKey]);
+        const inboundData = chartSourceData.map(d => d.inboundCount);
         const themeColor = currentTab === 'kenrokuen' ? colors.primary : colors.secondary;
+        const isKenrokuen = currentTab === 'kenrokuen';
 
         if (monthlyChartInstance) monthlyChartInstance.destroy();
         const ctxMonthly = document.getElementById('monthlyChart').getContext('2d');
@@ -1053,21 +1094,34 @@
             type: 'line',
             data: {
                 labels: labels,
-                datasets: [{
-                    label: '入園者数',
-                    data: chartData,
-                    borderColor: themeColor,
-                    backgroundColor: themeColor + '33', 
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 2
-                }]
+                datasets: [
+                    {
+                        label: '全体入園者数',
+                        data: chartData,
+                        borderColor: themeColor,
+                        backgroundColor: themeColor + '33',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 2
+                    },
+                    ...(isKenrokuen ? [{
+                        label: 'インバウンド',
+                        data: inboundData,
+                        borderColor: colors.secondary,
+                        backgroundColor: colors.secondary + '33',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 2
+                    }] : [])
+                ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
+                interaction: { mode: 'index', intersect: false },
+                plugins: { legend: { display: isKenrokuen, position: 'top', align: 'end' } },
                 scales: {
                     y: { beginAtZero: true, ticks: { callback: function(value) { return value.toLocaleString(); } } }
                 }
@@ -1076,6 +1130,7 @@
 
         const fyLabels = Object.keys(data.yearlyAgg).sort();
         const fyData = fyLabels.map(fy => data.yearlyAgg[fy][targetKey]);
+        const fyInboundData = fyLabels.map(fy => data.yearlyAgg[fy].inbound);
 
         if (yearlyChartInstance) yearlyChartInstance.destroy();
         const ctxYearly = document.getElementById('yearlyChart').getContext('2d');
@@ -1083,17 +1138,26 @@
             type: 'bar',
             data: {
                 labels: fyLabels.map(fy => `${fy}年度`),
-                datasets: [{
-                    label: '入園者数',
-                    data: fyData,
-                    backgroundColor: themeColor,
-                    borderRadius: 4
-                }]
+                datasets: [
+                    {
+                        label: '全体入園者数',
+                        data: fyData,
+                        backgroundColor: themeColor,
+                        borderRadius: 4
+                    },
+                    ...(isKenrokuen ? [{
+                        label: 'インバウンド',
+                        data: fyInboundData,
+                        backgroundColor: colors.secondary,
+                        borderRadius: 4
+                    }] : [])
+                ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
+                interaction: { mode: 'index', intersect: false },
+                plugins: { legend: { display: isKenrokuen, position: 'top', align: 'end' } },
                 scales: {
                     y: { beginAtZero: true, ticks: { callback: function(value) { return value.toLocaleString(); } } }
                 }
@@ -1151,7 +1215,8 @@
     }
 
     // --- 7. 起動（データ取得） ---
-    window.onload = initData;
+    // DOMはこのスクリプトより前に構築済み。画像・フォント等のload完了を待たずに開始する。
+    initData();
 
 </script>
 </body>
