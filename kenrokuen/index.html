@@ -117,6 +117,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
             margin-bottom: 1rem;
         }
         .card-header-flex .card-title {
@@ -442,7 +444,13 @@
 
         <!-- 3. 年度別データ (チャート・全幅) -->
         <div class="tifo-card">
-            <h2 class="card-title"><i class="fa-solid fa-chart-bar"></i> 年度別 入園者数推移</h2>
+            <div class="card-header-flex">
+                <h2 class="card-title" id="yearly-chart-title"><i class="fa-solid fa-chart-bar"></i> 年度別 入園者数推移</h2>
+                <div class="period-controls">
+                    <button class="period-btn active" id="btn-yearly-fiscal" onclick="changeYearlyChartAggregation('fiscal')">年度</button>
+                    <button class="period-btn" id="btn-yearly-calendar" onclick="changeYearlyChartAggregation('calendar')">年</button>
+                </div>
+            </div>
             <div class="chart-container">
                 <canvas id="yearlyChart"></canvas>
             </div>
@@ -452,7 +460,7 @@
         <div class="kenrokuen-only">
             <!-- フィルターコントロール (全幅) -->
             <div style="display: flex; justify-content: space-between; align-items: center; background: var(--tifo-card-bg); padding: 1rem 1.5rem; border-radius: 1.5rem; border: 1px solid var(--tifo-card-border); box-shadow: 0 4px 6px -2px rgba(0,0,0,0.05);">
-                <div style="font-weight: bold; font-size: 1.1rem; color: var(--tifo-text);"><i class="fa-regular fa-calendar-check" style="color:var(--tifo-primary);"></i> 月別・年度別 インバウンド詳細</div>
+                <div style="font-weight: bold; font-size: 1.1rem; color: var(--tifo-text);"><i class="fa-regular fa-calendar-check" style="color:var(--tifo-primary);"></i> 月別・年度別・年別 インバウンド詳細</div>
                 <div class="ranking-controls">
                     <select id="select-year" onchange="updateRankingSection()"></select> 年
                     <select id="select-month" onchange="updateRankingSection()"></select>
@@ -511,7 +519,13 @@
 
         <!-- 5. 年度別データ表 (全幅、一番下) -->
         <div class="tifo-card">
-            <h2 class="card-title"><i class="fa-solid fa-table"></i> 年度別 データ表</h2>
+            <div class="card-header-flex">
+                <h2 class="card-title" id="yearly-table-title"><i class="fa-solid fa-table"></i> 年度別 データ表</h2>
+                <div class="period-controls">
+                    <button class="period-btn active" id="btn-table-fiscal" onclick="changeYearlyTableAggregation('fiscal')">年度</button>
+                    <button class="period-btn" id="btn-table-calendar" onclick="changeYearlyTableAggregation('calendar')">年</button>
+                </div>
+            </div>
             <!-- .table-responsive に高さを設けてスクロール可能にしています -->
             <div class="table-responsive">
                 <table id="yearlyTable">
@@ -548,6 +562,7 @@
             <div class="period-controls">
                 <button class="period-btn active" id="btn-modal-monthly" onclick="changeModalPeriod('monthly')">月別推移</button>
                 <button class="period-btn" id="btn-modal-yearly" onclick="changeModalPeriod('yearly')">年度別推移</button>
+                <button class="period-btn" id="btn-modal-calendar" onclick="changeModalPeriod('calendar')">年別推移</button>
             </div>
         </div>
         <div class="chart-container">
@@ -568,6 +583,8 @@
     let currentTab = 'kenrokuen'; 
     let chartPeriod = '3years'; 
     let inboundChartPeriod = '3years'; 
+    let yearlyChartAggregation = 'fiscal';
+    let yearlyTableAggregation = 'fiscal';
     
     let monthlyChartInstance = null;
     let yearlyChartInstance = null;
@@ -728,6 +745,7 @@
         const currentFY = getFiscalYear(latestData.month);
 
         const yearlyAgg = {};
+        const calendarYearlyAgg = {};
         monthlyData.forEach(row => {
             const fy = getFiscalYear(row.month);
             if (!yearlyAgg[fy]) {
@@ -736,6 +754,14 @@
             yearlyAgg[fy].kenrokuen += row.kenrokuen;
             yearlyAgg[fy].kanazawa += row.kanazawa;
             yearlyAgg[fy].inbound += row.inboundCount; // インバウンド総数を追加集計
+
+            const cy = new Date(row.month).getFullYear();
+            if (!calendarYearlyAgg[cy]) {
+                calendarYearlyAgg[cy] = { kenrokuen: 0, kanazawa: 0, inbound: 0 };
+            }
+            calendarYearlyAgg[cy].kenrokuen += row.kenrokuen;
+            calendarYearlyAgg[cy].kanazawa += row.kanazawa;
+            calendarYearlyAgg[cy].inbound += row.inboundCount;
         });
 
         let ytdKenrokuen = 0;
@@ -759,6 +785,7 @@
             latestDateStr: `${latestDate.getFullYear()}年${latestDate.getMonth() + 1}月`,
             currentFY: currentFY,
             yearlyAgg: yearlyAgg,
+            calendarYearlyAgg: calendarYearlyAgg,
             ytd: { kenrokuen: ytdKenrokuen, kanazawa: ytdKanazawa },
             lastYearData: lastYearData
         };
@@ -782,6 +809,7 @@
         modalPeriod = period;
         document.getElementById('btn-modal-monthly').classList.remove('active');
         document.getElementById('btn-modal-yearly').classList.remove('active');
+        document.getElementById('btn-modal-calendar').classList.remove('active');
         document.getElementById(`btn-modal-${period}`).classList.add('active');
         
         updateModalChart();
@@ -803,19 +831,20 @@
                 dataCounts.push(detail ? detail.count : 0);
             });
         } else {
-            // 年度別
+            // 年度別（4月〜翌3月）または年別（1月〜12月）
             const yearlyAgg = {};
             filteredData.forEach(d => {
-                const fy = getFiscalYear(d.month);
-                if (!yearlyAgg[fy]) yearlyAgg[fy] = 0;
+                const date = new Date(d.month);
+                const key = modalPeriod === 'yearly' ? getFiscalYear(d.month) : date.getFullYear();
+                if (!yearlyAgg[key]) yearlyAgg[key] = 0;
                 const detail = d.foreignDetails.find(fd => fd.country === modalCountry);
                 if (detail) {
-                    yearlyAgg[fy] += detail.count;
+                    yearlyAgg[key] += detail.count;
                 }
             });
             const fyLabels = Object.keys(yearlyAgg).sort();
             fyLabels.forEach(fy => {
-                labels.push(`${fy}年度`);
+                labels.push(`${fy}${modalPeriod === 'yearly' ? '年度' : '年'}`);
                 dataCounts.push(yearlyAgg[fy]);
             });
         }
@@ -835,7 +864,7 @@
                     fill: modalPeriod === 'monthly',
                     tension: 0.4,
                     pointRadius: modalPeriod === 'monthly' ? 2 : 0,
-                    borderRadius: modalPeriod === 'yearly' ? 4 : 0
+                    borderRadius: modalPeriod === 'monthly' ? 0 : 4
                 }]
             },
             options: {
@@ -875,6 +904,22 @@
         updateInboundChart();
     }
 
+    function changeYearlyChartAggregation(type) {
+        yearlyChartAggregation = type;
+        updateDashboard();
+    }
+
+    function changeYearlyTableAggregation(type) {
+        yearlyTableAggregation = type;
+        updateDashboard();
+    }
+
+    function syncAggregationButtons(prefix, activeType) {
+        document.getElementById(`btn-${prefix}-fiscal`).classList.remove('active');
+        document.getElementById(`btn-${prefix}-calendar`).classList.remove('active');
+        document.getElementById(`btn-${prefix}-${activeType}`).classList.add('active');
+    }
+
     function initRankingSelects() {
         const yearSelect = document.getElementById('select-year');
         const monthSelect = document.getElementById('select-month');
@@ -902,6 +947,11 @@
         yearlyOption.textContent = '年度';
         monthSelect.appendChild(yearlyOption);
 
+        const calendarOption = document.createElement('option');
+        calendarOption.value = 'calendar';
+        calendarOption.textContent = '年';
+        monthSelect.appendChild(calendarOption);
+
         const latestDate = new Date(monthlyData[monthlyData.length - 1].month);
         yearSelect.value = latestDate.getFullYear();
         monthSelect.value = latestDate.getMonth() + 1;
@@ -915,14 +965,18 @@
 
         let targetData = null;
 
-        if (monthVal === 'yearly') {
-            // 年度別（year年の4月 〜 翌年3月）の合計値を計算
+        if (monthVal === 'yearly' || monthVal === 'calendar') {
+            // 年度別（4月〜翌3月）または年別（1月〜12月）の合計値を計算
             let totalKenrokuen = 0;
             let totalInbound = 0;
             const foreignMap = {};
 
             monthlyData.forEach(d => {
-                if (getFiscalYear(d.month) === year) {
+                const date = new Date(d.month);
+                const matchesPeriod = monthVal === 'yearly'
+                    ? getFiscalYear(d.month) === year
+                    : date.getFullYear() === year;
+                if (matchesPeriod) {
                     totalKenrokuen += d.kenrokuen;
                     totalInbound += d.inboundCount;
                     d.foreignDetails.forEach(fd => {
@@ -1128,26 +1182,30 @@
             }
         });
 
-        const fyLabels = Object.keys(data.yearlyAgg).sort();
-        const fyData = fyLabels.map(fy => data.yearlyAgg[fy][targetKey]);
-        const fyInboundData = fyLabels.map(fy => data.yearlyAgg[fy].inbound);
+        const yearlyChartData = yearlyChartAggregation === 'fiscal' ? data.yearlyAgg : data.calendarYearlyAgg;
+        const yearlyChartLabels = Object.keys(yearlyChartData).sort();
+        const yearlyVisitors = yearlyChartLabels.map(key => yearlyChartData[key][targetKey]);
+        const yearlyInbound = yearlyChartLabels.map(key => yearlyChartData[key].inbound);
+        const yearlyChartSuffix = yearlyChartAggregation === 'fiscal' ? '年度' : '年';
+        document.getElementById('yearly-chart-title').innerHTML = `<i class="fa-solid fa-chart-bar"></i> ${yearlyChartAggregation === 'fiscal' ? '年度別' : '年別'} 入園者数推移`;
+        syncAggregationButtons('yearly', yearlyChartAggregation);
 
         if (yearlyChartInstance) yearlyChartInstance.destroy();
         const ctxYearly = document.getElementById('yearlyChart').getContext('2d');
         yearlyChartInstance = new Chart(ctxYearly, {
             type: 'bar',
             data: {
-                labels: fyLabels.map(fy => `${fy}年度`),
+                labels: yearlyChartLabels.map(key => `${key}${yearlyChartSuffix}`),
                 datasets: [
                     {
                         label: '全体入園者数',
-                        data: fyData,
+                        data: yearlyVisitors,
                         backgroundColor: themeColor,
                         borderRadius: 4
                     },
                     ...(isKenrokuen ? [{
                         label: 'インバウンド',
-                        data: fyInboundData,
+                        data: yearlyInbound,
                         backgroundColor: colors.secondary,
                         borderRadius: 4
                     }] : [])
@@ -1164,23 +1222,30 @@
             }
         });
 
-        // テーブルヘッダーの切り替え
+        // 年度別／年別データ表の切り替え
+        const yearlyTableData = yearlyTableAggregation === 'fiscal' ? data.yearlyAgg : data.calendarYearlyAgg;
+        const yearlyTableLabels = Object.keys(yearlyTableData).sort();
+        const yearlyTableSuffix = yearlyTableAggregation === 'fiscal' ? '年度' : '年';
+        const comparisonLabel = yearlyTableAggregation === 'fiscal' ? '前年度比' : '前年比';
+        document.getElementById('yearly-table-title').innerHTML = `<i class="fa-solid fa-table"></i> ${yearlyTableAggregation === 'fiscal' ? '年度別' : '年別'} データ表`;
+        syncAggregationButtons('table', yearlyTableAggregation);
+
         const theadTr = document.getElementById('yearlyTableHeaderRow');
         if (currentTab === 'kenrokuen') {
-            theadTr.innerHTML = '<th>年度</th><th>入園者数(人)</th><th>前年度比</th><th>インバウンド(人)</th>';
+            theadTr.innerHTML = `<th>${yearlyTableSuffix}</th><th>入園者数(人)</th><th>${comparisonLabel}</th><th>インバウンド(人)</th>`;
         } else {
-            theadTr.innerHTML = '<th>年度</th><th>入園者数(人)</th><th>前年度比</th>';
+            theadTr.innerHTML = `<th>${yearlyTableSuffix}</th><th>入園者数(人)</th><th>${comparisonLabel}</th>`;
         }
 
         const tbody = document.querySelector('#yearlyTable tbody');
         tbody.innerHTML = '';
-        for (let i = fyLabels.length - 1; i >= 0; i--) { 
-            const fy = fyLabels[i];
-            const count = data.yearlyAgg[fy][targetKey];
+        for (let i = yearlyTableLabels.length - 1; i >= 0; i--) { 
+            const key = yearlyTableLabels[i];
+            const count = yearlyTableData[key][targetKey];
             let compareText = '-';
             
             if (i > 0) {
-                const prevCount = data.yearlyAgg[fyLabels[i-1]][targetKey];
+                const prevCount = yearlyTableData[yearlyTableLabels[i-1]][targetKey];
                 if (prevCount > 0) {
                     const diff = ((count - prevCount) / prevCount * 100).toFixed(1);
                     const color = diff > 0 ? '#48BB78' : '#F56565';
@@ -1191,16 +1256,16 @@
 
             const tr = document.createElement('tr');
             if (currentTab === 'kenrokuen') {
-                const inboundCount = data.yearlyAgg[fy].inbound;
+                const inboundCount = yearlyTableData[key].inbound;
                 tr.innerHTML = `
-                    <td>${fy}年度</td>
+                    <td>${key}${yearlyTableSuffix}</td>
                     <td>${formatNum(count)}</td>
                     <td>${compareText}</td>
                     <td>${formatNum(inboundCount)}</td>
                 `;
             } else {
                 tr.innerHTML = `
-                    <td>${fy}年度</td>
+                    <td>${key}${yearlyTableSuffix}</td>
                     <td>${formatNum(count)}</td>
                     <td>${compareText}</td>
                 `;
