@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ななお観光案内ポータル</title>
+  <meta name="description" content="七尾駅観光案内所・和倉温泉駅観光案内所の対応履歴、相談トレンド、来訪者属性、月次集計をまとめた観光案内ポータルです。">
+  <meta name="theme-color" content="#4fd1c5">
+  <meta name="generator" content="Code for Noto / ChatGPT">
+  <style>
+    :root {
+      --tifo-bg:#f7fafc;
+      --tifo-text:#2d3748;
+      --tifo-primary:#4fd1c5;
+      --tifo-primary-dark:#38b2ac;
+      --tifo-card-border:#e2e8f0;
+      --tifo-card-bg:#fff;
+      --navy:#203144;
+      --muted:#64748b;
+      --faint:#8795a8;
+      --shadow:0 16px 40px -28px rgba(32,49,68,.4);
+      --content-width:1180px;
+      --nanao:#4fd1c5;
+      --wakura:#8aa6c4;
+      --danger:#b34545;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--tifo-bg);color:var(--tifo-text);font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+    button,input,select{font:inherit}
+    button,a{-webkit-tap-highlight-color:transparent}
+    a{color:inherit;text-decoration:none}
+    button{cursor:pointer}
+    .section-wrap{width:min(calc(100% - 40px),var(--content-width));margin-inline:auto}
+
+    .site-header{position:sticky;z-index:40;top:0;border-bottom:1px solid rgba(226,232,240,.9);background:rgba(247,250,252,.92);backdrop-filter:blur(14px)}
+    .header-inner{display:flex;min-height:74px;align-items:center;gap:26px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand-mark{display:grid;width:46px;height:46px;flex:0 0 auto;place-items:center;border-radius:14px;background:var(--navy);color:#fff;font-weight:800;font-size:1.05rem;letter-spacing:-.05em}
+    .brand-text{display:grid;gap:2px;min-width:0}
+    .brand-text strong{color:var(--navy);font-size:.96rem;white-space:nowrap}
+    .brand-text small{color:var(--faint);font-size:.62rem;letter-spacing:.08em;white-space:nowrap}
+    .desktop-nav{display:flex;margin-left:auto;gap:20px;color:#536276;font-size:.75rem;font-weight:700}
+    .desktop-nav a:hover{color:var(--tifo-primary-dark)}
+    .sheet-button{display:inline-flex;min-height:42px;align-items:center;gap:7px;border:1px solid #d8e2ea;border-radius:999px;background:#fff;padding:0 16px;color:#405066;font-size:.76rem;font-weight:700;white-space:nowrap}
+
+    .dashboard-top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-block:22px 12px}
+    .office-switch{display:flex;gap:4px;border:1px solid #d9e5e8;border-radius:999px;background:#fff;padding:3px}
+    .office-switch button{border:0;border-radius:999px;background:transparent;padding:8px 14px;color:var(--faint);font-size:.7rem;font-weight:800}
+    .office-switch button.active{background:var(--navy);color:#fff}
+    .sync-compact{display:inline-flex;align-items:center;gap:12px;color:var(--faint);font-size:.68rem}
+    .sync-compact p{margin:0}.sync-compact strong{margin-left:4px;color:var(--navy)}
+    .sync-compact button{border:0;background:transparent;padding:5px 0;color:var(--tifo-primary-dark);font-size:.68rem;font-weight:800}
+    .status-badge{display:inline-flex;align-items:center;gap:7px;border-radius:999px;background:#e9fbf8;padding:6px 10px;color:#218b83;font-size:.68rem;font-weight:800}
+    .status-badge::before{width:7px;height:7px;border-radius:50%;background:currentColor;content:""}
+    .status-badge.loading{background:#edf2f7;color:#64748b}.status-badge.error{background:#fff0f0;color:var(--danger)}
+
+    .summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:52px}
+    .summary-card,.tifo-card{border:1px solid var(--tifo-card-border);background:var(--tifo-card-bg);box-shadow:var(--shadow)}
+    .summary-card{min-height:126px;border-radius:24px;padding:22px 26px}.summary-card.today{border-color:rgba(79,209,197,.65)}
+    .summary-card p{margin:0 0 5px;color:var(--muted);font-size:.78rem;font-weight:700}
+    .summary-card strong{display:block;color:var(--navy);font-size:2.25rem;letter-spacing:-.04em;line-height:1.1}.summary-card strong span.unit{margin-left:4px;font-size:.9rem}
+    .summary-card small{display:block;margin-top:7px;color:var(--faint);font-size:.72rem;line-height:1.45}
+
+    .content-section{scroll-margin-top:100px;margin-bottom:92px}
+    .section-heading{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:24px}
+    .section-kicker{margin:0 0 10px;color:var(--tifo-primary-dark);font-size:.68rem;font-weight:800;letter-spacing:.17em}
+    .section-heading h2{margin:0;color:var(--navy);font-size:clamp(1.55rem,3vw,2.15rem)}
+    .section-heading p:last-child{margin:9px 0 0;color:var(--muted);font-size:.8rem;line-height:1.6}
+    .result-count{display:flex;align-items:baseline;gap:3px;color:var(--muted)}.result-count strong{color:var(--navy);font-size:1.55rem}.result-count span{font-size:.72rem}
+    .tifo-card{border-radius:24px;padding:24px}
+
+    .search-row{display:grid;grid-template-columns:1fr 190px;gap:12px}
+    .search-box{display:flex;min-height:54px;align-items:center;gap:10px;border:1px solid #dfe7ec;border-radius:16px;background:#f9fbfc;padding:0 16px}
+    .search-box span{color:var(--tifo-primary-dark);font-size:1.25rem}.search-box input{width:100%;border:0;outline:0;background:transparent;color:var(--navy)}
+    .history-sort{min-height:54px;border:1px solid #dfe7ec;border-radius:16px;background:#fff;padding:0 14px;color:#526176}
+    .history-list{height:560px;margin-top:12px;overflow-y:auto;padding-right:8px}
+    .history-item{border-bottom:1px solid #edf1f4;padding:20px 8px}.history-item:last-child{border-bottom:0}
+    .history-tags{display:flex;gap:6px;flex-wrap:wrap}.tag{border-radius:999px;background:#eef4f6;padding:5px 9px;color:#617187;font-size:.62rem}.tag.date{background:#def8f4;color:#238f87;font-weight:800}.tag.office-nanao{background:#e9fbf8;color:#218b83;font-weight:800}.tag.office-wakura{background:#edf3f9;color:#5d7894;font-weight:800}
+    .history-item p{margin:13px 0 0;color:#35465b;font-size:.88rem;line-height:1.8}.history-sub{display:flex;gap:14px;flex-wrap:wrap;margin-top:9px;color:var(--faint);font-size:.66rem}.history-sub strong{color:#526176;font-weight:700}
+    .history-load-more{display:none;width:100%;min-height:46px;margin-top:12px;border:1px solid #cfe8e5;border-radius:14px;background:#effaf9;color:#238f87;font-size:.74rem;font-weight:800}.history-load-more.visible{display:block}
+
+    .trend-section{border-block:1px solid #dfe8ed;background:#eef9f8;padding-block:78px}
+    .trend-toolbar,.attribute-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .trend-toolbar select,.attribute-toolbar select,.segmented{min-height:42px;border:1px solid #d9e5e8;border-radius:999px;background:#fff}
+    .trend-toolbar select,.attribute-toolbar select{padding:0 36px 0 14px;color:#526176;font-size:.72rem}
+    .segmented{display:flex;padding:3px}.segmented button{border:0;border-radius:999px;background:transparent;padding:8px 13px;color:var(--faint);font-size:.68rem;font-weight:700}.segmented button.active{background:var(--tifo-primary);color:#fff}
+    .stopword-status{display:inline-flex;align-items:center;gap:6px;min-height:28px;border:1px solid #d9e5e8;border-radius:999px;background:rgba(255,255,255,.78);padding:4px 10px;color:#64748b;font-size:.66rem;white-space:nowrap}.stopword-status::before{width:7px;height:7px;border-radius:50%;background:var(--tifo-primary-dark);content:""}
+    .trend-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}.trend-note{margin:14px 2px 0;color:#718096;font-size:.7rem;line-height:1.7}
+    .card-title-row{display:flex;align-items:start;justify-content:space-between;gap:18px}.card-title-row>div>span{color:var(--tifo-primary-dark);font-size:.62rem;font-weight:800;letter-spacing:.15em}.card-title-row h3{margin:6px 0 0;color:var(--navy);font-size:1.12rem}.card-title-row>small{color:var(--faint);font-size:.62rem;line-height:1.5;text-align:right}
+    .word-cloud{display:flex;min-height:360px;align-content:center;align-items:center;justify-content:center;gap:10px 16px;flex-wrap:wrap;padding:28px}.keyword-button{border:0;background:transparent;color:var(--navy);font-weight:700;transition:.18s ease}.keyword-button:hover{color:var(--tifo-primary-dark);transform:translateY(-2px)}
+    .ranking-list{display:grid;max-height:360px;gap:8px;overflow-y:auto}.ranking-item{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:10px;border:0;border-radius:13px;background:#f7fafb;padding:9px 11px;color:var(--navy);text-align:left}.rank-badge{display:grid;width:27px;height:27px;place-items:center;border-radius:50%;background:#a9a9a9;color:#fff;font-size:.68rem;font-weight:800}.ranking-item:nth-child(1) .rank-badge{background:#e7b80f}.ranking-item:nth-child(2) .rank-badge{background:#9faab7}.ranking-item:nth-child(3) .rank-badge{background:#bd7745}.ranking-item strong{font-size:.77rem}.ranking-item small{color:var(--faint);font-size:.62rem}
+
+    .attribute-sample{color:var(--faint);font-size:.68rem}.attribute-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.attribute-card{min-width:0}.distribution-list{display:grid;gap:12px;margin-top:22px}.distribution-row{display:grid;grid-template-columns:minmax(110px,.85fr) minmax(120px,1.5fr) 76px;align-items:center;gap:12px}.distribution-label{overflow:hidden;color:#43536a;font-size:.7rem;font-weight:700;text-overflow:ellipsis;white-space:nowrap}.distribution-track{height:10px;overflow:hidden;border-radius:999px;background:#edf2f4}.distribution-track i{display:block;height:100%;border-radius:inherit;background:var(--tifo-primary)}.distribution-value{color:var(--muted);font-size:.66rem;font-variant-numeric:tabular-nums;text-align:right}
+
+    .monthly-heading{align-items:center}.month-switcher{display:grid;grid-template-columns:42px 130px 42px;align-items:center;gap:8px}.month-switcher button,.modal-month button{display:grid;width:40px;height:40px;place-items:center;border:1px solid #d9e4ea;border-radius:50%;background:#fff;color:#405066;font-size:1.25rem}.month-switcher button:disabled,.modal-month button:disabled{cursor:default;opacity:.3}.month-switcher strong,.modal-month strong{color:var(--navy);text-align:center}
+    .monthly-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}.monthly-summary article{display:flex;min-height:90px;align-items:center;justify-content:space-between;border:1px solid var(--tifo-card-border);border-radius:18px;background:#fff;padding:18px 20px}.monthly-summary span{color:var(--muted);font-size:.7rem}.monthly-summary strong{color:var(--navy);font-size:1.35rem}.monthly-summary small{margin-left:3px;font-size:.65rem}
+    .monthly-card{margin-bottom:18px}.vertical-bars{display:flex;height:280px;align-items:end;justify-content:space-around;gap:10px;margin-top:28px}.vertical-bar-item{display:grid;border:0;background:transparent;padding:0;color:inherit;height:100%;min-width:52px;flex:1;grid-template-rows:22px 1fr 54px;gap:6px;text-align:center}.bar-value{color:var(--muted);font-size:.68rem;font-weight:800}.vertical-bar-track{display:flex;align-items:end;justify-content:center;border-bottom:1px solid #dce5eb}.vertical-bar-track i{display:block;width:min(65%,66px);min-height:4px;border-radius:7px 7px 0 0;background:var(--tifo-primary)}.bar-label{color:#536276;font-size:.65rem;font-weight:700;line-height:1.3;word-break:keep-all}
+    .monthly-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.breakdown-list{display:grid;gap:11px;margin-top:20px}.breakdown-row{display:grid;grid-template-columns:minmax(120px,.9fr) 1.5fr 62px;gap:12px;align-items:center}.breakdown-row button{overflow:hidden;border:0;background:transparent;padding:0;color:#43536a;font-size:.7rem;font-weight:700;text-align:left;text-overflow:ellipsis;white-space:nowrap}.breakdown-bar{height:9px;overflow:hidden;border-radius:999px;background:#edf2f4}.breakdown-bar i{display:block;height:100%;border-radius:inherit;background:var(--tifo-primary)}.breakdown-count{color:var(--muted);font-size:.66rem;text-align:right}
+    .trend-chart{width:100%;height:auto;margin-top:22px;overflow:visible}.axis-label{fill:#8795a8;font-size:10px}.grid-line{stroke:#e5ebef;stroke-width:1}.line-total{fill:none;stroke:var(--navy);stroke-width:2.5}.line-nanao{fill:none;stroke:var(--nanao);stroke-width:2}.line-wakura{fill:none;stroke:var(--wakura);stroke-width:2}.dot-total{fill:var(--navy)}.dot-nanao{fill:var(--nanao)}.dot-wakura{fill:var(--wakura)}.legend{display:flex;justify-content:flex-end;gap:12px;flex-wrap:wrap;margin-top:10px}.legend-item{display:inline-flex;align-items:center;gap:5px;color:#728196;font-size:.62rem}.legend-dot{width:10px;height:10px;border-radius:50%}
+
+    .links-section{border-top:1px solid #dfe8ed;background:#fff;padding-block:58px}.links-inner{display:grid;grid-template-columns:.55fr 1.45fr;gap:52px;align-items:start}.links-inner h2{margin:0;color:var(--navy);font-size:1.6rem}.link-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.link-cards a{display:grid;grid-template-columns:1fr auto;align-items:center;gap:5px;border:1px solid #e0e7ec;border-radius:18px;padding:18px 20px}.link-cards a span{grid-column:1;color:var(--tifo-primary-dark);font-size:.6rem;font-weight:800;letter-spacing:.12em}.link-cards a strong{grid-column:1;color:var(--navy);font-size:.82rem}.link-cards a em{grid-column:2;grid-row:1/3;color:var(--faint);font-style:normal}.link-cards a:hover{border-color:#bde7e2;background:#f5fcfb}
+    footer{padding-block:28px 90px;background:#fff}.footer-inner{display:flex;justify-content:space-between;gap:24px;color:var(--faint)}.footer-inner strong{color:#536276;font-size:.76rem}.footer-inner p{margin:6px 0 0;font-size:.64rem}.footer-mark{font-size:.6rem;letter-spacing:.12em}
+
+    .empty-state{display:grid;min-height:180px;place-items:center;color:var(--faint);font-size:.8rem;text-align:center;line-height:1.7;padding:20px}.error-detail{max-width:720px;margin:8px auto 0;color:#8b5e5e;font-size:.68rem;text-align:center;line-height:1.7}
+    .custom-scrollbar::-webkit-scrollbar{width:8px;height:8px}.custom-scrollbar::-webkit-scrollbar-thumb{border-radius:99px;background:#cfdae0}.custom-scrollbar::-webkit-scrollbar-track{background:transparent}
+
+    .mobile-nav{display:none}
+    .modal-overlay{position:fixed;z-index:80;inset:0;display:grid;place-items:center;background:rgba(32,49,68,.44);padding:20px}.modal-overlay[hidden]{display:none}.modal-content{width:min(920px,100%);max-height:min(82vh,760px);overflow:auto;border:1px solid #dfe7ec;border-radius:26px;background:#fff;box-shadow:0 28px 80px -32px rgba(32,49,68,.65)}.modal-header{display:flex;position:sticky;z-index:2;top:0;align-items:start;justify-content:space-between;gap:20px;border-bottom:1px solid #edf1f4;background:rgba(255,255,255,.96);padding:22px 24px;backdrop-filter:blur(8px)}.modal-header>div>span{color:var(--tifo-primary-dark);font-size:.62rem;font-weight:800;letter-spacing:.14em}.modal-header h2{margin:6px 0 0;color:var(--navy);font-size:1.35rem}.modal-header p{margin:7px 0 0;color:var(--muted);font-size:.72rem}.modal-close{display:grid;width:38px;height:38px;place-items:center;border:1px solid #dce4e9;border-radius:50%;background:#fff;color:#526176;font-size:1.15rem}.keyword-modal-toolbar{display:flex;justify-content:flex-end;padding:18px 24px 0}.modal-body{padding:20px 24px 28px}.modal-month{display:grid;grid-template-columns:42px 130px 42px;justify-content:center;align-items:center;gap:8px;margin:0 0 18px}.modal-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}.modal-stat{border:1px solid #e3eaee;border-radius:16px;padding:14px}.modal-stat span{display:block;color:var(--faint);font-size:.62rem}.modal-stat strong{display:block;margin-top:5px;color:var(--navy);font-size:1.2rem}.modal-history{display:grid;gap:10px;margin-top:18px}.modal-history article{border:1px solid #edf1f4;border-radius:14px;background:#fafcfd;padding:13px}.modal-history small{color:var(--faint)}.modal-history p{margin:7px 0 0;color:#405066;font-size:.75rem;line-height:1.65}
+
+    @media(max-width:980px){.desktop-nav{display:none}.trend-grid{grid-template-columns:1fr}.summary-grid{grid-template-columns:repeat(2,1fr)}.links-inner{grid-template-columns:1fr;gap:28px}.link-cards{grid-template-columns:repeat(2,1fr)}.monthly-grid{grid-template-columns:1fr}.dashboard-top{align-items:flex-start;flex-direction:column}.sync-compact{align-self:flex-end}}
+    @media(max-width:680px){body{padding-bottom:67px}.section-wrap{width:min(calc(100% - 28px),var(--content-width))}.header-inner{min-height:68px}.brand-text small{display:none}.brand-text strong{max-width:146px;font-size:.86rem;white-space:normal;line-height:1.25}.brand-mark{width:40px;height:40px;border-radius:12px}.sheet-button{margin-left:auto;min-height:38px;padding-inline:12px;font-size:.7rem}.summary-grid{gap:10px;margin-bottom:48px}.summary-card{min-height:112px;border-radius:19px;padding:16px}.summary-card strong{font-size:1.8rem}.content-section{margin-bottom:68px}.section-heading{align-items:start;flex-direction:column}.attribute-grid{grid-template-columns:1fr}.trend-toolbar,.attribute-toolbar{align-items:stretch;flex-direction:column}.trend-toolbar select,.attribute-toolbar select{width:100%}.tifo-card{padding:17px;border-radius:19px}.search-row{grid-template-columns:1fr}.history-list{height:520px}.word-cloud{min-height:320px;padding:18px 6px}.monthly-summary{grid-template-columns:1fr}.vertical-bars{height:auto;display:grid;gap:10px}.vertical-bar-item{height:auto;min-width:0;grid-template-columns:100px 1fr 48px;grid-template-rows:auto;align-items:center;text-align:left}.vertical-bar-item .bar-value{grid-column:3;grid-row:1;text-align:right}.vertical-bar-track{grid-column:2;grid-row:1;height:12px;border:0;border-radius:99px;background:#edf2f4;align-items:stretch;justify-content:flex-start;overflow:hidden}.vertical-bar-track i{height:100%;width:var(--mobile-width)!important;min-height:0;border-radius:inherit}.bar-label{grid-column:1;grid-row:1}.links-inner{grid-template-columns:1fr}.link-cards{grid-template-columns:1fr}.footer-inner{flex-direction:column}.footer-mark{display:none}.mobile-nav{display:grid;position:fixed;z-index:50;right:0;bottom:0;left:0;grid-template-columns:repeat(4,1fr);border-top:1px solid #dfe7ec;background:rgba(255,255,255,.96);backdrop-filter:blur(12px)}.mobile-nav a{padding:15px 5px;color:#64748b;font-size:.68rem;font-weight:800;text-align:center}.distribution-row{grid-template-columns:minmax(95px,.8fr) 1.3fr 68px}.modal-overlay{padding:10px}.modal-content{max-height:88vh;border-radius:20px}.modal-stat-grid{grid-template-columns:1fr}.dashboard-top{padding-block:12px 8px}.office-switch{width:100%;overflow:auto}.office-switch button{flex:1;white-space:nowrap}.sync-compact{align-self:stretch;justify-content:flex-end;flex-wrap:wrap}.monthly-heading .month-switcher{align-self:center}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="section-wrap header-inner">
+      <a class="brand" href="#top" aria-label="ななお観光案内ポータル トップへ">
+        <span class="brand-mark" aria-hidden="true">七尾</span>
+        <span class="brand-text"><strong>ななお観光案内ポータル</strong><small>NANAO TOURIST INFORMATION PORTAL</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="ページ内メニュー">
+        <a href="#history">案内履歴</a><a href="#trend">トレンド</a><a href="#attributes">属性</a><a href="#monthly">月次集計</a><a href="#links">各種リンク</a>
+      </nav>
+      <a class="sheet-button" href="https://docs.google.com/spreadsheets/d/1iwOyjY38NeEYIGxTozXUe_VsQ5jWMhGz-HauSNjnqQU/edit?gid=0#gid=0" target="_blank" rel="noreferrer">元データ <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="section-wrap dashboard-top" aria-label="データ表示条件と更新状況">
+      <div class="office-switch" id="officeSwitch" aria-label="案内所切り替え">
+        <button class="active" type="button" data-office="all">2案内所 合計</button>
+        <button type="button" data-office="七尾駅観光案内所">七尾駅</button>
+        <button type="button" data-office="和倉温泉駅観光案内所">和倉温泉駅</button>
+      </div>
+      <div class="sync-compact"><span id="statusBadge" class="status-badge loading">読み込み中</span><p>最終データ日 <strong id="latestDate">—</strong></p><button id="reloadButton" type="button">再読み込み</button></div>
+    </section>
+
+    <section class="section-wrap summary-grid" aria-label="案内件数サマリー">
+      <article class="summary-card today"><p>本日の案内件数</p><strong><span id="todayCount">—</span><span class="unit">件</span></strong><small id="todayTopCategory">問い合わせ傾向を集計中</small></article>
+      <article class="summary-card"><p>今月の案内件数</p><strong><span id="monthCount">—</span><span class="unit">件</span></strong><small id="monthTopCategory">問い合わせ傾向を集計中</small></article>
+      <article class="summary-card"><p>今月の延べ利用人数</p><strong><span id="monthPeople">—</span><span class="unit">人</span></strong><small>人数入力のある案内を合計</small></article>
+      <article class="summary-card"><p>今月の海外客率</p><strong><span id="monthInternationalRate">—</span><span class="unit">%</span></strong><small>国籍が日本以外の案内割合</small></article>
+    </section>
+
+    <section id="history" class="section-wrap content-section">
+      <div class="section-heading"><div><p class="section-kicker">GUIDANCE HISTORY</p><h2>案内履歴</h2><p>案内概要の自由記述を、最新の記録から確認できます。</p></div><div class="result-count"><strong id="historyCount">0</strong><span>件</span></div></div>
+      <div class="tifo-card">
+        <div class="search-row">
+          <label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="自由記述・国籍・エリア・交通・ジャンルを検索"></label>
+          <select id="historySort" class="history-sort" aria-label="案内履歴の並び順"><option value="desc">新しい順</option><option value="asc">古い順</option></select>
+        </div>
+        <div id="historyList" class="history-list custom-scrollbar" aria-live="polite"><div class="empty-state">データを読み込んでいます。</div></div>
+        <button id="historyLoadMore" class="history-load-more" type="button">さらに表示</button>
+      </div>
+    </section>
+
+    <section id="trend" class="trend-section content-section">
+      <div class="section-wrap">
+        <div class="section-heading"><div><p class="section-kicker">CONSULTATION TREND</p><h2>相談トレンド</h2><p>「案内概要」の自由記述だけを対象に、頻出語と特徴語を可視化します。</p></div><div class="trend-toolbar"><select id="rangeSelect" aria-label="集計期間"><option value="1">直近1か月</option><option value="3" selected>直近3か月</option><option value="6">直近6か月</option><option value="12">直近12か月</option><option value="all">全期間</option></select><div class="segmented" aria-label="集計方法"><button class="active" type="button" data-mode="frequency">頻出</button><button type="button" data-mode="tfidf">TF-IDF</button></div><span class="stopword-status">内蔵ストップワード適用</span></div></div>
+        <div class="trend-grid">
+          <article class="tifo-card"><div class="card-title-row"><div><span>KEYWORD CLOUD</span><h3>頻出キーワード</h3></div><small>クリックで月別・時間帯別推移</small></div><div id="wordCloud" class="word-cloud"><div class="empty-state">キーワードを集計しています。</div></div></article>
+          <article class="tifo-card"><div class="card-title-row"><div><span>TOP KEYWORDS</span><h3>キーワードランキング</h3></div></div><div id="rankingList" class="ranking-list custom-scrollbar"></div></article>
+        </div>
+        <p class="trend-note">形態素解析はブラウザ標準の日本語単語分割を利用し、「案内概要（Summary）」のみを対象に一般名詞・固有名詞に相当する語を抽出しています。助詞・助動詞・動詞的な語、数字のみの語、内蔵ストップワードは除外しています。</p>
+      </div>
+    </section>
+
+    <section id="attributes" class="section-wrap content-section">
+      <div class="section-heading"><div><p class="section-kicker">VISITOR PROFILE</p><h2>案内属性</h2><p>不要な管理列を除き、案内所・受付・ジャンル・行先・国籍・人数・年代・交通・宿泊などを可能な限り集計します。</p></div><div class="attribute-toolbar"><select id="attributeRange" aria-label="属性の集計期間"><option value="3">直近3か月</option><option value="12" selected>直近12か月</option><option value="year">今年</option><option value="all">全期間</option></select><span id="attributeSample" class="attribute-sample">—</span></div></div>
+      <div id="attributeGrid" class="attribute-grid"><article class="tifo-card"><div class="empty-state">属性データを集計しています。</div></article></div>
+    </section>
+
+    <section id="monthly" class="section-wrap content-section">
+      <div class="section-heading monthly-heading"><div><p class="section-kicker">MONTHLY REPORT</p><h2>月次集計</h2><p>主な問い合わせジャンルと、エリア・交通・観光スポットなどの詳細を月ごとに確認できます。</p></div><div class="month-switcher"><button id="previousMonth" type="button" aria-label="前の月">‹</button><strong id="selectedMonthLabel">—</strong><button id="nextMonth" type="button" aria-label="次の月">›</button></div></div>
+      <div class="monthly-summary"><article><span>案内件数</span><strong><span id="selectedCount">0</span><small>件</small></strong></article><article><span>延べ利用人数</span><strong><span id="selectedPeople">0</span><small>人</small></strong></article><article><span>海外客率</span><strong><span id="internationalRate">0</span><small>%</small></strong></article></div>
+      <article class="tifo-card monthly-card"><div class="card-title-row"><div><span>GUIDANCE CATEGORIES</span><h3>案内ジャンル</h3></div><small>Main_Categoryの複数選択をそれぞれ1件として集計</small></div><div id="verticalBars" class="vertical-bars"></div></article>
+      <div class="monthly-grid">
+        <article class="tifo-card"><div class="card-title-row"><div><span>DESTINATION / AREA</span><h3>案内対象エリア</h3></div><small>上位10件</small></div><div id="targetAreaBreakdown" class="breakdown-list"></div></article>
+        <article class="tifo-card"><div class="card-title-row"><div><span>TRANSPORT</span><h3>交通の相談内容</h3></div><small>複数回答を分割集計</small></div><div id="transportBreakdown" class="breakdown-list"></div></article>
+        <article class="tifo-card"><div class="card-title-row"><div><span>SIGHTSEEING</span><h3>観光スポット</h3></div><small>具体的な案内先</small></div><div id="sightseeingBreakdown" class="breakdown-list"></div></article>
+        <article class="tifo-card"><div class="card-title-row"><div><span>STAY</span><h3>宿泊形態</h3></div><small>日帰り・和倉温泉宿泊など</small></div><div id="stayBreakdown" class="breakdown-list"></div></article>
+      </div>
+      <article class="tifo-card" style="margin-top:18px"><div class="card-title-row"><div><span>12 MONTH TREND</span><h3>案内件数の推移</h3></div><small>全体表示では2案内所も比較</small></div><div id="monthlyTrendChart"></div></article>
+    </section>
+
+    <section id="links" class="links-section"><div class="section-wrap links-inner"><div><p class="section-kicker">RELATED LINKS</p><h2>各種リンク</h2></div><div class="link-cards"><a href="https://docs.google.com/spreadsheets/d/1iwOyjY38NeEYIGxTozXUe_VsQ5jWMhGz-HauSNjnqQU/edit?gid=0#gid=0" target="_blank" rel="noreferrer"><span>DATA SOURCE</span><strong>元データのスプレッドシート</strong><em>↗</em></a><a href="https://www.city.nanao.lg.jp/koryu-s/aramashi/kankou/index.html" target="_blank" rel="noreferrer"><span>NANAO TOURISM</span><strong>七尾市 観光情報</strong><em>↗</em></a></div></div></section>
+  </main>
+
+  <footer><div class="section-wrap footer-inner"><div><strong>ななお観光案内ポータル</strong><p>データ：七尾市観光案内所対応履歴オープンデータ</p></div><span class="footer-mark">NANAO TOURIST INFORMATION PORTAL</span></div></footer>
+  <nav class="mobile-nav" aria-label="スマートフォン用ページ内メニュー"><a href="#history">履歴</a><a href="#trend">トレンド</a><a href="#attributes">属性</a><a href="#monthly">月次</a></nav>
+
+  <div id="keywordModal" class="modal-overlay" hidden><div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="keywordModalTitle"><div class="modal-header"><div><span>KEYWORD DETAIL</span><h2 id="keywordModalTitle">キーワードの推移</h2><p id="keywordModalDescription">月別・時間帯別の登場回数</p></div><button class="modal-close" type="button" aria-label="閉じる">×</button></div><div class="keyword-modal-toolbar"><div class="segmented keyword-view-switch"><button class="active" type="button" data-keyword-view="monthly">月別推移</button><button type="button" data-keyword-view="hourly">時間帯別</button></div></div><div id="keywordModalBody" class="modal-body"></div></div></div>
+  <div id="categoryModal" class="modal-overlay" hidden><div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="categoryModalTitle"><div class="modal-header"><div><span>CATEGORY DETAIL</span><h2 id="categoryModalTitle">ジャンル詳細</h2><p id="categoryModalDescription">選択月の内訳と最近の案内</p></div><button class="modal-close" type="button" aria-label="閉じる">×</button></div><div id="categoryModalBody" class="modal-body"></div></div></div>
+
+<script>
+"use strict";
+const SHEET_ID="1iwOyjY38NeEYIGxTozXUe_VsQ5jWMhGz-HauSNjnqQU";
+const SHEET_GID="0";
+const DATA_SOURCES=[
+  `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${SHEET_GID}`,
+  `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${SHEET_GID}`
+];
+const OFFICE_NAMES=["七尾駅観光案内所","和倉温泉駅観光案内所"];
+const CATEGORY_COLORS={
+  "交通":"#ff7043","観光スポット":"#f6a72b","食事":"#62bc6c","宿泊":"#56a7c4","特産品・お土産":"#9eb4d8","イベント":"#8c88c9","その他":"#a8b2bd","案内所・施設":"#ef5261"
+};
+const DEFAULT_COLORS=["#4fd1c5","#ff7043","#f6a72b","#62bc6c","#56a7c4","#8c88c9","#9eb4d8","#ef5261","#a8b2bd","#7cddd4"];
+const STOP_WORDS=new Set(`行き ます って です しま した して から ので まで ない でした でしょう ください いただき いただく もらい もらう お願い され でき あり なく なり たく 教え 教えて 知り たい ところ こちら それ これ あれ どこ 何 どう 今日 明日 昨日 今 今から 行く 行きたい 行ける 行き方 戻る 見る 見たい 買う 買いたい 乗る 乗り 乗りたい ある あります いる います なる くださいませ 案内 問い合わせ 問合せ お客様 観光 客 方 こと もの ため よう とき 時間 お願いいたします お願いします 教えて下さい 教えてください できます できる ですか ますか でしょうか ありますか ありますでしょうか`.split(/\s+/));
+const NON_NOUN_PATTERNS=[/^(する|した|して|します|される|され|なる|なった|ある|いる|できる|でき|行く|行き|行った|行きたい|見る|見たい|欲しい|ほしい|教える|教えて|知りたい)$/,/^(です|ます|ました|ません|でしょう|ください|たい|ない|なく|あり|から|まで|ので|けど|ですか|ますか)$/];
+const state={records:[],office:"all",keywordMode:"frequency",rangeMonths:3,attributeRange:"12",selectedMonth:"",historyLimit:80,keyword:null,keywordView:"monthly"};
+
+function parseCsv(text){const rows=[];let row=[],field="",quoted=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c==='"'&&quoted&&n==='"'){field+='"';i++;}else if(c==='"'){quoted=!quoted;}else if(c===','&&!quoted){row.push(field);field="";}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&n==='\n')i++;row.push(field);if(row.some(v=>v.trim()))rows.push(row);row=[];field="";}else field+=c;}if(field.length||row.length){row.push(field);if(row.some(v=>v.trim()))rows.push(row);}return rows;}
+function normalizeText(v){return String(v??"").normalize("NFKC").replace(/\s+/g," ").trim();}
+function splitMulti(v){return normalizeText(v).split(/[，,、]/).map(x=>x.trim()).filter(Boolean);}
+function pad(n){return String(n).padStart(2,"0")}
+function parseTimestamp(raw){const s=normalizeText(raw);const m=s.match(/(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})(?:\s+(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?/);if(!m)return null;const y=+m[1],mo=+m[2],d=+m[3],h=+(m[4]||0),mi=+(m[5]||0),se=+(m[6]||0);const date=new Date(y,mo-1,d,h,mi,se);return {dateObj:date,dateKey:`${y}-${pad(mo)}-${pad(d)}`,monthKey:`${y}-${pad(mo)}`,time:`${pad(h)}:${pad(mi)}`,hour:h};}
+function normalizeOffice(v){const s=normalizeText(v);if(s.includes("和倉"))return "和倉温泉駅観光案内所";if(s.includes("七尾"))return "七尾駅観光案内所";return s||"不明";}
+function isTrue(v){return /^(true|1|yes|はい)$/i.test(normalizeText(v));}
+function csvToRecords(text){const rows=parseCsv(text);if(rows.length<2)return[];const headers=rows[0].map(normalizeText);const idx=(...names)=>{for(const n of names){const i=headers.indexOf(n);if(i>=0)return i;}return-1};const c={timestamp:idx("Timestamp"),office:idx("Office_Code"),channel:idx("Channel"),category:idx("Main_Category"),summary:idx("Summary"),target:idx("Target_Area"),nationality:idx("Nationality"),visitor:idx("Visitor_Type"),duration:idx("Duration_Min"),sightseeing:idx("Sightseeing_Detail"),gender:idx("Gender"),test:idx("Is_Test_Data"),party:idx("Party_Size"),age:idx("Age_Group"),transport:idx("Transport_Detail"),food:idx("Food_Detail"),stay:idx("Stay_Type")};return rows.slice(1).map((r,sequence)=>{const t=parseTimestamp(r[c.timestamp]);if(!t)return null;if(c.test>=0&&isTrue(r[c.test]))return null;const categories=splitMulti(r[c.category]);return {...t,sequence,office:normalizeOffice(r[c.office]),channel:normalizeText(r[c.channel])||"不明",categories,primaryCategory:categories[0]||"未分類",summary:normalizeText(r[c.summary]),targetArea:normalizeText(r[c.target]),nationality:normalizeText(r[c.nationality])||"不明",visitorType:normalizeText(r[c.visitor])||"不明",duration:normalizeText(r[c.duration]),sightseeing:splitMulti(r[c.sightseeing]),gender:normalizeText(r[c.gender])||"不明",partySize:Number.parseInt(normalizeText(r[c.party]),10)||0,age:normalizeText(r[c.age])||"不明",transport:splitMulti(r[c.transport]),food:splitMulti(r[c.food]),stayType:normalizeText(r[c.stay])||"不明"};}).filter(Boolean).sort((a,b)=>b.dateObj-a.dateObj||b.sequence-a.sequence);}
+function escapeHtml(v){return String(v??"").replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));}
+function formatDate(key){const [y,m,d]=key.split("-");return `${y}/${m}/${d}`}
+function formatMonth(key){if(!key)return"—";const[y,m]=key.split("-");return `${y}年${Number(m)}月`}
+function monthShift(key,delta){const[y,m]=key.split("-").map(Number);const d=new Date(y,m-1+delta,1);return `${d.getFullYear()}-${pad(d.getMonth()+1)}`}
+function browserTodayKey(){const d=new Date();return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
+function browserMonthKey(){return browserTodayKey().slice(0,7)}
+function latestMonth(){return state.records[0]?.monthKey||browserMonthKey()}
+function latestDate(){return state.records[0]?.dateKey||""}
+function baseRecords(){return state.records.filter(r=>state.office==="all"||r.office===state.office)}
+function rangeRecords(range,source=baseRecords()){if(range==="all")return source;const anchor=latestMonth();if(range==="year"){const year=anchor.slice(0,4);return source.filter(r=>r.dateKey.startsWith(year));}const months=Number(range);const first=monthShift(anchor,-(months-1));return source.filter(r=>r.monthKey>=first&&r.monthKey<=anchor)}
+function rate(records,predicate){if(!records.length)return 0;return Math.round(records.filter(predicate).length/records.length*100)}
+function countMap(values){const m=new Map();values.forEach(v=>{if(v)m.set(v,(m.get(v)||0)+1)});return [...m].map(([name,count])=>({name,count})).sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name,"ja"));}
+function topValue(values){return countMap(values)[0]||null}
+function isInternational(n){const s=normalizeText(n);return s&&s!=="日本"&&!s.includes("地域不明")&&!s.includes("不明")}
+function categoryColor(name,index=0){return CATEGORY_COLORS[name]||DEFAULT_COLORS[index%DEFAULT_COLORS.length]}
+
+async function loadRecords(){setStatus("loading");let lastError="";for(const url of DATA_SOURCES){try{const response=await fetch(url,{cache:"no-store"});if(!response.ok)throw new Error(`HTTP ${response.status}`);const text=await response.text();const records=csvToRecords(text);if(!records.length)throw new Error("有効なレコードがありません");state.records=records;state.selectedMonth=latestMonth();setStatus("live");renderAll();return;}catch(e){lastError=e?.message||String(e);}}state.records=[];setStatus("error",lastError);renderAll();}
+function setStatus(status,detail=""){const badge=document.getElementById("statusBadge");badge.className=`status-badge ${status}`;badge.textContent={loading:"読み込み中",live:"最新データ",error:"読み込み失敗"}[status]||status;document.getElementById("latestDate").textContent=latestDate()?formatDate(latestDate()):"—";if(status==="error"){document.getElementById("historyList").innerHTML=`<div class="empty-state"><div>スプレッドシートからデータを取得できませんでした。<div class="error-detail">公開設定とGoogle SheetsのCSV取得可否をご確認ください。${escapeHtml(detail)}</div></div></div>`;}}
+
+function renderSummary(){const records=baseRecords(),today=browserTodayKey(),month=browserMonthKey();const todayRows=records.filter(r=>r.dateKey===today),monthRows=records.filter(r=>r.monthKey===month);document.getElementById("todayCount").textContent=todayRows.length.toLocaleString();document.getElementById("monthCount").textContent=monthRows.length.toLocaleString();document.getElementById("monthPeople").textContent=monthRows.reduce((s,r)=>s+r.partySize,0).toLocaleString();document.getElementById("monthInternationalRate").textContent=rate(monthRows,r=>isInternational(r.nationality));const t=topValue(todayRows.flatMap(r=>r.categories)),m=topValue(monthRows.flatMap(r=>r.categories));document.getElementById("todayTopCategory").textContent=t?`最多：${t.name}（${t.count}件）`:"本日の記録はまだありません";document.getElementById("monthTopCategory").textContent=m?`最多：${m.name}（${m.count}件）`:"今月の記録はまだありません";}
+
+function renderHistory(reset=false){if(reset)state.historyLimit=80;const q=normalizeText(document.getElementById("searchInput").value).toLowerCase();let rows=baseRecords().filter(r=>r.summary);rows=rows.filter(r=>{if(!q)return true;return normalizeText([r.summary,r.office,r.channel,r.categories.join(" "),r.targetArea,r.nationality,r.visitorType,r.age,r.transport.join(" "),r.sightseeing.join(" "),r.food.join(" "),r.stayType].join(" ")).toLowerCase().includes(q)});if(document.getElementById("historySort").value==="asc")rows=[...rows].sort((a,b)=>a.dateObj-b.dateObj||a.sequence-b.sequence);document.getElementById("historyCount").textContent=rows.length.toLocaleString();const visible=rows.slice(0,state.historyLimit);const list=document.getElementById("historyList");if(!visible.length){list.innerHTML='<div class="empty-state">該当する案内履歴はありません。</div>';}else{list.innerHTML=visible.map(r=>{const officeClass=r.office.includes("和倉")?"office-wakura":"office-nanao";const tags=[`<span class="tag date">${escapeHtml(formatDate(r.dateKey))} ${escapeHtml(r.time)}</span>`,`<span class="tag ${officeClass}">${escapeHtml(r.office.replace("観光案内所",""))}</span>`,`<span class="tag">${escapeHtml(r.channel)}</span>`,...r.categories.map(c=>`<span class="tag">${escapeHtml(c)}</span>`),r.targetArea?`<span class="tag">${escapeHtml(r.targetArea)}</span>`:"",r.nationality?`<span class="tag">${escapeHtml(r.nationality)}</span>`:"",r.age&&r.age!=="不明"?`<span class="tag">${escapeHtml(r.age)}</span>`:""].join("");const sub=[r.visitorType&&r.visitorType!=="不明"?`来訪形態 <strong>${escapeHtml(r.visitorType)}</strong>`:"",r.partySize?`人数 <strong>${r.partySize}人</strong>`:"",r.duration?`対応 <strong>${escapeHtml(r.duration)}</strong>`:"",r.transport.length?`交通 <strong>${escapeHtml(r.transport.join(" / "))}</strong>`:"",r.stayType&&r.stayType!=="不明"?`宿泊 <strong>${escapeHtml(r.stayType)}</strong>`:""].filter(Boolean).map(x=>`<span>${x}</span>`).join("");return `<article class="history-item"><div class="history-tags">${tags}</div><p>${escapeHtml(r.summary)}</p>${sub?`<div class="history-sub">${sub}</div>`:""}</article>`}).join("");}const remain=rows.length-visible.length,btn=document.getElementById("historyLoadMore");btn.classList.toggle("visible",remain>0);btn.textContent=remain>0?`さらに表示（残り${remain.toLocaleString()}件）`:"";}
+
+function isNounCandidate(word){const w=normalizeText(word);return w.length>=2&&w.length<22&&!STOP_WORDS.has(w)&&!/^[\d０-９]+$/.test(w)&&!/^[ぁ-んー]{2,}$/.test(w)&&!NON_NOUN_PATTERNS.some(p=>p.test(w));}
+function tokenize(text){const n=normalizeText(text);if("Segmenter" in Intl){const seg=new Intl.Segmenter("ja",{granularity:"word"});return [...seg.segment(n)].filter(x=>x.isWordLike).map(x=>x.segment).filter(isNounCandidate);}return (n.match(/[一-龠々〆ヵヶァ-ヴー]{2,}|[a-zA-Z]{3,}/g)||[]).filter(isNounCandidate);}
+function recordTokens(r){if(!r._tokens)r._tokens=tokenize(r.summary);return r._tokens}
+function analyzeKeywords(records){const docs=records.filter(r=>r.summary).map(recordTokens);const counts=new Map(),df=new Map(),score=new Map();docs.forEach(tokens=>{const local=new Map();tokens.forEach(t=>{counts.set(t,(counts.get(t)||0)+1);local.set(t,(local.get(t)||0)+1)});local.forEach((_,t)=>df.set(t,(df.get(t)||0)+1));});docs.forEach(tokens=>{const local=new Map();tokens.forEach(t=>local.set(t,(local.get(t)||0)+1));local.forEach((f,t)=>{const tf=1+Math.log(f),idf=Math.log((docs.length+1)/((df.get(t)||1)+1))+1;score.set(t,(score.get(t)||0)+tf*idf)});});return [...counts].map(([word,count])=>({word,count,score:score.get(word)||0})).filter(x=>x.count>=(records.length>100?2:1)).sort((a,b)=>state.keywordMode==="frequency"?(b.count-a.count||b.score-a.score):(b.score-a.score||b.count-a.count)).slice(0,40)}
+function trendRecords(){const rows=baseRecords();if(state.rangeMonths==="all")return rows.filter(r=>r.summary);const first=monthShift(latestMonth(),-(Number(state.rangeMonths)-1));return rows.filter(r=>r.summary&&r.monthKey>=first&&r.monthKey<=latestMonth())}
+function renderTrends(){const kws=analyzeKeywords(trendRecords()),cloud=document.getElementById("wordCloud"),rank=document.getElementById("rankingList");if(!kws.length){cloud.innerHTML='<div class="empty-state">キーワードがありません。</div>';rank.innerHTML="";return;}const max=state.keywordMode==="frequency"?kws[0].count:kws[0].score;cloud.innerHTML=kws.slice(0,26).map((x,i)=>{const v=state.keywordMode==="frequency"?x.count:x.score,ratio=max?v/max:0,size=.8+ratio*1.45,color=i%4===0?"#38b2ac":"#203144";return `<button class="keyword-button" type="button" data-keyword="${escapeHtml(x.word)}" style="font-size:${size.toFixed(2)}rem;color:${color}">${escapeHtml(x.word)}</button>`}).join("");rank.innerHTML=kws.slice(0,30).map((x,i)=>`<button class="ranking-item" type="button" data-keyword="${escapeHtml(x.word)}"><span class="rank-badge">${i+1}</span><strong>${escapeHtml(x.word)}</strong><small>${state.keywordMode==="frequency"?`${x.count}回`:x.score.toFixed(1)}</small></button>`).join("");document.querySelectorAll("[data-keyword]").forEach(el=>el.addEventListener("click",()=>openKeywordModal(el.dataset.keyword)));}
+function keywordSeries(word,mode){const rows=baseRecords();if(mode==="hourly"){const pts=Array.from({length:12},(_,i)=>({label:`${i+8}時`,value:0}));rows.forEach(r=>{if(r.hour>=8&&r.hour<20)pts[r.hour-8].value+=recordTokens(r).filter(t=>t===word).length});return pts;}const end=latestMonth(),months=Array.from({length:24},(_,i)=>monthShift(end,i-23));return months.map(m=>({label:`${Number(m.slice(5))}月`,full:m,value:rows.filter(r=>r.monthKey===m).reduce((s,r)=>s+recordTokens(r).filter(t=>t===word).length,0)}));}
+function simpleLineSvg(points,label){const W=760,H=320,p={l:38,r:16,t:24,b:42},cw=W-p.l-p.r,ch=H-p.t-p.b,max=Math.max(1,...points.map(x=>x.value)),coords=points.map((x,i)=>({x:p.l+(i/Math.max(points.length-1,1))*cw,y:p.t+ch-(x.value/max)*ch,...x}));const path=coords.map((c,i)=>`${i?"L":"M"}${c.x.toFixed(1)},${c.y.toFixed(1)}`).join(" ");const grid=[0,.25,.5,.75,1].map(f=>{const y=p.t+ch*(1-f);return `<line class="grid-line" x1="${p.l}" y1="${y}" x2="${W-p.r}" y2="${y}"/><text class="axis-label" x="${p.l-8}" y="${y+3}" text-anchor="end">${Math.round(max*f)}</text>`}).join("");const step=Math.max(1,Math.ceil(points.length/8));const xlabels=coords.map((c,i)=>i%step===0||i===coords.length-1?`<text class="axis-label" x="${c.x}" y="${H-16}" text-anchor="middle">${escapeHtml(c.label)}</text>`:"").join("");const dots=coords.map(c=>`<circle class="dot-total" cx="${c.x}" cy="${c.y}" r="3"><title>${escapeHtml(c.full||c.label)}: ${c.value}回</title></circle>`).join("");return `<svg class="trend-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${escapeHtml(label)}"><g>${grid}</g><path class="line-total" d="${path}"/>${dots}${xlabels}</svg>`}
+function openKeywordModal(word){state.keyword=word;state.keywordView="monthly";document.querySelectorAll("[data-keyword-view]").forEach(b=>b.classList.toggle("active",b.dataset.keywordView==="monthly"));document.getElementById("keywordModalTitle").textContent=`「${word}」の推移`;document.getElementById("keywordModal").hidden=false;renderKeywordModal();}
+function renderKeywordModal(){const pts=keywordSeries(state.keyword,state.keywordView),total=pts.reduce((s,x)=>s+x.value,0),peak=[...pts].sort((a,b)=>b.value-a.value)[0];document.getElementById("keywordModalDescription").textContent=state.keywordView==="monthly"?"過去24か月の案内概要への登場回数":"時間帯別の案内概要への登場回数";document.getElementById("keywordModalBody").innerHTML=`<div class="modal-stat-grid"><div class="modal-stat"><span>合計登場回数</span><strong>${total}回</strong></div><div class="modal-stat"><span>最多</span><strong>${escapeHtml(peak?.full?formatMonth(peak.full):peak?.label||"—")}</strong></div><div class="modal-stat"><span>最多回数</span><strong>${peak?.value||0}回</strong></div></div>${simpleLineSvg(pts,`${state.keyword}の推移`)}`;}
+
+function renderDistributionCard(title,kicker,items,total,maxItems=8){const shown=items.slice(0,maxItems),max=shown[0]?.count||1;return `<article class="tifo-card attribute-card"><div class="card-title-row"><div><span>${escapeHtml(kicker)}</span><h3>${escapeHtml(title)}</h3></div><small>${total.toLocaleString()}件を集計</small></div><div class="distribution-list">${shown.length?shown.map(x=>`<div class="distribution-row"><div class="distribution-label" title="${escapeHtml(x.name)}">${escapeHtml(x.name)}</div><div class="distribution-track"><i style="width:${(x.count/max*100).toFixed(1)}%"></i></div><div class="distribution-value">${x.count.toLocaleString()} / ${total?Math.round(x.count/total*100):0}%</div></div>`).join(""):'<div class="empty-state">データがありません。</div>'}</div></article>`}
+function renderAttributes(){const rows=rangeRecords(state.attributeRange);document.getElementById("attributeSample").textContent=`${rows.length.toLocaleString()}件を集計`;const specs=[
+ ["案内所","INFORMATION DESK",r=>[r.office]],
+ ["受付方法","CHANNEL",r=>[r.channel]],
+ ["案内ジャンル","CATEGORY",r=>r.categories],
+ ["案内対象エリア","TARGET AREA",r=>[r.targetArea||"不明"]],
+ ["国籍・地域","NATIONALITY",r=>[r.nationality]],
+ ["来訪形態","VISITOR TYPE",r=>[r.visitorType]],
+ ["人数","PARTY SIZE",r=>[r.partySize?`${r.partySize}人`:"不明"]],
+ ["性別","GENDER",r=>[r.gender]],
+ ["年代","AGE GROUP",r=>[r.age]],
+ ["交通の相談内容","TRANSPORT",r=>r.transport],
+ ["観光スポット","SIGHTSEEING",r=>r.sightseeing],
+ ["食事の相談内容","FOOD",r=>r.food],
+ ["宿泊形態","STAY TYPE",r=>[r.stayType]],
+ ["対応時間","DURATION",r=>[r.duration||"不明"]],
+ ["時間帯","TIME OF DAY",r=>[`${r.hour}:00〜${r.hour+1}:00`]]
+ ];document.getElementById("attributeGrid").innerHTML=specs.map(([title,kicker,getter])=>{const values=rows.flatMap(getter).filter(Boolean);return renderDistributionCard(title,kicker,countMap(values),rows.length,title==="案内対象エリア"||title==="観光スポット"||title==="交通の相談内容"?10:8)}).join("");}
+
+function monthRows(){return baseRecords().filter(r=>r.monthKey===state.selectedMonth)}
+function renderBreakdown(id,items,total){const el=document.getElementById(id),shown=items.slice(0,10),max=shown[0]?.count||1;if(!shown.length){el.innerHTML='<div class="empty-state">データがありません。</div>';return;}el.innerHTML=shown.map(x=>`<div class="breakdown-row"><button type="button" title="${escapeHtml(x.name)}">${escapeHtml(x.name)}</button><div class="breakdown-bar"><i style="width:${(x.count/max*100).toFixed(1)}%"></i></div><div class="breakdown-count">${x.count}件</div></div>`).join("");}
+function renderMonthly(){const rows=monthRows();document.getElementById("selectedMonthLabel").textContent=formatMonth(state.selectedMonth);document.getElementById("selectedCount").textContent=rows.length.toLocaleString();document.getElementById("selectedPeople").textContent=rows.reduce((s,r)=>s+r.partySize,0).toLocaleString();document.getElementById("internationalRate").textContent=rate(rows,r=>isInternational(r.nationality));const cats=countMap(rows.flatMap(r=>r.categories));const max=cats[0]?.count||1;document.getElementById("verticalBars").innerHTML=cats.length?cats.map((x,i)=>`<button class="vertical-bar-item" type="button" data-category="${escapeHtml(x.name)}" title="${escapeHtml(x.name)} ${x.count}件"><div class="bar-value">${x.count}</div><div class="vertical-bar-track"><i style="height:${(x.count/max*100).toFixed(1)}%;background:${categoryColor(x.name,i)};--mobile-width:${(x.count/max*100).toFixed(1)}%"></i></div><div class="bar-label">${escapeHtml(x.name)}</div></button>`).join(""):'<div class="empty-state" style="width:100%">この月のデータはありません。</div>';document.querySelectorAll("[data-category]").forEach(b=>b.addEventListener("click",()=>openCategoryModal(b.dataset.category)));renderBreakdown("targetAreaBreakdown",countMap(rows.map(r=>r.targetArea).filter(Boolean)),rows.length);renderBreakdown("transportBreakdown",countMap(rows.flatMap(r=>r.transport)),rows.length);renderBreakdown("sightseeingBreakdown",countMap(rows.flatMap(r=>r.sightseeing)),rows.length);renderBreakdown("stayBreakdown",countMap(rows.map(r=>r.stayType).filter(Boolean)),rows.length);renderMonthlyTrend();updateMonthButtons();}
+function monthlySeries(){const end=latestMonth(),months=Array.from({length:12},(_,i)=>monthShift(end,i-11));const all=state.records;return months.map(m=>({month:m,label:`${Number(m.slice(5))}月`,total:baseRecords().filter(r=>r.monthKey===m).length,nanao:all.filter(r=>r.monthKey===m&&r.office===OFFICE_NAMES[0]).length,wakura:all.filter(r=>r.monthKey===m&&r.office===OFFICE_NAMES[1]).length}))}
+function renderMonthlyTrend(){const pts=monthlySeries(),W=760,H=320,p={l:38,r:16,t:24,b:42},cw=W-p.l-p.r,ch=H-p.t-p.b,max=Math.max(1,...pts.flatMap(x=>state.office==="all"?[x.total,x.nanao,x.wakura]:[x.total]));const coords=(key)=>pts.map((x,i)=>({x:p.l+(i/11)*cw,y:p.t+ch-(x[key]/max)*ch,value:x[key],label:x.label,month:x.month}));const path=(arr)=>arr.map((c,i)=>`${i?"L":"M"}${c.x.toFixed(1)},${c.y.toFixed(1)}`).join(" ");const grid=[0,.25,.5,.75,1].map(f=>{const y=p.t+ch*(1-f);return `<line class="grid-line" x1="${p.l}" y1="${y}" x2="${W-p.r}" y2="${y}"/><text class="axis-label" x="${p.l-8}" y="${y+3}" text-anchor="end">${Math.round(max*f)}</text>`}).join("");const labels=pts.map((x,i)=>i%2===0||i===11?`<text class="axis-label" x="${(p.l+i/11*cw)}" y="${H-16}" text-anchor="middle">${escapeHtml(x.label)}</text>`:"").join("");const total=coords("total");let lines=`<path class="line-total" d="${path(total)}"/>${total.map(c=>`<circle class="dot-total" cx="${c.x}" cy="${c.y}" r="3"><title>${formatMonth(c.month)} ${c.value}件</title></circle>`).join("")}`;let legend='<span class="legend-item"><i class="legend-dot" style="background:#203144"></i>表示対象</span>';if(state.office==="all"){const n=coords("nanao"),w=coords("wakura");lines+=`<path class="line-nanao" d="${path(n)}"/><path class="line-wakura" d="${path(w)}"/>${n.map(c=>`<circle class="dot-nanao" cx="${c.x}" cy="${c.y}" r="2.5"><title>${formatMonth(c.month)} 七尾駅 ${c.value}件</title></circle>`).join("")}${w.map(c=>`<circle class="dot-wakura" cx="${c.x}" cy="${c.y}" r="2.5"><title>${formatMonth(c.month)} 和倉温泉駅 ${c.value}件</title></circle>`).join("")}`;legend='<span class="legend-item"><i class="legend-dot" style="background:#203144"></i>2案内所合計</span><span class="legend-item"><i class="legend-dot" style="background:#4fd1c5"></i>七尾駅</span><span class="legend-item"><i class="legend-dot" style="background:#8aa6c4"></i>和倉温泉駅</span>';}document.getElementById("monthlyTrendChart").innerHTML=`<svg class="trend-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="過去12か月の案内件数推移">${grid}${lines}${labels}</svg><div class="legend">${legend}</div>`;}
+function updateMonthButtons(){const months=[...new Set(baseRecords().map(r=>r.monthKey))].sort();const i=months.indexOf(state.selectedMonth);document.getElementById("previousMonth").disabled=i<=0;document.getElementById("nextMonth").disabled=i<0||i>=months.length-1;}
+function moveMonth(delta){const months=[...new Set(baseRecords().map(r=>r.monthKey))].sort();let i=months.indexOf(state.selectedMonth);if(i<0)i=months.length-1;const next=months[i+delta];if(next){state.selectedMonth=next;renderMonthly();}}
+function openCategoryModal(cat){const rows=monthRows().filter(r=>r.categories.includes(cat));const areas=countMap(rows.map(r=>r.targetArea).filter(Boolean)).slice(0,5),transport=countMap(rows.flatMap(r=>r.transport)).slice(0,5),recent=rows.filter(r=>r.summary).slice(0,8);document.getElementById("categoryModalTitle").textContent=cat;document.getElementById("categoryModalDescription").textContent=`${formatMonth(state.selectedMonth)}・${rows.length}件`;const list=(items)=>items.length?items.map(x=>`<div class="distribution-row"><div class="distribution-label">${escapeHtml(x.name)}</div><div class="distribution-track"><i style="width:${(x.count/(items[0]?.count||1)*100).toFixed(1)}%"></i></div><div class="distribution-value">${x.count}件</div></div>`).join(""):'<div class="empty-state">データなし</div>';document.getElementById("categoryModalBody").innerHTML=`<div class="modal-stat-grid"><div class="modal-stat"><span>案内件数</span><strong>${rows.length}件</strong></div><div class="modal-stat"><span>延べ人数</span><strong>${rows.reduce((s,r)=>s+r.partySize,0)}人</strong></div><div class="modal-stat"><span>海外客率</span><strong>${rate(rows,r=>isInternational(r.nationality))}%</strong></div></div><div class="monthly-grid"><div><div class="card-title-row"><div><span>AREA</span><h3>対象エリア</h3></div></div><div class="distribution-list">${list(areas)}</div></div><div><div class="card-title-row"><div><span>TRANSPORT</span><h3>交通</h3></div></div><div class="distribution-list">${list(transport)}</div></div></div><div class="modal-history">${recent.map(r=>`<article><small>${formatDate(r.dateKey)} ${r.time} ・ ${escapeHtml(r.office.replace("観光案内所",""))}</small><p>${escapeHtml(r.summary)}</p></article>`).join("")||'<div class="empty-state">自由記述はありません。</div>'}</div>`;document.getElementById("categoryModal").hidden=false;}
+
+function renderAll(){document.getElementById("latestDate").textContent=latestDate()?formatDate(latestDate()):"—";renderSummary();renderHistory(true);renderTrends();renderAttributes();if(!state.selectedMonth||!baseRecords().some(r=>r.monthKey===state.selectedMonth))state.selectedMonth=baseRecords()[0]?.monthKey||latestMonth();renderMonthly();}
+
+function bindEvents(){document.getElementById("reloadButton").addEventListener("click",loadRecords);document.getElementById("searchInput").addEventListener("input",()=>renderHistory(true));document.getElementById("historySort").addEventListener("change",()=>renderHistory(true));document.getElementById("historyLoadMore").addEventListener("click",()=>{state.historyLimit+=80;renderHistory(false)});document.getElementById("rangeSelect").addEventListener("change",e=>{state.rangeMonths=e.target.value;renderTrends()});document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>{state.keywordMode=b.dataset.mode;document.querySelectorAll("[data-mode]").forEach(x=>x.classList.toggle("active",x===b));renderTrends()}));document.getElementById("attributeRange").addEventListener("change",e=>{state.attributeRange=e.target.value;renderAttributes()});document.getElementById("previousMonth").addEventListener("click",()=>moveMonth(-1));document.getElementById("nextMonth").addEventListener("click",()=>moveMonth(1));document.querySelectorAll("#officeSwitch button").forEach(b=>b.addEventListener("click",()=>{state.office=b.dataset.office;document.querySelectorAll("#officeSwitch button").forEach(x=>x.classList.toggle("active",x===b));state.selectedMonth=baseRecords()[0]?.monthKey||latestMonth();renderAll()}));document.querySelectorAll(".modal-close").forEach(b=>b.addEventListener("click",()=>b.closest(".modal-overlay").hidden=true));document.querySelectorAll(".modal-overlay").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.hidden=true}));document.querySelectorAll("[data-keyword-view]").forEach(b=>b.addEventListener("click",()=>{state.keywordView=b.dataset.keywordView;document.querySelectorAll("[data-keyword-view]").forEach(x=>x.classList.toggle("active",x===b));renderKeywordModal()}));document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".modal-overlay").forEach(m=>m.hidden=true)});}
+bindEvents();loadRecords();
+</script>
+</body>
+</html>
