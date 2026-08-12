@@ -445,10 +445,10 @@
         <!-- 3. 年度別データ (チャート・全幅) -->
         <div class="tifo-card">
             <div class="card-header-flex">
-                <h2 class="card-title" id="yearly-chart-title"><i class="fa-solid fa-chart-bar"></i> 年度別 入園者数推移</h2>
+                <h2 class="card-title" id="yearly-chart-title"><i class="fa-solid fa-chart-bar"></i> 年別 入園者数推移</h2>
                 <div class="period-controls">
-                    <button class="period-btn active" id="btn-yearly-fiscal" onclick="changeYearlyChartAggregation('fiscal')">年度</button>
-                    <button class="period-btn" id="btn-yearly-calendar" onclick="changeYearlyChartAggregation('calendar')">年</button>
+                    <button class="period-btn" id="btn-yearly-fiscal" onclick="changeYearlyChartAggregation('fiscal')">年度</button>
+                    <button class="period-btn active" id="btn-yearly-calendar" onclick="changeYearlyChartAggregation('calendar')">年</button>
                 </div>
             </div>
             <div class="chart-container">
@@ -520,10 +520,10 @@
         <!-- 5. 年度別データ表 (全幅、一番下) -->
         <div class="tifo-card">
             <div class="card-header-flex">
-                <h2 class="card-title" id="yearly-table-title"><i class="fa-solid fa-table"></i> 年度別 データ表</h2>
+                <h2 class="card-title" id="yearly-table-title"><i class="fa-solid fa-table"></i> 年別 データ表</h2>
                 <div class="period-controls">
-                    <button class="period-btn active" id="btn-table-fiscal" onclick="changeYearlyTableAggregation('fiscal')">年度</button>
-                    <button class="period-btn" id="btn-table-calendar" onclick="changeYearlyTableAggregation('calendar')">年</button>
+                    <button class="period-btn" id="btn-table-fiscal" onclick="changeYearlyTableAggregation('fiscal')">年度</button>
+                    <button class="period-btn active" id="btn-table-calendar" onclick="changeYearlyTableAggregation('calendar')">年</button>
                 </div>
             </div>
             <!-- .table-responsive に高さを設けてスクロール可能にしています -->
@@ -583,8 +583,8 @@
     let currentTab = 'kenrokuen'; 
     let chartPeriod = '3years'; 
     let inboundChartPeriod = '3years'; 
-    let yearlyChartAggregation = 'fiscal';
-    let yearlyTableAggregation = 'fiscal';
+    let yearlyChartAggregation = 'calendar';
+    let yearlyTableAggregation = 'calendar';
     
     let monthlyChartInstance = null;
     let yearlyChartInstance = null;
