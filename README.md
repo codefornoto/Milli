@@ -1,34 +1,37 @@
-# 兼六園・金沢城公園 入園者数ダッシュボード
+# Milli Mini LLM
 
-本リポジトリでは、**兼六園・金沢城公園の入園者数データ**を可視化したダッシュボードを公開しています。
+石川県観光アンケート「Milli」の自由記述だけを使って、ランダム初期化から学習した小さな文字Transformerです。
 
-## 概要
+## そのまま公開する
 
-石川県の観光オープンデータ分析プラットフォーム「Milli」に掲載されているデータを活用し、  
-入園者数の推移や傾向を分かりやすく可視化しています。
+`github-pages` フォルダの中身をGitHubリポジトリの公開対象へ置けば動きます。ビルドは不要です。ローカル確認時は、ファイルを直接開かず簡易HTTPサーバーを使ってください。
 
-観光施策の検討や、来訪動向の把握に活用することを目的としています。
+```bash
+python3 -m http.server 8000
+```
 
-## データソース
+## 再学習する（PyTorch）
 
-本ダッシュボードは、以下のオープンデータを使用しています。
+```bash
+pip install torch pandas onnx
+python scripts/create_personas.py path/to/all.csv
+python scripts/preprocess.py path/to/all.csv
+python scripts/train.py --steps 2000
+python scripts/export_web_model.py model/model-2000.pt
+```
 
-- **Milli（石川県観光オープンデータ分析プラットフォーム）**  
-  https://sites.google.com/view/milli-ishikawa-pref/
+500 / 2,000 / 5,000 stepでチェックポイントを保存します。今回同梱したブラウザ用学習済みモデルは、同じGPT構造をTensorFlow.jsで2,000 step学習し、ブラウザ用のフラット重みへ変換したものです。
 
-## 内容
+## 人物画像
 
-- 兼六園・金沢城公園の入園者数推移
-- 月別・期間別の比較
-- 観光動向の可視化
+20枚のWebP画像はBase64データURIへ変換し、`index.html` の `PERSONA_IMAGES` に直接埋め込んであります。公開時に人物画像ファイルを別途配置する必要はありません。
 
-## 利用について
+画像を差し替える場合だけ `images/persona01.webp` から `images/persona20.webp` を用意し、次を実行すると埋め込み部分を一括更新できます。
 
-本リポジトリの内容は、オープンデータを基に作成されています。  
-データの利用条件については、上記データ提供元の規約に従ってください。
+```bash
+node scripts/embed_persona_images.mjs
+```
 
-## 今後の展望
+## 外部AI
 
-- 他観光地データとの統合
-- リアルタイムデータとの連携
-- 観光施策への応用（予測・分析の高度化）
+チャット生成時に外部LLM APIは呼びません。モデル、語彙、推論ライブラリはすべて同梱されています。

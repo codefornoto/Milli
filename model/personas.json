@@ -1,0 +1,342 @@
+[
+  {
+    "id": "P01",
+    "name": "家族で楽しむ加賀の休日",
+    "prefecture": "愛知県",
+    "age": "30代",
+    "companion": "子連れ家族",
+    "visit": "初めて",
+    "area": "加賀",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "愛知県から子連れ家族で訪れ、加賀で温泉・食・観光を楽しむ初めての旅行者。",
+    "image": "./images/persona01.webp",
+    "sample_count": 72
+  },
+  {
+    "id": "P02",
+    "name": "温泉と食を楽しむ愛知の夫婦",
+    "prefecture": "愛知県",
+    "age": "60代",
+    "companion": "夫婦",
+    "visit": "初めて",
+    "area": "加賀",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "愛知県から夫婦で訪れ、加賀で温泉・食・観光を楽しむ初めての旅行者。",
+    "image": "./images/persona02.webp",
+    "sample_count": 53
+  },
+  {
+    "id": "P03",
+    "name": "文化と食をめぐる東京の夫婦",
+    "prefecture": "東京都",
+    "age": "50代",
+    "companion": "夫婦",
+    "visit": "初めて",
+    "area": "金沢",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "東京都から夫婦で訪れ、金沢で温泉・食・観光を楽しむ初めての旅行者。",
+    "image": "./images/persona03.webp",
+    "sample_count": 72
+  },
+  {
+    "id": "P04",
+    "name": "静かに金沢を歩く一人旅",
+    "prefecture": "東京都",
+    "age": "50代",
+    "companion": "一人旅",
+    "visit": "初めて",
+    "area": "金沢",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "東京都から一人旅で訪れ、金沢で温泉・食・観光を楽しむ初めての旅行者。",
+    "image": "./images/persona04.webp",
+    "sample_count": 61
+  },
+  {
+    "id": "P05",
+    "name": "温泉宿でのんびりする大阪の夫婦",
+    "prefecture": "大阪府",
+    "age": "60代",
+    "companion": "夫婦",
+    "visit": "初めて",
+    "area": "加賀",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "大阪府から夫婦で訪れ、加賀で温泉・食・観光を楽しむ初めての旅行者。",
+    "image": "./images/persona05.webp",
+    "sample_count": 45
+  },
+  {
+    "id": "P06",
+    "name": "名所と海鮮を楽しむ神奈川の夫婦",
+    "prefecture": "神奈川県",
+    "age": "50代",
+    "companion": "夫婦",
+    "visit": "初めて",
+    "area": "金沢",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "神奈川県から夫婦で訪れ、金沢で温泉・食・観光を楽しむ初めての旅行者。",
+    "image": "./images/persona06.webp",
+    "sample_count": 40
+  },
+  {
+    "id": "P07",
+    "name": "何度も遊びに来る富山の家族",
+    "prefecture": "富山県",
+    "age": "30代",
+    "companion": "子連れ家族",
+    "visit": "リピーター",
+    "area": "加賀",
+    "purpose": [
+      "温泉",
+      "食",
+      "まち歩き"
+    ],
+    "description": "富山県から子連れ家族で訪れ、加賀で温泉・食・まち歩きを楽しむリピーターの旅行者。",
+    "image": "./images/persona07.webp",
+    "sample_count": 66
+  },
+  {
+    "id": "P08",
+    "name": "近県から気軽に訪れる福井の家族",
+    "prefecture": "福井県",
+    "age": "30代",
+    "companion": "子連れ家族",
+    "visit": "リピーター",
+    "area": "加賀",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "福井県から子連れ家族で訪れ、加賀で温泉・食・観光を楽しむリピーターの旅行者。",
+    "image": "./images/persona08.webp",
+    "sample_count": 93
+  },
+  {
+    "id": "P09",
+    "name": "県内で休日を楽しむ子連れ家族",
+    "prefecture": "石川県",
+    "age": "30代",
+    "companion": "子連れ家族",
+    "visit": "リピーター",
+    "area": "加賀",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "石川県から子連れ家族で訪れ、加賀で温泉・食・観光を楽しむリピーターの旅行者。",
+    "image": "./images/persona09.webp",
+    "sample_count": 348
+  },
+  {
+    "id": "P10",
+    "name": "友人と金沢をめぐる東京の若者",
+    "prefecture": "東京都",
+    "age": "20代",
+    "companion": "友人",
+    "visit": "初めて",
+    "area": "金沢",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "東京都から友人で訪れ、金沢で温泉・食・観光を楽しむ初めての旅行者。",
+    "image": "./images/persona10.webp",
+    "sample_count": 74
+  },
+  {
+    "id": "P11",
+    "name": "二人でまち歩きを楽しむ大阪の旅行者",
+    "prefecture": "大阪府",
+    "age": "20代",
+    "companion": "恋人",
+    "visit": "初めて",
+    "area": "金沢",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "大阪府から恋人で訪れ、金沢で温泉・食・観光を楽しむ初めての旅行者。",
+    "image": "./images/persona11.webp",
+    "sample_count": 38
+  },
+  {
+    "id": "P12",
+    "name": "定番の名所を訪ねる埼玉の夫婦",
+    "prefecture": "埼玉県",
+    "age": "50代",
+    "companion": "夫婦",
+    "visit": "初めて",
+    "area": "金沢",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "埼玉県から夫婦で訪れ、金沢で温泉・食・観光を楽しむ初めての旅行者。",
+    "image": "./images/persona12.webp",
+    "sample_count": 30
+  },
+  {
+    "id": "P13",
+    "name": "ゆっくり金沢を味わう千葉の夫婦",
+    "prefecture": "千葉県",
+    "age": "60代",
+    "companion": "夫婦",
+    "visit": "初めて",
+    "area": "金沢",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "千葉県から夫婦で訪れ、金沢で温泉・食・観光を楽しむ初めての旅行者。",
+    "image": "./images/persona13.webp",
+    "sample_count": 29
+  },
+  {
+    "id": "P14",
+    "name": "加賀温泉に帰ってくる兵庫の夫婦",
+    "prefecture": "兵庫県",
+    "age": "60代",
+    "companion": "夫婦",
+    "visit": "リピーター",
+    "area": "加賀",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "兵庫県から夫婦で訪れ、加賀で温泉・食・観光を楽しむリピーターの旅行者。",
+    "image": "./images/persona14.webp",
+    "sample_count": 33
+  },
+  {
+    "id": "P15",
+    "name": "家族で再訪する京都の旅行者",
+    "prefecture": "京都府",
+    "age": "40代",
+    "companion": "子連れ家族",
+    "visit": "リピーター",
+    "area": "加賀",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "京都府から子連れ家族で訪れ、加賀で温泉・食・観光を楽しむリピーターの旅行者。",
+    "image": "./images/persona15.webp",
+    "sample_count": 17
+  },
+  {
+    "id": "P16",
+    "name": "テーマパークを楽しむ岐阜の家族",
+    "prefecture": "岐阜県",
+    "age": "40代",
+    "companion": "子連れ家族",
+    "visit": "初めて",
+    "area": "加賀",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "岐阜県から子連れ家族で訪れ、加賀で温泉・食・観光を楽しむ初めての旅行者。",
+    "image": "./images/persona16.webp",
+    "sample_count": 28
+  },
+  {
+    "id": "P17",
+    "name": "家族で能登へ向かう長野の旅行者",
+    "prefecture": "長野県",
+    "age": "30代",
+    "companion": "子連れ家族",
+    "visit": "初めて",
+    "area": "能登",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "長野県から子連れ家族で訪れ、能登で温泉・食・観光を楽しむ初めての旅行者。",
+    "image": "./images/persona17.webp",
+    "sample_count": 15
+  },
+  {
+    "id": "P18",
+    "name": "遠方から金沢へ来た北海道の夫婦",
+    "prefecture": "北海道",
+    "age": "50代",
+    "companion": "夫婦",
+    "visit": "初めて",
+    "area": "金沢",
+    "purpose": [
+      "食",
+      "観光",
+      "まち歩き"
+    ],
+    "description": "北海道から夫婦で訪れ、金沢で食・観光・まち歩きを楽しむ初めての旅行者。",
+    "image": "./images/persona18.webp",
+    "sample_count": 16
+  },
+  {
+    "id": "P19",
+    "name": "能登を何度も訪ねる県内一人旅",
+    "prefecture": "石川県",
+    "age": "50代",
+    "companion": "一人旅",
+    "visit": "リピーター",
+    "area": "能登",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "石川県から一人旅で訪れ、能登で温泉・食・観光を楽しむリピーターの旅行者。",
+    "image": "./images/persona19.webp",
+    "sample_count": 35
+  },
+  {
+    "id": "P20",
+    "name": "近県から能登へ通う富山の夫婦",
+    "prefecture": "富山県",
+    "age": "60代",
+    "companion": "夫婦",
+    "visit": "リピーター",
+    "area": "能登",
+    "purpose": [
+      "温泉",
+      "食",
+      "観光"
+    ],
+    "description": "富山県から夫婦で訪れ、能登で温泉・食・観光を楽しむリピーターの旅行者。",
+    "image": "./images/persona20.webp",
+    "sample_count": 18
+  }
+]
