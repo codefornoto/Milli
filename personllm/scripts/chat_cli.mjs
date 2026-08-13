@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // 学習済みブラウザ用モデルをコマンドラインで試す簡易QAスクリプト。
-import * as tf from '@tensorflow/tfjs-node';import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';
+import * as tf from '@tensorflow/tfjs';import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),meta=JSON.parse(fs.readFileSync(path.join(root,'model/training_meta.json'))),vocab=JSON.parse(fs.readFileSync(path.join(root,'model/vocab.json'))),all=new Float32Array(fs.readFileSync(path.join(root,'model',meta.weights_file)).buffer);let W={};
 const raw=fs.readFileSync(path.join(root,'model',meta.weights_file));const floats=new Float32Array(raw.buffer,raw.byteOffset,raw.byteLength/4);for(const d of meta.weights)W[d.name]=tf.tensor(floats.subarray(d.offset/4,d.offset/4+d.length),d.shape);
 function ln(x,g,b){const{mean,variance}=tf.moments(x,-1,true);return x.sub(mean).mul(tf.rsqrt(variance.add(1e-5))).mul(g).add(b)}function dense(x,w,b){const lead=x.shape.slice(0,-1),out=w.shape[1];return x.reshape([-1,x.shape.at(-1)]).matMul(w).add(b).reshape([...lead,out])}
