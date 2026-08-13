@@ -1,0 +1,11 @@
+{
+  "context_length": 64,
+  "embedding_dim": 80,
+  "layers": 4,
+  "attention_heads": 4,
+  "ff_multiplier": 4,
+  "vocab_limit": 1600,
+  "architecture": "character-gpt",
+  "format": "milli-tfjs-flat-v1",
+  "vocab_size": 1600
+}
