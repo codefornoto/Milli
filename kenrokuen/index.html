@@ -579,6 +579,70 @@
     const URL_FOREIGN = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=兼六園外国人国別`;
     const FETCH_TIMEOUT_MS = 15000;
 
+    // 2000〜2018年のインバウンド実績は、旧シートの形式が異なるため年単位で保持する。
+    // 月別・年度別へは配賦せず、年別グラフと年別データ表だけで使用する。
+    const HISTORICAL_INBOUND_TOTALS = Object.freeze({
+        2000: 27188,
+        2001: 26464,
+        2002: 26177,
+        2003: 27127,
+        2004: 49361,
+        2005: 75853,
+        2006: 95987,
+        2007: 125000,
+        2008: 146510,
+        2009: 101431,
+        2010: 134009,
+        2011: 76850,
+        2012: 114317,
+        2013: 192085,
+        2014: 229080,
+        2015: 291841,
+        2016: 356061,
+        2017: 379094,
+        2018: 428504
+    });
+
+    // 2004〜2018年の主要国データ。国別推移の「年別推移」でのみ使用する。
+    const HISTORICAL_COUNTRY_YEARLY = Object.freeze({
+        '台湾': Object.freeze({
+            2004: 28020, 2005: 50145, 2006: 59852, 2007: 79142, 2008: 90708,
+            2009: 51529, 2010: 66116, 2011: 49390, 2012: 65226, 2013: 110074,
+            2014: 127925, 2015: 135656, 2016: 145643, 2017: 150553, 2018: 159790
+        }),
+        '中国': Object.freeze({
+            2004: 2910, 2005: 2536, 2006: 2734, 2007: 2788, 2008: 2292,
+            2009: 3434, 2010: 3959, 2011: 2951, 2012: 3966, 2013: 4580,
+            2014: 6731, 2015: 14177, 2016: 21037, 2017: 24629, 2018: 36146
+        }),
+        '韓国': Object.freeze({
+            2004: 3214, 2005: 7208, 2006: 10404, 2007: 12686, 2008: 12830,
+            2009: 5008, 2010: 10069, 2011: 3432, 2012: 5936, 2013: 6919,
+            2014: 5292, 2015: 7552, 2016: 10735, 2017: 15240, 2018: 13540
+        }),
+        'アメリカ': Object.freeze({
+            2004: 6896, 2005: 6585, 2006: 7390, 2007: 9423, 2008: 7482,
+            2009: 6017, 2010: 7008, 2011: 3273, 2012: 4881, 2013: 8346,
+            2014: 10018, 2015: 15528, 2016: 19867, 2017: 22359, 2018: 24871
+        }),
+        '豪州': Object.freeze({
+            2004: 1175, 2005: 1070, 2006: 1535, 2007: 1818, 2008: 2856,
+            2009: 2601, 2010: 3681, 2011: 1981, 2012: 2990, 2013: 4426,
+            2014: 6186, 2015: 8495, 2016: 12689, 2017: 14428, 2018: 15609
+        }),
+        '香港': Object.freeze({
+            2008: 4392, 2009: 6526, 2010: 11284, 2011: 4963, 2012: 8794,
+            2013: 18468, 2014: 19097, 2015: 28820, 2016: 38687, 2017: 36958,
+            2018: 36878
+        })
+    });
+
+    const HISTORICAL_COUNTRY_ALIASES = Object.freeze({
+        '米国': 'アメリカ',
+        'アメリカ合衆国': 'アメリカ',
+        'オーストラリア': '豪州'
+    });
+
     let monthlyData = []; // 整形後のデータ格納用
     let currentTab = 'kenrokuen'; 
     let chartPeriod = '3years'; 
@@ -764,6 +828,14 @@
             calendarYearlyAgg[cy].inbound += row.inboundCount;
         });
 
+        // 旧形式データは年合計だけを上書きし、年度集計には混ぜない。
+        Object.entries(HISTORICAL_INBOUND_TOTALS).forEach(([year, inbound]) => {
+            if (!calendarYearlyAgg[year]) {
+                calendarYearlyAgg[year] = { kenrokuen: 0, kanazawa: 0, inbound: 0 };
+            }
+            calendarYearlyAgg[year].inbound = inbound;
+        });
+
         let ytdKenrokuen = 0;
         let ytdKanazawa = 0;
         monthlyData.forEach(row => {
@@ -842,7 +914,19 @@
                     yearlyAgg[key] += detail.count;
                 }
             });
-            const fyLabels = Object.keys(yearlyAgg).sort();
+
+            // 旧形式の主要国データは、月別・年度別には配賦せず年別だけに連結する。
+            if (modalPeriod === 'calendar') {
+                const historicalCountry = HISTORICAL_COUNTRY_ALIASES[modalCountry] || modalCountry;
+                const historicalData = HISTORICAL_COUNTRY_YEARLY[historicalCountry];
+                if (historicalData) {
+                    Object.entries(historicalData).forEach(([year, count]) => {
+                        yearlyAgg[year] = count;
+                    });
+                }
+            }
+
+            const fyLabels = Object.keys(yearlyAgg).sort((a, b) => Number(a) - Number(b));
             fyLabels.forEach(fy => {
                 labels.push(`${fy}${modalPeriod === 'yearly' ? '年度' : '年'}`);
                 dataCounts.push(yearlyAgg[fy]);
