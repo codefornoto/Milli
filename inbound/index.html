@@ -694,6 +694,29 @@
         const URL_VISITORS = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent('兼六園金沢城公園')}`;
         const URL_FOREIGN = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent('兼六園外国人国別')}`;
 
+        // 2001〜2018年は元データの形式が現在と異なるため、年合計のみを保持する。
+        // 月別・年度別・国別には配賦せず、「年」のグラフとデータ表だけで使用する。
+        const HISTORICAL_INBOUND_TOTALS = Object.freeze({
+            2001: 26464,
+            2002: 26177,
+            2003: 27127,
+            2004: 49361,
+            2005: 75853,
+            2006: 95987,
+            2007: 125000,
+            2008: 146510,
+            2009: 101431,
+            2010: 134009,
+            2011: 76850,
+            2012: 114317,
+            2013: 192085,
+            2014: 229080,
+            2015: 291841,
+            2016: 356061,
+            2017: 379094,
+            2018: 428504
+        });
+
         const fetchCSV = (url) => {
             return new Promise((resolve, reject) => {
                 Papa.parse(url, {
@@ -756,6 +779,14 @@
                 calendarYearlyAgg[cy].kenrokuen += row.kenrokuen;
                 calendarYearlyAgg[cy].kanazawa += row.kanazawa;
                 calendarYearlyAgg[cy].inbound += row.inboundCount;
+            });
+
+            // 旧形式のデータは年合計だけを上書きし、月別・年度別には混ぜない。
+            Object.entries(HISTORICAL_INBOUND_TOTALS).forEach(([year, inbound]) => {
+                if (!calendarYearlyAgg[year]) {
+                    calendarYearlyAgg[year] = { kenrokuen: 0, kanazawa: 0, inbound: 0 };
+                }
+                calendarYearlyAgg[year].inbound = inbound;
             });
 
             return { monthlyData, yearlyAgg, calendarYearlyAgg };
@@ -826,7 +857,7 @@
         const ParkYearlyChart = ({ parkData, targetKey, themeColorHex }) => {
             const chartRef = React.useRef(null);
             const chartInstance = React.useRef(null);
-            const [aggType, setAggType] = React.useState('fiscal');
+            const [aggType, setAggType] = React.useState('calendar');
 
             React.useEffect(() => {
                 if (!chartRef.current || !parkData) return;
@@ -1124,7 +1155,7 @@
         };
 
         const ParkYearlyTable = ({ parkData, isKenrokuen, targetKey }) => {
-            const [aggType, setAggType] = React.useState('fiscal');
+            const [aggType, setAggType] = React.useState('calendar');
             const aggData = aggType === 'fiscal' ? parkData.yearlyAgg : parkData.calendarYearlyAgg;
             const labels = Object.keys(aggData).sort((a, b) => b - a); // 降順
 
