@@ -2242,6 +2242,15 @@
           .trim();
       }
 
+      function removeTrailingStaffNames(value) {
+        return String(value || "")
+          .replace(
+            /(?:\s*[（(][^()（）\r\n]{1,30}[）)])+\s*$/u,
+            ""
+          )
+          .trim();
+      }
+
       function escapeHtml(value) {
         return String(value || "")
           .replaceAll("&", "&amp;")
@@ -2626,7 +2635,9 @@
                 readCell(cells, indexes.primaryCategory) || "その他",
               genres,
               genreDetails,
-              summary: readCell(cells, indexes.summary)
+              summary: removeTrailingStaffNames(
+                readCell(cells, indexes.summary)
+              )
                 .replace(/\s+/g, " ")
                 .trim()
             };
