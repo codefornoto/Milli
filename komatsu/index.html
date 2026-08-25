@@ -1775,7 +1775,7 @@
           <div>
             <p class="section-kicker">MONTHLY REPORT</p>
             <h2>月次集計</h2>
-            <p>9つの案内ジャンルと、その具体的な問い合わせ内容を月ごとに確認できます。</p>
+            <p>10の案内ジャンルと、その具体的な問い合わせ内容を月ごとに確認できます。</p>
           </div>
 
           <div class="month-switcher">
@@ -2029,6 +2029,12 @@
           shortLabel: "イベント",
           header: "イベント",
           color: "#8c88c9"
+        },
+        {
+          name: "その他",
+          shortLabel: "その他",
+          header: "その他（落とし物、ATM、公衆電話、授乳室など）",
+          color: "#a785b8"
         }
       ];
 
@@ -2252,6 +2258,52 @@
 
         const [year, month, day] = value.split("-");
         return `${year}.${Number(month)}.${Number(day)}`;
+      }
+
+      function normalizeDateValue(value) {
+        const normalized = String(value || "")
+          .normalize("NFKC")
+          .trim();
+        const yearFirst = normalized.match(
+          /^(\d{4})[\/\-.年](\d{1,2})[\/\-.月](\d{1,2})(?:日)?/
+        );
+        const yearLast = yearFirst
+          ? null
+          : normalized.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})/);
+        const year = Number(yearFirst ? yearFirst[1] : yearLast?.[3]);
+        const month = Number(yearFirst ? yearFirst[2] : yearLast?.[1]);
+        const day = Number(yearFirst ? yearFirst[3] : yearLast?.[2]);
+
+        if (!year || !month || !day) {
+          return "";
+        }
+
+        const testDate = new Date(Date.UTC(year, month - 1, day));
+        if (
+          testDate.getUTCFullYear() !== year ||
+          testDate.getUTCMonth() + 1 !== month ||
+          testDate.getUTCDate() !== day
+        ) {
+          return "";
+        }
+
+        return [
+          String(year).padStart(4, "0"),
+          String(month).padStart(2, "0"),
+          String(day).padStart(2, "0")
+        ].join("-");
+      }
+
+      function weekdayFromDate(value) {
+        if (!value) {
+          return "";
+        }
+
+        const [year, month, day] = value.split("-").map(Number);
+        return new Intl.DateTimeFormat("ja-JP", {
+          weekday: "short",
+          timeZone: "Asia/Tokyo"
+        }).format(new Date(Date.UTC(year, month - 1, day, 12)));
       }
 
       function extractTimeParts(value) {
@@ -2535,9 +2587,10 @@
         return rows
           .slice(1)
           .map((cells, rowIndex) => {
-            const date = readCell(cells, indexes.date)
-              .trim()
-              .replaceAll("/", "-");
+            const timestamp = readCell(cells, indexes.timestamp);
+            const date =
+              normalizeDateValue(readCell(cells, indexes.date)) ||
+              normalizeDateValue(timestamp);
 
             const genreDetails = Object.fromEntries(
               GENRE_DEFINITIONS.map((definition) => [
@@ -2554,10 +2607,11 @@
 
             return {
               id: `${date}-${rowIndex}`,
-              timestamp: readCell(cells, indexes.timestamp),
+              timestamp,
               date,
-              day: readCell(cells, indexes.day),
-              sequence: Number(readCell(cells, indexes.sequence)) || 0,
+              day: readCell(cells, indexes.day) || weekdayFromDate(date),
+              sequence:
+                Number(readCell(cells, indexes.sequence)) || rowIndex + 1,
               reception: readCell(cells, indexes.reception) || "不明",
               nationality: normalizeNationality(
                 readCell(cells, indexes.nationality)
