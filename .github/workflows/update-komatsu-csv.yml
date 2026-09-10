@@ -29,18 +29,12 @@ jobs:
         run: |
           set -euo pipefail
 
-          mapfile -d '' -t html_files < <(
-            find . -type f -name 'komatsu.html' -not -path './.git/*' -print0
-          )
-          if [ "${#html_files[@]}" -ne 1 ]; then
-            echo "Exactly one komatsu.html must exist in the repository." >&2
-            exit 1
-          fi
+          html_path="komatsu/index.html"
+          csv_path="komatsu/komatsu.csv"
 
-          html_path="${html_files[0]#./}"
-          csv_path="$(dirname "$html_path")/komatsu.csv"
-          if [ "$csv_path" = "./komatsu.csv" ]; then
-            csv_path="komatsu.csv"
+          if [ ! -f "$html_path" ]; then
+            echo "$html_path was not found." >&2
+            exit 1
           fi
 
           temp_file="$(mktemp)"
