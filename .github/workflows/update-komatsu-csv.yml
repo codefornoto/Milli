@@ -1,0 +1,107 @@
+name: Update Komatsu CSV
+
+on:
+  schedule:
+    # GitHub ActionsのcronはUTCです。毎日1:17、7:17、13:17、19:17（日本時間）に実行します。
+    - cron: "17 16,22,4,10 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-komatsu-csv
+  cancel-in-progress: false
+
+jobs:
+  update-csv:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download spreadsheet as CSV
+        id: download
+        shell: bash
+        env:
+          SHEET_URL: https://docs.google.com/spreadsheets/d/1W29-TDryRUumj2gsiqfIDYjVWurPiDHsWcWzyX_wOA0/export?format=csv&gid=0
+        run: |
+          set -euo pipefail
+
+          mapfile -d '' -t html_files < <(
+            find . -type f -name 'komatsu.html' -not -path './.git/*' -print0
+          )
+          if [ "${#html_files[@]}" -ne 1 ]; then
+            echo "Exactly one komatsu.html must exist in the repository." >&2
+            exit 1
+          fi
+
+          html_path="${html_files[0]#./}"
+          csv_path="$(dirname "$html_path")/komatsu.csv"
+          if [ "$csv_path" = "./komatsu.csv" ]; then
+            csv_path="komatsu.csv"
+          fi
+
+          temp_file="$(mktemp)"
+          trap 'rm -f "$temp_file"' EXIT
+
+          curl \
+            --fail \
+            --location \
+            --silent \
+            --show-error \
+            --retry 3 \
+            --retry-all-errors \
+            --connect-timeout 20 \
+            --max-time 120 \
+            "$SHEET_URL" \
+            --output "$temp_file"
+
+          python3 - "$temp_file" <<'PY'
+          import csv
+          import pathlib
+          import sys
+
+          csv_path = pathlib.Path(sys.argv[1])
+          required_headers = {
+              "タイムスタンプ",
+              "受付",
+              "問い合わせ内容",
+              "問い合わせ内容/回答",
+          }
+
+          with csv_path.open("r", encoding="utf-8-sig", newline="") as source:
+              reader = csv.reader(source)
+              headers = next(reader, [])
+              has_data = any(any(cell.strip() for cell in row) for row in reader)
+
+          missing = required_headers.difference(cell.strip() for cell in headers)
+          if missing:
+              raise SystemExit(
+                  "CSV header validation failed. Missing: " + ", ".join(sorted(missing))
+              )
+          if not has_data:
+              raise SystemExit("CSV validation failed: no data rows found.")
+          PY
+
+          mv "$temp_file" "$csv_path"
+          echo "csv_path=$csv_path" >> "$GITHUB_OUTPUT"
+
+      - name: Commit updated CSV
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          csv_path="${{ steps.download.outputs.csv_path }}"
+          git add -- "$csv_path"
+
+          if git diff --cached --quiet; then
+            echo "$csv_path has not changed."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update Komatsu CSV"
+          git push
