@@ -1967,11 +1967,13 @@
       const DATA_SOURCES = [
         {
           url: SHEET_URL,
-          status: "live"
+          status: "live",
+          timeoutMs: 8000
         },
         {
-          url: "./data/komatsu9.csv",
-          status: "cached"
+          url: "./komatsu.csv",
+          status: "cached",
+          timeoutMs: 8000
         }
       ];
 
@@ -2651,20 +2653,39 @@
           });
       }
 
+      async function fetchCsv(source) {
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(
+          () => controller.abort(),
+          source.timeoutMs
+        );
+
+        try {
+          const separator = source.url.includes("?") ? "&" : "?";
+          const response = await fetch(
+            `${source.url}${separator}v=${Date.now()}`,
+            {
+              cache: "no-store",
+              signal: controller.signal
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(`Data source unavailable (${response.status})`);
+          }
+
+          return response.text();
+        } finally {
+          window.clearTimeout(timeoutId);
+        }
+      }
+
       async function loadRecords() {
         setDataStatus("loading");
 
         for (const source of DATA_SOURCES) {
           try {
-            const response = await fetch(source.url, {
-              cache: "no-store"
-            });
-
-            if (!response.ok) {
-              throw new Error("Data source unavailable");
-            }
-
-            const records = csvToRecords(await response.text());
+            const records = csvToRecords(await fetchCsv(source));
 
             if (!records.length) {
               throw new Error("No records");
@@ -2689,7 +2710,7 @@
         const labels = {
           loading: "読み込み中",
           live: "最新データ",
-          cached: "保存データ",
+          cached: "保存データ（6時間ごと更新）",
           error: "読み込み失敗"
         };
 
