@@ -1,0 +1,1514 @@
+{
+"schema_version": "1.1.0",
+"dataset_type": "jnto_monthly_visitor_arrivals_country_status",
+"report": {
+"source_name_ja": "日本政府観光局（JNTO）",
+"source_name_en": "Japan National Tourism Organization",
+"report_title_ja": "訪日外客数（2026年8月推計値）",
+"published_date": "2026-09-16",
+"data_month": "2026年8月",
+"data_year": 2026,
+"data_month_number": 8,
+"as_of_date": "2026-09-10",
+"primary_comparison": {
+"type": "year_over_year",
+"base_year": 2025,
+"target_year": 2026,
+"label_ja": "前年同月比"
+},
+"notes_ja": [
+"2026年8月の訪日外客数はJNTO推計値。",
+"2025年の訪日外客数は確定値。",
+"市場概況の訪日外客数以外の情報は、JNTOが2026年9月10日時点で把握している最新情報。",
+"北欧地域はスウェーデン、デンマーク、ノルウェー、フィンランドを指す。",
+"中東地域はイスラエル、トルコ、GCC6か国（サウジアラビア、アラブ首長国連邦（UAE）、バーレーン、オマーン、カタール、クウェート）を指す。"
+],
+"definition_ja": "訪日外客数とは、法務省集計による出入国管理統計に基づき算出したものである。外国人正規入国者から、日本を主たる居住国とする永住者等の外国人を除き、寄港地上陸、通過上陸、船舶観光上陸の外国人を加えたものを指す。駐在員やその家族、留学生等の入国者・再入国者は含まれ、乗員は含まれない。"
+},
+"overall": {
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 3098900,
+"comparison_year": 2025,
+"comparison_value": 3428406,
+"change_pct_vs_comparison_year": -9.6,
+"comparison_type": "year_over_year",
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 27626300,
+"comparison_year": 2025,
+"comparison_value": 28384099,
+"change_pct_vs_comparison_year": -2.7,
+"comparison_type": "year_over_year",
+"data_status": "preliminary_estimate"
+}
+},
+"headline_summary_ja": "2026年8月の訪日外客数は3,098,900人で、前年同月比9.6%減となった一方、韓国、台湾、香港、マレーシア、インドネシア、インド、米国、メキシコ、フランス、イタリア、スペイン、ロシア、北欧地域、中東地域の14市場で8月として過去最高を記録し、イタリアとスペインは単月としても過去最高を記録した。",
+"overall_context_ja": [
+"東アジアや欧米豪・中東を中心に、夏季休暇や祝日に合わせた訪日需要の高まりが見られ、多くの市場で訪日外客数が増加した。",
+"東南アジアを中心に訪日需要が落ち着く時期であるほか、航空便の減便や台風による欠航等もあり、一部市場では前年同月を下回った。",
+"韓国、台湾、香港、マレーシア、インドネシア、インド、米国、メキシコ、フランス、イタリア、スペイン、ロシア、北欧地域、中東地域の14市場で8月として過去最高を記録した。",
+"イタリア、スペインでは単月として過去最高を記録した。"
+],
+"common_market_conditions_ja": [
+"多くの市場において円安傾向が継続している。",
+"欧州地域では、ウクライナ情勢に伴う飛行ルート変更によるフライト時間増加が訪日旅行の懸念材料となっている。"
+]
+},
+"markets": [
+{
+"market_key": "KR",
+"name_ja": "韓国",
+"name_en": "South Korea",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 850500,
+"comparison_year": 2025,
+"comparison_value": 660917,
+"change_pct_vs_comparison_year": 28.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 27.45,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 7420300,
+"comparison_year": 2025,
+"comparison_value": 6123081,
+"change_pct_vs_comparison_year": 21.2,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 26.86,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "8月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "台風による航空便への影響はあったものの、継続する訪日旅行人気、スクールホリデー、航空座席数の増加により850,500人、前年同月比28.7%増となり、8月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"航空座席数の増加"
+],
+"constraints_ja": [
+"台風による航空便への影響"
+],
+"aviation_updates_ja": [
+"航空座席数の増加"
+],
+"demand_events_ja": [
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"record_high",
+"strong_growth",
+"aviation_increase",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "CN",
+"name_ja": "中国",
+"name_en": "China",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 418000,
+"comparison_year": 2025,
+"comparison_value": 1018747,
+"change_pct_vs_comparison_year": -59.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 13.49,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 2904600,
+"comparison_year": 2025,
+"comparison_value": 6711851,
+"change_pct_vs_comparison_year": -56.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 10.51,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "スクールホリデーの影響はあったものの、中国政府による日本への渡航を避けるよう求める注意喚起や航空便の減便等の影響により418,000人、前年同月比59.0%減となった。",
+"positive_drivers_ja": [],
+"constraints_ja": [
+"中国政府による日本への渡航を避けるよう求める注意喚起",
+"航空便の減便"
+],
+"aviation_updates_ja": [
+"航空便の減便"
+],
+"demand_events_ja": [
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [
+"中国政府より日本への渡航を避けるよう注意喚起があった。"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"severe_decline",
+"regulatory_constraint",
+"seat_capacity_decline",
+"holiday_effect"
+]
+},
+{
+"market_key": "TW",
+"name_ja": "台湾",
+"name_en": "Taiwan",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 666000,
+"comparison_year": 2025,
+"comparison_value": 620753,
+"change_pct_vs_comparison_year": 7.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 21.49,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 5402000,
+"comparison_year": 2025,
+"comparison_value": 4509729,
+"change_pct_vs_comparison_year": 19.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 19.55,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "8月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "台風による航空便やクルーズ船への影響はあったものの、継続する訪日旅行人気、スクールホリデー、航空座席数の増加により666,000人、前年同月比7.3%増となり、8月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"航空座席数の増加"
+],
+"constraints_ja": [
+"台風による航空便やクルーズ船への影響"
+],
+"aviation_updates_ja": [
+"航空座席数の増加"
+],
+"demand_events_ja": [
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"record_high",
+"moderate_growth",
+"aviation_increase",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "HK",
+"name_ja": "香港",
+"name_en": "Hong Kong",
+"region_ja": "東アジア",
+"region_en": "East Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 247300,
+"comparison_year": 2025,
+"comparison_value": 226069,
+"change_pct_vs_comparison_year": 9.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 7.98,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 1818300,
+"comparison_year": 2025,
+"comparison_value": 1673144,
+"change_pct_vs_comparison_year": 8.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 6.58,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "8月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "台風による航空便への影響はあったものの、スクールホリデーや航空座席数の増加により247,300人、前年同月比9.4%増となり、8月として過去最高を記録した。",
+"positive_drivers_ja": [
+"航空座席数の増加"
+],
+"constraints_ja": [
+"台風による航空便への影響"
+],
+"aviation_updates_ja": [
+"航空座席数の増加"
+],
+"demand_events_ja": [
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"record_high",
+"moderate_growth",
+"aviation_increase",
+"holiday_effect"
+]
+},
+{
+"market_key": "TH",
+"name_ja": "タイ",
+"name_en": "Thailand",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 32200,
+"comparison_year": 2025,
+"comparison_value": 35499,
+"change_pct_vs_comparison_year": -9.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.04,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 790500,
+"comparison_year": 2025,
+"comparison_value": 764521,
+"change_pct_vs_comparison_year": 3.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.86,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "夏場は訪日需要が落ち着く時期であることに加え、前年の特別休日による4連休の反動、航空便の減便、訪中旅行の継続的な人気等の影響により32,200人、前年同月比9.3%減となった。",
+"positive_drivers_ja": [],
+"constraints_ja": [
+"夏場は訪日需要が落ち着く時期",
+"前年は特別休日による4連休があった",
+"航空便の減便",
+"訪中旅行の継続的な人気"
+],
+"aviation_updates_ja": [
+"航空便の減便"
+],
+"demand_events_ja": [
+"前年は特別休日による4連休があった"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"seat_capacity_decline"
+]
+},
+{
+"market_key": "SG",
+"name_ja": "シンガポール",
+"name_en": "Singapore",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 21600,
+"comparison_year": 2025,
+"comparison_value": 20512,
+"change_pct_vs_comparison_year": 5.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.7,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 429000,
+"comparison_year": 2025,
+"comparison_value": 389972,
+"change_pct_vs_comparison_year": 10.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.55,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "夏場は訪日需要が落ち着く時期で、訪中旅行の継続的な人気もある一方、祝日、シンガポール～那覇間の復便、継続する訪日旅行人気等により21,600人、前年同月比5.3%増となった。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [
+"夏場は訪日需要が落ち着く時期",
+"訪中旅行の継続的な人気"
+],
+"aviation_updates_ja": [
+"シンガポール～那覇間の復便（2025年12月）"
+],
+"demand_events_ja": [
+"祝日"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"moderate_growth",
+"route_resumption",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "MY",
+"name_ja": "マレーシア",
+"name_en": "Malaysia",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 26000,
+"comparison_year": 2025,
+"comparison_value": 21143,
+"change_pct_vs_comparison_year": 23.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.84,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 421100,
+"comparison_year": 2025,
+"comparison_value": 363216,
+"change_pct_vs_comparison_year": 15.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.52,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "8月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "夏場は訪日需要が落ち着く時期で、訪中旅行の継続的な人気もある一方、スクールホリデー、祝日、継続する訪日旅行人気等により26,000人、前年同月比23.0%増となり、8月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [
+"夏場は訪日需要が落ち着く時期",
+"訪中旅行の継続的な人気"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"スクールホリデー",
+"祝日"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"record_high",
+"strong_growth",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "ID",
+"name_ja": "インドネシア",
+"name_en": "Indonesia",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 32500,
+"comparison_year": 2025,
+"comparison_value": 31419,
+"change_pct_vs_comparison_year": 3.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.05,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 451200,
+"comparison_year": 2025,
+"comparison_value": 405008,
+"change_pct_vs_comparison_year": 11.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.63,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "8月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "夏場は訪日需要が落ち着く時期である一方、祝日や継続する訪日旅行人気等により32,500人、前年同月比3.4%増となり、8月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [
+"夏場は訪日需要が落ち着く時期"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"祝日"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"record_high",
+"moderate_growth",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "PH",
+"name_ja": "フィリピン",
+"name_en": "Philippines",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 39100,
+"comparison_year": 2025,
+"comparison_value": 44209,
+"change_pct_vs_comparison_year": -11.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.26,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 558500,
+"comparison_year": 2025,
+"comparison_value": 539690,
+"change_pct_vs_comparison_year": 3.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.02,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "夏場は訪日需要が落ち着く時期であることに加え、祝日の並びが前年より悪かったことや航空便数の減少等により39,100人、前年同月比11.6%減となった。",
+"positive_drivers_ja": [],
+"constraints_ja": [
+"夏場は訪日需要が落ち着く時期",
+"祝日の並びが前年と比べて悪かった",
+"航空便数の減少"
+],
+"aviation_updates_ja": [
+"航空便数の減少"
+],
+"demand_events_ja": [
+"祝日の並びが前年と比べて悪かった"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"seat_capacity_decline"
+]
+},
+{
+"market_key": "VN",
+"name_ja": "ベトナム",
+"name_en": "Vietnam",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 56600,
+"comparison_year": 2025,
+"comparison_value": 61215,
+"change_pct_vs_comparison_year": -7.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.83,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 505300,
+"comparison_year": 2025,
+"comparison_value": 479391,
+"change_pct_vs_comparison_year": 5.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.83,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "スクールホリデー、8月末の連休、ハノイ～静岡間の新規就航等のプラス要因はあったものの、訪中旅行の継続的な人気等により56,600人、前年同月比7.5%減となった。",
+"positive_drivers_ja": [],
+"constraints_ja": [
+"訪中旅行の継続的な人気"
+],
+"aviation_updates_ja": [
+"ハノイ～静岡間の新規就航（2026年4月）"
+],
+"demand_events_ja": [
+"スクールホリデー",
+"8月末の連休"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"留学、技能実習等を含むその他客の多い市場であることに留意する。"
+]
+},
+"dashboard_tags": [
+"decline",
+"new_route",
+"holiday_effect"
+]
+},
+{
+"market_key": "IN",
+"name_ja": "インド",
+"name_en": "India",
+"region_ja": "東南アジア・南アジア",
+"region_en": "Southeast and South Asia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 19500,
+"comparison_year": 2025,
+"comparison_value": 18620,
+"change_pct_vs_comparison_year": 4.7,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.63,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 250100,
+"comparison_year": 2025,
+"comparison_value": 208043,
+"change_pct_vs_comparison_year": 20.2,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.91,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "8月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "夏場は訪日需要が落ち着く時期である一方、デリー～成田間、ムンバイ～羽田間の新規就航等により19,500人、前年同月比4.7%増となり、8月として過去最高を記録した。",
+"positive_drivers_ja": [],
+"constraints_ja": [
+"夏場は訪日需要が落ち着く時期"
+],
+"aviation_updates_ja": [
+"デリー～成田間での新規就航（2026年1月）",
+"ムンバイ～羽田間での新規就航（2026年6月）"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"record_high",
+"moderate_growth",
+"new_route"
+]
+},
+{
+"market_key": "AU",
+"name_ja": "豪州",
+"name_en": "Australia",
+"region_ja": "豪州",
+"region_en": "Australia",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 38200,
+"comparison_year": 2025,
+"comparison_value": 41250,
+"change_pct_vs_comparison_year": -7.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.23,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 681200,
+"comparison_year": 2025,
+"comparison_value": 658668,
+"change_pct_vs_comparison_year": 3.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 2.47,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気の影響はあるものの、現地物価上昇等による海外旅行抑制の動きにより38,200人、前年同月比7.4%減となった。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [
+"現地物価上昇等による海外旅行の抑制"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "US",
+"name_ja": "米国",
+"name_en": "U.S.A.",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 197400,
+"comparison_year": 2025,
+"comparison_value": 194525,
+"change_pct_vs_comparison_year": 1.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 6.37,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 2305300,
+"comparison_year": 2025,
+"comparison_value": 2173032,
+"change_pct_vs_comparison_year": 6.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 8.34,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "8月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "8月は訪日需要が落ち着く時期である一方、継続する訪日旅行人気やスクールホリデー等により197,400人、前年同月比1.5%増となり、8月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [
+"8月は訪日需要が落ち着く時期"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"record_high",
+"moderate_growth",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "CA",
+"name_ja": "カナダ",
+"name_en": "Canada",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 50600,
+"comparison_year": 2025,
+"comparison_value": 51513,
+"change_pct_vs_comparison_year": -1.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.63,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 469600,
+"comparison_year": 2025,
+"comparison_value": 439002,
+"change_pct_vs_comparison_year": 7.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.7,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "夏場は訪日需要が落ち着く時期であることに加え、前年は9月月初の祝日のずれによる影響があったこと等から50,600人、前年同月比1.8%減となった。",
+"positive_drivers_ja": [],
+"constraints_ja": [
+"夏場は訪日需要が落ち着く時期",
+"前年は9月月初にあった祝日のずれによる影響"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"前年は9月月初にあった祝日のずれによる影響"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"holiday_effect"
+]
+},
+{
+"market_key": "MX",
+"name_ja": "メキシコ",
+"name_en": "Mexico",
+"region_ja": "北米",
+"region_en": "North America",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 18600,
+"comparison_year": 2025,
+"comparison_value": 13575,
+"change_pct_vs_comparison_year": 37.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.6,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 151300,
+"comparison_year": 2025,
+"comparison_value": 118196,
+"change_pct_vs_comparison_year": 28.0,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.55,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "8月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気に加え、スクールホリデーの影響等により18,600人、前年同月比37.0%増となり、8月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"record_high",
+"strong_growth",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "GB",
+"name_ja": "英国",
+"name_en": "United Kingdom",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 36600,
+"comparison_year": 2025,
+"comparison_value": 36690,
+"change_pct_vs_comparison_year": -0.2,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.18,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 364800,
+"comparison_year": 2025,
+"comparison_value": 344830,
+"change_pct_vs_comparison_year": 5.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.32,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気の影響はあるものの、夏場は訪日需要が落ち着く時期であること等から36,600人、前年同月比0.2%減となり、前年同月並みとなった。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [
+"夏場は訪日需要が落ち着く時期"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "FR",
+"name_ja": "フランス",
+"name_en": "France",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 40300,
+"comparison_year": 2025,
+"comparison_value": 37185,
+"change_pct_vs_comparison_year": 8.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.3,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 318300,
+"comparison_year": 2025,
+"comparison_value": 293112,
+"change_pct_vs_comparison_year": 8.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.15,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "8月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気に加え、スクールホリデーの影響等により40,300人、前年同月比8.4%増となり、8月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"record_high",
+"moderate_growth",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "DE",
+"name_ja": "ドイツ",
+"name_en": "Germany",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 33700,
+"comparison_year": 2025,
+"comparison_value": 35677,
+"change_pct_vs_comparison_year": -5.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.09,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 281500,
+"comparison_year": 2025,
+"comparison_value": 266576,
+"change_pct_vs_comparison_year": 5.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.02,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気の影響はあるものの、一部の州で前年より早く8月中旬までにスクールホリデーが終了した影響等により33,700人、前年同月比5.5%減となった。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [
+"一部の州で前年より早く8月中旬までにスクールホリデーが終了した"
+],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"一部の州で前年より早く8月中旬までにスクールホリデーが終了"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "IT",
+"name_ja": "イタリア",
+"name_en": "Italy",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 47300,
+"comparison_year": 2025,
+"comparison_value": 41098,
+"change_pct_vs_comparison_year": 15.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.53,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 207800,
+"comparison_year": 2025,
+"comparison_value": 198948,
+"change_pct_vs_comparison_year": 4.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.75,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": true,
+"record_note_ja": "8月として過去最高かつ単月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気に加え、スクールホリデーやバカンスシーズンの影響等により47,300人、前年同月比15.1%増となり、単月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [
+"スクールホリデー",
+"バカンスシーズン"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"record_high",
+"all_time_record_high",
+"moderate_growth",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "ES",
+"name_ja": "スペイン",
+"name_en": "Spain",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 36500,
+"comparison_year": 2025,
+"comparison_value": 31990,
+"change_pct_vs_comparison_year": 14.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 1.18,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 170500,
+"comparison_year": 2025,
+"comparison_value": 154307,
+"change_pct_vs_comparison_year": 10.5,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.62,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": true,
+"record_note_ja": "8月として過去最高かつ単月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気に加え、スクールホリデー、バカンスシーズン、マドリード～成田間の増便等により36,500人、前年同月比14.1%増となり、単月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"マドリード～成田間の増便"
+],
+"demand_events_ja": [
+"スクールホリデー",
+"バカンスシーズン"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"record_high",
+"all_time_record_high",
+"moderate_growth",
+"aviation_increase",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "RU",
+"name_ja": "ロシア",
+"name_en": "Russia",
+"region_ja": "欧州",
+"region_en": "Europe",
+"is_region_aggregate": false,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 14400,
+"comparison_year": 2025,
+"comparison_value": 13044,
+"change_pct_vs_comparison_year": 10.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.46,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 131900,
+"comparison_year": 2025,
+"comparison_value": 108001,
+"change_pct_vs_comparison_year": 22.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.48,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "8月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "ウクライナ侵攻に伴う各国からの制裁の影響が続く一方、スクールホリデー、経由便の多様化、クルーズ船の寄港等により14,400人、前年同月比10.4%増となり、8月として過去最高を記録した。",
+"positive_drivers_ja": [
+"経由便の多様化",
+"クルーズ船の寄港"
+],
+"constraints_ja": [
+"ウクライナ侵攻による各国からの制裁の影響"
+],
+"aviation_updates_ja": [
+"経由便の多様化"
+],
+"demand_events_ja": [
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [
+"ウクライナ侵攻による各国からの制裁の影響が続いている。"
+],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"record_high",
+"moderate_growth",
+"holiday_effect",
+"geopolitical_risk"
+]
+},
+{
+"market_key": "NORDIC",
+"name_ja": "北欧地域",
+"name_en": "Nordic Countries",
+"region_ja": "北欧地域",
+"region_en": "Nordic Countries",
+"is_region_aggregate": true,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 9400,
+"comparison_year": 2025,
+"comparison_value": 9051,
+"change_pct_vs_comparison_year": 3.9,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.3,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 139000,
+"comparison_year": 2025,
+"comparison_value": 122571,
+"change_pct_vs_comparison_year": 13.4,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.5,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "8月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気に加え、ヘルシンキ～関西間の増便をはじめとした航空座席数の増加等により9,400人、前年同月比3.9%増となり、8月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気",
+"航空座席数の増加"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"ヘルシンキ～関西間の増便",
+"航空座席数の増加"
+],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"北欧地域はスウェーデン、デンマーク、ノルウェー、フィンランドを指す。"
+]
+},
+"dashboard_tags": [
+"record_high",
+"moderate_growth",
+"aviation_increase",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "ME",
+"name_ja": "中東地域",
+"name_en": "Middle East",
+"region_ja": "中東地域",
+"region_en": "Middle East",
+"is_region_aggregate": true,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 22900,
+"comparison_year": 2025,
+"comparison_value": 18354,
+"change_pct_vs_comparison_year": 24.8,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.74,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 179300,
+"comparison_year": 2025,
+"comparison_value": 154137,
+"change_pct_vs_comparison_year": 16.3,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 0.65,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": true,
+"all_time_monthly_record": false,
+"record_note_ja": "8月として過去最高"
+},
+"market_context": {
+"status_summary_ja": "継続する訪日旅行人気に加え、一部路線における航空便の再開や増便、スクールホリデー等により22,900人、前年同月比24.8%増となり、8月として過去最高を記録した。",
+"positive_drivers_ja": [
+"継続する訪日旅行人気"
+],
+"constraints_ja": [],
+"aviation_updates_ja": [
+"一部路線における航空便の再開",
+"一部路線における航空便の増便"
+],
+"demand_events_ja": [
+"スクールホリデー"
+],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": [
+"中東地域はイスラエル、トルコ、GCC6か国（サウジアラビア、アラブ首長国連邦（UAE）、バーレーン、オマーン、カタール、クウェート）を指す。"
+]
+},
+"dashboard_tags": [
+"record_high",
+"strong_growth",
+"aviation_increase",
+"route_resumption",
+"holiday_effect",
+"continued_japan_popularity"
+]
+},
+{
+"market_key": "OTHERS",
+"name_ja": "その他",
+"name_en": "Others",
+"region_ja": "その他",
+"region_en": "Others",
+"is_region_aggregate": true,
+"visitor_arrivals": {
+"month": {
+"period": "2026-08",
+"current_year": 2026,
+"current_value": 143700,
+"comparison_year": 2025,
+"comparison_value": 145351,
+"change_pct_vs_comparison_year": -1.1,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 4.64,
+"data_status": "preliminary_estimate"
+},
+"cumulative": {
+"period": "2026-01_2026-08",
+"current_year": 2026,
+"current_value": 1274900,
+"comparison_year": 2025,
+"comparison_value": 1185073,
+"change_pct_vs_comparison_year": 7.6,
+"comparison_type": "year_over_year",
+"share_of_total_current_pct": 4.61,
+"data_status": "preliminary_estimate"
+}
+},
+"record": {
+"april_record": false,
+"month_record": false,
+"all_time_monthly_record": false,
+"record_note_ja": null
+},
+"market_context": {
+"status_summary_ja": null,
+"positive_drivers_ja": [],
+"constraints_ja": [],
+"aviation_updates_ja": [],
+"demand_events_ja": [],
+"policy_or_regulation_notes_ja": [],
+"special_notes_ja": []
+},
+"dashboard_tags": [
+"decline"
+]
+}
+],
+"dashboard_hints": {
+"primary_metric": "visitor_arrivals.month.current_value",
+"comparison_metric": "visitor_arrivals.month.change_pct_vs_comparison_year",
+"context_metric": "market_context.status_summary_ja",
+"group_by": [
+"region_ja",
+"market_key"
+],
+"suggested_charts": [
+"国・地域別の月次訪日外客数ランキング",
+"国・地域別の前年同月比または2019年同月比",
+"地域別の回復・増減状況",
+"航空便・休暇・規制要因の一覧",
+"過去最高を記録した市場のハイライト"
+]
+},
+"quality_checks": {
+"has_country_table": true,
+"has_market_context": true,
+"missing_context_markets": [
+"OTHERS"
+],
+"warnings": []
+}
+}
