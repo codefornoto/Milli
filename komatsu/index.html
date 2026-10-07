@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y18S9CW084"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y18S9CW084"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-Y18S9CW084');
-</script>
-    
+      gtag('config', 'G-Y18S9CW084');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Komatsu九 観光案内ポータル</title>
+    <title>Komatsu九 観光案内データダッシュボード</title>
     <meta
       name="description"
-      content="Komatsu九の観光案内履歴、問い合わせトレンド、来訪者属性、月次集計をまとめたポータルです。"
+      content="Komatsu九の問い合わせトレンド、来訪者属性、月次集計をまとめた観光案内データダッシュボードです。"
     >
     <meta name="theme-color" content="#4FD1C5">
     <meta name="generator" content="Code for Noto">
@@ -307,110 +306,9 @@
         font-size: 0.8rem;
       }
 
-      .result-count {
-        display: flex;
-        align-items: baseline;
-        gap: 3px;
-        color: var(--muted);
-      }
-
-      .result-count strong {
-        color: var(--navy);
-        font-size: 1.55rem;
-      }
-
-      .result-count span {
-        font-size: 0.72rem;
-      }
-
       .tifo-card {
         border-radius: 24px;
         padding: 24px;
-      }
-
-      .search-box {
-        display: flex;
-        min-height: 54px;
-        align-items: center;
-        gap: 10px;
-        border: 1px solid #dfe7ec;
-        border-radius: 16px;
-        background: #f9fbfc;
-        padding: 0 16px;
-      }
-
-      .search-box span {
-        color: var(--tifo-primary-dark);
-        font-size: 1.25rem;
-      }
-
-      .search-box input {
-        width: 100%;
-        border: 0;
-        outline: 0;
-        background: transparent;
-        color: var(--navy);
-      }
-
-      .history-list {
-        height: 520px;
-        margin-top: 12px;
-        overflow-y: auto;
-        padding-right: 8px;
-      }
-
-      .history-item {
-        border-bottom: 1px solid #edf1f4;
-        padding: 20px 8px;
-      }
-
-      .history-item:last-child {
-        border-bottom: 0;
-      }
-
-      .history-tags {
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-      }
-
-      .tag {
-        border-radius: 999px;
-        background: #eef4f6;
-        padding: 5px 9px;
-        color: #617187;
-        font-size: 0.62rem;
-      }
-
-      .tag.date {
-        background: #def8f4;
-        color: #238f87;
-        font-weight: 800;
-      }
-
-      .history-item p {
-        margin: 13px 0 0;
-        color: #35465b;
-        font-size: 0.88rem;
-        line-height: 1.8;
-      }
-
-      .history-load-more {
-        display: none;
-        width: 100%;
-        min-height: 46px;
-        margin-top: 12px;
-        border: 1px solid #cfe8e5;
-        border-radius: 14px;
-        background: #effaf9;
-        color: #238f87;
-        cursor: pointer;
-        font-size: 0.74rem;
-        font-weight: 800;
-      }
-
-      .history-load-more.visible {
-        display: block;
       }
 
       .attribute-toolbar {
@@ -1378,17 +1276,12 @@
           line-height: 1.6;
         }
 
-        .history-card,
         .word-cloud-card,
         .ranking-card,
         .attribute-card,
         .monthly-card,
         .matrix-card {
           padding: 17px;
-        }
-
-        .history-list {
-          height: 520px;
         }
 
         .trend-section {
@@ -1543,7 +1436,7 @@
   <body>
     <header class="site-header">
       <div class="section-wrap header-inner">
-        <a class="brand" href="#top" aria-label="Komatsu九 観光案内ポータル トップへ">
+        <a class="brand" href="#top" aria-label="Komatsu九 観光案内データダッシュボード トップへ">
           <img
             src="./komatsulogo.png"
             alt="Komatsu九"
@@ -1551,13 +1444,12 @@
           >
           <span class="brand-logo-fallback" aria-hidden="true">九</span>
           <span class="brand-text">
-            <strong>Komatsu九 観光案内ポータル</strong>
-            <small>KOMATSU NINE INFORMATION PORTAL</small>
+            <strong>Komatsu九 観光案内データダッシュボード</strong>
+            <small>KOMATSU NINE DATA DASHBOARD</small>
           </span>
         </a>
 
         <nav class="desktop-nav" aria-label="ページ内メニュー">
-          <a href="#history">案内履歴</a>
           <a href="#trend">トレンド</a>
           <a href="#attributes">属性</a>
           <a href="#monthly">月次集計</a>
@@ -1613,51 +1505,13 @@
         </article>
       </section>
 
-      <section id="history" class="section-wrap content-section">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">GUIDANCE HISTORY</p>
-            <h2>案内履歴</h2>
-            <p>「問い合わせ内容／回答」の自由記述を、最新の日付からたどれます。</p>
-          </div>
-
-          <div class="result-count">
-            <strong id="historyCount">0</strong>
-            <span>件</span>
-          </div>
-        </div>
-
-        <div class="tifo-card history-card">
-          <label class="search-box">
-            <span aria-hidden="true">⌕</span>
-            <input
-              id="searchInput"
-              type="search"
-              placeholder="自由記述・国籍・目的・ジャンルを検索"
-            >
-          </label>
-
-          <div
-            id="historyList"
-            class="history-list custom-scrollbar"
-            aria-live="polite"
-          >
-            <div class="empty-state">データを読み込んでいます。</div>
-          </div>
-
-          <button id="historyLoadMore" class="history-load-more" type="button">
-            さらに表示
-          </button>
-        </div>
-      </section>
-
       <section id="trend" class="trend-section content-section">
         <div class="section-wrap">
           <div class="section-heading">
             <div>
               <p class="section-kicker">CONSULTATION TREND</p>
               <h2>相談トレンド</h2>
-              <p>自由記述に多く登場する言葉から、問い合わせの変化を見渡します。</p>
+              <p>問い合わせ内容に多く登場する言葉から、変化を見渡します。</p>
             </div>
 
             <div class="trend-toolbar">
@@ -1833,17 +1687,16 @@
       <div class="section-wrap footer-inner">
         <div>
           <strong>
-            Komatsu九 観光案内ポータル
+            Komatsu九 観光案内データダッシュボード
           </strong>
           <p>データ：Komatsu九 観光案内記録</p>
         </div>
 
-        <span class="footer-mark">KOMATSU NINE INFORMATION PORTAL</span>
+        <span class="footer-mark">KOMATSU NINE DATA DASHBOARD</span>
       </div>
     </footer>
 
     <nav class="mobile-nav" aria-label="スマートフォン用ページ内メニュー">
-      <a href="#history">履歴</a>
       <a href="#trend">トレンド</a>
       <a href="#attributes">属性</a>
       <a href="#monthly">月次</a>
@@ -2175,7 +2028,6 @@
         keywordMode: "frequency",
         rangeMonths: 3,
         attributeRange: "12",
-        historyLimit: 80,
         selectedKeyword: null,
         keywordModalView: "monthly",
         selectedGenre: null
@@ -2686,7 +2538,7 @@
       }
 
       // -----------------------------------------------------------------------
-      // サマリーと案内履歴
+      // サマリー
       // -----------------------------------------------------------------------
 
       function renderSummary() {
@@ -2735,79 +2587,6 @@
           monthTop
             ? `最多：${monthTop.name}（${monthTop.count}件）`
             : "今月の記録はまだありません";
-      }
-
-      function renderHistory() {
-        const query = normalizeText(
-          document.getElementById("searchInput").value
-        );
-
-        const filteredRecords = state.records.filter((record) => {
-          if (!record.summary) {
-            return false;
-          }
-
-          const searchableText = normalizeText([
-            record.summary,
-            record.reception,
-            record.nationality,
-            record.purpose,
-            record.partySize,
-            record.gender,
-            record.age,
-            record.primaryCategory,
-            ...record.genres,
-            ...Object.values(record.genreDetails).flat()
-          ].join(" "));
-
-          return !query || searchableText.includes(query);
-        });
-
-        document.getElementById("historyCount").textContent =
-          filteredRecords.length.toLocaleString();
-
-        const historyList = document.getElementById("historyList");
-        const loadMoreButton = document.getElementById("historyLoadMore");
-
-        if (!filteredRecords.length) {
-          historyList.innerHTML =
-            '<div class="empty-state">該当する案内履歴はありません。</div>';
-          loadMoreButton.classList.remove("visible");
-          return;
-        }
-
-        const visibleRecords = filteredRecords.slice(0, state.historyLimit);
-
-        historyList.innerHTML = visibleRecords
-          .map((record) => {
-            const tags = [
-              `<span class="tag date">${escapeHtml(formatDate(record.date))}</span>`,
-              `<span class="tag">${escapeHtml(record.timeSlot)}</span>`,
-              `<span class="tag">${escapeHtml(record.reception)}</span>`,
-              `<span class="tag">${escapeHtml(record.nationality)}</span>`,
-              `<span class="tag">${escapeHtml(record.purpose)}</span>`,
-              `<span class="tag">${escapeHtml(record.partySize)}</span>`,
-              `<span class="tag">${escapeHtml(record.gender)}</span>`,
-              `<span class="tag">${escapeHtml(record.age)}</span>`,
-              ...record.genres.map(
-                (item) => `<span class="tag">${escapeHtml(item)}</span>`
-              )
-            ].join("");
-
-            return `
-              <article class="history-item">
-                <div class="history-tags">${tags}</div>
-                <p>${escapeHtml(record.summary)}</p>
-              </article>
-            `;
-          })
-          .join("");
-
-        const remaining = filteredRecords.length - visibleRecords.length;
-        loadMoreButton.classList.toggle("visible", remaining > 0);
-        loadMoreButton.textContent = remaining > 0
-          ? `さらに表示（残り${remaining.toLocaleString()}件）`
-          : "";
       }
 
       // -----------------------------------------------------------------------
@@ -3768,7 +3547,6 @@
 
       function renderAll() {
         renderSummary();
-        renderHistory();
         renderTrends();
         renderAttributes();
         renderMonthly();
@@ -3777,22 +3555,6 @@
       document.getElementById("reloadButton").addEventListener(
         "click",
         loadRecords
-      );
-
-      document.getElementById("searchInput").addEventListener(
-        "input",
-        () => {
-          state.historyLimit = 80;
-          renderHistory();
-        }
-      );
-
-      document.getElementById("historyLoadMore").addEventListener(
-        "click",
-        () => {
-          state.historyLimit += 80;
-          renderHistory();
-        }
       );
 
       document.getElementById("rangeSelect").addEventListener(
