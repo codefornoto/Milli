@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#4fd1c5"><title>金沢駅観光案内所（外国人窓口）対応データ</title><meta name="description" content="金沢駅観光案内所（外国人窓口）の案内履歴、相談トレンド、月次集計、日別案内人数。"><style>
+      :root {
+        --tifo-bg: #f7fafc;
+        --tifo-text: #2d3748;
+        --tifo-primary: #4fd1c5;
+        --tifo-primary-dark: #38b2ac;
+        --tifo-card-border: #e2e8f0;
+        --tifo-card-bg: #ffffff;
+        --navy: #203144;
+        --muted: #64748b;
+        --faint: #8795a8;
+        --shadow: 0 16px 40px -28px rgba(32, 49, 68, 0.4);
+        --content-width: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--tifo-bg);
+        color: var(--tifo-text);
+        font-family:
+          "Noto Sans JP",
+          "Hiragino Kaku Gothic ProN",
+          "Yu Gothic",
+          sans-serif;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .section-wrap {
+        width: min(calc(100% - 40px), var(--content-width));
+        margin-inline: auto;
+      }
+
+      .site-header {
+        position: sticky;
+        z-index: 40;
+        top: 0;
+        border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+        background: rgba(247, 250, 252, 0.92);
+        backdrop-filter: blur(14px);
+      }
+
+      .header-inner {
+        display: flex;
+        min-height: 74px;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand img {
+        width: 46px;
+        height: 46px;
+        object-fit: contain;
+      }
+
+      .brand-text {
+        display: grid;
+        gap: 2px;
+      }
+
+      .brand-text strong {
+        color: var(--navy);
+        font-size: 0.96rem;
+      }
+
+      .brand-text small {
+        color: var(--faint);
+        font-size: 0.62rem;
+        letter-spacing: 0.08em;
+      }
+
+      .desktop-nav {
+        display: flex;
+        margin-left: auto;
+        gap: 22px;
+        color: #536276;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      .desktop-nav a:hover {
+        color: var(--tifo-primary-dark);
+      }
+
+      .sheet-button {
+        display: inline-flex;
+        min-height: 42px;
+        align-items: center;
+        gap: 7px;
+        border: 1px solid #d8e2ea;
+        border-radius: 999px;
+        background: #fff;
+        padding: 0 16px;
+        color: #405066;
+        font-size: 0.76rem;
+        font-weight: 700;
+      }
+
+      .dashboard-top {
+        display: flex;
+        justify-content: flex-end;
+        padding-block: 22px 12px;
+      }
+
+      .sync-compact {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--faint);
+        font-size: 0.68rem;
+      }
+
+      .sync-compact p {
+        margin: 0;
+      }
+
+      .sync-compact strong {
+        margin-left: 4px;
+        color: var(--navy);
+      }
+
+      .sync-compact button {
+        border: 0;
+        background: transparent;
+        padding: 5px 0;
+        color: var(--tifo-primary-dark);
+        cursor: pointer;
+        font-size: 0.68rem;
+        font-weight: 800;
+      }
+
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border-radius: 999px;
+        background: #e9fbf8;
+        padding: 6px 10px;
+        color: #218b83;
+        font-size: 0.68rem;
+        font-weight: 800;
+      }
+
+      .status-badge::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: currentColor;
+        content: "";
+      }
+
+      .status-badge.loading {
+        background: #edf2f7;
+        color: #64748b;
+      }
+
+      .status-badge.cached {
+        background: #fff7dc;
+        color: #9a7414;
+      }
+
+      .status-badge.error {
+        background: #fff0f0;
+        color: #b34545;
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-bottom: 52px;
+      }
+
+      .summary-card,
+      .tifo-card {
+        border: 1px solid var(--tifo-card-border);
+        background: var(--tifo-card-bg);
+        box-shadow: var(--shadow);
+      }
+
+      .summary-card {
+        min-height: 126px;
+        border-radius: 24px;
+        padding: 22px 26px;
+      }
+
+      .summary-card.today {
+        border-color: rgba(79, 209, 197, 0.6);
+      }
+
+      .summary-card p {
+        margin: 0 0 5px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .summary-card strong {
+        display: block;
+        color: var(--navy);
+        font-size: 2.25rem;
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+      }
+
+      .summary-card strong span {
+        margin-left: 4px;
+        font-size: 0.9rem;
+      }
+
+      .summary-card small {
+        display: block;
+        margin-top: 7px;
+        color: var(--faint);
+        font-size: 0.72rem;
+      }
+
+      .content-section {
+        scroll-margin-top: 100px;
+        margin-bottom: 92px;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+
+      .section-kicker {
+        margin: 0 0 10px;
+        color: var(--tifo-primary-dark);
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.17em;
+      }
+
+      .section-heading h2 {
+        margin: 0;
+        color: var(--navy);
+        font-size: clamp(1.55rem, 3vw, 2.15rem);
+      }
+
+      .section-heading p:last-child {
+        margin: 9px 0 0;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .result-count {
+        display: flex;
+        align-items: baseline;
+        gap: 3px;
+        color: var(--muted);
+      }
+
+      .result-count strong {
+        color: var(--navy);
+        font-size: 1.55rem;
+      }
+
+      .result-count span {
+        font-size: 0.72rem;
+      }
+
+      .tifo-card {
+        border-radius: 24px;
+        padding: 24px;
+      }
+
+      .search-box {
+        display: flex;
+        min-height: 54px;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #dfe7ec;
+        border-radius: 16px;
+        background: #f9fbfc;
+        padding: 0 16px;
+      }
+
+      .search-box span {
+        color: var(--tifo-primary-dark);
+        font-size: 1.25rem;
+      }
+
+      .search-box input {
+        width: 100%;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: var(--navy);
+      }
+
+      .history-list {
+        height: 520px;
+        margin-top: 12px;
+        overflow-y: auto;
+        padding-right: 8px;
+      }
+
+      .history-item {
+        border-bottom: 1px solid #edf1f4;
+        padding: 20px 8px;
+      }
+
+      .history-item:last-child {
+        border-bottom: 0;
+      }
+
+      .history-tags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        border-radius: 999px;
+        background: #eef4f6;
+        padding: 5px 9px;
+        color: #617187;
+        font-size: 0.62rem;
+      }
+
+      .tag.date {
+        background: #def8f4;
+        color: #238f87;
+        font-weight: 800;
+      }
+
+      .history-item p {
+        margin: 13px 0 0;
+        color: #35465b;
+        font-size: 0.88rem;
+        line-height: 1.8;
+      }
+
+      .empty-state {
+        display: grid;
+        min-height: 180px;
+        place-items: center;
+        color: var(--faint);
+        font-size: 0.8rem;
+      }
+
+      .trend-section {
+        border-block: 1px solid #dfe8ed;
+        background: #eef9f8;
+        padding-block: 78px;
+      }
+
+      .trend-toolbar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .stopword-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-height: 28px;
+        border: 1px solid #d9e5e8;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.78);
+        padding: 4px 10px;
+        color: #64748b;
+        font-size: 0.66rem;
+        white-space: nowrap;
+      }
+
+      .stopword-status::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #a0aec0;
+        content: "";
+      }
+
+      .stopword-status.loaded::before {
+        background: var(--tifo-primary-dark);
+      }
+
+      .stopword-status.fallback::before {
+        background: #edb83f;
+      }
+
+      .trend-toolbar select,
+      .segmented {
+        min-height: 42px;
+        border: 1px solid #d9e5e8;
+        border-radius: 999px;
+        background: #fff;
+      }
+
+      .trend-toolbar select {
+        padding: 0 36px 0 14px;
+        color: #526176;
+        font-size: 0.72rem;
+      }
+
+      .segmented {
+        display: flex;
+        padding: 3px;
+      }
+
+      .segmented button {
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
+        padding: 8px 13px;
+        color: var(--faint);
+        cursor: pointer;
+        font-size: 0.68rem;
+        font-weight: 700;
+      }
+
+      .segmented button.active {
+        background: var(--tifo-primary);
+        color: #fff;
+      }
+
+      .trend-grid {
+        display: grid;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 18px;
+      }
+
+      .trend-note {
+        margin: 14px 2px 0;
+        color: #718096;
+        font-size: 0.7rem;
+        line-height: 1.7;
+      }
+
+      .word-cloud {
+        display: flex;
+        min-height: 360px;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        gap: 10px 16px;
+        flex-wrap: wrap;
+        padding: 28px;
+      }
+
+      .keyword-button {
+        border: 0;
+        background: transparent;
+        color: var(--navy);
+        cursor: pointer;
+        font-weight: 700;
+        transition: 0.18s ease;
+      }
+
+      .keyword-button:hover {
+        color: var(--tifo-primary-dark);
+        transform: translateY(-2px);
+      }
+
+      .ranking-list {
+        display: grid;
+        max-height: 360px;
+        gap: 8px;
+        overflow-y: auto;
+      }
+
+      .ranking-item {
+        display: grid;
+        grid-template-columns: 30px 1fr auto;
+        align-items: center;
+        gap: 10px;
+        border: 0;
+        border-radius: 13px;
+        background: #f7fafb;
+        padding: 9px 11px;
+        color: var(--navy);
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .rank-badge {
+        display: grid;
+        width: 27px;
+        height: 27px;
+        place-items: center;
+        border-radius: 50%;
+        background: #a9a9a9;
+        color: #fff;
+        font-size: 0.68rem;
+        font-weight: 800;
+      }
+
+      .ranking-item:nth-child(1) .rank-badge {
+        background: #e7b80f;
+      }
+
+      .ranking-item:nth-child(2) .rank-badge {
+        background: #9faab7;
+      }
+
+      .ranking-item:nth-child(3) .rank-badge {
+        background: #bd7745;
+      }
+
+      .ranking-item strong {
+        font-size: 0.77rem;
+      }
+
+      .ranking-item small {
+        color: var(--faint);
+        font-size: 0.62rem;
+      }
+
+      .monthly-heading {
+        align-items: center;
+      }
+
+      .month-switcher {
+        display: grid;
+        grid-template-columns: 42px 130px 42px;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .month-switcher button,
+      .modal-month button {
+        display: grid;
+        width: 40px;
+        height: 40px;
+        place-items: center;
+        border: 1px solid #d9e4ea;
+        border-radius: 50%;
+        background: #fff;
+        color: #405066;
+        cursor: pointer;
+        font-size: 1.25rem;
+      }
+
+      .month-switcher button:disabled,
+      .modal-month button:disabled {
+        cursor: default;
+        opacity: 0.3;
+      }
+
+      .month-switcher strong,
+      .modal-month strong {
+        color: var(--navy);
+        text-align: center;
+      }
+
+      .monthly-summary {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .monthly-summary article {
+        display: flex;
+        min-height: 90px;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid var(--tifo-card-border);
+        border-radius: 18px;
+        background: #fff;
+        padding: 18px 20px;
+      }
+
+      .monthly-summary span {
+        color: var(--muted);
+        font-size: 0.7rem;
+      }
+
+      .monthly-summary strong {
+        color: var(--navy);
+        font-size: 1.35rem;
+      }
+
+      .monthly-summary small {
+        margin-left: 3px;
+        font-size: 0.65rem;
+      }
+
+      .monthly-card {
+        margin-bottom: 18px;
+      }
+
+      .card-title-row {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .card-title-row > div > span {
+        color: var(--tifo-primary-dark);
+        font-size: 0.62rem;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+      }
+
+      .card-title-row h3 {
+        margin: 6px 0 0;
+        color: var(--navy);
+        font-size: 1.12rem;
+      }
+
+      .card-title-row > small {
+        color: var(--faint);
+        font-size: 0.62rem;
+      }
+
+      .vertical-bars {
+        display: flex;
+        height: 270px;
+        align-items: end;
+        justify-content: space-around;
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+      .vertical-bar-item {
+        display: grid;
+        height: 100%;
+        min-width: 58px;
+        flex: 1;
+        grid-template-rows: 22px 1fr 48px;
+        gap: 6px;
+        text-align: center;
+      }
+
+      .bar-value {
+        color: var(--muted);
+        font-size: 0.68rem;
+        font-weight: 800;
+      }
+
+      .vertical-bar-track {
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        border-bottom: 1px solid #dce5eb;
+      }
+
+      .vertical-bar-track i {
+        display: block;
+        width: min(65%, 66px);
+        min-height: 4px;
+        border-radius: 7px 7px 0 0;
+        cursor: default;
+      }
+
+      .bar-label {
+        color: #536276;
+        font-size: 0.67rem;
+        font-weight: 700;
+        line-height: 1.35;
+      }
+
+      .legend {
+        display: flex;
+        max-width: 650px;
+        justify-content: end;
+        gap: 7px 12px;
+        flex-wrap: wrap;
+      }
+
+      .legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: #728196;
+        cursor: default;
+        font-size: 0.62rem;
+      }
+
+      .legend-dot,
+      .donut-label i {
+        width: 10px;
+        height: 10px;
+        flex: 0 0 auto;
+        border-radius: 50%;
+      }
+
+      .matrix-scroll {
+        margin-top: 24px;
+        overflow-x: auto;
+      }
+
+      .matrix-table {
+        min-width: 880px;
+      }
+
+      .matrix-row {
+        display: grid;
+        min-height: 49px;
+        grid-template-columns: 62px 110px 1fr;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid #edf1f4;
+      }
+
+      .matrix-count {
+        color: var(--muted);
+        font-size: 0.68rem;
+        font-weight: 800;
+        text-align: right;
+      }
+
+      .municipality-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+        border: 0;
+        background: transparent;
+        padding: 7px 3px;
+        color: #43536a;
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .municipality-button strong {
+        font-size: 0.76rem;
+        white-space: nowrap;
+      }
+
+      .municipality-button span {
+        color: var(--tifo-primary-dark);
+        opacity: 0;
+      }
+
+      .municipality-button:hover span,
+      .municipality-button:focus-visible span {
+        opacity: 1;
+      }
+
+      .stacked-bar {
+        display: flex;
+        width: 100%;
+        height: 28px;
+        overflow: hidden;
+        border-radius: 6px;
+        background: #eef2f5;
+      }
+
+      .stacked-bar span {
+        display: grid;
+        min-width: 2px;
+        place-items: center;
+        overflow: hidden;
+        color: rgba(32, 49, 68, 0.9);
+        cursor: default;
+        font-size: 0.58rem;
+        font-weight: 800;
+      }
+
+      .links-section {
+        border-top: 1px solid #e0e7ed;
+        background: #fff;
+        padding-block: 70px;
+      }
+
+      .links-inner {
+        display: grid;
+        grid-template-columns: 0.55fr 1.45fr;
+        align-items: center;
+        gap: 54px;
+      }
+
+      .links-inner h2 {
+        margin: 0;
+        color: var(--navy);
+      }
+
+      .link-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      .link-cards a {
+        display: grid;
+        min-height: 130px;
+        grid-template-columns: 1fr auto;
+        align-content: center;
+        gap: 8px;
+        border: 1px solid var(--tifo-card-border);
+        border-radius: 20px;
+        padding: 22px;
+        transition: 0.2s ease;
+      }
+
+      .link-cards a:hover {
+        border-color: var(--tifo-primary);
+        transform: translateY(-2px);
+      }
+
+      .link-cards a > span {
+        grid-column: 1 / -1;
+        color: var(--tifo-primary-dark);
+        font-size: 0.6rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+      }
+
+      .link-cards strong {
+        color: var(--navy);
+        font-size: 0.86rem;
+      }
+
+      footer {
+        background: var(--navy);
+        color: #fff;
+      }
+
+      .footer-inner {
+        display: flex;
+        min-height: 180px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .footer-inner strong {
+        font-size: 0.78rem;
+      }
+
+      .footer-inner p {
+        margin: 9px 0 0;
+        color: #aebdca;
+        font-size: 0.68rem;
+      }
+
+      .footer-mark {
+        color: #91a2b2;
+        font-size: 0.64rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+      }
+
+      .mobile-nav {
+        display: none;
+      }
+
+      .modal-overlay {
+        position: fixed;
+        z-index: 80;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(32, 49, 68, 0.74);
+        padding: 20px;
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-overlay[hidden] {
+        display: none;
+      }
+
+      .modal-content {
+        display: flex;
+        width: min(760px, 100%);
+        max-height: 88vh;
+        overflow: hidden;
+        flex-direction: column;
+        border-radius: 26px;
+        background: #fff;
+        box-shadow: 0 28px 80px -30px rgba(15, 30, 45, 0.8);
+      }
+
+      .modal-header {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 20px;
+        border-bottom: 1px solid #e6edf2;
+        padding: 24px 27px 19px;
+      }
+
+      .modal-header > div > span {
+        color: var(--tifo-primary-dark);
+        font-size: 0.62rem;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+      }
+
+      .modal-header h2 {
+        margin: 5px 0 0;
+        color: var(--navy);
+        font-size: 1.38rem;
+      }
+
+      .modal-header p {
+        margin: 7px 0 0;
+        color: var(--faint);
+        font-size: 0.72rem;
+      }
+
+      .modal-close {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        background: #eef3f6;
+        color: var(--muted);
+        cursor: pointer;
+        font-size: 1.25rem;
+      }
+
+      .modal-body {
+        overflow-y: auto;
+        padding: 22px 26px 27px;
+      }
+
+      .keyword-modal-toolbar {
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid #e6edf2;
+        background: #f8fbfc;
+        padding: 12px 20px;
+      }
+
+      .keyword-view-switch {
+        min-height: 38px;
+      }
+
+      .hourly-chart {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .hourly-chart text {
+        fill: #8290a0;
+        font-size: 9px;
+      }
+
+      .hourly-bar {
+        fill: var(--tifo-primary);
+        cursor: default;
+        transition: fill 0.18s ease, opacity 0.18s ease;
+      }
+
+      .hourly-bar:hover {
+        fill: var(--tifo-primary-dark);
+      }
+
+      .line-chart {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .line-chart text {
+        fill: #8290a0;
+        font-size: 9px;
+      }
+
+      .modal-month {
+        display: grid;
+        grid-template-columns: 42px 140px 42px;
+        align-items: center;
+        align-self: center;
+        gap: 8px;
+        padding-top: 18px;
+      }
+
+      .donut-layout {
+        display: grid;
+        grid-template-columns: 230px 1fr;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .donut-chart {
+        position: relative;
+        width: 220px;
+        aspect-ratio: 1;
+      }
+
+      .donut-chart svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        transform: rotate(-90deg);
+      }
+
+      .donut-track,
+      .donut-segment {
+        fill: none;
+        stroke-width: 24;
+      }
+
+      .donut-track {
+        stroke: #edf2f7;
+      }
+
+      .donut-segment {
+        cursor: default;
+        transition: filter 0.18s ease, stroke-width 0.18s ease;
+      }
+
+      .donut-segment:hover {
+        filter: brightness(0.93);
+        stroke-width: 27;
+      }
+
+      .donut-hole {
+        position: absolute;
+        top: 21%;
+        left: 21%;
+        display: grid;
+        width: 58%;
+        aspect-ratio: 1;
+        place-content: center;
+        border-radius: 50%;
+        background: #fff;
+        text-align: center;
+      }
+
+      .donut-hole strong {
+        color: var(--navy);
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .donut-hole span {
+        margin-top: 7px;
+        color: var(--faint);
+        font-size: 0.65rem;
+      }
+
+      .donut-legend {
+        display: grid;
+        width: 100%;
+        gap: 7px;
+      }
+
+      .donut-row {
+        display: grid;
+        grid-template-columns: 1fr auto 48px;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 1px solid #edf1f4;
+        padding: 7px 0;
+      }
+
+      .donut-label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        color: #526176;
+        font-size: 0.75rem;
+      }
+
+      .donut-row strong {
+        color: var(--navy);
+        font-size: 0.76rem;
+      }
+
+      .donut-row small {
+        color: var(--faint);
+        font-size: 0.67rem;
+        text-align: right;
+      }
+
+      .graph-tooltip {
+        position: fixed;
+        z-index: 120;
+        max-width: min(280px, calc(100vw - 24px));
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        background: rgba(32, 49, 68, 0.96);
+        padding: 8px 11px;
+        color: #fff;
+        box-shadow: 0 10px 26px -14px rgba(15, 30, 45, 0.8);
+        font-size: 0.7rem;
+        font-weight: 700;
+        line-height: 1.45;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+
+      .graph-tooltip[hidden] {
+        display: none;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background: #f1f1f1;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #cbd5df;
+      }
+
+      @media (max-width: 920px) {
+        .desktop-nav {
+          display: none;
+        }
+
+        .sheet-button {
+          margin-left: auto;
+        }
+
+        .trend-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .links-inner {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+
+        .link-cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 680px) {
+        body {
+          padding-bottom: 67px;
+        }
+
+        .section-wrap {
+          width: min(calc(100% - 28px), var(--content-width));
+        }
+
+        .header-inner {
+          min-height: 68px;
+        }
+
+        .brand-text small {
+          display: none;
+        }
+
+        .brand-text strong {
+          max-width: 120px;
+          font-size: 0.88rem;
+          line-height: 1.25;
+        }
+
+        .brand img {
+          width: 40px;
+          height: 40px;
+        }
+
+        .sheet-button {
+          min-height: 38px;
+          padding-inline: 12px;
+          font-size: 0.7rem;
+        }
+
+        .dashboard-top {
+          padding-block: 12px 8px;
+        }
+
+        .sync-compact {
+          gap: 7px;
+          font-size: 0.59rem;
+        }
+
+        .status-badge {
+          padding: 5px 7px;
+          font-size: 0.58rem;
+        }
+
+        .summary-grid {
+          gap: 10px;
+          margin-bottom: 48px;
+        }
+
+        .summary-card {
+          min-height: 112px;
+          border-radius: 19px;
+          padding: 16px;
+        }
+
+        .summary-card strong {
+          font-size: 1.8rem;
+        }
+
+        .summary-card small {
+          line-height: 1.35;
+        }
+
+        .content-section {
+          margin-bottom: 68px;
+        }
+
+        .section-heading {
+          align-items: start;
+        }
+
+        .section-heading p:last-child {
+          max-width: 270px;
+          line-height: 1.6;
+        }
+
+        .history-card,
+        .word-cloud-card,
+        .ranking-card,
+        .monthly-card,
+        .matrix-card {
+          padding: 17px;
+        }
+
+        .history-list {
+          height: 520px;
+        }
+
+        .trend-section {
+          padding-block: 64px;
+        }
+
+        .trend-toolbar {
+          width: 100%;
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .segmented button {
+          flex: 1;
+        }
+
+        .word-cloud {
+          min-height: 300px;
+          padding: 20px 4px;
+        }
+
+        .monthly-heading {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .month-switcher {
+          width: 100%;
+          grid-template-columns: 42px 1fr 42px;
+        }
+
+        .monthly-summary {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+
+        .monthly-summary article {
+          min-height: 72px;
+        }
+
+        .vertical-bars {
+          height: 250px;
+          gap: 4px;
+        }
+
+        .vertical-bar-item {
+          min-width: 34px;
+          grid-template-rows: 20px 1fr 54px;
+        }
+
+        .bar-label {
+          font-size: 0.55rem;
+          word-break: break-all;
+        }
+
+        .card-title-row {
+          display: block;
+        }
+
+        .legend {
+          margin-top: 14px;
+          justify-content: start;
+        }
+
+        .matrix-table {
+          min-width: 720px;
+        }
+
+        .matrix-row {
+          grid-template-columns: 54px 112px 1fr;
+        }
+
+        .municipality-button {
+          border-radius: 9px;
+          background: #f1faf9;
+          padding: 8px 9px;
+        }
+
+        .municipality-button span {
+          opacity: 1;
+        }
+
+        .link-cards {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-inner {
+          min-height: 190px;
+          align-items: start;
+          justify-content: center;
+          flex-direction: column;
+        }
+
+        .footer-mark {
+          display: none;
+        }
+
+        .mobile-nav {
+          position: fixed;
+          z-index: 50;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          display: grid;
+          height: 67px;
+          grid-template-columns: repeat(4, 1fr);
+          border-top: 1px solid #dce5eb;
+          background: rgba(255, 255, 255, 0.96);
+          padding-bottom: env(safe-area-inset-bottom);
+          backdrop-filter: blur(12px);
+        }
+
+        .mobile-nav a {
+          display: grid;
+          place-items: center;
+          color: var(--muted);
+          font-size: 0.66rem;
+        }
+
+        .modal-overlay {
+          align-items: end;
+          padding: 0;
+        }
+
+        .modal-content {
+          width: 100%;
+          max-height: 91vh;
+          border-radius: 24px 24px 0 0;
+        }
+
+        .modal-header {
+          padding: 20px 19px 16px;
+        }
+
+        .modal-body {
+          padding: 20px 19px 25px;
+        }
+
+        .donut-layout {
+          grid-template-columns: 1fr;
+          justify-items: center;
+          gap: 22px;
+        }
+
+        .donut-chart {
+          width: min(210px, 72vw);
+        }
+      }
+    /* Adapted from https://codefornoto.github.io/Milli/notodesk/ */
+:root{color-scheme:light}.brand-logo{width:46px;height:46px;flex:none}.brand-logo svg{display:block;width:100%;height:100%}.header-inner{gap:22px}.brand-text{max-width:480px}.brand-text strong{font-size:.91rem;line-height:1.5}.desktop-nav{gap:18px;white-space:nowrap}.sheet-button{flex:none}.summary-grid{grid-template-columns:repeat(3,1fr)}.summary-card strong b{font:inherit}.summary-card strong>span{font-size:.9rem}.summary-card small b{font-weight:600}.summary-card.today{background:linear-gradient(125deg,#fff,#f0fcfa)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.5}button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.upload-label:focus-within{outline:3px solid #279b93;outline-offset:4px}.search-box:focus-within{outline:2px solid #38b2ac}.filter-row,.controls-wrap{display:flex;gap:12px;align-items:end;flex-wrap:wrap}.filter-row{margin-top:18px}.filter-row label,.controls-wrap label{display:grid;gap:6px;color:#64748b;font-size:.7rem;font-weight:600}.filter-row input,.filter-row select,.controls-wrap input,.controls-wrap select,.month-switcher input{min-height:40px;border:1px solid #d9e5e8;border-radius:10px;padding:8px 12px;background:white;color:#203144;min-width:0;max-width:100%}.plain-button{border:1px solid #d9e5e8;border-radius:11px;min-height:40px;padding:8px 14px;background:white;color:#267f79;font-size:.74rem;font-weight:700}.upload-label{cursor:pointer;color:#267f79;border-left:1px solid #d9e5e8;padding-left:10px}.data-message{margin-top:0;margin-bottom:18px;border:1px solid #e8dcc2;border-radius:12px;background:#fffbef;padding:12px 16px;font-size:.78rem;line-height:1.8}.history-list{height:440px}.free-text{border-left:3px solid #a7e6df;background:#f5fbfa;margin-top:12px;padding:9px 13px;border-radius:0 8px 8px 0}.free-text>span{color:#218b83;font-size:.63rem;font-weight:700}.free-text p{margin:4px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}.history-item>p{white-space:pre-wrap;overflow-wrap:anywhere}.trend-heading{align-items:center}.controls-wrap{margin-bottom:22px}.controls-wrap .segmented{align-self:end}.controls-wrap select{border-radius:10px;padding:8px 12px}.ranking-list{margin-top:20px}.segmented button.active{background:#2a9e95;color:white}.stopword-settings{margin-top:16px;font-size:.75rem;color:#64748b}.stopword-settings summary{cursor:pointer}.stopword-settings label{display:block;margin:14px 0 8px}.stopword-settings textarea{display:block;width:min(600px,100%);padding:10px;border:1px solid #d9e5e8;border-radius:10px;resize:vertical;background:#fff;color:#203144}.stopword-settings button{margin-top:8px}.month-switcher{grid-template-columns:40px 170px 40px}.month-switcher input{font-size:.88rem;font-weight:700;text-align:center;width:100%}.horizontal-bars{margin-top:26px;display:grid;gap:18px}.horizontal-bar-row{display:grid;grid-template-columns:minmax(120px,32%) 1fr 76px;align-items:center;gap:16px;font-size:.8rem}.horizontal-label{line-height:1.6;overflow-wrap:anywhere}.horizontal-track{height:14px;background:#f0f5f6;border-radius:8px;overflow:hidden}.horizontal-track i{display:block;height:100%;background:#4fd1c5;border-radius:8px}.horizontal-bar-row strong{text-align:right;color:#203144;font-size:.94rem}.horizontal-bar-row small{font-size:.63rem;margin-left:3px;font-weight:400}.missing-mark{color:#97691a}.daily-controls{margin:0}.daily-totals{display:flex;gap:28px;flex-wrap:wrap;font-size:.76rem;color:#64748b;margin:24px 0 4px}.daily-totals strong{font-size:1.35rem;color:#203144;margin-left:8px}.date-separator{padding-bottom:12px;color:#8795a8}.range-message{font-size:.72rem;color:#64748b;margin:16px 0 0;min-height:1em}.portal-line-chart{display:block;width:100%;height:auto;min-height:200px;overflow:visible}.portal-line-chart text{fill:#64748b;font-size:12px;font-family:inherit}.chart-point{outline:none}.chart-point .point-label{display:none;fill:#203144;font-weight:700;paint-order:stroke;stroke:white;stroke-width:4px}.chart-point:hover .point-label,.chart-point:focus .point-label{display:block}.chart-point:focus circle,.chart-point:hover circle{fill:#38b2ac;stroke:#203144}.table-scroll{overflow-x:auto;max-height:400px}.daily-details{margin-top:22px;font-size:.78rem;color:#64748b}.daily-details summary{cursor:pointer}table{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:15px}th,td{text-align:left;border-bottom:1px solid #edf1f4;padding:12px}th{color:#203144;background:#f7fafc}.portal-footer{padding:0 0 48px;color:#8795a8;font-size:.7rem;line-height:1.8}.portal-footer>p{font-weight:700;color:#64748b}.portal-footer details{max-width:850px}.portal-footer summary{cursor:pointer}.mobile-nav{display:none}dialog{width:min(860px,calc(100% - 32px));max-height:88vh;border:1px solid #d9e5e8;border-radius:24px;padding:0;color:#203144;background:#fff;box-shadow:0 25px 100px #20314444}dialog::backdrop{background:#20314466;backdrop-filter:blur(5px)}.dialog-head{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:24px 28px;border-bottom:1px solid #e2e8f0}.dialog-head h2{margin:0}.dialog-head .section-kicker{margin-bottom:7px}.dialog-body{padding:20px 28px;max-height:68vh;overflow:auto}.dialog-body>p{font-size:.78rem;color:#64748b;line-height:1.8}.dialog-body h3{font-size:.95rem;margin-top:24px}.close-button{border:1px solid #d9e5e8;background:#f7fafc;width:38px;height:38px;border-radius:50%;color:#64748b;font-size:24px;flex:none}.keyword-numbers{font-size:.75rem;line-height:2;margin-top:8px}.dialog-body details{font-size:.75rem;color:#64748b}.dialog-body .history-item:last-child{margin-bottom:12px}[hidden]{display:none!important}
+@media(max-width:1100px){.desktop-nav{display:none}.sheet-button{margin-left:auto}}@media(max-width:680px){.brand-text{max-width:none;min-width:0}.brand-text strong{font-size:.76rem;max-width:none;line-height:1.6}.brand-logo{width:38px;height:38px}.header-inner{gap:10px}.brand{gap:9px;min-width:0}.sheet-button{font-size:.63rem;padding:0 9px;min-height:34px}.summary-grid{grid-template-columns:repeat(2,1fr)}.summary-grid article:last-child{grid-column:1/-1}.summary-card:last-child{min-height:110px}.sync-compact{flex-wrap:wrap;justify-content:end;row-gap:8px}.trend-heading{flex-direction:column;align-items:start;gap:14px}.controls-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px}.controls-wrap label{min-width:0}.controls-wrap .segmented{width:100%;min-height:40px}.filter-row{gap:10px}.filter-row label{flex:1;min-width:125px}.horizontal-bar-row{grid-template-columns:1fr 58px;gap:7px 12px}.horizontal-label{grid-column:1/-1;font-size:.75rem}.horizontal-track{height:12px}.horizontal-bars{gap:22px}.daily-controls{align-items:stretch}.daily-controls>label{flex-basis:42%}.date-separator{display:none}.daily-controls>button{flex:1;white-space:nowrap}.daily-totals{gap:12px;font-size:.7rem}.portal-line-chart{min-height:170px}.portal-line-chart text{font-size:17px}.portal-line-chart .point-label{font-size:19px}.tifo-card{padding:18px}.card-title-row .segmented{display:inline-flex;margin-top:12px}.dialog-head{padding:20px}.dialog-body{padding:15px 20px}dialog{width:calc(100% - 20px);border-radius:20px}.month-switcher{grid-template-columns:40px 1fr 40px}.portal-footer{padding-bottom:35px}.content-section{scroll-margin-top:100px}.mobile-nav{display:grid}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style></head><body><header class="site-header"><div class="section-wrap header-inner">
+<a class="brand" href="#top" aria-label="トップへ"><span class="brand-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 83 83" aria-label="ロゴ" role="img"><g fill="#c5b37f">
+<path d="M33.07,13.29l6.56,10.85.86-.41L28.75,4.3l-.31.19.3-.15Z"/>
+<path d="M30.12,8.41l1.17,3.36,6.46,13.35.83-.45L33.07,13.29Z"/>
+<path d="M54.58,59.9l7.66,15.81c.27-.16.53-.34.8-.51L56.35,61.38C55.78,60.88,55.19,60.39,54.58,59.9Z"/>
+<polygon points="28.74 4.39 30.13 8.41 33.08 13.29 28.74 4.34 28.44 4.49 28.41 4.51 28.74 4.39"/>
+<polygon points="37.41 32.39 40.9 42.47 41.3 42.47 41.3 40.73 38.41 32.39 37.41 32.39"/>
+<path d="M30.18,11.47l5.21,15.08.83-.52L31.29,11.77,29.46,8Z"/>
+<path d="M47.5,61.55l6.23,18,.9-.31-6.36-18.4Z"/>
+<polygon points="29.46 8 31.29 11.78 30.13 8.41 29.24 6.95 29.46 8"/>
+<polygon points="29.24 6.95 30.13 8.41 28.74 4.39 28.41 4.51 28.39 4.52 28.72 4.45 29.24 6.95"/>
+<path d="M41.08,68.67l2.65,12.77,1-.08-2.84-13.7C41.58,68,41.32,68.33,41.08,68.67Z"/>
+<path d="M38,49.31a1.43,1.43,0,0,1-.66-1.2v-2L34.52,32.39h-1l4.88,23.53.8-.8Z"/>
+<path d="M33.57,27.81,30.18,11.47l-1.24-3.6.23,3.41,3.56,17.16Z"/>
+<polygon points="28.94 7.87 30.18 11.47 29.46 8 28.86 6.76 28.94 7.87"/><polygon points="29.46 8 29.24 6.95 28.82 6.26 28.86 6.76 29.46 8"/><polygon points="28.7 4.52 28.82 6.26 29.24 6.95 28.72 4.45 28.39 4.52 28.36 4.54 28.7 4.52"/>
+<path d="M30.57,31.47a1.46,1.46,0,0,1-.06-.8L29.17,11.28l-.72-3.47-.23,3.4,3.59,52,.88-1L30.57,31.47Z"/>
+<polygon points="28.53 6.7 28.45 7.81 29.17 11.28 28.94 7.87 28.53 6.7"/><polygon points="28.57 6.16 28.53 6.7 28.94 7.87 28.86 6.76 28.57 6.16"/><polygon points="28.57 6.16 28.86 6.76 28.82 6.26 28.59 5.87 28.57 6.16"/><polygon points="28.59 5.87 28.82 6.26 28.7 4.52 28.36 4.54 28.33 4.56 28.68 4.58 28.59 5.87"/>
+<path d="M28,7.81l-.72,3.47L22.82,75.62c.33-.56.69-1.14,1.06-1.73l4.34-62.68Z"/>
+<polygon points="27.98 7.81 28.22 11.21 28.45 7.81 28.22 6.68 27.98 7.81"/><polygon points="28.33 6.13 28.22 6.68 28.45 7.81 28.53 6.7 28.33 6.13"/><polygon points="28.4 5.81 28.33 6.13 28.53 6.7 28.57 6.16 28.4 5.81"/><polygon points="28.57 6.16 28.59 5.87 28.44 5.62 28.4 5.81 28.57 6.16"/><polygon points="28.64 4.64 28.44 5.62 28.59 5.87 28.68 4.58 28.33 4.56 28.3 4.58 28.64 4.64"/>
+<path d="M27.5,7.88l-1.24,3.59L14,70.54l.82.75,12.44-60Z"/>
+<polygon points="27.91 6.7 27.5 7.88 27.27 11.28 27.98 7.81 27.91 6.7"/><polygon points="28.1 6.13 27.91 6.7 27.98 7.81 28.22 6.68 28.1 6.13"/><polygon points="28.1 6.13 28.22 6.68 28.33 6.13 28.22 5.8 28.1 6.13"/><polygon points="28.29 5.58 28.22 5.8 28.33 6.13 28.4 5.81 28.29 5.58"/><polygon points="28.29 5.58 28.4 5.81 28.44 5.62 28.34 5.45 28.29 5.58"/><polygon points="28.34 5.45 28.44 5.62 28.64 4.64 28.3 4.58 28.27 4.59 28.6 4.7 28.34 5.45"/>
+<path d="M27,8l-1.83,3.77L7.56,62.66c.21.34.43.68.65,1l18.05-52.2Z"/>
+<polygon points="26.98 8 26.26 11.47 27.5 7.88 27.58 6.76 26.98 8"/><polygon points="27.87 6.16 27.58 6.76 27.5 7.88 27.91 6.7 27.87 6.16"/><polygon points="28.04 5.81 27.87 6.16 27.91 6.7 28.1 6.13 28.04 5.81"/><polygon points="28.14 5.58 28.04 5.81 28.1 6.13 28.22 5.8 28.14 5.58"/><polygon points="28.14 5.58 28.22 5.8 28.29 5.58 28.22 5.43 28.14 5.58"/><polygon points="28.27 5.33 28.22 5.43 28.29 5.58 28.34 5.45 28.27 5.33"/><polygon points="28.55 4.75 28.27 5.33 28.34 5.45 28.6 4.7 28.27 4.59 28.25 4.61 28.55 4.75"/>
+<path d="M26.39,8.17l-2.49,4-20.33,42c.14.42.28.85.44,1.27L25.15,11.77Z"/>
+<polygon points="26.39 8.17 25.15 11.77 26.98 8 27.21 6.86 26.39 8.17"/><polygon points="27.61 6.21 27.21 6.86 26.98 8 27.58 6.76 27.61 6.21"/><polygon points="27.61 6.21 27.58 6.76 27.87 6.16 27.85 5.84 27.61 6.21"/><polygon points="28 5.6 27.85 5.84 27.87 6.16 28.04 5.81 28 5.6"/><polygon points="28.1 5.44 28 5.6 28.04 5.81 28.14 5.58 28.1 5.44"/><polygon points="28.17 5.33 28.1 5.44 28.14 5.58 28.22 5.43 28.17 5.33"/><polygon points="28.27 5.33 28.21 5.25 28.17 5.33 28.22 5.43 28.27 5.33"/>
+<path d="M27.69,4.34l.31.15-.31-.19L1.76,46c.05.5.11,1,.18,1.49l22-35.28Z"/>
+<polygon points="23.9 12.18 26.39 8.17 27.7 4.39 28.02 4.5 28 4.49 27.7 4.34 23.9 12.18"/><polygon points="27.71 4.45 28.05 4.52 28.02 4.5 27.7 4.39 26.39 8.17 27.21 6.86 27.71 4.45"/><polygon points="27.21 6.86 27.61 6.21 27.73 4.52 28.08 4.54 28.05 4.52 27.71 4.45 27.21 6.86"/><polygon points="27.76 4.58 28.11 4.56 28.08 4.54 27.73 4.52 27.61 6.21 27.85 5.84 27.76 4.58"/><polygon points="27.85 5.84 28 5.6 27.8 4.64 28.14 4.58 28.11 4.56 27.76 4.58 27.85 5.84"/><polygon points="27.84 4.7 28.16 4.59 28.14 4.58 27.8 4.64 28 5.6 28.1 5.44 27.84 4.7"/><polygon points="28.1 5.44 28.17 5.33 27.89 4.75 28.19 4.61 28.16 4.59 27.84 4.7 28.1 5.44"/>
+<path d="M38.43,55.92c-2.11,2.15-4,4.23-5.74,6.22L34,80.78c.27.06.54.1.81.15a45.18,45.18,0,0,1,6.29-12.26Z"/><path d="M35.39,26.55c-.67.44-1.28.87-1.82,1.26l1,4.58h2.89Z"/><path d="M23.88,73.89l-.23,3.4A39.33,39.33,0,0,0,33,80.59L31.81,63.17A99.59,99.59,0,0,0,23.88,73.89Z"/>
+<path d="M62.74,53.09V49.54h2.5a1.43,1.43,0,0,0,1.42-1.43V43.89a1.43,1.43,0,0,0-1.42-1.42h-2.5V32.39h9.39a1.43,1.43,0,0,0,1-2.5c-.32-.27-7.57-6.6-16.5-8.4v-4A1.43,1.43,0,0,0,55.15,16H48.88a1.43,1.43,0,0,0-1.42,1.43v4a29.65,29.65,0,0,0-7,2.25l5.14,8.52-.8.5-5.2-8.61-1.05.53L56.35,61.38a45,45,0,0,1,9.5,11.84,40.09,40.09,0,0,0,8-8.14A127.27,127.27,0,0,0,62.74,53.09Zm-5.4-15a2.62,2.62,0,0,1-2.62,2.63H49.31a2.63,2.63,0,0,1-2.62-2.63V35.2a2.62,2.62,0,0,1,2.62-2.62h5.41a2.62,2.62,0,0,1,2.62,2.62Z"/>
+<path d="M38.42,32.39h2.85l-3.52-7.27c-.54.31-1,.61-1.53.91Z"/><path d="M41.3,40.73l7,20.15A45.78,45.78,0,0,1,52,58c.9.62,1.74,1.26,2.56,1.92L41.3,32.46Z"/><path d="M31,29.89a1.48,1.48,0,0,0-.45.78l.06.8a1.43,1.43,0,0,0,1.33.92h1.65l-.82-3.95C31.88,29.09,31.27,29.62,31,29.89Z"/><path d="M38.8,42.47a1.43,1.43,0,0,0-1.43,1.42v2.25L38,49.31a1.45,1.45,0,0,0,.77.23h2.5v3.55c-.71.69-1.4,1.36-2.07,2l2.61,12.54a44.81,44.81,0,0,1,5.66-6.11L40.9,42.47Z"/>
+<path d="M44.83,32.75l.8-.5-5.14-8.52-.86.41Z"/><path d="M41.27,32.39h0v.07L54.58,59.9c.61.49,1.2,1,1.77,1.48L38.58,24.67l-.83.45Z"/><path d="M41.3,42.47h-.4l6.6,19.08.77-.67-7-20.15Z"/><path d="M38.42,32.39,36.22,26l-.83.52,2,5.84Z"/><path d="M38,49.31l-.66-3.17v2A1.43,1.43,0,0,0,38,49.31Z"/><path d="M38.43,55.92l2.65,12.75c.24-.34.5-.67.76-1L39.23,55.12Z"/><path d="M32.73,28.44l.82,3.95h1l-1-4.58Z"/><path d="M31.81,63.17,33,80.59l1,.19L32.69,62.14Z"/><path d="M22.82,75.62l-.09,1.21.92.46.23-3.4C23.51,74.48,23.15,75.06,22.82,75.62Z"/>
+<path d="M41.5,83A41.5,41.5,0,1,1,83,41.5,41.55,41.55,0,0,1,41.5,83Zm0-80A38.5,38.5,0,1,0,80,41.5,38.54,38.54,0,0,0,41.5,3Z"/>
+</g><g fill="#fff"><polygon points="28.21 5.25 28.27 5.33 28.55 4.75 28.25 4.61 28.22 4.63 28.5 4.8 28.21 5.25"/><polygon points="27.94 4.8 28.22 4.63 28.19 4.61 27.89 4.75 28.17 5.33 28.21 5.25 27.94 4.8"/><polygon points="28.21 5.25 28.5 4.8 28.22 4.63 27.94 4.8 28.21 5.25"/><path d="M22.25,76.57l.48.26.09-1.21C22.62,75.94,22.43,76.26,22.25,76.57Z"/></g></svg>
+</span><span class="brand-text"><strong>金沢駅観光案内所（外国人窓口）対応データ</strong><small>KANAZAWA STATION · INTERNATIONAL VISITOR DESK</small></span></a>
+<nav class="desktop-nav" aria-label="ページ内メニュー"><a href="#history">案内履歴</a><a href="#trend">トレンド</a><a href="#monthly">月次集計</a><a href="#daily">日別推移</a></nav>
+<a class="sheet-button" href="https://docs.google.com/spreadsheets/d/18ODUuGJcgIURGjNsCVOprzRbdy7BZnNo67EF4K8Uta4/edit?usp=sharing" target="_blank" rel="noopener noreferrer">元データ ↗</a>
+</div></header>
+<main id="top">
+<h1 class="sr-only">金沢駅観光案内所（外国人窓口）対応データ</h1>
+<section class="section-wrap dashboard-top" aria-label="更新状況"><div class="sync-compact"><span id="statusBadge" class="status-badge loading" role="status">読み込み中</span><p>最終データ日 <strong id="latestDate">—</strong></p><button id="reloadButton" type="button">再読み込み</button><label class="upload-label">CSV読込<input type="file" id="csvUpload" accept=".csv,text/csv" class="sr-only"></label></div></section>
+<p id="dataMessage" class="section-wrap data-message" role="status" hidden></p>
+<section class="section-wrap summary-grid" aria-label="本日・今月の案内状況">
+<article class="summary-card today"><p>本日の案内件数</p><strong><b id="todayCount">—</b><span>件</span></strong><small><b id="todayPeople">—</b>人をご案内 <span id="todayLabel"></span></small></article>
+<article class="summary-card today"><p>本日の全体案内人数</p><strong><b id="todayPeopleMain">—</b><span>人</span></strong><small>国籍を問わず、すべての対応を集計</small></article>
+<article class="summary-card"><p>今月の全体案内人数</p><strong><b id="monthPeople">—</b><span>人</span></strong><small><b id="monthCount">—</b>件のご案内 <span id="monthLabel"></span></small></article>
+</section>
+<section id="history" class="section-wrap content-section">
+<div class="section-heading"><div><p class="section-kicker">GUIDANCE HISTORY</p><h2>案内履歴</h2><p>案内概要と自由記述を、最新の日付から確認できます。</p></div><div class="result-count"><strong id="historyCount">—</strong><span>件</span></div></div>
+<div class="tifo-card history-card"><label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="案内概要・自由記述・国籍を検索" aria-label="案内履歴を検索"></label>
+<div class="filter-row"><label>開始日<input type="date" id="historyFrom"></label><label>終了日<input type="date" id="historyTo"></label><label>国籍<select id="historyNationality"><option value="">すべて</option></select></label><button class="plain-button" id="historyReset" type="button">リセット</button></div>
+<div id="historyList" class="history-list custom-scrollbar" aria-live="polite"><div class="empty-state">データを読み込んでいます。</div></div><button class="plain-button" id="historyMore" hidden type="button">さらに50件表示</button></div>
+</section>
+<section id="trend" class="trend-section content-section"><div class="section-wrap">
+<div class="section-heading trend-heading"><div><p class="section-kicker">CONSULTATION TREND</p><h2>相談トレンド</h2><p>案内の言葉から、旅行者の関心を見渡します。</p></div><span id="tokenizerStatus" class="stopword-status" role="status">Kuromoji 準備中</span></div>
+<div class="trend-toolbar controls-wrap"><label>対象月<input type="month" id="trendEnd"></label><label>集計期間<select id="rangeSelect"><option value="1">1か月</option><option value="3" selected>3か月</option><option value="6">6か月</option><option value="12">12か月</option><option value="0">全期間</option></select></label><label>集計対象<select id="trendSource"><option value="all">案内概要＋自由記述</option><option value="detail">自由記述のみ</option></select></label><div class="segmented" role="group" aria-label="集計方法"><button class="active" type="button" data-mode="frequency" aria-pressed="true">頻出</button><button type="button" data-mode="tfidf" aria-pressed="false">TF-IDF</button></div></div>
+<div class="trend-grid"><article class="tifo-card word-cloud-card"><div class="card-title-row"><div><span>KEYWORD CLOUD</span><h3>頻出キーワード</h3></div><small>言葉をクリックして原文と推移を表示</small></div><div id="wordCloud" class="word-cloud"><div class="empty-state">Kuromojiの辞書を準備しています。</div></div></article>
+<article class="tifo-card ranking-card"><div class="card-title-row"><div><span>TOP KEYWORDS</span><h3>キーワードランキング</h3></div></div><div id="rankingList" class="ranking-list custom-scrollbar"></div></article></div>
+<p class="trend-note" id="trendNote">Kuromoji.jsで名詞を抽出し、一般的な語・数字・記号を除外します。</p><details class="stopword-settings"><summary>除外する言葉を追加</summary><label for="stopwords">カンマまたは改行で区切って入力</label><textarea id="stopwords" rows="2" placeholder="例：お客様, 内容"></textarea><button id="applyStopwords" class="plain-button" type="button">適用</button></details>
+</div></section>
+<section id="monthly" class="section-wrap content-section">
+<div class="section-heading monthly-heading"><div><p class="section-kicker">MONTHLY REPORT</p><h2>月次集計</h2><p>全体案内人数・国籍別人数・案内概要を月ごとに確認できます。</p></div><div class="month-switcher"><button id="previousMonth" type="button" aria-label="前の月">‹</button><input type="month" id="selectedMonth" aria-label="月次集計の対象月"><button id="nextMonth" type="button" aria-label="次の月">›</button></div></div>
+<div class="monthly-summary"><article><span>全体案内人数</span><strong><b id="selectedPeople">—</b><small>人</small></strong></article><article><span>案内件数</span><strong><b id="selectedCount">—</b><small>件</small></strong></article><article><span>国籍の種類</span><strong><b id="selectedCountries">—</b><small>か国・地域</small></strong></article></div>
+<article class="tifo-card monthly-card"><div class="card-title-row"><div><span>VISITORS BY NATIONALITY</span><h3>国籍別人数</h3></div><small>お客様の人数を国籍ごとに合算</small></div><div id="nationalityBars" class="horizontal-bars"></div></article>
+<article class="tifo-card monthly-card"><div class="card-title-row"><div><span>GUIDANCE OVERVIEW</span><h3>案内概要</h3></div><div class="segmented" role="group" aria-label="案内概要グラフの単位"><button class="active" data-category-unit="count" type="button" aria-pressed="true">件数</button><button data-category-unit="people" type="button" aria-pressed="false">人数</button></div></div><div id="categoryBars" class="horizontal-bars"></div><p class="trend-note">複数の案内概要が選択されている場合は、各項目に計上します。</p></article>
+</section>
+<section id="daily" class="section-wrap content-section"><div class="section-heading"><div><p class="section-kicker">DAILY VISITOR HISTORY</p><h2>日別の全体案内人数</h2><p>1日ごとの案内人数を、指定した期間で振り返ります。</p></div></div>
+<div class="tifo-card"><div class="filter-row daily-controls"><label>開始日<input type="date" id="dailyFrom"></label><span class="date-separator">〜</span><label>終了日<input type="date" id="dailyTo"></label><button class="plain-button" type="button" data-daily="30">直近30日</button><button class="plain-button" type="button" data-daily="month">今月</button><button class="plain-button" type="button" data-daily="all">全期間</button></div>
+<p id="dailyRangeMessage" class="range-message" role="status"></p><div class="daily-totals"><span>期間内の案内人数 <strong id="dailyTotal">—</strong> 人</span><span>記録のある日 <strong id="dailyDays">—</strong> 日</span></div><div id="dailyChart" class="daily-chart"></div><p class="trend-note">記録のない日は空欄です。0人と区別し、線をつなぎません。グラフの点から各日の値を確認できます。</p><details class="daily-details"><summary>日別の数値を一覧で見る</summary><div class="table-scroll"><table><thead><tr><th>日付</th><th>全体案内人数</th><th>案内件数</th></tr></thead><tbody id="dailyTable"></tbody></table></div></details></div>
+</section>
+</main>
+<footer class="section-wrap portal-footer"><p>金沢駅観光案内所（外国人窓口）対応データ</p><details><summary>集計について</summary><p>データは指定のスプレッドシートから取得します。「案内件数」は1行を1件、「案内人数」は「②お客様の人数」の合計です。同じ方への複数の対応を含む場合があり、実人数とは限りません。本日・今月は日本時間を基準にしています。</p><p id="qualityNote"></p><p>トレンドは案内概要と自由記述が対象です。頻出は語の延べ出現回数、TF-IDFは各案内を1文書とした重み付きスコアです。人数による重み付けはしません。</p><p>読み込みに失敗した場合は、このブラウザで6時間以内に取得した保存データを利用します。CSV読込にも対応しています。</p></details></footer>
+<nav class="mobile-nav" aria-label="ページ内メニュー"><a href="#history">案内履歴</a><a href="#trend">トレンド</a><a href="#monthly">月次集計</a><a href="#daily">日別推移</a></nav>
+<dialog id="keywordDialog" aria-labelledby="keywordTitle"><div class="dialog-head"><div><p class="section-kicker">KEYWORD DETAIL</p><h2 id="keywordTitle"></h2></div><button id="closeDialog" class="close-button" type="button" aria-label="閉じる">×</button></div><div class="dialog-body"><p id="keywordScope"></p><h3>月別の出現回数</h3><div id="keywordChart"></div><details><summary>月別の数値</summary><div id="keywordNumbers" class="keyword-numbers"></div></details><h3>この言葉を含む案内履歴</h3><div id="keywordRecords"></div></div></dialog>
+<script>'use strict';
+// Source: supplied Google Sheets, first worksheet (same as CSV export default).
+// No rows embedded. Fetch at open/reload; count one valid timestamp row as one guidance record.
+const SHEET_ID='18ODUuGJcgIURGjNsCVOprzRbdy7BZnNo67EF4K8Uta4';
+const CACHE_KEY='kanazawa-international-desk:v1';
+const DICT_PATH='https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/dict/';
+const $=id=>document.getElementById(id);
+const fmt=n=>n==null?'—':Number(n).toLocaleString('ja-JP');
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=v=>String(v??'').normalize('NFKC').trim();
+const tokyoDate=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+const today=tokyoDate();
+const state={records:[],ready:false,tokenizer:null,tokenError:false,mode:'frequency',categoryUnit:'count',limit:50,quality:{},tokenVersion:0};
+const BASE_STOP=new Set('案内,主要,観光,スポット,見どころ,行き方,その他,場合,内容,こと,もの,ため,よう,それ,これ,ここ,そこ,ところ,お客様,お客,お客様方,対応,質問,説明,利用,希望,今回,本日,今日,昨日,明日,私,方,人,名,時,日,月,年,分,さん,さま,様,駅前,周辺,について'.split(','));
+let extraStop=new Set();
+function shiftMonth(month,n){const [y,m]=month.split('-').map(Number);const d=new Date(Date.UTC(y,m-1+n,1));return d.toISOString().slice(0,7);}
+function shiftDay(day,n){const d=new Date(day+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);}
+function readableDate(v){return v?v.replace(/-/g,'/'):'—';}
+function inRange(r,from,to){return (!from||r.date>=from)&&(!to||r.date<=to);}
+function sumPeople(rows){return rows.some(r=>r.people!==null)?rows.reduce((n,r)=>n+(r.people??0),0):(rows.length?null:0);}
+function parseCsv(text){const rows=[];let row=[],field='',quoted=false;text=String(text).replace(/^\uFEFF/,'');for(let i=0;i<text.length;i++){const c=text[i],next=text[i+1];if(c==='"'&&quoted&&next==='"'){field+='"';i++;}else if(c==='"'){quoted=!quoted;}else if(c===','&&!quoted){row.push(field);field='';}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&next==='\n')i++;row.push(field);if(row.some(x=>x.trim()))rows.push(row);row=[];field='';}else field+=c;}if(quoted)throw new Error('CSVの引用符が閉じられていません。');if(field||row.length){row.push(field);if(row.some(x=>x.trim()))rows.push(row);}return rows;}
+function parseTimestamp(v){v=norm(v);const m=v.match(/^(\d{4})[\/\-年](\d{1,2})[\/\-月](\d{1,2})(?:日)?(?:[ T](\d{1,2}):(\d{2})(?::(\d{2}))?)?/);if(!m)return null;const [y,mo,d]=m.slice(1,4).map(Number);const x=new Date(Date.UTC(y,mo-1,d));if(x.getUTCFullYear()!==y||x.getUTCMonth()!==mo-1||x.getUTCDate()!==d)return null;if(Number(m[4]||0)>23||Number(m[5]||0)>59||Number(m[6]||0)>59)return null;const date=[y,String(mo).padStart(2,'0'),String(d).padStart(2,'0')].join('-');return {date,time:m[4]?`${String(m[4]).padStart(2,'0')}:${m[5]}${m[6]?':'+m[6]:''}`:''};}
+function decodeRecords(text){const rows=parseCsv(text);if(!rows.length)throw new Error('CSVが空です。');const headers=rows.shift().map(norm);const expected=['タイムスタンプ','①お客様の国籍','②お客様の人数','③案内概要','④（問③でその他の場合）案内内容'];const idx=expected.map(h=>headers.indexOf(norm(h)));if(idx.some(x=>x<0))throw new Error('必要な列がありません。指定のスプレッドシートと同じ見出しのCSVを選んでください。');const quality={invalidDates:0,missingPeople:0,totalRows:rows.length};const records=[];rows.forEach((row,i)=>{const timestamp=String(row[idx[0]]||'').trim(),dt=parseTimestamp(timestamp);if(!dt){quality.invalidDates++;return;}const raw=norm(row[idx[2]]).replace(/,/g,'');const match=raw.match(/^(\d+)\s*(?:人|名)?$/);const people=match&&Number.isSafeInteger(Number(match[1]))?Number(match[1]):null;if(people===null)quality.missingPeople++;const overview=String(row[idx[3]]||'').trim();const detail=String(row[idx[4]]||'').trim();const categories=[...new Set(overview.split(/[,、\n]+/).map(x=>x.trim()).filter(Boolean))];records.push({id:i,date:dt.date,time:dt.time,timestamp,nationality:norm(row[idx[1]])||'不明',people,overview,detail,categories:categories.length?categories:['未記入'],tokens:{}});});records.sort((a,b)=>b.date.localeCompare(a.date)||b.time.localeCompare(a.time)||b.id-a.id);if(rows.length&&!records.length)throw new Error('読み取れるタイムスタンプがありません。');return {records,quality};}
+function setStatus(type,label){$('statusBadge').className='status-badge '+(type==='live'?'':type);$('statusBadge').textContent=label;}
+function message(text){$('dataMessage').textContent=text;$('dataMessage').hidden=!text;}
+function acceptData(decoded,status,label){state.records=decoded.records;state.quality=decoded.quality;state.ready=true;state.tokenVersion++;setStatus(status,label);$('latestDate').textContent=readableDate(state.records[0]?.date);const countries=[...new Set(state.records.map(r=>r.nationality))].sort((a,b)=>a.localeCompare(b,'ja'));const prev=$('historyNationality').value;$('historyNationality').innerHTML='<option value="">すべて</option>'+countries.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join('');if(countries.includes(prev))$('historyNationality').value=prev;state.limit=50;renderAll();tokenizeRecords();}
+async function fetchText(url){const response=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(20000)});if(!response.ok)throw new Error('HTTP '+response.status);return response.text();}
+async function loadRecords(){const button=$('reloadButton');button.disabled=true;setStatus('loading','読み込み中');message('');const urls=[`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`,`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`];let errors=[];try{for(const url of urls){try{const text=await fetchText(url),decoded=decodeRecords(text);acceptData(decoded,'live','最新データ');try{localStorage.setItem(CACHE_KEY,JSON.stringify({text,savedAt:Date.now()}));}catch{}return;}catch(e){errors.push(e.message);}}try{const cached=JSON.parse(localStorage.getItem(CACHE_KEY)||'null');if(cached&&Date.now()-cached.savedAt<6*3600000&&Date.now()>=cached.savedAt){acceptData(decodeRecords(cached.text),'cached','保存データ');message(`最新データを取得できないため、${new Date(cached.savedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'})} 取得時のデータを表示しています。`);return;}}catch{}if(state.ready){setStatus('cached','更新に失敗');message('最新データを取得できませんでした。直前に表示していたデータを保持しています。再読み込み、またはCSV読込をお試しください。');}else{setStatus('error','取得できません');message('データを取得できませんでした。スプレッドシートの共有設定（リンクを知っている全員が閲覧可）と通信環境をご確認ください。CSV読込も利用できます。');renderUnavailable();}}finally{button.disabled=false;}}
+function renderUnavailable(){for(const id of ['historyList','wordCloud','rankingList','nationalityBars','categoryBars','dailyChart'])$(id).innerHTML='<div class="empty-state">データを読み込めていません。</div>';}
+function renderSummary(){const rows=state.records,day=rows.filter(r=>r.date===today),month=rows.filter(r=>r.date.slice(0,7)===today.slice(0,7));$('todayCount').textContent=fmt(day.length);$('todayPeople').textContent=fmt(sumPeople(day));$('todayPeopleMain').textContent=fmt(sumPeople(day));$('monthPeople').textContent=fmt(sumPeople(month));$('monthCount').textContent=fmt(month.length);$('todayLabel').textContent=readableDate(today);$('monthLabel').textContent=today.slice(0,7).replace('-','/');const q=state.quality;$('qualityNote').textContent=`取得したデータ：${q.totalRows}行。日付を読み取れない${q.invalidDates}行は集計対象外。人数が未記入・不正な${q.missingPeople}件は人数の合算から除外し、案内件数には含めます。${q.missingPeople?'各人数は入力済み分の合計です。':''}`;if(q.invalidDates||q.missingPeople)message(`入力データの確認：日付を読み取れない行 ${q.invalidDates}件、人数が未記入・不正な案内 ${q.missingPeople}件。人数は入力済み分の合計です。`);}
+function recordMarkup(r){return `<article class="history-item"><div class="history-tags"><span class="tag date">${esc(readableDate(r.date))}${r.time?' '+esc(r.time):''}</span><span class="tag">${esc(r.nationality)}</span><span class="tag">${r.people===null?'人数未記入':fmt(r.people)+'人'}</span></div><p>${esc(r.overview||'案内概要の記入なし')}</p>${r.detail?`<div class="free-text"><span>自由記述</span><p>${esc(r.detail)}</p></div>`:''}</article>`;}
+function renderHistory(){const from=$('historyFrom').value,to=$('historyTo').value,query=norm($('searchInput').value).toLowerCase(),nationality=$('historyNationality').value;if(from&&to&&from>to){$('historyList').innerHTML='<div class="empty-state">開始日は終了日以前に設定してください。</div>';$('historyCount').textContent='—';$('historyMore').hidden=true;return;}const rows=state.records.filter(r=>inRange(r,from,to)&&(!nationality||r.nationality===nationality)&&(!query||norm([r.overview,r.detail,r.nationality].join(' ')).toLowerCase().includes(query)));$('historyCount').textContent=fmt(rows.length);$('historyList').innerHTML=rows.length?rows.slice(0,state.limit).map(recordMarkup).join(''):'<div class="empty-state">条件に該当する案内はありません。</div>';$('historyMore').hidden=rows.length<=state.limit;}
+function aggregate(rows,field,people=false){const map=new Map();for(const r of rows){for(const k of Array.isArray(r[field])?r[field]:[r[field]]){if(!map.has(k))map.set(k,{label:k,value:people?null:0,count:0,missing:0});const group=map.get(k);group.count++;if(people&&r.people===null)group.missing++;else group.value=(group.value??0)+(people?r.people:1);}}return [...map.values()].sort((a,b)=>(b.value??-1)-(a.value??-1)||a.label.localeCompare(b.label,'ja'));}
+function barsMarkup(groups,unit){if(!groups.length)return '<div class="empty-state">この月の案内はありません。</div>';const max=Math.max(1,...groups.map(g=>g.value??0));return groups.map(g=>`<div class="horizontal-bar-row"><span class="horizontal-label">${esc(g.label)}</span><div class="horizontal-track"><i style="width:${(g.value??0)/max*100}%"></i></div><strong>${fmt(g.value)}<small>${unit}</small>${g.missing?'<span class="missing-mark" title="人数未記入を含む">*</span>':''}</strong></div>`).join('')+(groups.some(g=>g.missing)?'<p class="trend-note">* 人数未記入の案内を含みます。人数は入力済み分の合計です。</p>':'');}
+function renderMonthly(){const month=$('selectedMonth').value;const rows=state.records.filter(r=>r.date.slice(0,7)===month);$('selectedPeople').textContent=fmt(sumPeople(rows));$('selectedCount').textContent=fmt(rows.length);$('selectedCountries').textContent=fmt(new Set(rows.filter(r=>r.nationality!=='不明').map(r=>r.nationality)).size);$('nationalityBars').innerHTML=barsMarkup(aggregate(rows,'nationality',true),'人');$('categoryBars').innerHTML=barsMarkup(aggregate(rows,'categories',state.categoryUnit==='people'),state.categoryUnit==='people'?'人':'件');const earliest=state.records.at(-1)?.date.slice(0,7)||today.slice(0,7);const latest=[state.records[0]?.date.slice(0,7)||'',today.slice(0,7)].sort().at(-1);$('previousMonth').disabled=month<=earliest;$('nextMonth').disabled=month>=latest;}
+function dailyGroups(rows){const map=new Map();for(const r of rows){if(!map.has(r.date))map.set(r.date,[]);map.get(r.date).push(r);}return [...map.entries()].sort(([a],[b])=>a.localeCompare(b)).map(([date,list])=>({date,value:sumPeople(list),count:list.length,missing:list.filter(r=>r.people===null).length}));}
+// SVG charts retain true calendar spacing, keyboard-focusable points and native tooltips.
+function lineChart(points,{title='案内人数',unit='人',connectMonths=false}={}){if(!points.length||!points.some(p=>p.value!==null))return '<div class="empty-state">この期間に集計できる記録はありません。</div>';const W=1000,H=310,L=52,R=30,T=26,B=48,width=W-L-R,height=H-T-B;const dates=points.map(p=>Date.parse(p.date+'T00:00:00Z'));const min=dates[0],span=dates.at(-1)-min;const rawMax=Math.max(1,...points.map(p=>p.value??0));const step=Math.max(1,Math.ceil(rawMax/4));const max=step*4;const xy=(p,i)=>({x:span?L+(dates[i]-min)/span*width:L+width/2,y:T+height-(p.value??0)/max*height});let d='',was=false;points.forEach((p,i)=>{if(p.value===null){was=false;return;}const {x,y}=xy(p,i);d+=`${was?'L':'M'}${x.toFixed(2)},${y.toFixed(2)} `;was=true;});const labels=new Set([0,Math.floor((points.length-1)/4),Math.floor((points.length-1)/2),Math.floor((points.length-1)*3/4),points.length-1]);return `<svg class="portal-line-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)}"><title>${esc(title)}</title>${[0,1,2,3,4].map(n=>{const y=T+height-n/4*height;return `<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="#e2e8f0"/><text x="${L-12}" y="${y+4}" text-anchor="end">${fmt(n*step)}</text>`;}).join('')}<text x="${L}" y="13">${esc(unit)}</text><path d="${d}" fill="none" stroke="#38b2ac" stroke-width="3" stroke-linejoin="round"/>${points.map((p,i)=>{const {x,y}=xy(p,i);return (p.value===null?'':`<g tabindex="0" class="chart-point" aria-label="${esc(p.date)} ${fmt(p.value)}${esc(unit)}${p.missing?'（入力済み分）':''}"><title>${esc(readableDate(p.date))}：${fmt(p.value)}${esc(unit)}${p.count!=null?'／'+p.count+'件':''}${p.missing?'（人数未記入を含む）':''}</title><circle cx="${x}" cy="${y}" r="${points.length>180?2:4.5}" fill="white" stroke="#38b2ac" stroke-width="2.5"/><text class="point-label" x="${Math.min(W-R-40,Math.max(L+40,x))}" y="${Math.max(18,y-13)}" text-anchor="middle">${esc(p.date.slice(5))} ${fmt(p.value)}${esc(unit)}</text></g>`)+(labels.has(i)?`<text x="${x}" y="${H-16}" text-anchor="middle">${esc(connectMonths?p.date.slice(0,7):p.date.slice(5))}</text>`:'');}).join('')}</svg>`;}
+function renderDaily(){const from=$('dailyFrom').value,to=$('dailyTo').value;if(!from||!to||from>to){$('dailyRangeMessage').textContent='開始日と終了日を正しい順序で設定してください。';$('dailyChart').innerHTML='';$('dailyTotal').textContent='—';$('dailyDays').textContent='—';$('dailyTable').innerHTML='';return;}const days=Math.round((Date.parse(to)-Date.parse(from))/86400000)+1;if(days>3660){$('dailyRangeMessage').textContent='表示期間は10年以内で指定してください。';$('dailyChart').innerHTML='';$('dailyTotal').textContent='—';$('dailyDays').textContent='—';$('dailyTable').innerHTML='';return;}const rows=state.records.filter(r=>inRange(r,from,to)),groups=dailyGroups(rows),map=new Map(groups.map(g=>[g.date,g]));const points=Array.from({length:days},(_,i)=>{const date=shiftDay(from,i);return map.get(date)||{date,value:null,count:null};});$('dailyRangeMessage').textContent=readableDate(from)+' 〜 '+readableDate(to)+(rows.some(r=>r.people===null)?'（人数は入力済み分の合計）':'');$('dailyTotal').textContent=fmt(sumPeople(rows));$('dailyDays').textContent=fmt(groups.length);$('dailyChart').innerHTML=lineChart(points,{title:'日別の全体案内人数',unit:'人'});$('dailyTable').innerHTML=groups.length?groups.map(g=>`<tr><td>${esc(readableDate(g.date))}</td><td>${fmt(g.value)}人${g.missing?'（入力済み分）':''}</td><td>${fmt(g.count)}件</td></tr>`).join(''):'<tr><td colspan="3">この期間に案内の記録はありません。</td></tr>';}
+function loadScript(src){return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=()=>reject(new Error('script'));document.head.append(s);});}
+async function initializeTokenizer(){state.tokenError=false;$('tokenizerStatus').textContent='Kuromoji 辞書読込中';try{if(!window.kuromoji){try{await loadScript('https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/build/kuromoji.js');}catch{await loadScript('https://unpkg.com/kuromoji@0.1.2/build/kuromoji.js');}}const tokenizer=await new Promise((resolve,reject)=>{let settled=false;const timeout=setTimeout(()=>{settled=true;reject(new Error('dictionary timeout'));},60000);window.kuromoji.builder({dicPath:DICT_PATH}).build((err,t)=>{if(settled)return;clearTimeout(timeout);err?reject(err):resolve(t);});});state.tokenizer=tokenizer;$('tokenizerStatus').classList.add('loaded');$('tokenizerStatus').textContent='Kuromoji 名詞抽出';await tokenizeRecords();}catch(e){state.tokenError=true;$('tokenizerStatus').textContent='辞書の読込に失敗';renderTrends();}}
+function nounTokens(text){return state.tokenizer.tokenize(text).filter(t=>t.pos==='名詞'&&!['数','代名詞','非自立','接尾'].includes(t.pos_detail_1)).map(t=>norm(t.basic_form&&t.basic_form!=='*'?t.basic_form:t.surface_form)).filter(w=>w.length>1&&!/^[\d\s\p{P}\p{S}]+$/u.test(w));}
+async function tokenizeRecords(){if(!state.tokenizer||!state.ready)return;const version=state.tokenVersion;$('tokenizerStatus').textContent='Kuromoji 集計中';for(let i=0;i<state.records.length;i++){if(version!==state.tokenVersion)return;const r=state.records[i];if(!r.tokens.all){r.tokens.all=nounTokens([r.overview,r.detail].filter(Boolean).join('。'));r.tokens.detail=nounTokens(r.detail);}if(i%100===0)await new Promise(resolve=>setTimeout(resolve,0));}$('tokenizerStatus').textContent='Kuromoji 名詞抽出';renderTrends();}
+function selectedTrendRows(){const end=$('trendEnd').value||today.slice(0,7),months=Number($('rangeSelect').value),start=months?shiftMonth(end,1-months):'';return state.records.filter(r=>(!start||r.date.slice(0,7)>=start)&&r.date.slice(0,7)<=end);}
+function validTokens(r){return (r.tokens[$('trendSource').value]||[]).filter(w=>!BASE_STOP.has(w)&&!extraStop.has(w));}
+function keywordStats(rows){const counts=new Map(),df=new Map(),docs=rows.map(validTokens).filter(t=>t.length);docs.forEach(tokens=>{tokens.forEach(w=>counts.set(w,(counts.get(w)||0)+1));new Set(tokens).forEach(w=>df.set(w,(df.get(w)||0)+1));});const scores=new Map();docs.forEach(tokens=>{const local=new Map();tokens.forEach(w=>local.set(w,(local.get(w)||0)+1));local.forEach((n,w)=>scores.set(w,(scores.get(w)||0)+(1+Math.log(n))*(Math.log((1+docs.length)/(1+df.get(w)))+1)));});return [...counts].map(([word,count])=>({word,count,score:scores.get(word)||0})).sort((a,b)=>(state.mode==='frequency'?b.count-a.count:b.score-a.score)||a.word.localeCompare(b.word,'ja'));}
+function renderTrends(){if(!state.ready)return;if(!state.tokenizer){$('wordCloud').innerHTML=state.tokenError?'<div class="empty-state">Kuromojiの辞書を取得できませんでした。<button class="plain-button" type="button" id="retryTokenizer">再試行</button></div>':'<div class="empty-state">Kuromojiの辞書を読み込んでいます。</div>';$('rankingList').innerHTML='';return;}const rows=selectedTrendRows(),stats=keywordStats(rows),top=stats.slice(0,40);const key=state.mode==='frequency'?'count':'score',max=top[0]?.[key]||1;$('wordCloud').innerHTML=top.length?top.map((item,i)=>`<button type="button" class="keyword-button" data-keyword="${esc(item.word)}" style="font-size:${.85+1.55*Math.sqrt(item[key]/max)}rem;color:${i%3===0?'#279b93':'#203144'}" aria-label="${esc(item.word)} ${item.count}回。原文と推移を表示">${esc(item.word)}</button>`).join(''):'<div class="empty-state">この条件では集計対象の言葉がありません。</div>';$('rankingList').innerHTML=stats.slice(0,20).map((item,i)=>`<button type="button" class="ranking-item" data-keyword="${esc(item.word)}"><span class="rank-badge">${i+1}</span><strong>${esc(item.word)}</strong><small>${state.mode==='frequency'?item.count+'回':item.score.toFixed(2)}</small></button>`).join('');$('trendNote').textContent=`対象：${fmt(rows.length)}件。${$('trendSource').value==='all'?'案内概要と自由記述':'自由記述のみ'}から名詞を抽出し、一般的な語・数字・記号を除外しています。${state.mode==='frequency'?'値は言葉の延べ出現回数です。':'値はTF-IDFの合計スコアです。'} 国籍の列は解析対象に含めません。`;}
+function openKeyword(word){const rows=selectedTrendRows(),matching=rows.filter(r=>validTokens(r).includes(word));$('keywordTitle').textContent=word;$('keywordScope').textContent=`現在のトレンド集計条件に該当する ${fmt(matching.length)}件の案内。月別グラフは同じ期間・同じ集計対象の出現回数です。`;const countByMonth=new Map();matching.forEach(r=>{const month=r.date.slice(0,7);countByMonth.set(month,(countByMonth.get(month)||0)+validTokens(r).filter(w=>w===word).length);});const end=$('trendEnd').value,months=Number($('rangeSelect').value),start=months?shiftMonth(end,1-months):(state.records.at(-1)?.date.slice(0,7)||end);let points=[],cursor=start,guard=0;while(cursor<=end&&guard++<1200){const hasRows=rows.some(r=>r.date.slice(0,7)===cursor);points.push({date:cursor+'-01',value:hasRows?(countByMonth.get(cursor)||0):null});cursor=shiftMonth(cursor,1);}$('keywordChart').innerHTML=lineChart(points,{title:word+'の月別出現回数',unit:'回',connectMonths:true});$('keywordNumbers').textContent=points.map(p=>p.date.slice(0,7)+'：'+(p.value===null?'記録なし':p.value+'回')).join(' ／ ');$('keywordRecords').innerHTML=matching.map(recordMarkup).join('')||'<div class="empty-state">該当する案内はありません。</div>';$('keywordDialog').showModal();}
+function renderAll(){renderSummary();renderHistory();renderMonthly();renderDaily();renderTrends();}
+$('selectedMonth').value=today.slice(0,7);$('trendEnd').value=today.slice(0,7);$('dailyFrom').value=shiftDay(today,-29);$('dailyTo').value=today;
+$('reloadButton').addEventListener('click',loadRecords);
+$('csvUpload').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const decoded=decodeRecords(await file.text());message('');acceptData(decoded,'cached','CSVデータ');message(`「${file.name}」を読み込みました。最新データへの切り替えは「再読み込み」から行えます。`);}catch(err){message(err.message);}finally{e.target.value='';}});
+for(const id of ['searchInput','historyFrom','historyTo','historyNationality'])$(id).addEventListener('input',()=>{state.limit=50;if(state.ready)renderHistory();});
+$('historyReset').addEventListener('click',()=>{for(const id of ['searchInput','historyFrom','historyTo','historyNationality'])$(id).value='';state.limit=50;renderHistory();});
+$('historyMore').addEventListener('click',()=>{state.limit+=50;renderHistory();});
+for(const id of ['trendEnd','rangeSelect','trendSource'])$(id).addEventListener('change',renderTrends);
+$('trend').addEventListener('click',e=>{const mode=e.target.closest('[data-mode]'),keyword=e.target.closest('[data-keyword]');if(mode){state.mode=mode.dataset.mode;document.querySelectorAll('[data-mode]').forEach(b=>{b.classList.toggle('active',b===mode);b.setAttribute('aria-pressed',String(b===mode));});renderTrends();}if(keyword)openKeyword(keyword.dataset.keyword);if(e.target.id==='retryTokenizer')initializeTokenizer();});
+$('applyStopwords').addEventListener('click',()=>{extraStop=new Set($('stopwords').value.split(/[,、\n]+/).map(norm).filter(Boolean));renderTrends();});
+$('selectedMonth').addEventListener('change',()=>{if($('selectedMonth').value)renderMonthly();});
+$('previousMonth').addEventListener('click',()=>{$('selectedMonth').value=shiftMonth($('selectedMonth').value,-1);renderMonthly();});
+$('nextMonth').addEventListener('click',()=>{$('selectedMonth').value=shiftMonth($('selectedMonth').value,1);renderMonthly();});
+document.querySelectorAll('[data-category-unit]').forEach(b=>b.addEventListener('click',()=>{state.categoryUnit=b.dataset.categoryUnit;document.querySelectorAll('[data-category-unit]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b));});renderMonthly();}));
+for(const id of ['dailyFrom','dailyTo'])$(id).addEventListener('change',()=>{if(state.ready)renderDaily();});
+document.querySelectorAll('[data-daily]').forEach(b=>b.addEventListener('click',()=>{const preset=b.dataset.daily;$('dailyFrom').value=preset==='all'?(state.records.at(-1)?.date||today):preset==='month'?today.slice(0,7)+'-01':shiftDay(today,-29);$('dailyTo').value=preset==='all'?(state.records[0]?.date||today):today;if(state.ready)renderDaily();}));
+$('closeDialog').addEventListener('click',()=>$('keywordDialog').close());$('keywordDialog').addEventListener('click',e=>{if(e.target===$('keywordDialog')){const rect=e.target.getBoundingClientRect();if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom)e.target.close();}});
+loadRecords();initializeTokenizer();
+</script></body></html>
