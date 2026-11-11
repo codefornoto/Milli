@@ -1494,6 +1494,15 @@ const norm=v=>String(v??'').normalize('NFKC').trim();
 const tokyoDate=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const today=tokyoDate();
 const state={records:[],ready:false,tokenizer:null,tokenError:false,mode:'frequency',categoryUnit:'count',limit:50,quality:{},tokenVersion:0};
+// 月次CSVは金沢市指定テンプレートと同じ「国籍 × 1日～31日」の並びで出力する。
+const NATIONALITY_TEMPLATE_ROWS=["韓国","中国","台湾","香港","タイ","シンガポール","マレーシア","インドネシア","フィリピン","インド","ベトナム","マカオ","モンゴル","スリランカ","ネパール","パキスタン","バングラデシュ","ミャンマー","カンボジア","ラオス","ブルネイ","その他アジア","イスラエル","トルコ","アラブ首長国連邦","サウジアラビア","イラン","その他中東","英国","フランス","ドイツ","イタリア","ロシア","スペイン","オランダ","スウェーデン","スイス","フィンランド","ベルギー","デンマーク","オーストリア","アイルランド","ポルトガル","ノルウェー","ポーランド","チェコ","ルーマニア","ハンガリー","ギリシャ","ウクライナ","ブルガリア","スロバキア","クロアチア","その他ヨーロッパ","南アフリカ共和国","エジプト","ナイジェリア","ガーナ","その他アフリカ","米国","カナダ","その他北米","メキシコ","ブラジル","アルゼンチン","チリ","コロンビア","ペルー","ベネズエラ","エクアドル","ボリビア","その他中南米","オーストラリア","ニュージーランド","その他オセアニア","地域不明その他"];
+const NATIONALITY_TEMPLATE_MAP=new Map(NATIONALITY_TEMPLATE_ROWS.map(label=>[norm(label).toLocaleLowerCase('ja'),label]));
+const NATIONALITY_ALIASES=new Map([
+ ['アメリカ','米国'],['アメリカ合衆国','米国'],['united states','米国'],['united states of america','米国'],['usa','米国'],['u.s.a.','米国'],
+ ['イギリス','英国'],['united kingdom','英国'],['uk','英国'],['u.k.','英国'],
+ ['uae','アラブ首長国連邦'],['u.a.e.','アラブ首長国連邦'],
+ ['不明','地域不明その他'],['地域不明','地域不明その他'],['その他','地域不明その他'],['未記入','地域不明その他']
+]);
 const BASE_STOP=new Set('案内,主要,観光,スポット,見どころ,行き方,その他,場合,内容,こと,もの,ため,よう,それ,これ,ここ,そこ,ところ,お客様,お客,お客様方,対応,質問,説明,利用,希望,今回,本日,今日,昨日,明日,私,方,人,名,時,日,月,年,分,さん,さま,様,駅前,周辺,について'.split(','));
 const NON_NOUN_PATTERNS=[/する$/,/します$/,/しました$/,/した$/,/して$/,/です$/,/でした$/,/でしょう$/,/だった$/,/できる$/,/ください$/,/いただく$/,/もらう$/,/ある$/,/いる$/,/ない$/,/なく$/,/たい$/,/たく$/,/れる$/,/られる$/,/かった$/,/くて$/,/ので$/,/から$/,/まで$/,/より$/];
 let extraStop=new Set();
@@ -1578,16 +1587,23 @@ async function loadRecords(){
  }finally{button.disabled=false;}
 }
 function getMonthlyRecords(){return state.records.filter(r=>r.date.slice(0,7)===$('selectedMonth').value);}
+function templateNationality(value){const key=norm(value).toLocaleLowerCase('ja');return NATIONALITY_TEMPLATE_MAP.get(key)||NATIONALITY_ALIASES.get(key)||'地域不明その他';}
 function buildNationalityCsv(month,records){
- const safeText=value=>{const text=String(value??'');return /^[\s]*[=+@\-]/.test(text)?"'"+text:text;};
- const rows=[['対象月','国籍','案内人数','案内件数','人数未記入件数'],...aggregate(records,'nationality',true).map(g=>[month,safeText(g.label),g.value===null?'':g.value,g.count,g.missing])];
+ const matrix=new Map(NATIONALITY_TEMPLATE_ROWS.map(label=>[label,Array(31).fill(null)]));
+ for(const record of records){
+  if(record.people===null)continue;
+  const day=Number(record.date.slice(8,10));if(day<1||day>31)continue;
+  const cells=matrix.get(templateNationality(record.nationality));
+  cells[day-1]=(cells[day-1]??0)+record.people;
+ }
+ const rows=[['',...Array.from({length:31},(_,i)=>i+1)],...NATIONALITY_TEMPLATE_ROWS.map(label=>[label,...matrix.get(label).map(value=>value===null?'':value)])];
  return '\uFEFF'+rows.map(row=>row.map(csvCell).join(',')).join('\r\n')+'\r\n';
 }
 function downloadNationalityCsv(){
  const month=$('selectedMonth').value,records=getMonthlyRecords();if(!state.ready||!month||!records.length)return;
- const name=`kggn-nationality-${month}.csv`,blob=new Blob([buildNationalityCsv(month,records)],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),link=document.createElement('a');
+ const name=`kggn_${month.replace('-','')}.csv`,blob=new Blob([buildNationalityCsv(month,records)],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),link=document.createElement('a');
  link.href=url;link.download=name;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
- $('nationalityExportStatus').textContent=month.replace('-','年')+'月のCSVをダウンロードしました。';
+ $('nationalityExportStatus').textContent=name+' をダウンロードしました。';
 }
 
 function renderUnavailable(){for(const id of ['historyList','wordCloud','rankingList','nationalityBars','categoryBars','dailyChart'])$(id).innerHTML='<div class="empty-state">データを読み込めていません。</div>';}
