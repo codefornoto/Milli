@@ -1,0 +1,2984 @@
+{
+  "schema_version": "1.1.0",
+  "dataset_type": "jnto_monthly_visitor_arrivals_country_status",
+  "report": {
+    "report_id": "jnto_visitor_arrivals_2026_10_preliminary",
+    "title_ja": "訪日外客数（2026年10月推計値）",
+    "title_en": "Visitor Arrivals for Oct. 2026 (Preliminary figures by JNTO)",
+    "source_name_ja": "日本政府観光局（JNTO）",
+    "source_name_en": "Japan National Tourism Organization",
+    "published_date": "2026-11-18",
+    "data_month": "2026-10",
+    "unit": "persons",
+    "comparison_policy": "主に2025年同月・同期間との比較を使用",
+    "primary_comparison": {
+      "type": "year_over_year",
+      "base_year": 2025,
+      "target_year": 2026,
+      "label_ja": "2026年の2025年比"
+    },
+    "as_of_context_date": "2026-11-11",
+    "credit_required_ja": "引用時は出典名を「日本政府観光局(JNTO)」と明示する。",
+    "notes": [
+      "2025年の訪日外客数は確定値。国・地域別表の2026年の訪日外客数はJNTO推計値。全国月別表の2026年の訪日外客数は、*印がJNTO推計値で、その他の掲載値は暫定値。",
+      "訪日外客数は法務省集計の出入国管理統計に基づく。日本を主な居住地とする永住者等を除き、寄港地・通過・船舶観光で上陸する外国人を含む。駐在員とその家族、留学生等の入国者・再入国者を含み、乗員は対象外。",
+      "全国月別表の括弧内は訪日外客数に含まれる観光客数。出国日本人数の出典は法務省資料。",
+      "北欧地域はスウェーデン、デンマーク、ノルウェー、フィンランド。",
+      "中東地域はイスラエル、トルコ、GCC6か国（サウジアラビア、アラブ首長国連邦、バーレーン、オマーン、カタール、クウェート）。",
+      "市場概況の背景情報は2026年11月11日現在。JNTOは増便を前年同月に比べた既存路線の便数増、復便を運休路線の運航再開、新規就航を新路線の開設としている。"
+    ],
+    "source_consistency": {
+      "note_ja": "貼り付け原文に記載された総数、伸率および各内訳を採用。掲載された内訳を合算した値、または掲載人数から伸率を再計算した値と、原文の値が一致しない箇所を記録した。",
+      "checks": [
+        {
+          "period_ja": "2026年1～10月",
+          "measure": "visitor_arrivals",
+          "calculation": "sum_of_published_months",
+          "year": 2026,
+          "reported_total": 34643000,
+          "calculated_total": 34642960,
+          "difference_calculated_minus_reported": -40
+        },
+        {
+          "period_ja": "2026年1～10月",
+          "measure": "japanese_overseas_travelers",
+          "calculation": "sum_of_published_months",
+          "year": 2026,
+          "reported_total": 12478300,
+          "calculated_total": 12478262,
+          "difference_calculated_minus_reported": -38
+        }
+      ]
+    }
+  },
+  "overall": {
+    "visitor_arrivals": {
+      "month": {
+        "period": "2026-10",
+        "current_year": 2026,
+        "current_value": 3912500,
+        "comparison_year": 2025,
+        "comparison_value": 3896524,
+        "values_by_year": {
+          "2025": 3896524,
+          "2026": 3912500
+        },
+        "change_pct_vs_2025": 0.4,
+        "change_pct_vs_comparison_year": 0.4,
+        "growth_index_pct_vs_2025": 100.4,
+        "growth_index_pct_vs_comparison_year": 100.4,
+        "trend_class": "slight_growth",
+        "comparison_type": "year_over_year",
+        "2025": 3896524,
+        "2026": 3912500,
+        "comparisons": [
+          {
+            "type": "year_over_year",
+            "base_year": 2025,
+            "target_year": 2026,
+            "base_value": 3896524,
+            "target_value": 3912500,
+            "change_pct": 0.4,
+            "index_pct": 100.4,
+            "label_ja": "2026年の2025年比"
+          }
+        ]
+      },
+      "year_to_date": {
+        "period": "2026-01_to_2026-10",
+        "current_year": 2026,
+        "current_value": 34643000,
+        "comparison_year": 2025,
+        "comparison_value": 35547851,
+        "values_by_year": {
+          "2025": 35547851,
+          "2026": 34643000
+        },
+        "change_pct_vs_2025": -2.5,
+        "change_pct_vs_comparison_year": -2.5,
+        "growth_index_pct_vs_2025": 97.5,
+        "growth_index_pct_vs_comparison_year": 97.5,
+        "trend_class": "slight_decline",
+        "comparison_type": "year_over_year",
+        "2025": 35547851,
+        "2026": 34643000,
+        "comparisons": [
+          {
+            "type": "year_over_year",
+            "base_year": 2025,
+            "target_year": 2026,
+            "base_value": 35547851,
+            "target_value": 34643000,
+            "change_pct": -2.5,
+            "index_pct": 97.5,
+            "label_ja": "2026年の2025年比"
+          }
+        ]
+      }
+    },
+    "japanese_overseas_travelers": {
+      "month": {
+        "period": "2026-10",
+        "current_year": 2026,
+        "current_value": 1271800,
+        "comparison_year": 2025,
+        "comparison_value": 1243575,
+        "values_by_year": {
+          "2025": 1243575,
+          "2026": 1271800
+        },
+        "change_pct_vs_2025": 2.3,
+        "change_pct_vs_comparison_year": 2.3,
+        "growth_index_pct_vs_2025": 102.3,
+        "growth_index_pct_vs_comparison_year": 102.3,
+        "trend_class": "slight_growth",
+        "comparison_type": "year_over_year",
+        "2025": 1243575,
+        "2026": 1271800,
+        "comparisons": [
+          {
+            "type": "year_over_year",
+            "base_year": 2025,
+            "target_year": 2026,
+            "base_value": 1243575,
+            "target_value": 1271800,
+            "change_pct": 2.3,
+            "index_pct": 102.3,
+            "label_ja": "2026年の2025年比"
+          }
+        ]
+      },
+      "year_to_date": {
+        "period": "2026-01_to_2026-10",
+        "current_year": 2026,
+        "current_value": 12478300,
+        "comparison_year": 2025,
+        "comparison_value": 12100810,
+        "values_by_year": {
+          "2025": 12100810,
+          "2026": 12478300
+        },
+        "change_pct_vs_2025": 3.1,
+        "change_pct_vs_comparison_year": 3.1,
+        "growth_index_pct_vs_2025": 103.1,
+        "growth_index_pct_vs_comparison_year": 103.1,
+        "trend_class": "slight_growth",
+        "comparison_type": "year_over_year",
+        "2025": 12100810,
+        "2026": 12478300,
+        "comparisons": [
+          {
+            "type": "year_over_year",
+            "base_year": 2025,
+            "target_year": 2026,
+            "base_value": 12100810,
+            "target_value": 12478300,
+            "change_pct": 3.1,
+            "index_pct": 103.1,
+            "label_ja": "2026年の2025年比"
+          }
+        ]
+      }
+    },
+    "headline_ja": "10月の訪日外客数は3,912,500人。前年同月比0.4%増で、単月として過去最高。",
+    "summary_ja": "紅葉シーズンの始まりに加え、東・東南アジアの連休や欧州のスクールホリデーなどを背景に、多くの市場で訪日外客数が増加した。10月として20市場、単月として5市場で過去最高を記録し、インドとメキシコは1～10月累計で従来の年間最多を更新した。",
+    "common_market_context_ja": [
+      "多くの市場で円安傾向が続いている。",
+      "10月は紅葉シーズンの始まりで、桜シーズンと並ぶ訪日旅行のピークシーズン。",
+      "東アジア・東南アジアでは連休に合わせた需要が見られ、欧州ではスクールホリデーなどが訪日需要に寄与した。",
+      "欧州ではウクライナ情勢に伴う飛行ルートの変更で飛行時間が延びており、訪日旅行の懸念材料になっている。"
+    ],
+    "policy_direction_ja": "2026年3月策定の第5次観光立国推進基本計画が掲げる旅行者数（リピーターを含む）、旅行消費額、地方部延べ宿泊者数などの政府目標に向け、市場動向を分析して訪日旅行のプロモーションを進める。",
+    "records": {
+      "october_record_market_keys": [
+        "AU",
+        "CA",
+        "DE",
+        "ES",
+        "FR",
+        "GB",
+        "HK",
+        "ID",
+        "IN",
+        "IT",
+        "KR",
+        "MIDDLE_EAST",
+        "MX",
+        "MY",
+        "NORDIC",
+        "PH",
+        "RU",
+        "SG",
+        "TW",
+        "US"
+      ],
+      "all_time_monthly_record_market_keys": [
+        "DE",
+        "FR",
+        "MX",
+        "NORDIC",
+        "RU"
+      ],
+      "october_record_markets_ja": [
+        "韓国",
+        "台湾",
+        "香港",
+        "シンガポール",
+        "マレーシア",
+        "インドネシア",
+        "フィリピン",
+        "インド",
+        "豪州",
+        "米国",
+        "カナダ",
+        "メキシコ",
+        "英国",
+        "フランス",
+        "ドイツ",
+        "イタリア",
+        "スペイン",
+        "ロシア",
+        "北欧地域",
+        "中東地域"
+      ],
+      "all_time_monthly_record_markets_ja": [
+        "メキシコ",
+        "フランス",
+        "ドイツ",
+        "ロシア",
+        "北欧地域"
+      ],
+      "year_to_date_surpassed_past_annual_record_market_keys": [
+        "IN",
+        "MX"
+      ],
+      "year_to_date_surpassed_past_annual_record_markets_ja": [
+        "インド",
+        "メキシコ"
+      ],
+      "overall_all_time_monthly_record": true
+    },
+    "reported_time_series": {
+      "monthly": [
+        {
+          "month": 1,
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3781629,
+              "2026": 3597881
+            },
+            "change_pct_vs_2025": -4.9
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3455149,
+              "2026": 3242173
+            },
+            "change_pct_vs_2025": -6.2
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 912298,
+              "2026": 1072602
+            },
+            "change_pct_vs_2025": 17.6
+          }
+        },
+        {
+          "month": 2,
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3258491,
+              "2026": 3466848
+            },
+            "change_pct_vs_2025": 6.4
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 2965065,
+              "2026": 3215752
+            },
+            "change_pct_vs_2025": 8.5
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 1181062,
+              "2026": 1093250
+            },
+            "change_pct_vs_2025": -7.4
+          }
+        },
+        {
+          "month": 3,
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3497755,
+              "2026": 3619159
+            },
+            "change_pct_vs_2025": 3.5
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3149434,
+              "2026": 3221476
+            },
+            "change_pct_vs_2025": 2.3
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 1423449,
+              "2026": 1518999
+            },
+            "change_pct_vs_2025": 6.7
+          }
+        },
+        {
+          "month": 4,
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3909128,
+              "2026": 3692364
+            },
+            "change_pct_vs_2025": -5.5
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3587187,
+              "2026": 3346567
+            },
+            "change_pct_vs_2025": -6.7
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 961386,
+              "2026": 1042087
+            },
+            "change_pct_vs_2025": 8.4
+          }
+        },
+        {
+          "month": 5,
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3693587,
+              "2026": 3560256
+            },
+            "change_pct_vs_2025": -3.6
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3368573,
+              "2026": 3245723
+            },
+            "change_pct_vs_2025": -3.6
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 1076756,
+              "2026": 1127482
+            },
+            "change_pct_vs_2025": 4.7
+          }
+        },
+        {
+          "month": 6,
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3377985,
+              "2026": 3148754
+            },
+            "change_pct_vs_2025": -6.8
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3110559,
+              "2026": 2898017
+            },
+            "change_pct_vs_2025": -6.8
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 1054045,
+              "2026": 1090195
+            },
+            "change_pct_vs_2025": 3.4
+          }
+        },
+        {
+          "month": 7,
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3437118,
+              "2026": 3442310
+            },
+            "change_pct_vs_2025": 0.2
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3161501,
+              "2026": 3192300
+            },
+            "change_pct_vs_2025": 1.0
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 1205435,
+              "2026": 1191306
+            },
+            "change_pct_vs_2025": -1.2
+          }
+        },
+        {
+          "month": 8,
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3428406,
+              "2026": 3099188
+            },
+            "change_pct_vs_2025": -9.6
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3072139,
+              "2026": 2771330
+            },
+            "change_pct_vs_2025": -9.8
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 1648279,
+              "2026": 1588597
+            },
+            "change_pct_vs_2025": -3.6
+          }
+        },
+        {
+          "month": 9,
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3267228,
+              "2026": 3103700
+            },
+            "change_pct_vs_2025": -5.0,
+            "is_preliminary_2026": true
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 2893816,
+              "2026": null
+            },
+            "change_pct_vs_2025": null
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 1394525,
+              "2026": 1481944
+            },
+            "change_pct_vs_2025": 6.3
+          }
+        },
+        {
+          "month": 10,
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3896524,
+              "2026": 3912500
+            },
+            "change_pct_vs_2025": 0.4,
+            "is_preliminary_2026": true
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3579441,
+              "2026": null
+            },
+            "change_pct_vs_2025": null
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 1243575,
+              "2026": 1271800
+            },
+            "change_pct_vs_2025": 2.3,
+            "has_asterisk_2026": true
+          }
+        },
+        {
+          "month": 11,
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3517659,
+              "2026": null
+            },
+            "change_pct_vs_2025": null
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3224274,
+              "2026": null
+            },
+            "change_pct_vs_2025": null
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 1330014,
+              "2026": null
+            },
+            "change_pct_vs_2025": null
+          }
+        },
+        {
+          "month": 12,
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3617791,
+              "2026": null
+            },
+            "change_pct_vs_2025": null
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 3395228,
+              "2026": null
+            },
+            "change_pct_vs_2025": null
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 1300791,
+              "2026": null
+            },
+            "change_pct_vs_2025": null
+          }
+        }
+      ],
+      "cumulative": [
+        {
+          "period_by_year": {
+            "2025": "2025-01_to_2025-10",
+            "2026": "2026-01_to_2026-10"
+          },
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 35547851,
+              "2026": 34643000
+            },
+            "change_pct_vs_2025": -2.5,
+            "is_preliminary_2026": true
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 32342864,
+              "2026": null
+            },
+            "change_pct_vs_2025": null
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 12100810,
+              "2026": 12478300
+            },
+            "change_pct_vs_2025": 3.1,
+            "has_asterisk_2026": true
+          }
+        },
+        {
+          "period_by_year": {
+            "2025": "2025-01_to_2025-12",
+            "2026": "2026-01_to_2026-12"
+          },
+          "visitor_arrivals": {
+            "values_by_year": {
+              "2025": 42683301,
+              "2026": null
+            },
+            "change_pct_vs_2025": null
+          },
+          "tourists_among_visitor_arrivals": {
+            "values_by_year": {
+              "2025": 38962366,
+              "2026": null
+            },
+            "change_pct_vs_2025": null
+          },
+          "japanese_overseas_travelers": {
+            "values_by_year": {
+              "2025": 14731615,
+              "2026": null
+            },
+            "change_pct_vs_2025": null
+          }
+        }
+      ]
+    }
+  },
+  "markets": [
+    {
+      "market_key": "KR",
+      "name_ja": "韓国",
+      "name_en": "South Korea",
+      "region_ja": "東アジア",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 1035800,
+          "comparison_year": 2025,
+          "comparison_value": 867261,
+          "values_by_year": {
+            "2025": 867261,
+            "2026": 1035800
+          },
+          "change_pct_vs_2025": 19.4,
+          "change_pct_vs_comparison_year": 19.4,
+          "growth_index_pct_vs_2025": 119.4,
+          "growth_index_pct_vs_comparison_year": 119.4,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 867261,
+          "2026": 1035800,
+          "share_of_total_2026_pct": 26.47,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 867261,
+              "target_value": 1035800,
+              "change_pct": 19.4,
+              "index_pct": 119.4,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 9298400,
+          "comparison_year": 2025,
+          "comparison_value": 7660905,
+          "values_by_year": {
+            "2025": 7660905,
+            "2026": 9298400
+          },
+          "change_pct_vs_2025": 21.4,
+          "change_pct_vs_comparison_year": 21.4,
+          "growth_index_pct_vs_2025": 121.4,
+          "growth_index_pct_vs_comparison_year": 121.4,
+          "trend_class": "strong_growth",
+          "comparison_type": "year_over_year",
+          "2025": 7660905,
+          "2026": 9298400,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 7660905,
+              "target_value": 9298400,
+              "change_pct": 21.4,
+              "index_pct": 121.4,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "訪日人気が続くなか、2回の3連休や航空座席数の増加が寄与し、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "3連休が2回",
+          "航空座席数の増加"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [
+          "航空座席数の増加"
+        ],
+        "demand_events_ja": [
+          "3連休が2回"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "CN",
+      "name_ja": "中国",
+      "name_en": "China",
+      "region_ja": "東アジア",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 379500,
+          "comparison_year": 2025,
+          "comparison_value": 715804,
+          "values_by_year": {
+            "2025": 715804,
+            "2026": 379500
+          },
+          "change_pct_vs_2025": -47.0,
+          "change_pct_vs_comparison_year": -47.0,
+          "growth_index_pct_vs_2025": 53.0,
+          "growth_index_pct_vs_comparison_year": 53.0,
+          "trend_class": "sharp_decline",
+          "comparison_type": "year_over_year",
+          "2025": 715804,
+          "2026": 379500,
+          "share_of_total_2026_pct": 9.7,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 715804,
+              "target_value": 379500,
+              "change_pct": -47.0,
+              "index_pct": 53.0,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 3715200,
+          "comparison_year": 2025,
+          "comparison_value": 8203312,
+          "values_by_year": {
+            "2025": 8203312,
+            "2026": 3715200
+          },
+          "change_pct_vs_2025": -54.7,
+          "change_pct_vs_comparison_year": -54.7,
+          "growth_index_pct_vs_2025": 45.3,
+          "growth_index_pct_vs_comparison_year": 45.3,
+          "trend_class": "sharp_decline",
+          "comparison_type": "year_over_year",
+          "2025": 8203312,
+          "2026": 3715200,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 8203312,
+              "target_value": 3715200,
+              "change_pct": -54.7,
+              "index_pct": 45.3,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": false,
+        "all_time_monthly_record": false,
+        "record_note_ja": null,
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "国慶節の連休があったが、中国政府による渡航注意喚起や航空便の減便などの影響で前年同月を下回った。",
+        "positive_drivers_ja": [
+          "国慶節の連休"
+        ],
+        "constraints_ja": [
+          "2025年11月以降に複数回の中国政府による対日渡航注意喚起",
+          "航空便の減便"
+        ],
+        "aviation_updates_ja": [
+          "航空便の減便"
+        ],
+        "demand_events_ja": [
+          "国慶節の連休"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "TW",
+      "name_ja": "台湾",
+      "name_en": "Taiwan",
+      "region_ja": "東アジア",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 634600,
+          "comparison_year": 2025,
+          "comparison_value": 595915,
+          "values_by_year": {
+            "2025": 595915,
+            "2026": 634600
+          },
+          "change_pct_vs_2025": 6.5,
+          "change_pct_vs_comparison_year": 6.5,
+          "growth_index_pct_vs_2025": 106.5,
+          "growth_index_pct_vs_comparison_year": 106.5,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 595915,
+          "2026": 634600,
+          "share_of_total_2026_pct": 16.22,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 595915,
+              "target_value": 634600,
+              "change_pct": 6.5,
+              "index_pct": 106.5,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 6632300,
+          "comparison_year": 2025,
+          "comparison_value": 5632626,
+          "values_by_year": {
+            "2025": 5632626,
+            "2026": 6632300
+          },
+          "change_pct_vs_2025": 17.7,
+          "change_pct_vs_comparison_year": 17.7,
+          "growth_index_pct_vs_2025": 117.7,
+          "growth_index_pct_vs_comparison_year": 117.7,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 5632626,
+          "2026": 6632300,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 5632626,
+              "target_value": 6632300,
+              "change_pct": 17.7,
+              "index_pct": 117.7,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "台風に伴う欠航があったが、訪日人気に加え、2回の3連休や航空座席数の増加などが寄与し、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "3連休が2回",
+          "航空座席数の増加"
+        ],
+        "constraints_ja": [
+          "台風による航空便の欠航"
+        ],
+        "aviation_updates_ja": [
+          "航空座席数の増加",
+          "台風による航空便の欠航"
+        ],
+        "demand_events_ja": [
+          "3連休が2回"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "HK",
+      "name_ja": "香港",
+      "name_en": "Hong Kong",
+      "region_ja": "東アジア",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 202500,
+          "comparison_year": 2025,
+          "comparison_value": 196017,
+          "values_by_year": {
+            "2025": 196017,
+            "2026": 202500
+          },
+          "change_pct_vs_2025": 3.3,
+          "change_pct_vs_comparison_year": 3.3,
+          "growth_index_pct_vs_2025": 103.3,
+          "growth_index_pct_vs_comparison_year": 103.3,
+          "trend_class": "slight_growth",
+          "comparison_type": "year_over_year",
+          "2025": 196017,
+          "2026": 202500,
+          "share_of_total_2026_pct": 5.18,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 196017,
+              "target_value": 202500,
+              "change_pct": 3.3,
+              "index_pct": 103.3,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 2165800,
+          "comparison_year": 2025,
+          "comparison_value": 2018633,
+          "values_by_year": {
+            "2025": 2018633,
+            "2026": 2165800
+          },
+          "change_pct_vs_2025": 7.3,
+          "change_pct_vs_comparison_year": 7.3,
+          "growth_index_pct_vs_2025": 107.3,
+          "growth_index_pct_vs_comparison_year": 107.3,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 2018633,
+          "2026": 2165800,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 2018633,
+              "target_value": 2165800,
+              "change_pct": 7.3,
+              "index_pct": 107.3,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "クルーズ船の寄港は減少したが、訪日人気に加え重陽節の3連休などが寄与し、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "重陽節の3連休"
+        ],
+        "constraints_ja": [
+          "クルーズ船寄港の減少"
+        ],
+        "aviation_updates_ja": [],
+        "demand_events_ja": [
+          "重陽節の3連休"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "TH",
+      "name_ja": "タイ",
+      "name_en": "Thailand",
+      "region_ja": "東南アジア",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 133400,
+          "comparison_year": 2025,
+          "comparison_value": 125894,
+          "values_by_year": {
+            "2025": 125894,
+            "2026": 133400
+          },
+          "change_pct_vs_2025": 6.0,
+          "change_pct_vs_comparison_year": 6.0,
+          "growth_index_pct_vs_2025": 106.0,
+          "growth_index_pct_vs_comparison_year": 106.0,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 125894,
+          "2026": 133400,
+          "share_of_total_2026_pct": 3.41,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 125894,
+              "target_value": 133400,
+              "change_pct": 6.0,
+              "index_pct": 106.0,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 968800,
+          "comparison_year": 2025,
+          "comparison_value": 941698,
+          "values_by_year": {
+            "2025": 941698,
+            "2026": 968800
+          },
+          "change_pct_vs_2025": 2.9,
+          "change_pct_vs_comparison_year": 2.9,
+          "growth_index_pct_vs_2025": 102.9,
+          "growth_index_pct_vs_comparison_year": 102.9,
+          "trend_class": "slight_growth",
+          "comparison_type": "year_over_year",
+          "2025": 941698,
+          "2026": 968800,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 941698,
+              "target_value": 968800,
+              "change_pct": 2.9,
+              "index_pct": 102.9,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": false,
+        "all_time_monthly_record": false,
+        "record_note_ja": null,
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "航空券価格の上昇や訪中旅行の人気が続くなか、祝日やバンコクの特別休日などを背景に前年同月を上回った。",
+        "positive_drivers_ja": [
+          "祝日",
+          "バンコクでの特別休日"
+        ],
+        "constraints_ja": [
+          "中東情勢に伴う航空券価格の上昇",
+          "訪中旅行の継続的な人気"
+        ],
+        "aviation_updates_ja": [],
+        "demand_events_ja": [
+          "祝日",
+          "バンコクでの特別休日"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "SG",
+      "name_ja": "シンガポール",
+      "name_en": "Singapore",
+      "region_ja": "東南アジア",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 73800,
+          "comparison_year": 2025,
+          "comparison_value": 65745,
+          "values_by_year": {
+            "2025": 65745,
+            "2026": 73800
+          },
+          "change_pct_vs_2025": 12.3,
+          "change_pct_vs_comparison_year": 12.3,
+          "growth_index_pct_vs_2025": 112.3,
+          "growth_index_pct_vs_comparison_year": 112.3,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 65745,
+          "2026": 73800,
+          "share_of_total_2026_pct": 1.89,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 65745,
+              "target_value": 73800,
+              "change_pct": 12.3,
+              "index_pct": 112.3,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 545800,
+          "comparison_year": 2025,
+          "comparison_value": 496212,
+          "values_by_year": {
+            "2025": 496212,
+            "2026": 545800
+          },
+          "change_pct_vs_2025": 10.0,
+          "change_pct_vs_comparison_year": 10.0,
+          "growth_index_pct_vs_2025": 110.0,
+          "growth_index_pct_vs_comparison_year": 110.0,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 496212,
+          "2026": 545800,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 496212,
+              "target_value": 545800,
+              "change_pct": 10.0,
+              "index_pct": 110.0,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "シンガポール～那覇線の運航再開などで航空座席が増え、訪日人気も続いたことから、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "航空座席数の増加"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [
+          "シンガポール～那覇間の復便（2025年12月）"
+        ],
+        "demand_events_ja": [],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "MY",
+      "name_ja": "マレーシア",
+      "name_en": "Malaysia",
+      "region_ja": "東南アジア",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 71100,
+          "comparison_year": 2025,
+          "comparison_value": 57790,
+          "values_by_year": {
+            "2025": 57790,
+            "2026": 71100
+          },
+          "change_pct_vs_2025": 23.0,
+          "change_pct_vs_comparison_year": 23.0,
+          "growth_index_pct_vs_2025": 123.0,
+          "growth_index_pct_vs_comparison_year": 123.0,
+          "trend_class": "strong_growth",
+          "comparison_type": "year_over_year",
+          "2025": 57790,
+          "2026": 71100,
+          "share_of_total_2026_pct": 1.82,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 57790,
+              "target_value": 71100,
+              "change_pct": 23.0,
+              "index_pct": 123.0,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 527500,
+          "comparison_year": 2025,
+          "comparison_value": 464832,
+          "values_by_year": {
+            "2025": 464832,
+            "2026": 527500
+          },
+          "change_pct_vs_2025": 13.5,
+          "change_pct_vs_comparison_year": 13.5,
+          "growth_index_pct_vs_2025": 113.5,
+          "growth_index_pct_vs_comparison_year": 113.5,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 464832,
+          "2026": 527500,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 464832,
+              "target_value": 527500,
+              "change_pct": 13.5,
+              "index_pct": 113.5,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "クアラルンプール発の成田線の増便や福岡線の再開で航空座席が増え、訪日人気も続いたことから、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "航空座席数の増加"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [
+          "クアラルンプール～成田間の増便",
+          "クアラルンプール～福岡間の復便（2026年9月）"
+        ],
+        "demand_events_ja": [],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "ID",
+      "name_ja": "インドネシア",
+      "name_en": "Indonesia",
+      "region_ja": "東南アジア",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 57200,
+          "comparison_year": 2025,
+          "comparison_value": 53387,
+          "values_by_year": {
+            "2025": 53387,
+            "2026": 57200
+          },
+          "change_pct_vs_2025": 7.1,
+          "change_pct_vs_comparison_year": 7.1,
+          "growth_index_pct_vs_2025": 107.1,
+          "growth_index_pct_vs_comparison_year": 107.1,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 53387,
+          "2026": 57200,
+          "share_of_total_2026_pct": 1.46,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 53387,
+              "target_value": 57200,
+              "change_pct": 7.1,
+              "index_pct": 107.1,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 552400,
+          "comparison_year": 2025,
+          "comparison_value": 502467,
+          "values_by_year": {
+            "2025": 502467,
+            "2026": 552400
+          },
+          "change_pct_vs_2025": 9.9,
+          "change_pct_vs_comparison_year": 9.9,
+          "growth_index_pct_vs_2025": 109.9,
+          "growth_index_pct_vs_comparison_year": 109.9,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 502467,
+          "2026": 552400,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 502467,
+              "target_value": 552400,
+              "change_pct": 9.9,
+              "index_pct": 109.9,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "中東情勢に伴う航空券価格の上昇があったが、訪日人気が続き、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気"
+        ],
+        "constraints_ja": [
+          "中東情勢に伴う航空券価格の上昇"
+        ],
+        "aviation_updates_ja": [],
+        "demand_events_ja": [],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "PH",
+      "name_ja": "フィリピン",
+      "name_en": "Philippines",
+      "region_ja": "東南アジア",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 89600,
+          "comparison_year": 2025,
+          "comparison_value": 86150,
+          "values_by_year": {
+            "2025": 86150,
+            "2026": 89600
+          },
+          "change_pct_vs_2025": 4.0,
+          "change_pct_vs_comparison_year": 4.0,
+          "growth_index_pct_vs_2025": 104.0,
+          "growth_index_pct_vs_comparison_year": 104.0,
+          "trend_class": "slight_growth",
+          "comparison_type": "year_over_year",
+          "2025": 86150,
+          "2026": 89600,
+          "share_of_total_2026_pct": 2.29,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 86150,
+              "target_value": 89600,
+              "change_pct": 4.0,
+              "index_pct": 104.0,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 690800,
+          "comparison_year": 2025,
+          "comparison_value": 677455,
+          "values_by_year": {
+            "2025": 677455,
+            "2026": 690800
+          },
+          "change_pct_vs_2025": 2.0,
+          "change_pct_vs_comparison_year": 2.0,
+          "growth_index_pct_vs_2025": 102.0,
+          "growth_index_pct_vs_comparison_year": 102.0,
+          "trend_class": "slight_growth",
+          "comparison_type": "year_over_year",
+          "2025": 677455,
+          "2026": 690800,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 677455,
+              "target_value": 690800,
+              "change_pct": 2.0,
+              "index_pct": 102.0,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "航空券価格の上昇と航空便数の減少があったが、月末の連休や訪日人気などが寄与し、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "月末の連休"
+        ],
+        "constraints_ja": [
+          "中東情勢に伴う航空券価格の上昇",
+          "航空便数の減少"
+        ],
+        "aviation_updates_ja": [
+          "航空便数の減少"
+        ],
+        "demand_events_ja": [
+          "月末の連休"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "VN",
+      "name_ja": "ベトナム",
+      "name_en": "Vietnam",
+      "region_ja": "東南アジア",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 48700,
+          "comparison_year": 2025,
+          "comparison_value": 53238,
+          "values_by_year": {
+            "2025": 53238,
+            "2026": 48700
+          },
+          "change_pct_vs_2025": -8.5,
+          "change_pct_vs_comparison_year": -8.5,
+          "growth_index_pct_vs_2025": 91.5,
+          "growth_index_pct_vs_comparison_year": 91.5,
+          "trend_class": "slight_decline",
+          "comparison_type": "year_over_year",
+          "2025": 53238,
+          "2026": 48700,
+          "share_of_total_2026_pct": 1.24,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 53238,
+              "target_value": 48700,
+              "change_pct": -8.5,
+              "index_pct": 91.5,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 599900,
+          "comparison_year": 2025,
+          "comparison_value": 583048,
+          "values_by_year": {
+            "2025": 583048,
+            "2026": 599900
+          },
+          "change_pct_vs_2025": 2.9,
+          "change_pct_vs_comparison_year": 2.9,
+          "growth_index_pct_vs_2025": 102.9,
+          "growth_index_pct_vs_comparison_year": 102.9,
+          "trend_class": "slight_growth",
+          "comparison_type": "year_over_year",
+          "2025": 583048,
+          "2026": 599900,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 583048,
+              "target_value": 599900,
+              "change_pct": 2.9,
+              "index_pct": 102.9,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": false,
+        "all_time_monthly_record": false,
+        "record_note_ja": null,
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "ハノイ～静岡線が開設されたが、航空券価格の上昇や訪中旅行の人気などの影響で前年同月を下回った。",
+        "positive_drivers_ja": [
+          "ハノイ～静岡間の新規就航"
+        ],
+        "constraints_ja": [
+          "中東情勢に伴う航空券価格の上昇",
+          "訪中旅行の継続的な人気"
+        ],
+        "aviation_updates_ja": [
+          "ハノイ～静岡間の新規就航（2026年4月）"
+        ],
+        "demand_events_ja": [],
+        "cautions_ja": [
+          "留学・技能実習などを含む「その他客」が多い市場"
+        ],
+        "record_notes_ja": [],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "IN",
+      "name_ja": "インド",
+      "name_en": "India",
+      "region_ja": "東南アジア",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 42600,
+          "comparison_year": 2025,
+          "comparison_value": 29418,
+          "values_by_year": {
+            "2025": 29418,
+            "2026": 42600
+          },
+          "change_pct_vs_2025": 44.8,
+          "change_pct_vs_comparison_year": 44.8,
+          "growth_index_pct_vs_2025": 144.8,
+          "growth_index_pct_vs_comparison_year": 144.8,
+          "trend_class": "strong_growth",
+          "comparison_type": "year_over_year",
+          "2025": 29418,
+          "2026": 42600,
+          "share_of_total_2026_pct": 1.09,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 29418,
+              "target_value": 42600,
+              "change_pct": 44.8,
+              "index_pct": 144.8,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 320300,
+          "comparison_year": 2025,
+          "comparison_value": 262862,
+          "values_by_year": {
+            "2025": 262862,
+            "2026": 320300
+          },
+          "change_pct_vs_2025": 21.9,
+          "change_pct_vs_comparison_year": 21.9,
+          "growth_index_pct_vs_2025": 121.9,
+          "growth_index_pct_vs_comparison_year": 121.9,
+          "trend_class": "strong_growth",
+          "comparison_type": "year_over_year",
+          "2025": 262862,
+          "2026": 320300,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 262862,
+              "target_value": 320300,
+              "change_pct": 21.9,
+              "index_pct": 121.9,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高、1～10月累計で従来の年間最多を更新",
+        "year_to_date_surpassed_past_annual_record": true
+      },
+      "market_context": {
+        "status_summary_ja": "ヒンドゥー教の祝祭休暇やデリー・ムンバイからの新路線による航空座席の増加などが寄与し、10月として過去最高を記録した。1～10月累計で従来の年間最多も更新した。",
+        "positive_drivers_ja": [
+          "ヒンドゥー教の祝祭休暇",
+          "航空座席数の増加"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [
+          "デリー～成田間の新規就航（2026年1月）",
+          "ムンバイ～羽田間の新規就航（2026年6月）"
+        ],
+        "demand_events_ja": [
+          "ヒンドゥー教の祝祭休暇"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高",
+          "1～10月累計で従来の年間最多を更新"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "AU",
+      "name_ja": "豪州",
+      "name_en": "Australia",
+      "region_ja": "豪州・北米",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 102100,
+          "comparison_year": 2025,
+          "comparison_value": 96158,
+          "values_by_year": {
+            "2025": 96158,
+            "2026": 102100
+          },
+          "change_pct_vs_2025": 6.2,
+          "change_pct_vs_comparison_year": 6.2,
+          "growth_index_pct_vs_2025": 106.2,
+          "growth_index_pct_vs_comparison_year": 106.2,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 96158,
+          "2026": 102100,
+          "share_of_total_2026_pct": 2.61,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 96158,
+              "target_value": 102100,
+              "change_pct": 6.2,
+              "index_pct": 106.2,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 874000,
+          "comparison_year": 2025,
+          "comparison_value": 851436,
+          "values_by_year": {
+            "2025": 851436,
+            "2026": 874000
+          },
+          "change_pct_vs_2025": 2.7,
+          "change_pct_vs_comparison_year": 2.7,
+          "growth_index_pct_vs_2025": 102.7,
+          "growth_index_pct_vs_comparison_year": 102.7,
+          "trend_class": "slight_growth",
+          "comparison_type": "year_over_year",
+          "2025": 851436,
+          "2026": 874000,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 851436,
+              "target_value": 874000,
+              "change_pct": 2.7,
+              "index_pct": 102.7,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "訪日人気が続き、一部の州でスクールホリデーの時期が前年と異なった影響もあって、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "一部の州におけるスクールホリデーの期ずれ"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [],
+        "demand_events_ja": [
+          "一部の州におけるスクールホリデーの期ずれ"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "US",
+      "name_ja": "米国",
+      "name_en": "U.S.A.",
+      "region_ja": "豪州・北米",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 351500,
+          "comparison_year": 2025,
+          "comparison_value": 335744,
+          "values_by_year": {
+            "2025": 335744,
+            "2026": 351500
+          },
+          "change_pct_vs_2025": 4.7,
+          "change_pct_vs_comparison_year": 4.7,
+          "growth_index_pct_vs_2025": 104.7,
+          "growth_index_pct_vs_comparison_year": 104.7,
+          "trend_class": "slight_growth",
+          "comparison_type": "year_over_year",
+          "2025": 335744,
+          "2026": 351500,
+          "share_of_total_2026_pct": 8.98,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 335744,
+              "target_value": 351500,
+              "change_pct": 4.7,
+              "index_pct": 104.7,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 2874400,
+          "comparison_year": 2025,
+          "comparison_value": 2733569,
+          "values_by_year": {
+            "2025": 2733569,
+            "2026": 2874400
+          },
+          "change_pct_vs_2025": 5.2,
+          "change_pct_vs_comparison_year": 5.2,
+          "growth_index_pct_vs_2025": 105.2,
+          "growth_index_pct_vs_comparison_year": 105.2,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 2733569,
+          "2026": 2874400,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 2733569,
+              "target_value": 2874400,
+              "change_pct": 5.2,
+              "index_pct": 105.2,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "訪日人気の継続やクルーズ船の寄港などを背景に、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "クルーズ船の寄港"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [],
+        "demand_events_ja": [],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "CA",
+      "name_ja": "カナダ",
+      "name_en": "Canada",
+      "region_ja": "豪州・北米",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 73900,
+          "comparison_year": 2025,
+          "comparison_value": 73667,
+          "values_by_year": {
+            "2025": 73667,
+            "2026": 73900
+          },
+          "change_pct_vs_2025": 0.3,
+          "change_pct_vs_comparison_year": 0.3,
+          "growth_index_pct_vs_2025": 100.3,
+          "growth_index_pct_vs_comparison_year": 100.3,
+          "trend_class": "slight_growth",
+          "comparison_type": "year_over_year",
+          "2025": 73667,
+          "2026": 73900,
+          "share_of_total_2026_pct": 1.89,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 73667,
+              "target_value": 73900,
+              "change_pct": 0.3,
+              "index_pct": 100.3,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 592800,
+          "comparison_year": 2025,
+          "comparison_value": 568323,
+          "values_by_year": {
+            "2025": 568323,
+            "2026": 592800
+          },
+          "change_pct_vs_2025": 4.3,
+          "change_pct_vs_comparison_year": 4.3,
+          "growth_index_pct_vs_2025": 104.3,
+          "growth_index_pct_vs_comparison_year": 104.3,
+          "trend_class": "slight_growth",
+          "comparison_type": "year_over_year",
+          "2025": 568323,
+          "2026": 592800,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 568323,
+              "target_value": 592800,
+              "change_pct": 4.3,
+              "index_pct": 104.3,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "訪日人気の継続やクルーズ船の寄港などを背景に、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "クルーズ船の寄港"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [],
+        "demand_events_ja": [],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "MX",
+      "name_ja": "メキシコ",
+      "name_en": "Mexico",
+      "region_ja": "豪州・北米",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 30400,
+          "comparison_year": 2025,
+          "comparison_value": 24764,
+          "values_by_year": {
+            "2025": 24764,
+            "2026": 30400
+          },
+          "change_pct_vs_2025": 22.8,
+          "change_pct_vs_comparison_year": 22.8,
+          "growth_index_pct_vs_2025": 122.8,
+          "growth_index_pct_vs_comparison_year": 122.8,
+          "trend_class": "strong_growth",
+          "comparison_type": "year_over_year",
+          "2025": 24764,
+          "2026": 30400,
+          "share_of_total_2026_pct": 0.78,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 24764,
+              "target_value": 30400,
+              "change_pct": 22.8,
+              "index_pct": 122.8,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 203900,
+          "comparison_year": 2025,
+          "comparison_value": 162695,
+          "values_by_year": {
+            "2025": 162695,
+            "2026": 203900
+          },
+          "change_pct_vs_2025": 25.3,
+          "change_pct_vs_comparison_year": 25.3,
+          "growth_index_pct_vs_2025": 125.3,
+          "growth_index_pct_vs_comparison_year": 125.3,
+          "trend_class": "strong_growth",
+          "comparison_type": "year_over_year",
+          "2025": 162695,
+          "2026": 203900,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 162695,
+              "target_value": 203900,
+              "change_pct": 25.3,
+              "index_pct": 125.3,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": true,
+        "record_note_ja": "10月として過去最高、単月として過去最高、1～10月累計で従来の年間最多を更新",
+        "year_to_date_surpassed_past_annual_record": true
+      },
+      "market_context": {
+        "status_summary_ja": "秋の訪日需要の高まりと訪日人気の継続を背景に、単月として過去最高を記録した。1～10月累計で従来の年間最多も更新した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "秋の訪日需要の高まり"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [],
+        "demand_events_ja": [
+          "秋の訪日需要の高まり"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高",
+          "単月として過去最高",
+          "1～10月累計で従来の年間最多を更新"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "GB",
+      "name_ja": "英国",
+      "name_en": "United Kingdom",
+      "region_ja": "欧州",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 69100,
+          "comparison_year": 2025,
+          "comparison_value": 63343,
+          "values_by_year": {
+            "2025": 63343,
+            "2026": 69100
+          },
+          "change_pct_vs_2025": 9.1,
+          "change_pct_vs_comparison_year": 9.1,
+          "growth_index_pct_vs_2025": 109.1,
+          "growth_index_pct_vs_comparison_year": 109.1,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 63343,
+          "2026": 69100,
+          "share_of_total_2026_pct": 1.77,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 63343,
+              "target_value": 69100,
+              "change_pct": 9.1,
+              "index_pct": 109.1,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 479100,
+          "comparison_year": 2025,
+          "comparison_value": 455287,
+          "values_by_year": {
+            "2025": 455287,
+            "2026": 479100
+          },
+          "change_pct_vs_2025": 5.2,
+          "change_pct_vs_comparison_year": 5.2,
+          "growth_index_pct_vs_2025": 105.2,
+          "growth_index_pct_vs_comparison_year": 105.2,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 455287,
+          "2026": 479100,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 455287,
+              "target_value": 479100,
+              "change_pct": 5.2,
+              "index_pct": 105.2,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "訪日人気の継続やスクールホリデーを背景に、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "スクールホリデー"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [],
+        "demand_events_ja": [
+          "スクールホリデー"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "FR",
+      "name_ja": "フランス",
+      "name_en": "France",
+      "region_ja": "欧州",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 63600,
+          "comparison_year": 2025,
+          "comparison_value": 58242,
+          "values_by_year": {
+            "2025": 58242,
+            "2026": 63600
+          },
+          "change_pct_vs_2025": 9.2,
+          "change_pct_vs_comparison_year": 9.2,
+          "growth_index_pct_vs_2025": 109.2,
+          "growth_index_pct_vs_comparison_year": 109.2,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 58242,
+          "2026": 63600,
+          "share_of_total_2026_pct": 1.63,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 58242,
+              "target_value": 63600,
+              "change_pct": 9.2,
+              "index_pct": 109.2,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 417600,
+          "comparison_year": 2025,
+          "comparison_value": 390179,
+          "values_by_year": {
+            "2025": 390179,
+            "2026": 417600
+          },
+          "change_pct_vs_2025": 7.0,
+          "change_pct_vs_comparison_year": 7.0,
+          "growth_index_pct_vs_2025": 107.0,
+          "growth_index_pct_vs_comparison_year": 107.0,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 390179,
+          "2026": 417600,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 390179,
+              "target_value": 417600,
+              "change_pct": 7.0,
+              "index_pct": 107.0,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": true,
+        "record_note_ja": "10月として過去最高、単月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "訪日人気の継続やスクールホリデーを背景に、単月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "スクールホリデー"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [],
+        "demand_events_ja": [
+          "スクールホリデー"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高",
+          "単月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "DE",
+      "name_ja": "ドイツ",
+      "name_en": "Germany",
+      "region_ja": "欧州",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 61900,
+          "comparison_year": 2025,
+          "comparison_value": 56020,
+          "values_by_year": {
+            "2025": 56020,
+            "2026": 61900
+          },
+          "change_pct_vs_2025": 10.5,
+          "change_pct_vs_comparison_year": 10.5,
+          "growth_index_pct_vs_2025": 110.5,
+          "growth_index_pct_vs_comparison_year": 110.5,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 56020,
+          "2026": 61900,
+          "share_of_total_2026_pct": 1.58,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 56020,
+              "target_value": 61900,
+              "change_pct": 10.5,
+              "index_pct": 110.5,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 389500,
+          "comparison_year": 2025,
+          "comparison_value": 375415,
+          "values_by_year": {
+            "2025": 375415,
+            "2026": 389500
+          },
+          "change_pct_vs_2025": 3.8,
+          "change_pct_vs_comparison_year": 3.8,
+          "growth_index_pct_vs_2025": 103.8,
+          "growth_index_pct_vs_comparison_year": 103.8,
+          "trend_class": "slight_growth",
+          "comparison_type": "year_over_year",
+          "2025": 375415,
+          "2026": 389500,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 375415,
+              "target_value": 389500,
+              "change_pct": 3.8,
+              "index_pct": 103.8,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": true,
+        "record_note_ja": "10月として過去最高、単月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "訪日人気の継続やスクールホリデーを背景に、単月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "スクールホリデー"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [],
+        "demand_events_ja": [
+          "スクールホリデー"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高",
+          "単月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "IT",
+      "name_ja": "イタリア",
+      "name_en": "Italy",
+      "region_ja": "欧州",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 34800,
+          "comparison_year": 2025,
+          "comparison_value": 29425,
+          "values_by_year": {
+            "2025": 29425,
+            "2026": 34800
+          },
+          "change_pct_vs_2025": 18.3,
+          "change_pct_vs_comparison_year": 18.3,
+          "growth_index_pct_vs_2025": 118.3,
+          "growth_index_pct_vs_comparison_year": 118.3,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 29425,
+          "2026": 34800,
+          "share_of_total_2026_pct": 0.89,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 29425,
+              "target_value": 34800,
+              "change_pct": 18.3,
+              "index_pct": 118.3,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 268700,
+          "comparison_year": 2025,
+          "comparison_value": 257289,
+          "values_by_year": {
+            "2025": 257289,
+            "2026": 268700
+          },
+          "change_pct_vs_2025": 4.4,
+          "change_pct_vs_comparison_year": 4.4,
+          "growth_index_pct_vs_2025": 104.4,
+          "growth_index_pct_vs_comparison_year": 104.4,
+          "trend_class": "slight_growth",
+          "comparison_type": "year_over_year",
+          "2025": 257289,
+          "2026": 268700,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 257289,
+              "target_value": 268700,
+              "change_pct": 4.4,
+              "index_pct": 104.4,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "訪日人気の継続やクルーズ船の寄港などを背景に、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "クルーズ船の寄港"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [],
+        "demand_events_ja": [],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "ES",
+      "name_ja": "スペイン",
+      "name_en": "Spain",
+      "region_ja": "欧州",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 31700,
+          "comparison_year": 2025,
+          "comparison_value": 28749,
+          "values_by_year": {
+            "2025": 28749,
+            "2026": 31700
+          },
+          "change_pct_vs_2025": 10.3,
+          "change_pct_vs_comparison_year": 10.3,
+          "growth_index_pct_vs_2025": 110.3,
+          "growth_index_pct_vs_comparison_year": 110.3,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 28749,
+          "2026": 31700,
+          "share_of_total_2026_pct": 0.81,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 28749,
+              "target_value": 31700,
+              "change_pct": 10.3,
+              "index_pct": 110.3,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 226000,
+          "comparison_year": 2025,
+          "comparison_value": 207756,
+          "values_by_year": {
+            "2025": 207756,
+            "2026": 226000
+          },
+          "change_pct_vs_2025": 8.8,
+          "change_pct_vs_comparison_year": 8.8,
+          "growth_index_pct_vs_2025": 108.8,
+          "growth_index_pct_vs_comparison_year": 108.8,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 207756,
+          "2026": 226000,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 207756,
+              "target_value": 226000,
+              "change_pct": 8.8,
+              "index_pct": 108.8,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "訪日人気の継続やマドリード～成田線の増便などが寄与し、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "マドリード～成田間の増便"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [
+          "マドリード～成田間の増便"
+        ],
+        "demand_events_ja": [],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "RU",
+      "name_ja": "ロシア",
+      "name_en": "Russia",
+      "region_ja": "欧州",
+      "market_type": "country_or_area",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 32600,
+          "comparison_year": 2025,
+          "comparison_value": 30053,
+          "values_by_year": {
+            "2025": 30053,
+            "2026": 32600
+          },
+          "change_pct_vs_2025": 8.5,
+          "change_pct_vs_comparison_year": 8.5,
+          "growth_index_pct_vs_2025": 108.5,
+          "growth_index_pct_vs_comparison_year": 108.5,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 30053,
+          "2026": 32600,
+          "share_of_total_2026_pct": 0.83,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 30053,
+              "target_value": 32600,
+              "change_pct": 8.5,
+              "index_pct": 108.5,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 188200,
+          "comparison_year": 2025,
+          "comparison_value": 159228,
+          "values_by_year": {
+            "2025": 159228,
+            "2026": 188200
+          },
+          "change_pct_vs_2025": 18.2,
+          "change_pct_vs_comparison_year": 18.2,
+          "growth_index_pct_vs_2025": 118.2,
+          "growth_index_pct_vs_comparison_year": 118.2,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 159228,
+          "2026": 188200,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 159228,
+              "target_value": 188200,
+              "change_pct": 18.2,
+              "index_pct": 118.2,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": true,
+        "record_note_ja": "10月として過去最高、単月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "ウクライナ侵攻を受けた各国の制裁による影響が続くなか、訪日人気やクルーズ船の寄港などを背景に、単月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "クルーズ船の寄港"
+        ],
+        "constraints_ja": [
+          "ウクライナ侵攻に伴う各国の制裁による影響"
+        ],
+        "aviation_updates_ja": [],
+        "demand_events_ja": [],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高",
+          "単月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "NORDIC",
+      "name_ja": "北欧地域",
+      "name_en": "Nordic Countries",
+      "region_ja": "北欧地域",
+      "market_type": "aggregate_region",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 28600,
+          "comparison_year": 2025,
+          "comparison_value": 23947,
+          "values_by_year": {
+            "2025": 23947,
+            "2026": 28600
+          },
+          "change_pct_vs_2025": 19.4,
+          "change_pct_vs_comparison_year": 19.4,
+          "growth_index_pct_vs_2025": 119.4,
+          "growth_index_pct_vs_comparison_year": 119.4,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 23947,
+          "2026": 28600,
+          "share_of_total_2026_pct": 0.73,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 23947,
+              "target_value": 28600,
+              "change_pct": 19.4,
+              "index_pct": 119.4,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 184200,
+          "comparison_year": 2025,
+          "comparison_value": 163897,
+          "values_by_year": {
+            "2025": 163897,
+            "2026": 184200
+          },
+          "change_pct_vs_2025": 12.4,
+          "change_pct_vs_comparison_year": 12.4,
+          "growth_index_pct_vs_2025": 112.4,
+          "growth_index_pct_vs_comparison_year": 112.4,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 163897,
+          "2026": 184200,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 163897,
+              "target_value": 184200,
+              "change_pct": 12.4,
+              "index_pct": 112.4,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": true,
+        "record_note_ja": "10月として過去最高、単月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "訪日人気の継続に加え、スクールホリデーや一部路線の増便なども寄与し、単月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "スクールホリデー",
+          "一部路線の増便"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [
+          "一部路線の増便"
+        ],
+        "demand_events_ja": [
+          "スクールホリデー"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高",
+          "単月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "MIDDLE_EAST",
+      "name_ja": "中東地域",
+      "name_en": "Middle East",
+      "region_ja": "中東地域",
+      "market_type": "aggregate_region",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 35100,
+          "comparison_year": 2025,
+          "comparison_value": 27863,
+          "values_by_year": {
+            "2025": 27863,
+            "2026": 35100
+          },
+          "change_pct_vs_2025": 26.0,
+          "change_pct_vs_comparison_year": 26.0,
+          "growth_index_pct_vs_2025": 126.0,
+          "growth_index_pct_vs_comparison_year": 126.0,
+          "trend_class": "strong_growth",
+          "comparison_type": "year_over_year",
+          "2025": 27863,
+          "2026": 35100,
+          "share_of_total_2026_pct": 0.9,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 27863,
+              "target_value": 35100,
+              "change_pct": 26.0,
+              "index_pct": 126.0,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 252100,
+          "comparison_year": 2025,
+          "comparison_value": 211684,
+          "values_by_year": {
+            "2025": 211684,
+            "2026": 252100
+          },
+          "change_pct_vs_2025": 19.1,
+          "change_pct_vs_comparison_year": 19.1,
+          "growth_index_pct_vs_2025": 119.1,
+          "growth_index_pct_vs_comparison_year": 119.1,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 211684,
+          "2026": 252100,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 211684,
+              "target_value": 252100,
+              "change_pct": 19.1,
+              "index_pct": 119.1,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": true,
+        "all_time_monthly_record": false,
+        "record_note_ja": "10月として過去最高",
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "訪日人気の継続に加え、イスラエルの祝日や一部路線の増便なども寄与し、10月として過去最高を記録した。",
+        "positive_drivers_ja": [
+          "継続する訪日旅行人気",
+          "イスラエルの祝日",
+          "一部路線の増便"
+        ],
+        "constraints_ja": [],
+        "aviation_updates_ja": [
+          "一部路線の増便"
+        ],
+        "demand_events_ja": [
+          "イスラエルの祝日"
+        ],
+        "cautions_ja": [],
+        "record_notes_ja": [
+          "10月として過去最高"
+        ],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    },
+    {
+      "market_key": "OTHERS",
+      "name_ja": "その他",
+      "name_en": "Others",
+      "region_ja": "その他",
+      "market_type": "aggregate_region",
+      "visitor_arrivals": {
+        "month": {
+          "period": "2026-10",
+          "current_year": 2026,
+          "current_value": 228400,
+          "comparison_year": 2025,
+          "comparison_value": 201930,
+          "values_by_year": {
+            "2025": 201930,
+            "2026": 228400
+          },
+          "change_pct_vs_2025": 13.1,
+          "change_pct_vs_comparison_year": 13.1,
+          "growth_index_pct_vs_2025": 113.1,
+          "growth_index_pct_vs_comparison_year": 113.1,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 201930,
+          "2026": 228400,
+          "share_of_total_2026_pct": 5.84,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 201930,
+              "target_value": 228400,
+              "change_pct": 13.1,
+              "index_pct": 113.1,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        },
+        "year_to_date": {
+          "period": "2026-01_to_2026-10",
+          "current_year": 2026,
+          "current_value": 1675300,
+          "comparison_year": 2025,
+          "comparison_value": 1567043,
+          "values_by_year": {
+            "2025": 1567043,
+            "2026": 1675300
+          },
+          "change_pct_vs_2025": 6.9,
+          "change_pct_vs_comparison_year": 6.9,
+          "growth_index_pct_vs_2025": 106.9,
+          "growth_index_pct_vs_comparison_year": 106.9,
+          "trend_class": "growth",
+          "comparison_type": "year_over_year",
+          "2025": 1567043,
+          "2026": 1675300,
+          "comparisons": [
+            {
+              "type": "year_over_year",
+              "base_year": 2025,
+              "target_year": 2026,
+              "base_value": 1567043,
+              "target_value": 1675300,
+              "change_pct": 6.9,
+              "index_pct": 106.9,
+              "label_ja": "2026年の2025年比"
+            }
+          ]
+        }
+      },
+      "record": {
+        "october_record": false,
+        "all_time_monthly_record": false,
+        "record_note_ja": null,
+        "year_to_date_surpassed_past_annual_record": false
+      },
+      "market_context": {
+        "status_summary_ja": "その他の合計は前年同月比13.1%増、1～10月累計で前年同期比6.9%増だった。",
+        "positive_drivers_ja": [],
+        "constraints_ja": [],
+        "aviation_updates_ja": [],
+        "demand_events_ja": [],
+        "cautions_ja": [
+          "複数市場の合算区分で、原資料には個別市場の概況の記載がない"
+        ],
+        "record_notes_ja": [],
+        "visa_updates_ja": [],
+        "source_context_date": "2026-11-11"
+      }
+    }
+  ],
+  "dashboard_hints": {
+    "join_keys": [
+      "report.data_month",
+      "markets[].market_key"
+    ],
+    "primary_time_series_path": "markets[].visitor_arrivals.month.current_value",
+    "primary_comparison_path": "markets[].visitor_arrivals.month.change_pct_vs_comparison_year",
+    "ytd_time_series_path": "markets[].visitor_arrivals.year_to_date.current_value",
+    "context_paths": [
+      "markets[].market_context.status_summary_ja",
+      "markets[].market_context.positive_drivers_ja",
+      "markets[].market_context.constraints_ja",
+      "markets[].market_context.aviation_updates_ja",
+      "markets[].record"
+    ],
+    "schema_compatibility_notes_ja": [
+      "国・地域コードと前年比の構造は既存の2026年4月版に準拠。比較年が異なる月との結合にはcurrent_valueとcomparisons[]を利用できる。",
+      "全国月別表と累計表はoverall.reported_time_seriesに追加。原表の空欄はnull。"
+    ],
+    "trend_class_definitions_ja": {
+      "strong_growth": "比較年比20%以上の増加",
+      "growth": "比較年比5%以上20%未満の増加",
+      "slight_growth": "比較年比0%超5%未満の増加",
+      "flat": "比較年比0%",
+      "slight_decline": "比較年比0%未満10%未満の減少",
+      "decline": "比較年比10%以上25%未満の減少",
+      "sharp_decline": "比較年比25%以上の減少"
+    },
+    "recommended_visuals_ja": [
+      "国・地域別の月次訪日外客数推移折れ線グラフ",
+      "国・地域別の前年比増減率ランキング",
+      "10月として過去最高・単月過去最高市場のハイライト",
+      "航空便増便・復便・新規就航と訪日外客数増減の注釈表示",
+      "市場別の制約要因タグ表示（航空座席減、地政学、渡航注意喚起など）"
+    ]
+  }
+}
